@@ -60,9 +60,36 @@ Deploy (Vercel)
 - Set Root Directory to `web` and Framework Preset to “Other”.
 - Import the repository and deploy (no build necessary for the static prototype).
 
+Recent Updates (v0.6)
+
+- **Win Conditions**: Added three victory paths:
+  - Survivor: Reach week 25+
+  - Perfectionist: Maintain all meters ≥8 for 10 consecutive weeks  
+  - Legend: Maintain reputation = 10 for 10 consecutive weeks
+- **Pseudo Chat Panel**: Added chat UI in roster sidebar showing:
+  - Trait-triggered barks attributed to speaking roster members
+  - Random chatter every 4-10 seconds (50% chance) using trait barks
+  - 30-message history with speaker names and colored text
+- **Roster Expansion**: Expanded from 6 to 20 roster members, randomly selecting 5 per session
+- **UI Improvements**: Enhanced bar color contrast with bold white text and shadows for better readability
+- **Victory Flow**: Added victory detection, celebration banner, and "New Run" reset button
+
+Files Changed (v0.6)
+
+- `web-ts/src/App.tsx`
+  - Added win condition tracking with streak counters
+  - Implemented chat state and pushChat helper function
+  - Added random chatter timer loop (4-10s intervals)
+  - Enhanced bar styling with better contrast
+  - Added victory UI with reset functionality
+- `web-ts/public/resources/roster.json`
+  - Expanded roster from 6 to 20 members with diverse traits
+  - Added 10 new characters with existing trait IDs
+
 Next Steps (Planned)
 
-- Weighted event selection using `weights.base` plus `rep_low` / `rep_high` adjustments.
-- Decision log UI: recent choices and deltas recap.
-- Optional schema validation (AJV) for `events.json` against `resources/events/schema.json`.
-- Mobile polish: swipe gestures and subtle animations; accessibility passes.
+- Hidden content discovery system (rare events, trait combinations)
+- Achievement system to guide exploration
+- Meta-progression unlocks between playthroughs
+- Character backstories and relationship dynamics
+- Seasonal content and replayability features

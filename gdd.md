@@ -257,8 +257,9 @@ See trait definitions and barks: `resources/traits/traits.md`.
 
 ## Changelog
 
+- v0.6: Added win conditions (Survivor: week 25+, Perfectionist: all meters ≥8 for 10 weeks, Legend: reputation=10 for 10 weeks); implemented pseudo chat panel with trait-triggered barks and random chatter; expanded roster to 20 members with random 5 selection per session; improved bar color contrast for readability.
 - v0.5: Migrated prototype into YesYourGoatWeb; updated paths and web runtime notes.
 - v0.4: Added JSON schema reference and prototype traits pack; linked authoring data location.
-- v0.3: Removed simulation; added “Raid Night Check” cadence; locked data schema; added 6-member roster and IDs; morale set to light usage (authored hooks only).
+- v0.3: Removed simulation; added "Raid Night Check" cadence; locked data schema; added 6-member roster and IDs; morale set to light usage (authored hooks only).
 - v0.2: Reframed all content around MMO players and MMO-world events; renamed resources to Guild Funds / Server Reputation / Raid Readiness; added MMO event categories and samples; replaced tax example with loot drama JSON.
 - v0.1 (Initial): Added PDR for GOAT Kingdom Swipe Prototype, scoped for a 7–10 day web build.

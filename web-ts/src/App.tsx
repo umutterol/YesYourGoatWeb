@@ -28,7 +28,7 @@ type EventCard = {
   right: Choice
 }
 
-type Member = { id: string; name: string; traitId: string; morale?: number }
+type Member = { id: string; name: string; traitId: string; morale?: number; portrait?: string }
 
 type LogEntry = { week: number; title: string; choice: string; delta: string }
 
@@ -404,21 +404,51 @@ export default function App() {
         <aside style={{ background: '#161a22', border: '1px solid #242a36', borderRadius: 12 }}>
           <div style={{ padding: 12, borderBottom: '1px solid #242a36', fontSize: 12, opacity: 0.8 }}>Roster</div>
           <div style={{ padding: 12 }}>
-            {roster.map(m => {
-              const morale = clampMorale(m.morale ?? 50)
-              const color = barColor(morale, 100)
-              return (
-                <div key={m.id} style={{ padding: '8px 0', borderBottom: '1px dashed #242a36' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8 }}>
-                    <div style={{ fontSize: 12 }}>{m.name} <span style={{ opacity: 0.6 }}>({m.traitId})</span></div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+              {roster.map(m => {
+                const morale = clampMorale(m.morale ?? 50)
+                const color = barColor(morale, 100)
+                return (
+                  <div key={m.id} style={{ 
+                    background: '#0b1220', 
+                    border: `2px solid ${color}`, 
+                    borderRadius: 8, 
+                    padding: 8, 
+                    textAlign: 'center',
+                    position: 'relative'
+                  }}>
+                    <img 
+                      src={`/resources/portraits/${m.portrait || 'peon.png'}`} 
+                      alt={m.name}
+                      style={{ 
+                        width: 48, 
+                        height: 48, 
+                        borderRadius: 4, 
+                        objectFit: 'cover',
+                        border: '1px solid #333'
+                      }} 
+                    />
+                    <div style={{ fontSize: 10, marginTop: 4, color: '#e6e9ef' }}>{m.name}</div>
+                    <div style={{ fontSize: 9, opacity: 0.7, color: '#8b949e' }}>{m.traitId}</div>
+                    <div style={{ 
+                      position: 'absolute', 
+                      bottom: 4, 
+                      left: '50%', 
+                      transform: 'translateX(-50%)',
+                      background: color,
+                      color: '#ffffff',
+                      fontSize: 9,
+                      fontWeight: 'bold',
+                      padding: '2px 6px',
+                      borderRadius: 4,
+                      textShadow: '1px 1px 2px rgba(0,0,0,0.8)'
+                    }}>
+                      {morale}
+                    </div>
                   </div>
-                  <div style={{ marginTop: 6, position: 'relative', width: '100%', height: 10, background: '#1a1a1a', borderRadius: 999, overflow: 'hidden', border: '1px solid #333' }}>
-                    <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: `${morale}%`, background: color }} />
-                    <div style={{ position: 'relative', textAlign: 'center', fontSize: 10, lineHeight: '10px', color: '#ffffff', fontWeight: 'bold', textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>{morale}/100</div>
-                  </div>
-                </div>
-              )
-            })}
+                )
+              })}
+            </div>
           </div>
           {hookTraits.length > 0 && (
             <div style={{ padding: 12, borderTop: '1px solid #242a36', fontSize: 12 }}>
