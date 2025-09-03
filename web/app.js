@@ -14,7 +14,8 @@ const state = {
   lastMsg: '',
   roster: [],           // [{id,name,traitId,morale}]
   barks: {},            // { traitId: [lines] }
-  hookTraits: []        // trait ids that matched last decision
+  hookTraits: [],       // trait ids that matched last decision
+  log: []               // decision log entries
 };
 
 function clamp(v) {
@@ -23,7 +24,7 @@ function clamp(v) {
 
 function save() {
   const morale = Object.fromEntries(state.roster.map(m => [m.id, m.morale]));
-  localStorage.setItem('yyg_state', JSON.stringify({ meters: state.meters, week: state.week, morale }));
+  localStorage.setItem('yyg_state', JSON.stringify({ meters: state.meters, week: state.week, morale, log: state.log }));
 }
 
 function load() {
@@ -34,6 +35,7 @@ function load() {
     if (s && s.meters && Number.isInteger(s.week)) {
       state.meters = { ...state.meters, ...s.meters };
       state.week = s.week;
+      if (Array.isArray(s.log)) state.log = s.log.slice(-20);
       if (s.morale && state.roster.length) {
         for (const m of state.roster) {
           if (s.morale[m.id] != null) m.morale = clampMorale(s.morale[m.id]);
@@ -82,6 +84,25 @@ function renderStatus(msg, isLoss=false) {
   }
 }
 
+function renderLog() {
+  const container = document.getElementById('log');
+  if (!container) return;
+  container.innerHTML = '';
+  for (const entry of state.log.slice(-8).reverse()) {
+    const div = document.createElement('div');
+    div.className = 'log-row';
+    const title = document.createElement('div');
+    title.className = 'log-title';
+    title.textContent = `W${entry.week} — ${entry.title}`;
+    const detail = document.createElement('div');
+    detail.className = 'log-detail';
+    detail.textContent = `${entry.choice}: ${entry.delta}`;
+    div.appendChild(title);
+    div.appendChild(detail);
+    container.appendChild(div);
+  }
+}
+
 function lossCheck() {
   const { funds, reputation, readiness } = state.meters;
   if (funds <= 0) return 'Guild Funds hit 0 - you lose.';
@@ -93,7 +114,30 @@ function lossCheck() {
 function drawEvent() {
   const week = state.week;
   const pool = (week % 3 === 0 && state.rnc.length) ? state.rnc : state.events;
-  return randPick(pool);
+  return weightedPick(pool);
+}
+
+function weightForEvent(ev) {
+  const base = (ev.weights && typeof ev.weights.base === 'number') ? ev.weights.base : 1;
+  let w = base;
+  // Simple reputation-based adjustments
+  const rep = state.meters.reputation;
+  if (ev.weights && typeof ev.weights.rep_low === 'number' && rep <= 3) w += ev.weights.rep_low;
+  if (ev.weights && typeof ev.weights.rep_high === 'number' && rep >= 8) w += ev.weights.rep_high;
+  if (!Number.isFinite(w) || w <= 0) w = 1;
+  return w;
+}
+
+function weightedPick(arr) {
+  if (!arr || !arr.length) return null;
+  const weights = arr.map(weightForEvent);
+  const total = weights.reduce((a,b) => a + b, 0);
+  let r = Math.random() * total;
+  for (let i = 0; i < arr.length; i++) {
+    r -= weights[i];
+    if (r <= 0) return arr[i];
+  }
+  return arr[arr.length - 1];
 }
 
 function applyEffects(effects) {
@@ -187,7 +231,8 @@ function setCard(ev) {
     applyEffects(left.effects);
     for (const ef of extraEffects) applyEffects(ef);
     const loss = lossCheck();
-    if (loss) { renderMeters(); renderStatus(loss, true); save(); return; }
+    state.log.push({ week: state.week, title: ev.title || 'Untitled', choice: left.label || 'Left', delta: state.lastMsg });
+    if (loss) { renderMeters(); renderStatus(loss, true); renderLog(); save(); return; }
     state.week++;
     save();
     nextTurn();
@@ -198,7 +243,8 @@ function setCard(ev) {
     applyEffects(right.effects);
     for (const ef of extraEffects) applyEffects(ef);
     const loss = lossCheck();
-    if (loss) { renderMeters(); renderStatus(loss, true); save(); return; }
+    state.log.push({ week: state.week, title: ev.title || 'Untitled', choice: right.label || 'Right', delta: state.lastMsg });
+    if (loss) { renderMeters(); renderStatus(loss, true); renderLog(); save(); return; }
     state.week++;
     save();
     nextTurn();
@@ -208,6 +254,7 @@ function setCard(ev) {
 function nextTurn() {
   renderMeters();
   renderStatus(state.lastMsg || '');
+  renderLog();
   const ev = drawEvent();
   setCard(ev);
 }
