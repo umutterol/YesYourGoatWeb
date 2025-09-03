@@ -39,11 +39,25 @@ function clampMorale(v: number) { return Math.max(0, Math.min(100, Math.round(v)
 
 function fmtDelta(v: number) { return v > 0 ? `+${v}` : `${v}` }
 
-function weightForEvent(ev: EventCard, reputation: number): number {
+function eventHasReadinessDecrease(ev: EventCard): boolean {
+  const lr = [ev.left, ev.right]
+  for (const c of lr) {
+    if (typeof c?.effects?.readiness === 'number' && c.effects.readiness < 0) return true
+  }
+  return false
+}
+
+function weightForEvent(ev: EventCard, reputation: number, readiness: number): number {
   const base = ev.weights?.base ?? 1
   let w = base
+  // Reputation-based adjustments
   if (typeof ev.weights?.rep_low === 'number' && reputation <= 3) w += ev.weights!.rep_low!
   if (typeof ev.weights?.rep_high === 'number' && reputation >= 8) w += ev.weights!.rep_high!
+  // Readiness-balancing heuristic: when readiness is high, surface more cards that can reduce readiness
+  // When readiness is low, slightly avoid further reductions to prevent spirals
+  const hasRedDown = eventHasReadinessDecrease(ev)
+  if (readiness >= 8 && hasRedDown) w += 2
+  if (readiness <= 3 && hasRedDown) w -= 1
   if (!Number.isFinite(w) || w <= 0) w = 1
   return w
 }
@@ -124,7 +138,7 @@ export default function App() {
 
   const currentCardRef = useRef<EventCard | null>(null)
   function drawCard(): EventCard | null {
-    const card = weightedPick(cardPool, (e) => weightForEvent(e, meters.reputation))
+    const card = weightedPick(cardPool, (e) => weightForEvent(e, meters.reputation, meters.readiness))
     currentCardRef.current = card
     return card
   }
