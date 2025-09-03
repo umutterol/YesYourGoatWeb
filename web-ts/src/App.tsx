@@ -261,7 +261,7 @@ export default function App() {
 
   // UI
   return (
-    <div style={{ maxWidth: 720, margin: '0 auto', padding: 24 }}>
+    <div style={{ maxWidth: 960, margin: '0 auto', padding: 24 }}>
       <header style={{ paddingBottom: 12, borderBottom: '1px solid #333' }}>
         <h1 style={{ margin: 0, fontSize: 18, opacity: 0.8 }}>Yes, Your Goat — React/TS</h1>
         <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
@@ -277,36 +277,57 @@ export default function App() {
         </div>
       </header>
 
-      <main style={{ marginTop: 16 }}>
-        {current && (
-          <section style={{ background: '#161a22', border: '1px solid #242a36', borderRadius: 12, boxShadow: '0 8px 24px rgba(0,0,0,0.25)' }}>
-            <div style={{ padding: 20 }}>
-              <h2 style={{ margin: '0 0 6px' }}>{current.title}</h2>
-              <p style={{ margin: '0 0 16px', opacity: 0.8 }}>{current.body}</p>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-                <button onClick={() => decide('left')}>{current.left.label}</button>
-                <button onClick={() => decide('right')}>{current.right.label}</button>
+      <div style={{ display: 'grid', gridTemplateColumns: '260px 1fr', gap: 16, alignItems: 'start', marginTop: 16 }}>
+        {/* Roster Panel */}
+        <aside style={{ background: '#161a22', border: '1px solid #242a36', borderRadius: 12 }}>
+          <div style={{ padding: 12, borderBottom: '1px solid #242a36', fontSize: 12, opacity: 0.8 }}>Roster</div>
+          <div style={{ padding: 12 }}>
+            {roster.map(m => (
+              <div key={m.id} style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 2, padding: '8px 0', borderBottom: '1px dashed #242a36' }}>
+                <div style={{ fontSize: 12 }}>{m.name} <span style={{ opacity: 0.6 }}>({m.traitId})</span></div>
+                <div style={{ fontSize: 11, opacity: 0.8 }}>Morale: {m.morale ?? 50}</div>
               </div>
+            ))}
+          </div>
+          {hookTraits.length > 0 && (
+            <div style={{ padding: 12, borderTop: '1px solid #242a36', fontSize: 12 }}>
+              <div style={{ opacity: 0.8, marginBottom: 6 }}>Last Trigger:</div>
+              <div>{hookTraits.join(', ')}</div>
             </div>
-          </section>
-        )}
-
-        <section style={{ marginTop: 12, minHeight: 20, fontSize: 12, opacity: 0.75 }}>
-          {lastMsg}
-          {!lastMsg && barkLine && (
-            <div style={{ marginTop: 4 }}>{barkLine}</div>
           )}
-        </section>
+        </aside>
 
-        <section style={{ marginTop: 16, borderTop: '1px solid #242a36', paddingTop: 12 }}>
-          {log.slice(-8).reverse().map((entry, i) => (
-            <div key={i} style={{ padding: '6px 0', borderBottom: '1px dashed #242a36' }}>
-              <div style={{ fontSize: 12 }}>{`W${entry.week} — ${entry.title}`}</div>
-              <div style={{ fontSize: 12, opacity: 0.8 }}>{`${entry.choice}: ${entry.delta}`}</div>
-            </div>
-          ))}
-        </section>
-      </main>
+        <main>
+          {current && (
+            <section style={{ background: '#161a22', border: '1px solid #242a36', borderRadius: 12, boxShadow: '0 8px 24px rgba(0,0,0,0.25)' }}>
+              <div style={{ padding: 20 }}>
+                <h2 style={{ margin: '0 0 6px' }}>{current.title}</h2>
+                <p style={{ margin: '0 0 16px', opacity: 0.8 }}>{current.body}</p>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                  <button onClick={() => decide('left')}>{current.left.label}</button>
+                  <button onClick={() => decide('right')}>{current.right.label}</button>
+                </div>
+              </div>
+            </section>
+          )}
+
+          <section style={{ marginTop: 12, minHeight: 20, fontSize: 12, opacity: 0.75 }}>
+            {lastMsg}
+            {!lastMsg && barkLine && (
+              <div style={{ marginTop: 4 }}>{barkLine}</div>
+            )}
+          </section>
+
+          <section style={{ marginTop: 16, borderTop: '1px solid #242a36', paddingTop: 12 }}>
+            {log.slice(-8).reverse().map((entry, i) => (
+              <div key={i} style={{ padding: '6px 0', borderBottom: '1px dashed #242a36' }}>
+                <div style={{ fontSize: 12 }}>{`W${entry.week} — ${entry.title}`}</div>
+                <div style={{ fontSize: 12, opacity: 0.8 }}>{`${entry.choice}: ${entry.delta}`}</div>
+              </div>
+            ))}
+          </section>
+        </main>
+      </div>
     </div>
   )
 }
