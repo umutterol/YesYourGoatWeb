@@ -74,6 +74,13 @@ function weightedPick<T>(arr: T[], weightFn: (t: T) => number): T | null {
   return arr[arr.length - 1]
 }
 
+function barColor(value: number, max: number) {
+  const pct = (value / max) * 100
+  if (pct <= 30) return '#f85149'   // bad
+  if (pct <= 60) return '#f1c40f'   // caution
+  return '#3fb950'                  // good
+}
+
 export default function App() {
   const [meters, setMeters] = useState<Meters>({ funds: 5, reputation: 5, readiness: 5 })
   const [week, setWeek] = useState<number>(1)
@@ -265,14 +272,20 @@ export default function App() {
       <header style={{ paddingBottom: 12, borderBottom: '1px solid #333' }}>
         <h1 style={{ margin: 0, fontSize: 18, opacity: 0.8 }}>Yes, Your Goat — React/TS</h1>
         <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
-          {(['funds','reputation','readiness'] as (keyof Meters)[]).map(k => (
-            <div key={k} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <span style={{ width: 80, fontSize: 12, opacity: 0.7 }}>{k === 'reputation' ? 'Reputation' : k[0].toUpperCase()+k.slice(1)}</span>
-              <div style={{ position: 'relative', width: 160, height: 10, background: '#222836', borderRadius: 999 }}>
-                <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: `${clamp(meters[k]) / CLAMP_MAX * 100}%`, background: '#68a0ff' }} />
+          {(['funds','reputation','readiness'] as (keyof Meters)[]).map(k => {
+            const v = clamp(meters[k])
+            const color = barColor(v, CLAMP_MAX)
+            const label = k === 'reputation' ? 'Reputation' : k[0].toUpperCase()+k.slice(1)
+            return (
+              <div key={k} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span style={{ width: 80, fontSize: 12, opacity: 0.7 }}>{label}</span>
+                <div style={{ position: 'relative', width: 200, height: 14, background: '#222836', borderRadius: 999, overflow: 'hidden', border: '1px solid #293140' }}>
+                  <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: `${v / CLAMP_MAX * 100}%`, background: color }} />
+                  <div style={{ position: 'relative', textAlign: 'center', fontSize: 11, lineHeight: '14px', color: '#e6e9ef' }}>{v}/10</div>
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
           <div style={{ marginLeft: 'auto', fontSize: 12, opacity: 0.7 }}>Week: {week}</div>
         </div>
       </header>
@@ -282,12 +295,21 @@ export default function App() {
         <aside style={{ background: '#161a22', border: '1px solid #242a36', borderRadius: 12 }}>
           <div style={{ padding: 12, borderBottom: '1px solid #242a36', fontSize: 12, opacity: 0.8 }}>Roster</div>
           <div style={{ padding: 12 }}>
-            {roster.map(m => (
-              <div key={m.id} style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 2, padding: '8px 0', borderBottom: '1px dashed #242a36' }}>
-                <div style={{ fontSize: 12 }}>{m.name} <span style={{ opacity: 0.6 }}>({m.traitId})</span></div>
-                <div style={{ fontSize: 11, opacity: 0.8 }}>Morale: {m.morale ?? 50}</div>
-              </div>
-            ))}
+            {roster.map(m => {
+              const morale = clampMorale(m.morale ?? 50)
+              const color = barColor(morale, 100)
+              return (
+                <div key={m.id} style={{ padding: '8px 0', borderBottom: '1px dashed #242a36' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8 }}>
+                    <div style={{ fontSize: 12 }}>{m.name} <span style={{ opacity: 0.6 }}>({m.traitId})</span></div>
+                  </div>
+                  <div style={{ marginTop: 6, position: 'relative', width: '100%', height: 10, background: '#222836', borderRadius: 999, overflow: 'hidden', border: '1px solid #293140' }}>
+                    <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: `${morale}%`, background: color }} />
+                    <div style={{ position: 'relative', textAlign: 'center', fontSize: 10, lineHeight: '10px', color: '#e6e9ef' }}>{morale}/100</div>
+                  </div>
+                </div>
+              )
+            })}
           </div>
           {hookTraits.length > 0 && (
             <div style={{ padding: 12, borderTop: '1px solid #242a36', fontSize: 12 }}>
