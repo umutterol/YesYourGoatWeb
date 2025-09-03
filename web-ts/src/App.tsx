@@ -32,6 +32,8 @@ type Member = { id: string; name: string; traitId: string; morale?: number }
 
 type LogEntry = { week: number; title: string; choice: string; delta: string }
 
+type ChatMsg = { speakerId?: string; speakerName: string; text: string }
+
 const CLAMP_MIN = 0, CLAMP_MAX = 10
 
 function clamp(v: number) { return Math.max(CLAMP_MIN, Math.min(CLAMP_MAX, v)) }
@@ -100,6 +102,14 @@ export default function App() {
   const [hookTraits, setHookTraits] = useState<string[]>([])
   const [lastMsg, setLastMsg] = useState<string>('')
   const [log, setLog] = useState<LogEntry[]>([])
+  const [victory, setVictory] = useState<string>('')
+  const [perfStreak, setPerfStreak] = useState<number>(0) // all meters >=8 for consecutive weeks
+  const [legendStreak, setLegendStreak] = useState<number>(0) // reputation == 10 for consecutive weeks
+  const [chat, setChat] = useState<ChatMsg[]>([])
+
+  function pushChat(msg: ChatMsg) {
+    setChat(prev => [...prev, msg].slice(-40))
+  }
 
   // Load static data and restore
   useEffect(() => {
@@ -251,12 +261,47 @@ export default function App() {
     return null
   }
 
+  function winCheck(nextMeters: Meters, nextWeek: number) {
+    if (victory) return // already won
+    // Survivor: reach week 25+
+    if (nextWeek >= 25) {
+      setVictory('Victory — Survivor: Your guild endured to Week 25!')
+      return
+    }
+    // Update streaks
+    const allHigh = nextMeters.funds >= 8 && nextMeters.reputation >= 8 && nextMeters.readiness >= 8
+    const nextPerf = allHigh ? perfStreak + 1 : 0
+    const nextLegend = nextMeters.reputation === 10 ? legendStreak + 1 : 0
+    setPerfStreak(nextPerf)
+    setLegendStreak(nextLegend)
+    if (nextPerf >= 10) {
+      setVictory('Victory — Perfectionist: Maintained all meters ≥ 8 for 10 weeks!')
+      return
+    }
+    if (nextLegend >= 10) {
+      setVictory('Victory — Legend: Maintained Reputation = 10 for 10 weeks!')
+      return
+    }
+  }
+
   function decide(side: 'left' | 'right') {
+    if (victory) return
     const ev = current
     if (!ev) return
     const choice = side === 'left' ? ev.left : ev.right
     const { extraEffects, matchedTraits } = evaluateHooks(choice.hooks)
     setHookTraits(matchedTraits)
+    // Route trait-triggered barks to chat with a matching speaker
+    if (matchedTraits.length) {
+      const tid = matchedTraits[Math.floor(Math.random() * matchedTraits.length)]
+      const candidates = roster.filter(r => r.traitId === tid)
+      const speaker = candidates.length ? candidates[Math.floor(Math.random() * candidates.length)] : roster[Math.floor(Math.random() * Math.max(1, roster.length))]
+      const lines = barks[tid] || []
+      if (speaker && lines.length) {
+        const line = lines[Math.floor(Math.random() * lines.length)]
+        pushChat({ speakerId: speaker.id, speakerName: speaker.name, text: line })
+      }
+    }
     const deltaA = applyEffects(choice.effects)
     for (const ef of extraEffects) applyEffects(ef)
     const loss = lossCheck()
@@ -264,10 +309,35 @@ export default function App() {
     setLastMsg(loss ?? delta)
     setLog(prev => [...prev, { week, title: ev.title ?? 'Untitled', choice: choice.label ?? side, delta }].slice(-20))
     if (loss) {
-      // persist handled by effect; do not advance week
       return
     }
+    // Compute next state for win checks (week advances by 1 after decision)
+    const nextWeek = week + 1
+    const nextMeters = { ...meters }
+    winCheck(nextMeters, nextWeek)
     setWeek(prev => prev + 1)
+    setCurrent(drawCard())
+  }
+
+  function newRun() {
+    // Simple reset; keep content loaded
+    localStorage.removeItem('yyg_state_ts')
+    setMeters({ funds: 5, reputation: 5, readiness: 5 })
+    setWeek(1)
+    setLog([])
+    setLastMsg('')
+    setHookTraits([])
+    setVictory('')
+    setPerfStreak(0)
+    setLegendStreak(0)
+    // Reroll active roster
+    setRoster(prev => {
+      if (!prev.length) return prev
+      const pool = prev
+      const active = shuffle(pool).slice(0, 5)
+      return active.map(m => ({ ...m, morale: clampMorale(m.morale ?? 50) }))
+    })
+    setCurrent(null)
     setCurrent(drawCard())
   }
 
@@ -279,6 +349,31 @@ export default function App() {
     if (!lines.length) return ''
     return '"' + lines[Math.floor(Math.random() * lines.length)] + '"'
   }, [hookTraits, barks])
+
+  // Random chatter loop: periodically post a line from a random active member's trait barks
+  useEffect(() => {
+    if (victory) return
+    let timer: any
+    function schedule() {
+      const delay = 4000 + Math.random() * 6000 // 4-10s
+      timer = setTimeout(() => {
+        if (roster.length) {
+          // 50% chance to emit chatter to avoid spam
+          if (Math.random() < 0.5) {
+            const mem = roster[Math.floor(Math.random() * roster.length)]
+            const lines = barks[mem.traitId] || []
+            if (lines.length) {
+              const line = lines[Math.floor(Math.random() * lines.length)]
+              pushChat({ speakerId: mem.id, speakerName: mem.name, text: line })
+            }
+          }
+        }
+        schedule()
+      }, delay)
+    }
+    schedule()
+    return () => { if (timer) clearTimeout(timer) }
+  }, [roster, barks, victory])
 
   // UI
   return (
@@ -331,6 +426,19 @@ export default function App() {
               <div>{hookTraits.join(', ')}</div>
             </div>
           )}
+          <div style={{ padding: 12, borderTop: '1px solid #242a36' }}>
+            <div style={{ fontSize: 12, opacity: 0.8, marginBottom: 6 }}>Chat</div>
+            <div style={{ height: 180, overflowY: 'auto', background: '#0b1220', border: '1px solid #1f2937', borderRadius: 8, padding: 8 }}>
+              {chat.slice(-30).map((c, i) => (
+                <div key={i} style={{ fontSize: 12, marginBottom: 6 }}>
+                  <span style={{ color: '#93c5fd' }}>{c.speakerName}:</span> <span style={{ color: '#cbd5e1' }}>{c.text}</span>
+                </div>
+              ))}
+              {chat.length === 0 && (
+                <div style={{ fontSize: 12, opacity: 0.6 }}>No chatter yet…</div>
+              )}
+            </div>
+          </div>
         </aside>
 
         <main>
@@ -340,9 +448,18 @@ export default function App() {
                 <h2 style={{ margin: '0 0 6px' }}>{current.title}</h2>
                 <p style={{ margin: '0 0 16px', opacity: 0.8 }}>{current.body}</p>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-                  <button onClick={() => decide('left')}>{current.left.label}</button>
-                  <button onClick={() => decide('right')}>{current.right.label}</button>
+                  <button disabled={!!victory} onClick={() => decide('left')}>{current.left.label}</button>
+                  <button disabled={!!victory} onClick={() => decide('right')}>{current.right.label}</button>
                 </div>
+              </div>
+            </section>
+          )}
+
+          {victory && (
+            <section style={{ marginTop: 12, background: '#0f172a', border: '1px solid #334155', borderRadius: 12, padding: 16 }}>
+              <div style={{ fontSize: 16, marginBottom: 8 }}>{victory}</div>
+              <div style={{ display: 'flex', gap: 12 }}>
+                <button onClick={newRun}>New Run</button>
               </div>
             </section>
           )}
