@@ -76,9 +76,9 @@ function weightedPick<T>(arr: T[], weightFn: (t: T) => number): T | null {
 
 function barColor(value: number, max: number) {
   const pct = (value / max) * 100
-  if (pct <= 30) return '#f85149'   // bad
-  if (pct <= 60) return '#f1c40f'   // caution
-  return '#3fb950'                  // good
+  if (pct <= 30) return '#dc2626'   // red - bad
+  if (pct <= 60) return '#d97706'   // orange - caution  
+  return '#059669'                  // green - good
 }
 
 function shuffle<T>(arr: T[]): T[] {
@@ -271,15 +271,14 @@ export default function App() {
     setCurrent(drawCard())
   }
 
-  // Compute a bark line when a trait hook triggered and there is no loss message
+  // Compute a bark line when a trait hook triggered
   const barkLine = useMemo(() => {
-    if (lastMsg) return ''
     if (!hookTraits.length) return ''
     const tid = hookTraits[Math.floor(Math.random() * hookTraits.length)]
     const lines = barks[tid] || []
     if (!lines.length) return ''
-    return '“' + lines[Math.floor(Math.random() * lines.length)] + '”'
-  }, [hookTraits, barks, lastMsg])
+    return '"' + lines[Math.floor(Math.random() * lines.length)] + '"'
+  }, [hookTraits, barks])
 
   // UI
   return (
@@ -294,9 +293,9 @@ export default function App() {
             return (
               <div key={k} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 <span style={{ width: 80, fontSize: 12, opacity: 0.7 }}>{label}</span>
-                <div style={{ position: 'relative', width: 200, height: 14, background: '#222836', borderRadius: 999, overflow: 'hidden', border: '1px solid #293140' }}>
+                <div style={{ position: 'relative', width: 200, height: 14, background: '#1a1a1a', borderRadius: 999, overflow: 'hidden', border: '1px solid #333' }}>
                   <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: `${v / CLAMP_MAX * 100}%`, background: color }} />
-                  <div style={{ position: 'relative', textAlign: 'center', fontSize: 11, lineHeight: '14px', color: '#e6e9ef' }}>{v}/10</div>
+                  <div style={{ position: 'relative', textAlign: 'center', fontSize: 11, lineHeight: '14px', color: '#ffffff', fontWeight: 'bold', textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>{v}/10</div>
                 </div>
               </div>
             )
@@ -318,9 +317,9 @@ export default function App() {
                   <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8 }}>
                     <div style={{ fontSize: 12 }}>{m.name} <span style={{ opacity: 0.6 }}>({m.traitId})</span></div>
                   </div>
-                  <div style={{ marginTop: 6, position: 'relative', width: '100%', height: 10, background: '#222836', borderRadius: 999, overflow: 'hidden', border: '1px solid #293140' }}>
+                  <div style={{ marginTop: 6, position: 'relative', width: '100%', height: 10, background: '#1a1a1a', borderRadius: 999, overflow: 'hidden', border: '1px solid #333' }}>
                     <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: `${morale}%`, background: color }} />
-                    <div style={{ position: 'relative', textAlign: 'center', fontSize: 10, lineHeight: '10px', color: '#e6e9ef' }}>{morale}/100</div>
+                    <div style={{ position: 'relative', textAlign: 'center', fontSize: 10, lineHeight: '10px', color: '#ffffff', fontWeight: 'bold', textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>{morale}/100</div>
                   </div>
                 </div>
               )
@@ -350,8 +349,8 @@ export default function App() {
 
           <section style={{ marginTop: 12, minHeight: 20, fontSize: 12, opacity: 0.75 }}>
             {lastMsg}
-            {!lastMsg && barkLine && (
-              <div style={{ marginTop: 4 }}>{barkLine}</div>
+            {barkLine && (
+              <div style={{ marginTop: 4, fontStyle: 'italic', color: '#8b949e' }}>{barkLine}</div>
             )}
           </section>
 
