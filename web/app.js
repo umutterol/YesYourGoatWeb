@@ -1,4 +1,6 @@
 const EVENTS_URL = './resources/events/events.json';
+const ROSTER_URL = './resources/roster.json';
+const BARKS_URL  = './resources/barks/trait_barks.json';
 const CLAMP_MIN = 0, CLAMP_MAX = 10;
 
 const el = (id) => document.getElementById(id);
@@ -9,7 +11,10 @@ const state = {
   week: 1,
   events: [],
   rnc: [], // raid_night_check
-  lastMsg: ''
+  lastMsg: '',
+  roster: [],           // [{id,name,traitId,morale}]
+  barks: {},            // { traitId: [lines] }
+  hookTraits: []        // trait ids that matched last decision
 };
 
 function clamp(v) {
@@ -17,7 +22,8 @@ function clamp(v) {
 }
 
 function save() {
-  localStorage.setItem('yyg_state', JSON.stringify({ meters: state.meters, week: state.week }));
+  const morale = Object.fromEntries(state.roster.map(m => [m.id, m.morale]));
+  localStorage.setItem('yyg_state', JSON.stringify({ meters: state.meters, week: state.week, morale }));
 }
 
 function load() {
@@ -28,9 +34,16 @@ function load() {
     if (s && s.meters && Number.isInteger(s.week)) {
       state.meters = { ...state.meters, ...s.meters };
       state.week = s.week;
+      if (s.morale && state.roster.length) {
+        for (const m of state.roster) {
+          if (s.morale[m.id] != null) m.morale = clampMorale(s.morale[m.id]);
+        }
+      }
     }
   } catch {}
 }
+
+function clampMorale(v) { return Math.max(0, Math.min(100, Math.round(v))); }
 
 function randPick(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -55,13 +68,25 @@ function renderStatus(msg, isLoss=false) {
   span.className = isLoss ? 'loss' : 'toast';
   span.textContent = msg;
   s.appendChild(span);
+  // Append a bark from any matched trait
+  if (!isLoss && state.hookTraits && state.hookTraits.length) {
+    const tid = state.hookTraits[Math.floor(Math.random() * state.hookTraits.length)];
+    const lines = state.barks[tid] || [];
+    if (lines.length) {
+      const b = document.createElement('div');
+      b.className = 'toast';
+      b.textContent = '“' + lines[Math.floor(Math.random() * lines.length)] + '”';
+      s.appendChild(document.createElement('br'));
+      s.appendChild(b);
+    }
+  }
 }
 
 function lossCheck() {
   const { funds, reputation, readiness } = state.meters;
-  if (funds <= 0) return 'Guild Funds hit 0 — you lose.';
-  if (reputation <= 0) return 'Server Reputation hit 0 — you lose.';
-  if (readiness <= 0) return 'Raid Readiness hit 0 — you lose.';
+  if (funds <= 0) return 'Guild Funds hit 0 - you lose.';
+  if (reputation <= 0) return 'Server Reputation hit 0 - you lose.';
+  if (readiness <= 0) return 'Raid Readiness hit 0 - you lose.';
   return null;
 }
 
@@ -74,13 +99,74 @@ function drawEvent() {
 function applyEffects(effects) {
   const m = state.meters;
   const deltas = [];
+  const moraleDeltas = [];
   for (const [k, v] of Object.entries(effects || {})) {
     if (k in m && typeof v === 'number') {
       m[k] = clamp(m[k] + v);
       deltas.push(`${k}: ${fmtDelta(v)}`);
+      continue;
+    }
+    if (k === 'morale_all' && typeof v === 'number') {
+      for (const mem of state.roster) {
+        mem.morale = clampMorale((mem.morale ?? 50) + v);
+      }
+      moraleDeltas.push(`morale_all: ${fmtDelta(v)}`);
+      continue;
+    }
+    const mm = k.match(/^morale_(.+)$/);
+    if (mm && typeof v === 'number') {
+      const id = mm[1];
+      const mem = state.roster.find(r => r.id === id);
+      if (mem) {
+        mem.morale = clampMorale((mem.morale ?? 50) + v);
+        moraleDeltas.push(`${k}: ${fmtDelta(v)}`);
+      }
+      continue;
     }
   }
-  state.lastMsg = deltas.length ? deltas.join('  •  ') : 'No change';
+  const parts = [];
+  if (deltas.length) parts.push(deltas.join('  •  '));
+  if (moraleDeltas.length) parts.push(moraleDeltas.join('  •  '));
+  state.lastMsg = parts.length ? parts.join('  •  ') : 'No change';
+}
+
+function parseMoraleWhen(expr) {
+  const m = expr.match(/^morale:(<|<=|>|>=|==)(\d{1,3})$/);
+  if (!m) return null; return { op: m[1], value: Number(m[2]) };
+}
+
+function evalMorale(cond) {
+  const { op, value } = cond;
+  for (const mem of state.roster) {
+    const v = mem.morale ?? 50;
+    if (op === '<'  && v <  value) return true;
+    if (op === '<=' && v <= value) return true;
+    if (op === '>'  && v >  value) return true;
+    if (op === '>=' && v >= value) return true;
+    if (op === '==' && v === value) return true;
+  }
+  return false;
+}
+
+function evaluateHooks(hooks) {
+  const extraEffects = [];
+  const matchedTraits = new Set();
+  for (const h of (hooks || [])) {
+    const w = h.when || '';
+    if (w.startsWith('trait:')) {
+      const tid = w.slice(6);
+      if (state.roster.some(r => r.traitId === tid)) {
+        extraEffects.push(h.effect || {});
+        matchedTraits.add(tid);
+      }
+      continue;
+    }
+    const cond = parseMoraleWhen(w);
+    if (cond && evalMorale(cond)) {
+      extraEffects.push(h.effect || {});
+    }
+  }
+  return { extraEffects, matchedTraits: Array.from(matchedTraits) };
 }
 
 function setCard(ev) {
@@ -96,7 +182,10 @@ function setCard(ev) {
 
   // Click handlers
   el('btn-left').onclick = () => {
+    const { extraEffects, matchedTraits } = evaluateHooks(left.hooks);
+    state.hookTraits = matchedTraits;
     applyEffects(left.effects);
+    for (const ef of extraEffects) applyEffects(ef);
     const loss = lossCheck();
     if (loss) { renderMeters(); renderStatus(loss, true); save(); return; }
     state.week++;
@@ -104,7 +193,10 @@ function setCard(ev) {
     nextTurn();
   };
   el('btn-right').onclick = () => {
+    const { extraEffects, matchedTraits } = evaluateHooks(right.hooks);
+    state.hookTraits = matchedTraits;
     applyEffects(right.effects);
+    for (const ef of extraEffects) applyEffects(ef);
     const loss = lossCheck();
     if (loss) { renderMeters(); renderStatus(loss, true); save(); return; }
     state.week++;
@@ -129,8 +221,23 @@ async function loadEvents() {
   state.events = data.filter(e => !(e.tags || []).includes('raid_night_check'));
 }
 
+async function loadRoster() {
+  const res = await fetch(ROSTER_URL);
+  if (!res.ok) throw new Error(`Failed to load roster: ${res.status}`);
+  const roster = await res.json();
+  state.roster = (roster || []).map(m => ({ ...m, morale: clampMorale(m.morale ?? 50) }));
+}
+
+async function loadBarks() {
+  const res = await fetch(BARKS_URL);
+  if (!res.ok) throw new Error(`Failed to load barks: ${res.status}`);
+  state.barks = await res.json();
+}
+
 async function main() {
   try {
+    await loadRoster();
+    await loadBarks();
     load();
     renderMeters();
     await loadEvents();
