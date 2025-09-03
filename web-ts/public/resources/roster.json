@@ -1,9 +1,23 @@
 [
-  { "id": "rix",   "name": "Rix",   "traitId": "theorycrafter",         "morale": 60 },
-  { "id": "diva",  "name": "Diva",  "traitId": "drama_queen",          "morale": 55 },
-  { "id": "afk",   "name": "AFK",   "traitId": "afk_farmer",           "morale": 65 },
-  { "id": "lead",  "name": "Lead",  "traitId": "guild_leader",         "morale": 70 },
-  { "id": "meta",  "name": "Meta",  "traitId": "meta_slave",           "morale": 60 },
-  { "id": "hc",    "name": "HC",    "traitId": "hardcore_permadeather", "morale": 60 }
+  { "id": "rix",   "name": "Rix",   "traitId": "theorycrafter",          "morale": 60 },
+  { "id": "diva",  "name": "Diva",  "traitId": "drama_queen",           "morale": 55 },
+  { "id": "afk",   "name": "AFK",   "traitId": "afk_farmer",            "morale": 65 },
+  { "id": "lead",  "name": "Lead",  "traitId": "guild_leader",          "morale": 70 },
+  { "id": "meta",  "name": "Meta",  "traitId": "meta_slave",            "morale": 60 },
+  { "id": "hc",    "name": "HC",    "traitId": "hardcore_permadeather",  "morale": 60 },
+  { "id": "vex",   "name": "Vex",   "traitId": "theorycrafter",          "morale": 50 },
+  { "id": "mara",  "name": "Mara",  "traitId": "guild_leader",          "morale": 62 },
+  { "id": "nyx",   "name": "Nyx",   "traitId": "afk_farmer",            "morale": 58 },
+  { "id": "vale",  "name": "Vale",  "traitId": "meta_slave",            "morale": 57 },
+  { "id": "juno",  "name": "Juno",  "traitId": "theorycrafter",          "morale": 63 },
+  { "id": "sparx", "name": "Sparx", "traitId": "drama_queen",           "morale": 52 },
+  { "id": "milo",  "name": "Milo",  "traitId": "afk_farmer",            "morale": 66 },
+  { "id": "cmdr",  "name": "Cmdr",  "traitId": "guild_leader",          "morale": 68 },
+  { "id": "tier",  "name": "Tier",  "traitId": "meta_slave",            "morale": 59 },
+  { "id": "grim",  "name": "Grim",  "traitId": "hardcore_permadeather",  "morale": 61 },
+  { "id": "lyra",  "name": "Lyra",  "traitId": "theorycrafter",          "morale": 54 },
+  { "id": "noir",  "name": "Noir",  "traitId": "drama_queen",           "morale": 56 },
+  { "id": "chip",  "name": "Chip",  "traitId": "afk_farmer",            "morale": 62 },
+  { "id": "sage",  "name": "Sage",  "traitId": "guild_leader",          "morale": 64 }
 ]
 

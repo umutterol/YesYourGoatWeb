@@ -81,6 +81,15 @@ function barColor(value: number, max: number) {
   return '#3fb950'                  // good
 }
 
+function shuffle<T>(arr: T[]): T[] {
+  const a = arr.slice()
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
+
 export default function App() {
   const [meters, setMeters] = useState<Meters>({ funds: 5, reputation: 5, readiness: 5 })
   const [week, setWeek] = useState<number>(1)
@@ -103,11 +112,16 @@ export default function App() {
       if (!bRes.ok) throw new Error(`Failed barks: ${bRes.status}`)
       const rosterData: Member[] = await rRes.json()
       const barksData: Record<string, string[]> = await bRes.json()
-      const rosterWithMorale = rosterData.map(m => ({ ...m, morale: clampMorale(m.morale ?? 50) }))
-      setRoster(rosterWithMorale)
+
+      // Build pool and select active 5 for this session
+      const withMorale = rosterData.map(m => ({ ...m, morale: clampMorale(m.morale ?? 50) }))
+      setRoster(withMorale)
+      const active = shuffle(withMorale).slice(0, 5)
+      setRoster(active)
+
       setBarks(barksData)
 
-      // Restore save now that roster is set (so morale mapping works)
+      // Restore save now that active roster is set (apply morale mapping for active only)
       const raw = localStorage.getItem('yyg_state_ts')
       if (raw) {
         try {
@@ -116,7 +130,7 @@ export default function App() {
           if (Number.isInteger(s?.week)) setWeek(s.week)
           if (Array.isArray(s?.log)) setLog(s.log.slice(-20))
           if (s?.morale) {
-            setRoster((prev) => prev.map(m => ({ ...m, morale: clampMorale(s.morale[m.id] ?? m.morale ?? 50) })))
+            setRoster(prev => prev.map(m => ({ ...m, morale: clampMorale(s.morale[m.id] ?? m.morale ?? 50) })))
           }
         } catch {}
       }
@@ -133,7 +147,7 @@ export default function App() {
     })
   }, [])
 
-  // Persist
+  // Persist: save morale for active roster only
   useEffect(() => {
     const morale = Object.fromEntries(roster.map(m => [m.id, m.morale ?? 50]))
     localStorage.setItem('yyg_state_ts', JSON.stringify({ meters, week, morale, log }))
@@ -176,6 +190,7 @@ export default function App() {
     return false
   }
 
+  // Hooks/traits should only check the active 5
   function evaluateHooks(hooks?: Hook[]) {
     const extraEffects: Effects[] = []
     const matchedTraits = new Set<string>()
