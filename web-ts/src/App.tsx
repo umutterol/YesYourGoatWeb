@@ -249,6 +249,16 @@ export default function App() {
     setCurrent(drawCard())
   }
 
+  // Compute a bark line when a trait hook triggered and there is no loss message
+  const barkLine = useMemo(() => {
+    if (lastMsg) return ''
+    if (!hookTraits.length) return ''
+    const tid = hookTraits[Math.floor(Math.random() * hookTraits.length)]
+    const lines = barks[tid] || []
+    if (!lines.length) return ''
+    return '“' + lines[Math.floor(Math.random() * lines.length)] + '”'
+  }, [hookTraits, barks, lastMsg])
+
   // UI
   return (
     <div style={{ maxWidth: 720, margin: '0 auto', padding: 24 }}>
@@ -283,10 +293,8 @@ export default function App() {
 
         <section style={{ marginTop: 12, minHeight: 20, fontSize: 12, opacity: 0.75 }}>
           {lastMsg}
-          {!lastMsg && hookTraits.length > 0 && (
-            <>
-              {/* Bark will show via decision; keep minimal here */}
-            </>
+          {!lastMsg && barkLine && (
+            <div style={{ marginTop: 4 }}>{barkLine}</div>
           )}
         </section>
 
