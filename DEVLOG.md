@@ -60,6 +60,17 @@ Deploy (Vercel)
 - Set Root Directory to `web` and Framework Preset to “Other”.
 - Import the repository and deploy (no build necessary for the static prototype).
 
+Recent Updates (v0.12)
+
+- **Reigns-Style Swipe Mechanics**: Added intuitive touch and mouse controls:
+  - **Touch Support**: Full touch event handling for mobile devices
+  - **Mouse Dragging**: Click and drag support for desktop users
+  - **Visual Feedback**: Card rotates and fades during swipe with smooth animations
+  - **Swipe Thresholds**: 100px minimum swipe distance to trigger decisions
+  - **Direction Indicators**: Arrows on buttons and visual scaling during swipe
+  - **Dual Input**: Both swipe and traditional button clicking work simultaneously
+  - **Smooth Animations**: 0.3s ease transitions for natural feel
+
 Recent Updates (v0.11)
 
 - **UI Fixes and Darker Palette**: Addressed layout and visual issues:
@@ -137,6 +148,17 @@ Recent Updates (v0.6)
 - **Roster Expansion**: Expanded from 6 to 20 roster members, randomly selecting 5 per session
 - **UI Improvements**: Enhanced bar color contrast with bold white text and shadows for better readability
 - **Victory Flow**: Added victory detection, celebration banner, and "New Run" reset button
+
+Files Changed (v0.12)
+
+- `web-ts/src/App.tsx`
+  - Added swipe state management (swipeStart, swipeOffset, isDragging)
+  - Implemented touch and mouse event handlers for drag detection
+  - Added global mouse event listeners for smooth dragging experience
+  - Enhanced event card with swipe transform, rotation, and opacity effects
+  - Added visual feedback with button scaling and direction indicators
+  - Included swipe instructions and maintained dual input methods
+  - Applied smooth transitions and animations throughout
 
 Files Changed (v0.11)
 

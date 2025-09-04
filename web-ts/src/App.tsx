@@ -167,9 +167,75 @@ export default function App() {
   const [legendStreak, setLegendStreak] = useState<number>(0)
   const [chat, setChat] = useState<ChatMsg[]>([])
   const [currentEventMember, setCurrentEventMember] = useState<Member | null>(null)
+  
+  // Swipe mechanics
+  const [swipeStart, setSwipeStart] = useState<{ x: number; y: number } | null>(null)
+  const [swipeOffset, setSwipeOffset] = useState(0)
+  const [isDragging, setIsDragging] = useState(false)
+  const cardRef = useRef<HTMLDivElement>(null)
 
   function pushChat(msg: ChatMsg) {
     setChat(prev => [...prev, msg].slice(-40))
+  }
+
+  // Swipe handling functions
+  const handleSwipeStart = (e: React.MouseEvent | React.TouchEvent) => {
+    if (victory || !current) return
+    
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY
+    
+    setSwipeStart({ x: clientX, y: clientY })
+    setSwipeOffset(0)
+    setIsDragging(true)
+  }
+
+  const handleSwipeMove = (e: React.MouseEvent | React.TouchEvent) => {
+    if (!isDragging || !swipeStart || victory || !current) return
+    
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
+    const deltaX = clientX - swipeStart.x
+    
+    // Limit swipe distance
+    const maxSwipe = 150
+    const limitedDeltaX = Math.max(-maxSwipe, Math.min(maxSwipe, deltaX))
+    setSwipeOffset(limitedDeltaX)
+  }
+
+  const handleSwipeEnd = () => {
+    if (!isDragging || !swipeStart || victory || !current) return
+    
+    const swipeThreshold = 100
+    const swipeDirection = swipeOffset > swipeThreshold ? 'right' : swipeOffset < -swipeThreshold ? 'left' : null
+    
+    if (swipeDirection) {
+      decide(swipeDirection)
+    }
+    
+    // Reset swipe state
+    setSwipeStart(null)
+    setSwipeOffset(0)
+    setIsDragging(false)
+  }
+
+  // Mouse events
+  const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault()
+    handleSwipeStart(e)
+  }
+
+  // Touch events
+  const handleTouchStart = (e: React.TouchEvent) => {
+    handleSwipeStart(e)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    e.preventDefault()
+    handleSwipeMove(e)
+  }
+
+  const handleTouchEnd = () => {
+    handleSwipeEnd()
   }
 
   // Load static data and restore
@@ -429,6 +495,27 @@ export default function App() {
     return () => { if (timer) clearTimeout(timer) }
   }, [roster, barks, victory])
 
+  // Global mouse event listeners for dragging
+  useEffect(() => {
+    if (!isDragging) return
+
+    const handleGlobalMouseMove = (e: MouseEvent) => {
+      handleSwipeMove(e as any)
+    }
+
+    const handleGlobalMouseUp = () => {
+      handleSwipeEnd()
+    }
+
+    document.addEventListener('mousemove', handleGlobalMouseMove)
+    document.addEventListener('mouseup', handleGlobalMouseUp)
+
+    return () => {
+      document.removeEventListener('mousemove', handleGlobalMouseMove)
+      document.removeEventListener('mouseup', handleGlobalMouseUp)
+    }
+  }, [isDragging, swipeStart, swipeOffset, victory, current])
+
   // UI
   return (
     <div style={{ 
@@ -518,7 +605,7 @@ export default function App() {
 
       {/* Party Roster */}
       <div style={{
-        background: COLORS.accent,
+        background: COLORS.secondary,
         border: `2px solid ${COLORS.border}`,
         borderRadius: '8px',
         padding: '15px',
@@ -605,19 +692,35 @@ export default function App() {
             marginBottom: '35px', // GAP: Adjust this value to change spacing between event box and chat box
             height: '500px' // Fixed height
           }}>
-            <div style={{
-              background: COLORS.accent,
-              border: `3px solid ${COLORS.border}`,
-              borderRadius: '12px',
-              padding: '30px',
-              width: '700px', // Fixed width
-              height: '460px', // Fixed height
-              textAlign: 'center',
-              boxShadow: '0 8px 16px rgba(0,0,0,0.5)',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between'
-            }}>
+            <div 
+              ref={cardRef}
+              style={{
+                background: COLORS.accent,
+                border: `3px solid ${COLORS.border}`,
+                borderRadius: '12px',
+                padding: '30px',
+                width: '700px', // Fixed width
+                height: '460px', // Fixed height
+                textAlign: 'center',
+                boxShadow: '0 8px 16px rgba(0,0,0,0.5)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                // Swipe transform
+                transform: `translateX(${swipeOffset}px)`,
+                transition: isDragging ? 'none' : 'transform 0.3s ease',
+                cursor: isDragging ? 'grabbing' : 'grab',
+                userSelect: 'none',
+                // Visual feedback for swipe direction
+                opacity: isDragging ? Math.max(0.7, 1 - Math.abs(swipeOffset) / 200) : 1,
+                // Rotation based on swipe
+                rotate: isDragging ? `${swipeOffset * 0.1}deg` : '0deg'
+              }}
+              onMouseDown={handleMouseDown}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
               {/* Large Character Portrait */}
               {currentEventMember && (
                 <div style={{ marginBottom: '20px' }}>
@@ -662,6 +765,16 @@ export default function App() {
                 </p>
               </div>
 
+              {/* Swipe Instructions */}
+              <div style={{ 
+                fontSize: '12px', 
+                color: COLORS.textDim, 
+                marginBottom: '15px',
+                opacity: isDragging ? 0.5 : 1
+              }}>
+                Swipe left or right, or click buttons below
+              </div>
+
               {/* Choice Buttons */}
               <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
                 <button 
@@ -678,10 +791,13 @@ export default function App() {
                     cursor: victory ? 'not-allowed' : 'pointer',
                     opacity: victory ? 0.5 : 1,
                     minWidth: '140px',
-                    boxShadow: '0 4px 8px rgba(0,0,0,0.3)'
+                    boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+                    // Visual feedback for swipe direction
+                    transform: isDragging && swipeOffset < -50 ? 'scale(1.05)' : 'scale(1)',
+                    transition: 'transform 0.2s ease'
                   }}
                 >
-                  {current.left.label}
+                  ← {current.left.label}
                 </button>
                 <button 
                   disabled={!!victory}
@@ -697,10 +813,13 @@ export default function App() {
                     cursor: victory ? 'not-allowed' : 'pointer',
                     opacity: victory ? 0.5 : 1,
                     minWidth: '140px',
-                    boxShadow: '0 4px 8px rgba(0,0,0,0.3)'
+                    boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+                    // Visual feedback for swipe direction
+                    transform: isDragging && swipeOffset > 50 ? 'scale(1.05)' : 'scale(1)',
+                    transition: 'transform 0.2s ease'
                   }}
                 >
-                  {current.right.label}
+                  {current.right.label} →
                 </button>
               </div>
             </div>
