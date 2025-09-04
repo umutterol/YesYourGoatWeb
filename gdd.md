@@ -257,6 +257,7 @@ See trait definitions and barks: `resources/traits/traits.md`.
 
 ## Changelog
 
+- v0.7: Complete UI redesign to Reigns-style layout with provided color palette; implemented party-based event system where events come from active roster members; added character portraits in event cards; redesigned chat box with WoW-style green text on dark background; moved roster to bottom with mini portraits and morale-colored borders; top resource bar with icons instead of progress bars.
 - v0.6: Added win conditions (Survivor: week 25+, Perfectionist: all meters ≥8 for 10 weeks, Legend: reputation=10 for 10 weeks); implemented pseudo chat panel with trait-triggered barks and random chatter; expanded roster to 20 members with random 5 selection per session; improved bar color contrast for readability.
 - v0.5: Migrated prototype into YesYourGoatWeb; updated paths and web runtime notes.
 - v0.4: Added JSON schema reference and prototype traits pack; linked authoring data location.

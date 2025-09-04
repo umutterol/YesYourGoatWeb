@@ -6,6 +6,16 @@ const EVENTS_URL = '/resources/events/events.json'
 const ROSTER_URL = '/resources/roster.json'
 const BARKS_URL  = '/resources/barks/trait_barks.json'
 
+// Color palette from provided image
+const COLORS = {
+  orange: '#d7913a',
+  lightGreen: '#b9db82', 
+  darkOlive: '#5f4c0c',
+  taupe: '#a28f65',
+  lavender: '#9484bc',
+  darkSlate: '#364652'
+}
+
 // Types
 type Meters = { funds: number; reputation: number; readiness: number }
 type Effects = Partial<Meters & { morale_all: number }> & Record<string, number>
@@ -76,12 +86,7 @@ function weightedPick<T>(arr: T[], weightFn: (t: T) => number): T | null {
   return arr[arr.length - 1]
 }
 
-function barColor(value: number, max: number) {
-  const pct = (value / max) * 100
-  if (pct <= 30) return '#dc2626'   // red - bad
-  if (pct <= 60) return '#d97706'   // orange - caution  
-  return '#059669'                  // green - good
-}
+
 
 function shuffle<T>(arr: T[]): T[] {
   const a = arr.slice()
@@ -92,6 +97,58 @@ function shuffle<T>(arr: T[]): T[] {
   return a
 }
 
+// Generate party-based events from roster members
+function generatePartyEvent(member: Member, week: number): EventCard {
+  const events = [
+    {
+      id: `${member.id}_drama_${week}`,
+      title: `${member.name} has a problem`,
+      body: `${member.name} is causing issues in the guild. How do you handle this?`,
+      left: {
+        label: "Support them",
+        effects: { [`morale_${member.id}`]: 2, reputation: -1 },
+        hooks: member.traitId === 'drama_queen' ? [{ when: 'trait:drama_queen', effect: { reputation: -1 } }] : undefined
+      },
+      right: {
+        label: "Discipline them", 
+        effects: { [`morale_${member.id}`]: -2, reputation: 1 },
+        hooks: member.traitId === 'hardcore_permadeather' ? [{ when: 'trait:hardcore_permadeather', effect: { readiness: -1 } }] : undefined
+      }
+    },
+    {
+      id: `${member.id}_request_${week}`,
+      title: `${member.name} makes a request`,
+      body: `${member.name} wants something from the guild. What do you do?`,
+      left: {
+        label: "Grant it",
+        effects: { [`morale_${member.id}`]: 1, funds: -1 },
+        hooks: member.traitId === 'meta_slave' ? [{ when: 'trait:meta_slave', effect: { readiness: 1 } }] : undefined
+      },
+      right: {
+        label: "Deny it",
+        effects: { [`morale_${member.id}`]: -1, funds: 0 },
+        hooks: member.traitId === 'afk_farmer' ? [{ when: 'trait:afk_farmer', effect: { readiness: -1 } }] : undefined
+      }
+    },
+    {
+      id: `${member.id}_conflict_${week}`,
+      title: `${member.name} conflicts with others`,
+      body: `${member.name} is having trouble with other guild members.`,
+      left: {
+        label: "Mediate",
+        effects: { [`morale_${member.id}`]: 1, readiness: -1 },
+        hooks: member.traitId === 'guild_leader' ? [{ when: 'trait:guild_leader', effect: { reputation: 1 } }] : undefined
+      },
+      right: {
+        label: "Let them sort it out",
+        effects: { [`morale_${member.id}`]: -1, readiness: 1 },
+        hooks: member.traitId === 'theorycrafter' ? [{ when: 'trait:theorycrafter', effect: { readiness: 1 } }] : undefined
+      }
+    }
+  ]
+  return events[Math.floor(Math.random() * events.length)]
+}
+
 export default function App() {
   const [meters, setMeters] = useState<Meters>({ funds: 5, reputation: 5, readiness: 5 })
   const [week, setWeek] = useState<number>(1)
@@ -99,13 +156,12 @@ export default function App() {
   const [raidChecks, setRaidChecks] = useState<EventCard[]>([])
   const [roster, setRoster] = useState<Member[]>([])
   const [barks, setBarks] = useState<Record<string, string[]>>({})
-  const [hookTraits, setHookTraits] = useState<string[]>([])
-  const [lastMsg, setLastMsg] = useState<string>('')
   const [log, setLog] = useState<LogEntry[]>([])
   const [victory, setVictory] = useState<string>('')
-  const [perfStreak, setPerfStreak] = useState<number>(0) // all meters >=8 for consecutive weeks
-  const [legendStreak, setLegendStreak] = useState<number>(0) // reputation == 10 for consecutive weeks
+  const [perfStreak, setPerfStreak] = useState<number>(0)
+  const [legendStreak, setLegendStreak] = useState<number>(0)
   const [chat, setChat] = useState<ChatMsg[]>([])
+  const [currentEventMember, setCurrentEventMember] = useState<Member | null>(null)
 
   function pushChat(msg: ChatMsg) {
     setChat(prev => [...prev, msg].slice(-40))
@@ -125,13 +181,12 @@ export default function App() {
 
       // Build pool and select active 5 for this session
       const withMorale = rosterData.map(m => ({ ...m, morale: clampMorale(m.morale ?? 50) }))
-      setRoster(withMorale)
       const active = shuffle(withMorale).slice(0, 5)
       setRoster(active)
 
       setBarks(barksData)
 
-      // Restore save now that active roster is set (apply morale mapping for active only)
+      // Restore save now that active roster is set
       const raw = localStorage.getItem('yyg_state_ts')
       if (raw) {
         try {
@@ -153,7 +208,7 @@ export default function App() {
     }
 
     run().catch(err => {
-      setLastMsg(String(err?.message ?? err))
+      console.error(String(err?.message ?? err))
     })
   }, [])
 
@@ -169,8 +224,19 @@ export default function App() {
 
   const currentCardRef = useRef<EventCard | null>(null)
   function drawCard(): EventCard | null {
+    // For party-based events, generate from a random party member
+    if (week % 3 !== 0 && roster.length) {
+      const member = roster[Math.floor(Math.random() * roster.length)]
+      const partyEvent = generatePartyEvent(member, week)
+      setCurrentEventMember(member)
+      currentCardRef.current = partyEvent
+      return partyEvent
+    }
+    
+    // For raid checks, use existing system
     const card = weightedPick(cardPool, (e) => weightForEvent(e, meters.reputation, meters.readiness))
     currentCardRef.current = card
+    setCurrentEventMember(null)
     return card
   }
 
@@ -262,13 +328,11 @@ export default function App() {
   }
 
   function winCheck(nextMeters: Meters, nextWeek: number) {
-    if (victory) return // already won
-    // Survivor: reach week 25+
+    if (victory) return
     if (nextWeek >= 25) {
       setVictory('Victory — Survivor: Your guild endured to Week 25!')
       return
     }
-    // Update streaks
     const allHigh = nextMeters.funds >= 8 && nextMeters.reputation >= 8 && nextMeters.readiness >= 8
     const nextPerf = allHigh ? perfStreak + 1 : 0
     const nextLegend = nextMeters.reputation === 10 ? legendStreak + 1 : 0
@@ -290,7 +354,7 @@ export default function App() {
     if (!ev) return
     const choice = side === 'left' ? ev.left : ev.right
     const { extraEffects, matchedTraits } = evaluateHooks(choice.hooks)
-    setHookTraits(matchedTraits)
+    
     // Route trait-triggered barks to chat with a matching speaker
     if (matchedTraits.length) {
       const tid = matchedTraits[Math.floor(Math.random() * matchedTraits.length)]
@@ -302,16 +366,15 @@ export default function App() {
         pushChat({ speakerId: speaker.id, speakerName: speaker.name, text: line })
       }
     }
+    
     const deltaA = applyEffects(choice.effects)
     for (const ef of extraEffects) applyEffects(ef)
     const loss = lossCheck()
     const delta = deltaA
-    setLastMsg(loss ?? delta)
     setLog(prev => [...prev, { week, title: ev.title ?? 'Untitled', choice: choice.label ?? side, delta }].slice(-20))
     if (loss) {
       return
     }
-    // Compute next state for win checks (week advances by 1 after decision)
     const nextWeek = week + 1
     const nextMeters = { ...meters }
     winCheck(nextMeters, nextWeek)
@@ -320,17 +383,13 @@ export default function App() {
   }
 
   function newRun() {
-    // Simple reset; keep content loaded
     localStorage.removeItem('yyg_state_ts')
     setMeters({ funds: 5, reputation: 5, readiness: 5 })
     setWeek(1)
     setLog([])
-    setLastMsg('')
-    setHookTraits([])
     setVictory('')
     setPerfStreak(0)
     setLegendStreak(0)
-    // Reroll active roster
     setRoster(prev => {
       if (!prev.length) return prev
       const pool = prev
@@ -341,24 +400,14 @@ export default function App() {
     setCurrent(drawCard())
   }
 
-  // Compute a bark line when a trait hook triggered
-  const barkLine = useMemo(() => {
-    if (!hookTraits.length) return ''
-    const tid = hookTraits[Math.floor(Math.random() * hookTraits.length)]
-    const lines = barks[tid] || []
-    if (!lines.length) return ''
-    return '"' + lines[Math.floor(Math.random() * lines.length)] + '"'
-  }, [hookTraits, barks])
-
-  // Random chatter loop: periodically post a line from a random active member's trait barks
+  // Random chatter loop
   useEffect(() => {
     if (victory) return
     let timer: any
     function schedule() {
-      const delay = 4000 + Math.random() * 6000 // 4-10s
+      const delay = 4000 + Math.random() * 6000
       timer = setTimeout(() => {
         if (roster.length) {
-          // 50% chance to emit chatter to avoid spam
           if (Math.random() < 0.5) {
             const mem = roster[Math.floor(Math.random() * roster.length)]
             const lines = barks[mem.traitId] || []
@@ -377,139 +426,272 @@ export default function App() {
 
   // UI
   return (
-    <div style={{ maxWidth: 960, margin: '0 auto', padding: 24 }}>
-      <header style={{ paddingBottom: 12, borderBottom: '1px solid #333' }}>
-        <h1 style={{ margin: 0, fontSize: 18, opacity: 0.8 }}>Yes, Your Goat — React/TS</h1>
-        <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
-          {(['funds','reputation','readiness'] as (keyof Meters)[]).map(k => {
-            const v = clamp(meters[k])
-            const color = barColor(v, CLAMP_MAX)
-            const label = k === 'reputation' ? 'Reputation' : k[0].toUpperCase()+k.slice(1)
-            return (
-              <div key={k} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span style={{ width: 80, fontSize: 12, opacity: 0.7 }}>{label}</span>
-                <div style={{ position: 'relative', width: 200, height: 14, background: '#1a1a1a', borderRadius: 999, overflow: 'hidden', border: '1px solid #333' }}>
-                  <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: `${v / CLAMP_MAX * 100}%`, background: color }} />
-                  <div style={{ position: 'relative', textAlign: 'center', fontSize: 11, lineHeight: '14px', color: '#ffffff', fontWeight: 'bold', textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>{v}/10</div>
-                </div>
-              </div>
-            )
-          })}
-          <div style={{ marginLeft: 'auto', fontSize: 12, opacity: 0.7 }}>Week: {week}</div>
+    <div style={{ 
+      minHeight: '100vh', 
+      background: `linear-gradient(135deg, ${COLORS.darkSlate} 0%, ${COLORS.darkOlive} 100%)`,
+      color: COLORS.lightGreen,
+      fontFamily: 'monospace'
+    }}>
+      {/* Top Resources Bar */}
+      <header style={{ 
+        padding: '12px 24px', 
+        background: COLORS.taupe,
+        borderBottom: `2px solid ${COLORS.darkOlive}`,
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      }}>
+        <div style={{ fontSize: 14, fontWeight: 'bold' }}>
+          Week {week} • Guild Master
+        </div>
+        <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+          {/* Resource Icons */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span style={{ fontSize: 16 }}>💰</span>
+            <span style={{ fontSize: 12 }}>{meters.funds}/10</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span style={{ fontSize: 16 }}>⭐</span>
+            <span style={{ fontSize: 12 }}>{meters.reputation}/10</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span style={{ fontSize: 16 }}>⚔️</span>
+            <span style={{ fontSize: 12 }}>{meters.readiness}/10</span>
+          </div>
         </div>
       </header>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '260px 1fr', gap: 16, alignItems: 'start', marginTop: 16 }}>
-        {/* Roster Panel */}
-        <aside style={{ background: '#161a22', border: '1px solid #242a36', borderRadius: 12 }}>
-          <div style={{ padding: 12, borderBottom: '1px solid #242a36', fontSize: 12, opacity: 0.8 }}>Roster</div>
-          <div style={{ padding: 12 }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-              {roster.map(m => {
-                const morale = clampMorale(m.morale ?? 50)
-                const color = barColor(morale, 100)
-                return (
-                  <div key={m.id} style={{ 
-                    background: '#0b1220', 
-                    border: `2px solid ${color}`, 
-                    borderRadius: 8, 
-                    padding: 8, 
-                    textAlign: 'center',
-                    position: 'relative'
+      {/* Main Content */}
+      <div style={{ 
+        display: 'flex', 
+        flexDirection: 'column',
+        height: 'calc(100vh - 60px)',
+        padding: '24px'
+      }}>
+        
+        {/* Center Event Card */}
+        {current && (
+          <div style={{ 
+            flex: 1,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginBottom: 24
+          }}>
+            <div style={{
+              background: COLORS.taupe,
+              border: `3px solid ${COLORS.darkOlive}`,
+              borderRadius: 12,
+              padding: 24,
+              maxWidth: 500,
+              width: '100%',
+              textAlign: 'center',
+              boxShadow: `0 8px 24px rgba(0,0,0,0.3)`
+            }}>
+              {/* Event Title */}
+              <h2 style={{ 
+                margin: '0 0 16px', 
+                fontSize: 18, 
+                color: COLORS.lightGreen,
+                fontWeight: 'bold'
+              }}>
+                {current.title}
+              </h2>
+              
+              {/* Event Body */}
+              <p style={{ 
+                margin: '0 0 24px', 
+                fontSize: 14,
+                color: COLORS.lightGreen,
+                opacity: 0.9,
+                lineHeight: 1.4
+              }}>
+                {current.body}
+              </p>
+
+              {/* Character Portrait */}
+              {currentEventMember && (
+                <div style={{ marginBottom: 24 }}>
+                  <img 
+                    src={`/resources/portraits/${currentEventMember.portrait || 'peon.png'}`}
+                    alt={currentEventMember.name}
+                    style={{
+                      width: 80,
+                      height: 80,
+                      borderRadius: 8,
+                      border: `2px solid ${COLORS.lavender}`,
+                      objectFit: 'cover'
+                    }}
+                  />
+                  <div style={{ 
+                    marginTop: 8, 
+                    fontSize: 14, 
+                    color: COLORS.lightGreen,
+                    fontWeight: 'bold'
+                  }}>
+                    {currentEventMember.name}
+                  </div>
+                </div>
+              )}
+
+              {/* Choice Buttons */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+                <button 
+                  disabled={!!victory}
+                  onClick={() => decide('left')}
+                  style={{
+                    background: COLORS.orange,
+                    border: `2px solid ${COLORS.darkOlive}`,
+                    borderRadius: 8,
+                    padding: '12px 16px',
+                    color: COLORS.darkOlive,
+                    fontSize: 14,
+                    fontWeight: 'bold',
+                    cursor: victory ? 'not-allowed' : 'pointer',
+                    opacity: victory ? 0.5 : 1
+                  }}
+                >
+                  {current.left.label}
+                </button>
+                <button 
+                  disabled={!!victory}
+                  onClick={() => decide('right')}
+                  style={{
+                    background: COLORS.lightGreen,
+                    border: `2px solid ${COLORS.darkOlive}`,
+                    borderRadius: 8,
+                    padding: '12px 16px',
+                    color: COLORS.darkOlive,
+                    fontSize: 14,
+                    fontWeight: 'bold',
+                    cursor: victory ? 'not-allowed' : 'pointer',
+                    opacity: victory ? 0.5 : 1
+                  }}
+                >
+                  {current.right.label}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Victory Banner */}
+        {victory && (
+          <div style={{ 
+            background: COLORS.lavender,
+            border: `2px solid ${COLORS.darkOlive}`,
+            borderRadius: 8,
+            padding: 16,
+            marginBottom: 16,
+            textAlign: 'center'
+          }}>
+            <div style={{ fontSize: 16, marginBottom: 8, color: COLORS.darkOlive, fontWeight: 'bold' }}>
+              {victory}
+            </div>
+            <button 
+              onClick={newRun}
+              style={{
+                background: COLORS.orange,
+                border: `2px solid ${COLORS.darkOlive}`,
+                borderRadius: 6,
+                padding: '8px 16px',
+                color: COLORS.darkOlive,
+                fontSize: 12,
+                fontWeight: 'bold',
+                cursor: 'pointer'
+              }}
+            >
+              New Run
+            </button>
+          </div>
+        )}
+
+        {/* Chat Box */}
+        <div style={{ 
+          background: COLORS.darkSlate,
+          border: `2px solid ${COLORS.darkOlive}`,
+          borderRadius: 8,
+          padding: 12,
+          marginBottom: 16,
+          height: 120,
+          overflowY: 'auto'
+        }}>
+          <div style={{ fontSize: 12, marginBottom: 8, color: COLORS.lightGreen, fontWeight: 'bold' }}>
+            Guild Chat
+          </div>
+          {chat.slice(-20).map((c, i) => (
+            <div key={i} style={{ 
+              fontSize: 11, 
+              marginBottom: 4,
+              textAlign: 'left'
+            }}>
+              <span style={{ color: COLORS.orange, fontWeight: 'bold' }}>{c.speakerName}:</span>
+              <span style={{ color: COLORS.lightGreen, marginLeft: 8 }}>{c.text}</span>
+            </div>
+          ))}
+          {chat.length === 0 && (
+            <div style={{ fontSize: 11, opacity: 0.6, color: COLORS.lightGreen }}>
+              No chatter yet...
+            </div>
+          )}
+        </div>
+
+        {/* Bottom Roster */}
+        <div style={{ 
+          background: COLORS.taupe,
+          border: `2px solid ${COLORS.darkOlive}`,
+          borderRadius: 8,
+          padding: 12
+        }}>
+          <div style={{ fontSize: 12, marginBottom: 8, color: COLORS.lightGreen, fontWeight: 'bold' }}>
+            Party Roster
+          </div>
+          <div style={{ display: 'flex', gap: 12, justifyContent: 'center' }}>
+            {roster.map(m => {
+              const morale = clampMorale(m.morale ?? 50)
+              const borderColor = morale <= 30 ? COLORS.orange : morale <= 60 ? COLORS.lightGreen : COLORS.lightGreen
+              return (
+                <div key={m.id} style={{ 
+                  textAlign: 'center',
+                  position: 'relative'
+                }}>
+                  <div style={{
+                    border: `3px solid ${borderColor}`,
+                    borderRadius: 8,
+                    padding: 4,
+                    background: COLORS.darkSlate
                   }}>
                     <img 
-                      src={`/resources/portraits/${m.portrait || 'peon.png'}`} 
+                      src={`/resources/portraits/${m.portrait || 'peon.png'}`}
                       alt={m.name}
-                      style={{ 
-                        width: 48, 
-                        height: 48, 
-                        borderRadius: 4, 
-                        objectFit: 'cover',
-                        border: '1px solid #333'
-                      }} 
+                      style={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: 4,
+                        objectFit: 'cover'
+                      }}
                     />
-                    <div style={{ fontSize: 10, marginTop: 4, color: '#e6e9ef' }}>{m.name}</div>
-                    <div style={{ fontSize: 9, opacity: 0.7, color: '#8b949e' }}>{m.traitId}</div>
-                    <div style={{ 
-                      position: 'absolute', 
-                      bottom: 4, 
-                      left: '50%', 
-                      transform: 'translateX(-50%)',
-                      background: color,
-                      color: '#ffffff',
-                      fontSize: 9,
-                      fontWeight: 'bold',
-                      padding: '2px 6px',
-                      borderRadius: 4,
-                      textShadow: '1px 1px 2px rgba(0,0,0,0.8)'
-                    }}>
-                      {morale}
-                    </div>
                   </div>
-                )
-              })}
-            </div>
-          </div>
-          {hookTraits.length > 0 && (
-            <div style={{ padding: 12, borderTop: '1px solid #242a36', fontSize: 12 }}>
-              <div style={{ opacity: 0.8, marginBottom: 6 }}>Last Trigger:</div>
-              <div>{hookTraits.join(', ')}</div>
-            </div>
-          )}
-          <div style={{ padding: 12, borderTop: '1px solid #242a36' }}>
-            <div style={{ fontSize: 12, opacity: 0.8, marginBottom: 6 }}>Chat</div>
-            <div style={{ height: 180, overflowY: 'auto', background: '#0b1220', border: '1px solid #1f2937', borderRadius: 8, padding: 8 }}>
-              {chat.slice(-30).map((c, i) => (
-                <div key={i} style={{ fontSize: 12, marginBottom: 6 }}>
-                  <span style={{ color: '#93c5fd' }}>{c.speakerName}:</span> <span style={{ color: '#cbd5e1' }}>{c.text}</span>
+                  <div style={{ 
+                    fontSize: 10, 
+                    marginTop: 4, 
+                    color: COLORS.lightGreen,
+                    fontWeight: 'bold'
+                  }}>
+                    {m.name}
+                  </div>
+                  <div style={{ 
+                    fontSize: 9, 
+                    color: COLORS.lightGreen,
+                    opacity: 0.7
+                  }}>
+                    {morale}
+                  </div>
                 </div>
-              ))}
-              {chat.length === 0 && (
-                <div style={{ fontSize: 12, opacity: 0.6 }}>No chatter yet…</div>
-              )}
-            </div>
+              )
+            })}
           </div>
-        </aside>
-
-        <main>
-          {current && (
-            <section style={{ background: '#161a22', border: '1px solid #242a36', borderRadius: 12, boxShadow: '0 8px 24px rgba(0,0,0,0.25)' }}>
-              <div style={{ padding: 20 }}>
-                <h2 style={{ margin: '0 0 6px' }}>{current.title}</h2>
-                <p style={{ margin: '0 0 16px', opacity: 0.8 }}>{current.body}</p>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-                  <button disabled={!!victory} onClick={() => decide('left')}>{current.left.label}</button>
-                  <button disabled={!!victory} onClick={() => decide('right')}>{current.right.label}</button>
-                </div>
-              </div>
-            </section>
-          )}
-
-          {victory && (
-            <section style={{ marginTop: 12, background: '#0f172a', border: '1px solid #334155', borderRadius: 12, padding: 16 }}>
-              <div style={{ fontSize: 16, marginBottom: 8 }}>{victory}</div>
-              <div style={{ display: 'flex', gap: 12 }}>
-                <button onClick={newRun}>New Run</button>
-              </div>
-            </section>
-          )}
-
-          <section style={{ marginTop: 12, minHeight: 20, fontSize: 12, opacity: 0.75 }}>
-            {lastMsg}
-            {barkLine && (
-              <div style={{ marginTop: 4, fontStyle: 'italic', color: '#8b949e' }}>{barkLine}</div>
-            )}
-          </section>
-
-          <section style={{ marginTop: 16, borderTop: '1px solid #242a36', paddingTop: 12 }}>
-            {log.slice(-8).reverse().map((entry, i) => (
-              <div key={i} style={{ padding: '6px 0', borderBottom: '1px dashed #242a36' }}>
-                <div style={{ fontSize: 12 }}>{`W${entry.week} — ${entry.title}`}</div>
-                <div style={{ fontSize: 12, opacity: 0.8 }}>{`${entry.choice}: ${entry.delta}`}</div>
-              </div>
-            ))}
-          </section>
-        </main>
+        </div>
       </div>
     </div>
   )

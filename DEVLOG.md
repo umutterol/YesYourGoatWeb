@@ -60,6 +60,23 @@ Deploy (Vercel)
 - Set Root Directory to `web` and Framework Preset to “Other”.
 - Import the repository and deploy (no build necessary for the static prototype).
 
+Recent Updates (v0.7)
+
+- **Complete UI Redesign**: Reigns-style layout with provided color palette:
+  - Top resource bar with icons (💰 Funds, ⭐ Reputation, ⚔️ Readiness) instead of progress bars
+  - Center event card with character portrait and dialogue
+  - Bottom chat box with WoW-style green text on dark background
+  - Bottom roster with mini portraits and morale-colored borders
+- **Party-Based Event System**: Events now come from active roster members:
+  - Generated dynamically from party members' traits and personalities
+  - Character portraits displayed in event cards
+  - Direct morale effects on the specific character causing the event
+  - Three event types: drama, requests, and conflicts
+- **Color Palette**: Applied provided color scheme throughout:
+  - Orange (#d7913a), Light Green (#b9db82), Dark Olive (#5f4c0c)
+  - Taupe (#a28f65), Lavender (#9484bc), Dark Slate (#364652)
+- **Chat Styling**: WoW-style left-aligned green text on dark background with speaker names
+
 Recent Updates (v0.6)
 
 - **Win Conditions**: Added three victory paths:
@@ -73,6 +90,19 @@ Recent Updates (v0.6)
 - **Roster Expansion**: Expanded from 6 to 20 roster members, randomly selecting 5 per session
 - **UI Improvements**: Enhanced bar color contrast with bold white text and shadows for better readability
 - **Victory Flow**: Added victory detection, celebration banner, and "New Run" reset button
+
+Files Changed (v0.7)
+
+- `web-ts/src/App.tsx`
+  - Complete UI redesign to Reigns-style layout
+  - Implemented party-based event generation system
+  - Added character portraits to event cards
+  - Redesigned chat box with WoW-style green text
+  - Moved roster to bottom with mini portraits
+  - Applied provided color palette throughout
+  - Removed unused state variables and functions
+- `gdd.md` & `DEVLOG.md`
+  - Updated documentation to reflect v0.7 changes
 
 Files Changed (v0.6)
 
