@@ -522,7 +522,7 @@ export default function App() {
         border: `2px solid ${COLORS.border}`,
         borderRadius: '8px',
         padding: '15px',
-        marginBottom: '5px'
+        marginBottom: '35px' // GAP: Adjust this value to change spacing between roster and event box
       }}>
         <div style={{ 
           display: 'flex', 
@@ -602,7 +602,7 @@ export default function App() {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            marginBottom: '5px',
+            marginBottom: '35px', // GAP: Adjust this value to change spacing between event box and chat box
             height: '500px' // Fixed height
           }}>
             <div style={{
