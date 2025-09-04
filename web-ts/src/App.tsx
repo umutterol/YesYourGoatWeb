@@ -31,6 +31,7 @@ type Choice = {
   label: string
   effects: Effects
   hooks?: Hook[]
+  nextStep?: string
 }
 
 type EventCard = {
@@ -167,6 +168,7 @@ export default function App() {
   const [legendStreak, setLegendStreak] = useState<number>(0)
   const [chat, setChat] = useState<ChatMsg[]>([])
   const [currentEventMember, setCurrentEventMember] = useState<Member | null>(null)
+  const [pendingMultiStep, setPendingMultiStep] = useState<string | null>(null)
   
   // Swipe mechanics
   const [swipeStart, setSwipeStart] = useState<{ x: number; y: number } | null>(null)
@@ -295,6 +297,17 @@ export default function App() {
 
   const currentCardRef = useRef<EventCard | null>(null)
   function drawCard(): EventCard | null {
+    // Check for pending multi-step event
+    if (pendingMultiStep) {
+      const nextEvent = [...events, ...raidChecks].find(e => e.id === pendingMultiStep)
+      if (nextEvent) {
+        setPendingMultiStep(null)
+        currentCardRef.current = nextEvent
+        setCurrentEventMember(null)
+        return nextEvent
+      }
+    }
+    
     // For party-based events, generate from a random party member
     if (week % 3 !== 0 && roster.length) {
       const member = roster[Math.floor(Math.random() * roster.length)]
@@ -446,6 +459,14 @@ export default function App() {
     if (loss) {
       return
     }
+    
+    // Check for multi-step event
+    if (choice.nextStep) {
+      setPendingMultiStep(choice.nextStep)
+      setCurrent(drawCard())
+      return
+    }
+    
     const nextWeek = week + 1
     const nextMeters = { ...meters }
     winCheck(nextMeters, nextWeek)
@@ -461,6 +482,7 @@ export default function App() {
     setVictory('')
     setPerfStreak(0)
     setLegendStreak(0)
+    setPendingMultiStep(null)
     setRoster(prev => {
       if (!prev.length) return prev
       const pool = prev

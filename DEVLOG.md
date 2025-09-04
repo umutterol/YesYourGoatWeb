@@ -60,6 +60,19 @@ Deploy (Vercel)
 - Set Root Directory to `web` and Framework Preset to “Other”.
 - Import the repository and deploy (no build necessary for the static prototype).
 
+Recent Updates (v0.17)
+
+- **Multi-Step Events System**: Implemented complex branching event chains:
+  - **Guild Bank Scandal**: 4-step investigation with theft, redemption, and surveillance
+  - **Raid Leader Crisis**: 3-step leadership transition with multiple candidate paths
+  - **Server Transfer Drama**: 2-step decision between expensive/cheap servers or staying
+  - **Loot Council Revolution**: 2-step transparency vs corruption investigation
+  - **Guild Merger**: 3-step merger negotiations with officer status and team structure
+  - **Immediate Effects**: Every step has immediate consequences and resource costs
+  - **Branching Paths**: Player choices determine which steps follow
+  - **Narrative Depth**: Events create ongoing story arcs with escalating consequences
+  - **State Management**: Added pendingMultiStep state and nextStep property to choices
+
 Recent Updates (v0.16)
 
 - **Character Expansion**: Added 15 new characters with realistic names and new portraits:
@@ -197,6 +210,26 @@ Recent Updates (v0.6)
 - **Roster Expansion**: Expanded from 6 to 20 roster members, randomly selecting 5 per session
 - **UI Improvements**: Enhanced bar color contrast with bold white text and shadows for better readability
 - **Victory Flow**: Added victory detection, celebration banner, and "New Run" reset button
+
+Files Changed (v0.17)
+
+- `web-ts/public/resources/events/events.json`
+  - Added 5 multi-step event chains with 20+ total steps
+  - Guild Bank Scandal: 4 steps (investigation → results → redemption/surveillance → final outcome)
+  - Raid Leader Crisis: 3 steps (resignation → demands/candidates → leadership struggles)
+  - Server Transfer Drama: 2 steps (decision → costs/recruiting challenges)
+  - Loot Council Revolution: 2 steps (transparency → favoritism/investigation)
+  - Guild Merger: 3 steps (proposal → officer status → team structure)
+  - Each step includes immediate effects and resource costs
+  - Events branch based on player choices with realistic consequences
+
+- `web-ts/src/App.tsx`
+  - Added nextStep property to Choice type for multi-step event support
+  - Added pendingMultiStep state to track ongoing event chains
+  - Updated drawCard function to handle multi-step event progression
+  - Modified decide function to check for nextStep and continue event chains
+  - Updated newRun function to reset multi-step state
+  - Multi-step events don't advance week counter until chain completes
 
 Files Changed (v0.16)
 
