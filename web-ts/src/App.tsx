@@ -98,55 +98,55 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 // Generate party-based events from roster members
-function generatePartyEvent(member: Member, week: number): EventCard {
-  const events = [
-    {
-      id: `${member.id}_drama_${week}`,
+function generatePartyEvent(member: Member, week: number, eventTemplates: EventCard[]): EventCard {
+  // Filter for member-based events (excluding raid checks)
+  const memberEvents = eventTemplates.filter(e => e.id.startsWith('member_'))
+  if (!memberEvents.length) {
+    // Fallback if no member events found
+    return {
+      id: `${member.id}_fallback_${week}`,
       title: `${member.name} has a problem`,
       body: `${member.name} is causing issues in the guild. How do you handle this?`,
+      tags: ["player_drama"],
+      weights: { base: 5 },
       left: {
         label: "Support them",
-        effects: { [`morale_${member.id}`]: 2, reputation: -1 },
-        hooks: member.traitId === 'drama_queen' ? [{ when: 'trait:drama_queen', effect: { reputation: -1 } }] : undefined
+        effects: { [`morale_${member.id}`]: 2, reputation: -1 }
       },
       right: {
-        label: "Discipline them", 
-        effects: { [`morale_${member.id}`]: -2, reputation: 1 },
-        hooks: member.traitId === 'hardcore_permadeather' ? [{ when: 'trait:hardcore_permadeather', effect: { readiness: -1 } }] : undefined
-      }
-    },
-    {
-      id: `${member.id}_request_${week}`,
-      title: `${member.name} makes a request`,
-      body: `${member.name} wants something from the guild. What do you do?`,
-      left: {
-        label: "Grant it",
-        effects: { [`morale_${member.id}`]: 1, funds: -1 },
-        hooks: member.traitId === 'meta_slave' ? [{ when: 'trait:meta_slave', effect: { readiness: 1 } }] : undefined
-      },
-      right: {
-        label: "Deny it",
-        effects: { [`morale_${member.id}`]: -1, funds: 0 },
-        hooks: member.traitId === 'afk_farmer' ? [{ when: 'trait:afk_farmer', effect: { readiness: -1 } }] : undefined
-      }
-    },
-    {
-      id: `${member.id}_conflict_${week}`,
-      title: `${member.name} conflicts with others`,
-      body: `${member.name} is having trouble with other guild members.`,
-      left: {
-        label: "Mediate",
-        effects: { [`morale_${member.id}`]: 1, readiness: -1 },
-        hooks: member.traitId === 'guild_leader' ? [{ when: 'trait:guild_leader', effect: { reputation: 1 } }] : undefined
-      },
-      right: {
-        label: "Let them sort it out",
-        effects: { [`morale_${member.id}`]: -1, readiness: 1 },
-        hooks: member.traitId === 'theorycrafter' ? [{ when: 'trait:theorycrafter', effect: { readiness: 1 } }] : undefined
+        label: "Discipline them",
+        effects: { [`morale_${member.id}`]: -2, reputation: 1 }
       }
     }
-  ]
-  return events[Math.floor(Math.random() * events.length)]
+  }
+  
+  const template = memberEvents[Math.floor(Math.random() * memberEvents.length)]
+  
+  // Replace placeholders in the template
+  const replaceMember = (text: string) => text.replace(/{member}/g, member.name)
+  const replaceMemberId = (effects: Effects) => {
+    const newEffects: Effects = {}
+    for (const [key, value] of Object.entries(effects)) {
+      const newKey = key.replace('{memberId}', member.id)
+      newEffects[newKey] = value
+    }
+    return newEffects
+  }
+  
+  return {
+    ...template,
+    id: `${member.id}_${template.id}_${week}`,
+    title: replaceMember(template.title),
+    body: replaceMember(template.body),
+    left: {
+      ...template.left,
+      effects: replaceMemberId(template.left.effects)
+    },
+    right: {
+      ...template.right,
+      effects: replaceMemberId(template.right.effects)
+    }
+  }
 }
 
 export default function App() {
@@ -227,7 +227,7 @@ export default function App() {
     // For party-based events, generate from a random party member
     if (week % 3 !== 0 && roster.length) {
       const member = roster[Math.floor(Math.random() * roster.length)]
-      const partyEvent = generatePartyEvent(member, week)
+      const partyEvent = generatePartyEvent(member, week, events)
       setCurrentEventMember(member)
       currentCardRef.current = partyEvent
       return partyEvent

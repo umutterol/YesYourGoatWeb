@@ -60,6 +60,31 @@ Deploy (Vercel)
 - Set Root Directory to `web` and Framework Preset to “Other”.
 - Import the repository and deploy (no build necessary for the static prototype).
 
+Recent Updates (v0.9)
+
+- **Reigns-Style Event Complexity**: Enhanced events with sophisticated scenarios:
+  - **Crisis Events**: Threats to quit, betrayal revealed, health concerns
+  - **Psychological Events**: Paranoia, ego problems, gaming addiction, obsession
+  - **Supernatural Events**: Prophecies, curses, visions, rituals, immortality quests
+  - **Character Arc Events**: Redemption, ascension, fall from grace, legacy concerns
+  - **Multiple Trait Hooks**: Each choice can trigger multiple trait interactions
+  - **Higher Stakes**: Dramatic events have higher weight values (6 vs 3-5)
+  - **Deeper Consequences**: More complex resource trade-offs and morale impacts
+
+Recent Updates (v0.8)
+
+- **Complete Event Rewrite**: All events now party-based with dynamic member substitution:
+  - Events come from specific roster members and directly affect their morale
+  - Template system with {member} and {memberId} placeholders
+  - 20 member-specific event types covering all aspects of guild life
+  - Dynamic event generation based on active roster members
+- **Event Categories**: Comprehensive coverage including:
+  - Drama, requests, conflicts, burnout, performance issues
+  - Attendance, strategy disagreements, social drama, gear requests
+  - Alt characters, voice comms, parse obsession, meta complaints
+  - Poaching attempts, break requests, role changes, consumables
+  - Schedule conflicts, bench requests, mentoring opportunities
+
 Recent Updates (v0.7)
 
 - **Complete UI Redesign**: Reigns-style layout with provided color palette:
@@ -90,6 +115,31 @@ Recent Updates (v0.6)
 - **Roster Expansion**: Expanded from 6 to 20 roster members, randomly selecting 5 per session
 - **UI Improvements**: Enhanced bar color contrast with bold white text and shadows for better readability
 - **Victory Flow**: Added victory detection, celebration banner, and "New Run" reset button
+
+Files Changed (v0.9)
+
+- `web-ts/public/resources/events/events.json`
+  - Added 25+ Reigns-style complex events with multiple trait hooks
+  - Introduced crisis events (weight 6) with dramatic consequences
+  - Added psychological and supernatural event categories
+  - Implemented character arc progression events
+  - Enhanced trait interactions with multiple hooks per choice
+  - Increased complexity of resource trade-offs and morale impacts
+
+Files Changed (v0.8)
+
+- `web-ts/public/resources/events/events.json`
+  - Complete rewrite of all events to be party-based
+  - Added 20 member-specific event templates with placeholders
+  - Implemented {member} and {memberId} substitution system
+  - Removed generic events, replaced with character-driven content
+- `web-ts/src/App.tsx`
+  - Updated generatePartyEvent function to use template system
+  - Added dynamic placeholder replacement for member names and IDs
+  - Enhanced event generation to use actual event templates
+  - Improved fallback system for missing templates
+- `gdd.md` & `DEVLOG.md`
+  - Updated documentation to reflect v0.8 changes
 
 Files Changed (v0.7)
 
