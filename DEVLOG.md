@@ -60,6 +60,18 @@ Deploy (Vercel)
 - Set Root Directory to `web` and Framework Preset to “Other”.
 - Import the repository and deploy (no build necessary for the static prototype).
 
+Recent Updates (v0.13)
+
+- **Mobile Responsiveness**: Optimized UI for phones and tablets:
+  - **Breakpoint**: 768px responsive breakpoint for mobile vs desktop
+  - **Resource Bars**: Smaller bars (35x18px vs 50x25px) and reduced font sizes
+  - **Party Roster**: Smaller portraits (60x60px vs 80x80px) and tighter spacing
+  - **Event Cards**: 95% width on mobile with smaller character portraits (120x120px vs 200x200px)
+  - **Text Sizing**: Responsive font sizes throughout (14px vs 18px for titles)
+  - **Button Layout**: Smaller buttons with wrap layout for mobile
+  - **Chat Box**: Reduced height (150px vs 200px) and smaller text
+  - **Touch Optimization**: Maintained swipe mechanics with mobile-friendly sizing
+
 Recent Updates (v0.12)
 
 - **Reigns-Style Swipe Mechanics**: Added intuitive touch and mouse controls:
@@ -148,6 +160,19 @@ Recent Updates (v0.6)
 - **Roster Expansion**: Expanded from 6 to 20 roster members, randomly selecting 5 per session
 - **UI Improvements**: Enhanced bar color contrast with bold white text and shadows for better readability
 - **Victory Flow**: Added victory detection, celebration banner, and "New Run" reset button
+
+Files Changed (v0.13)
+
+- `web-ts/src/App.tsx`
+  - Added responsive breakpoint detection (768px) throughout UI
+  - Implemented mobile-specific sizing for all components
+  - Reduced resource bar dimensions and font sizes for mobile
+  - Made party roster portraits and spacing responsive
+  - Created responsive event card with 95% width on mobile
+  - Adjusted character portrait sizes and text scaling
+  - Optimized button layout and sizing for touch interaction
+  - Reduced chat box height and font sizes for mobile
+  - Maintained swipe mechanics across all screen sizes
 
 Files Changed (v0.12)
 

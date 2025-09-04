@@ -523,28 +523,39 @@ export default function App() {
       background: `linear-gradient(135deg, ${COLORS.primary} 0%, ${COLORS.secondary} 100%)`,
       color: COLORS.text,
       fontFamily: 'monospace',
-      padding: '10px'
+      padding: window.innerWidth < 768 ? '5px' : '10px'
     }}>
       {/* Top Resource Bar with Filling Icons */}
       <div style={{
         background: COLORS.secondary,
         border: `2px solid ${COLORS.border}`,
         borderRadius: '8px',
-        padding: '15px 20px',
+        padding: window.innerWidth < 768 ? '10px 15px' : '15px 20px',
         marginBottom: '5px',
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        flexWrap: window.innerWidth < 768 ? 'wrap' : 'nowrap'
       }}>
-        <div style={{ fontSize: '18px', fontWeight: 'bold', color: COLORS.highlight }}>
+        <div style={{ 
+          fontSize: window.innerWidth < 768 ? '14px' : '18px', 
+          fontWeight: 'bold', 
+          color: COLORS.highlight,
+          marginBottom: window.innerWidth < 768 ? '5px' : '0'
+        }}>
           Week {week}
         </div>
-        <div style={{ display: 'flex', gap: '30px' }}>
+        <div style={{ 
+          display: 'flex', 
+          gap: window.innerWidth < 768 ? '15px' : '30px',
+          flexWrap: 'wrap',
+          justifyContent: 'center'
+        }}>
           {/* Funds with filling bar */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: window.innerWidth < 768 ? '5px' : '10px' }}>
             <div style={{
-              width: '50px',
-              height: '25px',
+              width: window.innerWidth < 768 ? '35px' : '50px',
+              height: window.innerWidth < 768 ? '18px' : '25px',
               background: COLORS.primary,
               border: `2px solid ${COLORS.border}`,
               borderRadius: '4px',
@@ -558,13 +569,17 @@ export default function App() {
                 transition: 'width 0.3s ease'
               }} />
             </div>
-            <span style={{ fontSize: '16px', fontWeight: 'bold', color: COLORS.text }}>💰 {meters.funds}</span>
+            <span style={{ 
+              fontSize: window.innerWidth < 768 ? '12px' : '16px', 
+              fontWeight: 'bold', 
+              color: COLORS.text 
+            }}>💰 {meters.funds}</span>
           </div>
           {/* Reputation with filling bar */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: window.innerWidth < 768 ? '5px' : '10px' }}>
             <div style={{
-              width: '50px',
-              height: '25px',
+              width: window.innerWidth < 768 ? '35px' : '50px',
+              height: window.innerWidth < 768 ? '18px' : '25px',
               background: COLORS.primary,
               border: `2px solid ${COLORS.border}`,
               borderRadius: '4px',
@@ -578,13 +593,17 @@ export default function App() {
                 transition: 'width 0.3s ease'
               }} />
             </div>
-            <span style={{ fontSize: '16px', fontWeight: 'bold', color: COLORS.text }}>⭐ {meters.reputation}</span>
+            <span style={{ 
+              fontSize: window.innerWidth < 768 ? '12px' : '16px', 
+              fontWeight: 'bold', 
+              color: COLORS.text 
+            }}>⭐ {meters.reputation}</span>
           </div>
           {/* Readiness with filling bar */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: window.innerWidth < 768 ? '5px' : '10px' }}>
             <div style={{
-              width: '50px',
-              height: '25px',
+              width: window.innerWidth < 768 ? '35px' : '50px',
+              height: window.innerWidth < 768 ? '18px' : '25px',
               background: COLORS.primary,
               border: `2px solid ${COLORS.border}`,
               borderRadius: '4px',
@@ -598,7 +617,11 @@ export default function App() {
                 transition: 'width 0.3s ease'
               }} />
             </div>
-            <span style={{ fontSize: '16px', fontWeight: 'bold', color: COLORS.text }}>⚔️ {meters.readiness}</span>
+            <span style={{ 
+              fontSize: window.innerWidth < 768 ? '12px' : '16px', 
+              fontWeight: 'bold', 
+              color: COLORS.text 
+            }}>⚔️ {meters.readiness}</span>
           </div>
         </div>
       </div>
@@ -608,12 +631,12 @@ export default function App() {
         background: COLORS.secondary,
         border: `2px solid ${COLORS.border}`,
         borderRadius: '8px',
-        padding: '15px',
-        marginBottom: '35px' // GAP: Adjust this value to change spacing between roster and event box
+        padding: window.innerWidth < 768 ? '10px' : '15px',
+        marginBottom: window.innerWidth < 768 ? '20px' : '35px' // GAP: Adjust this value to change spacing between roster and event box
       }}>
         <div style={{ 
           display: 'flex', 
-          gap: '20px', 
+          gap: window.innerWidth < 768 ? '10px' : '20px', 
           justifyContent: 'center',
           flexWrap: 'wrap'
         }}>
@@ -633,8 +656,8 @@ export default function App() {
                     src={`/resources/portraits/${member.portrait || 'peon.png'}`}
                     alt={member.name}
                     style={{
-                      width: '80px',
-                      height: '80px',
+                      width: window.innerWidth < 768 ? '60px' : '80px',
+                      height: window.innerWidth < 768 ? '60px' : '80px',
                       borderRadius: '8px',
                       border: `3px solid ${borderColor}`,
                       objectFit: 'cover'
@@ -649,12 +672,12 @@ export default function App() {
                     background: COLORS.secondary,
                     border: `2px solid ${borderColor}`,
                     borderRadius: '50%',
-                    width: '24px',
-                    height: '24px',
+                    width: window.innerWidth < 768 ? '20px' : '24px',
+                    height: window.innerWidth < 768 ? '20px' : '24px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: '12px',
+                    fontSize: window.innerWidth < 768 ? '10px' : '12px',
                     fontWeight: 'bold',
                     color: COLORS.text
                   }}>
@@ -662,7 +685,7 @@ export default function App() {
                   </div>
                 </div>
                 <div style={{ 
-                  fontSize: '14px', 
+                  fontSize: window.innerWidth < 768 ? '12px' : '14px', 
                   color: COLORS.text,
                   fontWeight: 'bold',
                   marginTop: '8px'
@@ -683,14 +706,14 @@ export default function App() {
         padding: '0'
       }}>
         
-        {/* Center Event Card - Fixed Size */}
+        {/* Center Event Card - Responsive Size */}
         {current && (
           <div style={{ 
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            marginBottom: '35px', // GAP: Adjust this value to change spacing between event box and chat box
-            height: '500px' // Fixed height
+            marginBottom: window.innerWidth < 768 ? '20px' : '35px', // GAP: Adjust this value to change spacing between event box and chat box
+            height: window.innerWidth < 768 ? '400px' : '500px' // Responsive height
           }}>
             <div 
               ref={cardRef}
@@ -698,9 +721,10 @@ export default function App() {
                 background: COLORS.accent,
                 border: `3px solid ${COLORS.border}`,
                 borderRadius: '12px',
-                padding: '30px',
-                width: '700px', // Fixed width
-                height: '460px', // Fixed height
+                padding: window.innerWidth < 768 ? '20px' : '30px',
+                width: window.innerWidth < 768 ? '95%' : '700px', // Responsive width
+                maxWidth: '700px',
+                height: window.innerWidth < 768 ? '360px' : '460px', // Responsive height
                 textAlign: 'center',
                 boxShadow: '0 8px 16px rgba(0,0,0,0.5)',
                 display: 'flex',
@@ -723,13 +747,13 @@ export default function App() {
             >
               {/* Large Character Portrait */}
               {currentEventMember && (
-                <div style={{ marginBottom: '20px' }}>
+                <div style={{ marginBottom: window.innerWidth < 768 ? '15px' : '20px' }}>
                   <img 
                     src={`/resources/portraits/${currentEventMember.portrait || 'peon.png'}`}
                     alt={currentEventMember.name}
                     style={{
-                      width: '200px',
-                      height: '200px',
+                      width: window.innerWidth < 768 ? '120px' : '200px',
+                      height: window.innerWidth < 768 ? '120px' : '200px',
                       borderRadius: '12px',
                       border: `4px solid ${COLORS.highlight}`,
                       objectFit: 'cover',
@@ -739,12 +763,12 @@ export default function App() {
                 </div>
               )}
 
-              {/* Event Content - Fixed height container */}
+              {/* Event Content - Responsive container */}
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 {/* Event Title */}
                 <h2 style={{ 
                   margin: '0 0 15px', 
-                  fontSize: '24px', 
+                  fontSize: window.innerWidth < 768 ? '18px' : '24px', 
                   color: COLORS.text,
                   fontWeight: 'bold'
                 }}>
@@ -754,10 +778,10 @@ export default function App() {
                 {/* Event Body */}
                 <p style={{ 
                   margin: '0 0 20px', 
-                  fontSize: '16px',
+                  fontSize: window.innerWidth < 768 ? '14px' : '16px',
                   color: COLORS.textDim,
                   lineHeight: '1.4',
-                  maxHeight: '80px',
+                  maxHeight: window.innerWidth < 768 ? '60px' : '80px',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis'
                 }}>
@@ -767,7 +791,7 @@ export default function App() {
 
               {/* Swipe Instructions */}
               <div style={{ 
-                fontSize: '12px', 
+                fontSize: window.innerWidth < 768 ? '10px' : '12px', 
                 color: COLORS.textDim, 
                 marginBottom: '15px',
                 opacity: isDragging ? 0.5 : 1
@@ -776,7 +800,12 @@ export default function App() {
               </div>
 
               {/* Choice Buttons */}
-              <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
+              <div style={{ 
+                display: 'flex', 
+                gap: window.innerWidth < 768 ? '10px' : '20px', 
+                justifyContent: 'center',
+                flexWrap: window.innerWidth < 768 ? 'wrap' : 'nowrap'
+              }}>
                 <button 
                   disabled={!!victory}
                   onClick={() => decide('left')}
@@ -784,13 +813,13 @@ export default function App() {
                     background: COLORS.warning,
                     border: 'none',
                     borderRadius: '8px',
-                    padding: '12px 24px',
+                    padding: window.innerWidth < 768 ? '10px 16px' : '12px 24px',
                     color: COLORS.secondary,
-                    fontSize: '16px',
+                    fontSize: window.innerWidth < 768 ? '14px' : '16px',
                     fontWeight: 'bold',
                     cursor: victory ? 'not-allowed' : 'pointer',
                     opacity: victory ? 0.5 : 1,
-                    minWidth: '140px',
+                    minWidth: window.innerWidth < 768 ? '120px' : '140px',
                     boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
                     // Visual feedback for swipe direction
                     transform: isDragging && swipeOffset < -50 ? 'scale(1.05)' : 'scale(1)',
@@ -806,13 +835,13 @@ export default function App() {
                     background: COLORS.success,
                     border: 'none',
                     borderRadius: '8px',
-                    padding: '12px 24px',
+                    padding: window.innerWidth < 768 ? '10px 16px' : '12px 24px',
                     color: COLORS.secondary,
-                    fontSize: '16px',
+                    fontSize: window.innerWidth < 768 ? '14px' : '16px',
                     fontWeight: 'bold',
                     cursor: victory ? 'not-allowed' : 'pointer',
                     opacity: victory ? 0.5 : 1,
-                    minWidth: '140px',
+                    minWidth: window.innerWidth < 768 ? '120px' : '140px',
                     boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
                     // Visual feedback for swipe direction
                     transform: isDragging && swipeOffset > 50 ? 'scale(1.05)' : 'scale(1)',
@@ -853,7 +882,7 @@ export default function App() {
               }}
             >
               New Run
-            </button>
+        </button>
           </div>
         )}
 
@@ -862,12 +891,12 @@ export default function App() {
           background: COLORS.secondary,
           border: `2px solid ${COLORS.border}`,
           borderRadius: '8px',
-          padding: '15px',
-          height: '200px',
+          padding: window.innerWidth < 768 ? '10px' : '15px',
+          height: window.innerWidth < 768 ? '150px' : '200px',
           overflowY: 'auto'
         }}>
           <div style={{ 
-            fontSize: '18px', 
+            fontSize: window.innerWidth < 768 ? '14px' : '18px', 
             marginBottom: '10px', 
             color: COLORS.highlight, 
             fontWeight: 'bold',
@@ -877,7 +906,7 @@ export default function App() {
           </div>
           {chat.slice(-20).map((c, i) => (
             <div key={i} style={{ 
-              fontSize: '14px', 
+              fontSize: window.innerWidth < 768 ? '12px' : '14px', 
               marginBottom: '5px',
               textAlign: 'left'
             }}>
@@ -886,7 +915,11 @@ export default function App() {
             </div>
           ))}
           {chat.length === 0 && (
-            <div style={{ fontSize: '14px', opacity: 0.6, color: COLORS.textDim }}>
+            <div style={{ 
+              fontSize: window.innerWidth < 768 ? '12px' : '14px', 
+              opacity: 0.6, 
+              color: COLORS.textDim 
+            }}>
               No chatter yet...
             </div>
           )}
