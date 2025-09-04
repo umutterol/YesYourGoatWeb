@@ -60,6 +60,16 @@ Deploy (Vercel)
 - Set Root Directory to `web` and Framework Preset to “Other”.
 - Import the repository and deploy (no build necessary for the static prototype).
 
+Recent Updates (v0.10)
+
+- **Complete UI Redesign**: Restructured layout to match provided design:
+  - **Top Resource Bar**: Filling flat color bars with resource icons and values
+  - **Party Roster**: Moved directly under resource bar with larger portraits (80x80px)
+  - **Event Card**: Much larger character portrait (200x200px) with bigger text and buttons
+  - **Chat Box**: Moved to bottom with improved styling and larger text
+  - **Visual Hierarchy**: Better spacing, larger fonts, improved contrast
+  - **Layout Flow**: Resource bar → Party roster → Event card → Chat box
+
 Recent Updates (v0.9)
 
 - **Reigns-Style Event Complexity**: Enhanced events with sophisticated scenarios:
@@ -115,6 +125,18 @@ Recent Updates (v0.6)
 - **Roster Expansion**: Expanded from 6 to 20 roster members, randomly selecting 5 per session
 - **UI Improvements**: Enhanced bar color contrast with bold white text and shadows for better readability
 - **Victory Flow**: Added victory detection, celebration banner, and "New Run" reset button
+
+Files Changed (v0.10)
+
+- `web-ts/src/App.tsx`
+  - Complete UI layout restructure to match provided design
+  - Resource bar with filling flat color bars instead of simple icons
+  - Party roster moved to top section with larger portraits (80x80px)
+  - Event card redesigned with much larger character portrait (200x200px)
+  - Increased font sizes throughout for better readability
+  - Improved button styling with shadows and better contrast
+  - Chat box moved to bottom with enhanced styling
+  - Removed duplicate roster section from bottom
 
 Files Changed (v0.9)
 

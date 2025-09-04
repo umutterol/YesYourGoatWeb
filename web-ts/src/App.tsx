@@ -430,43 +430,150 @@ export default function App() {
       minHeight: '100vh', 
       background: `linear-gradient(135deg, ${COLORS.darkSlate} 0%, ${COLORS.darkOlive} 100%)`,
       color: COLORS.lightGreen,
-      fontFamily: 'monospace'
+      fontFamily: 'monospace',
+      padding: '10px'
     }}>
-      {/* Top Resources Bar */}
-      <header style={{ 
-        padding: '12px 24px', 
-        background: COLORS.taupe,
-        borderBottom: `2px solid ${COLORS.darkOlive}`,
+      {/* Top Resource Bar with Filling Icons */}
+      <div style={{
+        background: COLORS.darkSlate,
+        border: `2px solid ${COLORS.orange}`,
+        borderRadius: '8px',
+        padding: '15px 20px',
+        marginBottom: '10px',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center'
       }}>
-        <div style={{ fontSize: 14, fontWeight: 'bold' }}>
-          Week {week} • Guild Master
+        <div style={{ fontSize: '18px', fontWeight: 'bold', color: COLORS.orange }}>
+          Week {week}
         </div>
-        <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
-          {/* Resource Icons */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ fontSize: 16 }}>💰</span>
-            <span style={{ fontSize: 12 }}>{meters.funds}/10</span>
+        <div style={{ display: 'flex', gap: '30px' }}>
+          {/* Funds with filling bar */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div style={{
+              width: '50px',
+              height: '25px',
+              background: COLORS.taupe,
+              border: `2px solid ${COLORS.orange}`,
+              borderRadius: '4px',
+              position: 'relative',
+              overflow: 'hidden'
+            }}>
+              <div style={{
+                width: `${(meters.funds / 10) * 100}%`,
+                height: '100%',
+                background: COLORS.orange,
+                transition: 'width 0.3s ease'
+              }} />
+            </div>
+            <span style={{ fontSize: '16px', fontWeight: 'bold' }}>💰 {meters.funds}</span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ fontSize: 16 }}>⭐</span>
-            <span style={{ fontSize: 12 }}>{meters.reputation}/10</span>
+          {/* Reputation with filling bar */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div style={{
+              width: '50px',
+              height: '25px',
+              background: COLORS.taupe,
+              border: `2px solid ${COLORS.orange}`,
+              borderRadius: '4px',
+              position: 'relative',
+              overflow: 'hidden'
+            }}>
+              <div style={{
+                width: `${(meters.reputation / 10) * 100}%`,
+                height: '100%',
+                background: COLORS.lightGreen,
+                transition: 'width 0.3s ease'
+              }} />
+            </div>
+            <span style={{ fontSize: '16px', fontWeight: 'bold' }}>⭐ {meters.reputation}</span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ fontSize: 16 }}>⚔️</span>
-            <span style={{ fontSize: 12 }}>{meters.readiness}/10</span>
+          {/* Readiness with filling bar */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div style={{
+              width: '50px',
+              height: '25px',
+              background: COLORS.taupe,
+              border: `2px solid ${COLORS.orange}`,
+              borderRadius: '4px',
+              position: 'relative',
+              overflow: 'hidden'
+            }}>
+              <div style={{
+                width: `${(meters.readiness / 10) * 100}%`,
+                height: '100%',
+                background: COLORS.lavender,
+                transition: 'width 0.3s ease'
+              }} />
+            </div>
+            <span style={{ fontSize: '16px', fontWeight: 'bold' }}>⚔️ {meters.readiness}</span>
           </div>
         </div>
-      </header>
+      </div>
+
+      {/* Party Roster */}
+      <div style={{
+        background: COLORS.taupe,
+        border: `2px solid ${COLORS.orange}`,
+        borderRadius: '8px',
+        padding: '15px',
+        marginBottom: '10px'
+      }}>
+        <div style={{ 
+          display: 'flex', 
+          gap: '20px', 
+          justifyContent: 'center',
+          flexWrap: 'wrap'
+        }}>
+          {roster.map(member => {
+            const morale = clampMorale(member.morale ?? 50)
+            const borderColor = morale <= 30 ? COLORS.orange : morale <= 60 ? COLORS.lightGreen : COLORS.lightGreen
+            return (
+              <div key={member.id} style={{ 
+                textAlign: 'center',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center'
+              }}>
+                <img 
+                  src={`/resources/portraits/${member.portrait || 'peon.png'}`}
+                  alt={member.name}
+                  style={{
+                    width: '80px',
+                    height: '80px',
+                    borderRadius: '8px',
+                    border: `3px solid ${borderColor}`,
+                    objectFit: 'cover',
+                    marginBottom: '8px'
+                  }}
+                />
+                <div style={{ 
+                  fontSize: '14px', 
+                  color: COLORS.lightGreen,
+                  fontWeight: 'bold',
+                  marginBottom: '4px'
+                }}>
+                  {member.name}
+                </div>
+                <div style={{ 
+                  fontSize: '16px', 
+                  color: COLORS.orange,
+                  fontWeight: 'bold'
+                }}>
+                  {morale}
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
 
       {/* Main Content */}
       <div style={{ 
         display: 'flex', 
         flexDirection: 'column',
-        height: 'calc(100vh - 60px)',
-        padding: '24px'
+        height: 'calc(100vh - 200px)',
+        padding: '0'
       }}>
         
         {/* Center Event Card */}
@@ -476,22 +583,40 @@ export default function App() {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            marginBottom: 24
+            marginBottom: '10px'
           }}>
             <div style={{
               background: COLORS.taupe,
-              border: `3px solid ${COLORS.darkOlive}`,
-              borderRadius: 12,
-              padding: 24,
-              maxWidth: 500,
+              border: `3px solid ${COLORS.orange}`,
+              borderRadius: '12px',
+              padding: '30px',
+              maxWidth: '700px',
               width: '100%',
               textAlign: 'center',
-              boxShadow: `0 8px 24px rgba(0,0,0,0.3)`
+              boxShadow: '0 8px 16px rgba(0,0,0,0.3)'
             }}>
+              {/* Large Character Portrait */}
+              {currentEventMember && (
+                <div style={{ marginBottom: '25px' }}>
+                  <img 
+                    src={`/resources/portraits/${currentEventMember.portrait || 'peon.png'}`}
+                    alt={currentEventMember.name}
+                    style={{
+                      width: '200px',
+                      height: '200px',
+                      borderRadius: '12px',
+                      border: `4px solid ${COLORS.orange}`,
+                      objectFit: 'cover',
+                      boxShadow: '0 4px 8px rgba(0,0,0,0.3)'
+                    }}
+                  />
+                </div>
+              )}
+
               {/* Event Title */}
               <h2 style={{ 
-                margin: '0 0 16px', 
-                fontSize: 18, 
+                margin: '0 0 20px', 
+                fontSize: '28px', 
                 color: COLORS.lightGreen,
                 fontWeight: 'bold'
               }}>
@@ -500,55 +625,32 @@ export default function App() {
               
               {/* Event Body */}
               <p style={{ 
-                margin: '0 0 24px', 
-                fontSize: 14,
+                margin: '0 0 30px', 
+                fontSize: '20px',
                 color: COLORS.lightGreen,
                 opacity: 0.9,
-                lineHeight: 1.4
+                lineHeight: '1.5'
               }}>
                 {current.body}
               </p>
 
-              {/* Character Portrait */}
-              {currentEventMember && (
-                <div style={{ marginBottom: 24 }}>
-                  <img 
-                    src={`/resources/portraits/${currentEventMember.portrait || 'peon.png'}`}
-                    alt={currentEventMember.name}
-                    style={{
-                      width: 80,
-                      height: 80,
-                      borderRadius: 8,
-                      border: `2px solid ${COLORS.lavender}`,
-                      objectFit: 'cover'
-                    }}
-                  />
-                  <div style={{ 
-                    marginTop: 8, 
-                    fontSize: 14, 
-                    color: COLORS.lightGreen,
-                    fontWeight: 'bold'
-                  }}>
-                    {currentEventMember.name}
-                  </div>
-                </div>
-              )}
-
               {/* Choice Buttons */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+              <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
                 <button 
                   disabled={!!victory}
                   onClick={() => decide('left')}
                   style={{
                     background: COLORS.orange,
-                    border: `2px solid ${COLORS.darkOlive}`,
-                    borderRadius: 8,
-                    padding: '12px 16px',
-                    color: COLORS.darkOlive,
-                    fontSize: 14,
+                    border: 'none',
+                    borderRadius: '8px',
+                    padding: '15px 30px',
+                    color: 'white',
+                    fontSize: '18px',
                     fontWeight: 'bold',
                     cursor: victory ? 'not-allowed' : 'pointer',
-                    opacity: victory ? 0.5 : 1
+                    opacity: victory ? 0.5 : 1,
+                    minWidth: '150px',
+                    boxShadow: '0 4px 8px rgba(0,0,0,0.3)'
                   }}
                 >
                   {current.left.label}
@@ -558,14 +660,16 @@ export default function App() {
                   onClick={() => decide('right')}
                   style={{
                     background: COLORS.lightGreen,
-                    border: `2px solid ${COLORS.darkOlive}`,
-                    borderRadius: 8,
-                    padding: '12px 16px',
-                    color: COLORS.darkOlive,
-                    fontSize: 14,
+                    border: 'none',
+                    borderRadius: '8px',
+                    padding: '15px 30px',
+                    color: COLORS.darkSlate,
+                    fontSize: '18px',
                     fontWeight: 'bold',
                     cursor: victory ? 'not-allowed' : 'pointer',
-                    opacity: victory ? 0.5 : 1
+                    opacity: victory ? 0.5 : 1,
+                    minWidth: '150px',
+                    boxShadow: '0 4px 8px rgba(0,0,0,0.3)'
                   }}
                 >
                   {current.right.label}
@@ -609,88 +713,36 @@ export default function App() {
         {/* Chat Box */}
         <div style={{ 
           background: COLORS.darkSlate,
-          border: `2px solid ${COLORS.darkOlive}`,
-          borderRadius: 8,
-          padding: 12,
-          marginBottom: 16,
-          height: 120,
+          border: `2px solid ${COLORS.orange}`,
+          borderRadius: '8px',
+          padding: '15px',
+          height: '200px',
           overflowY: 'auto'
         }}>
-          <div style={{ fontSize: 12, marginBottom: 8, color: COLORS.lightGreen, fontWeight: 'bold' }}>
+          <div style={{ 
+            fontSize: '18px', 
+            marginBottom: '10px', 
+            color: COLORS.orange, 
+            fontWeight: 'bold',
+            textAlign: 'center'
+          }}>
             Guild Chat
           </div>
           {chat.slice(-20).map((c, i) => (
             <div key={i} style={{ 
-              fontSize: 11, 
-              marginBottom: 4,
+              fontSize: '14px', 
+              marginBottom: '5px',
               textAlign: 'left'
             }}>
               <span style={{ color: COLORS.orange, fontWeight: 'bold' }}>{c.speakerName}:</span>
-              <span style={{ color: COLORS.lightGreen, marginLeft: 8 }}>{c.text}</span>
+              <span style={{ color: COLORS.lightGreen, marginLeft: '8px' }}>{c.text}</span>
             </div>
           ))}
           {chat.length === 0 && (
-            <div style={{ fontSize: 11, opacity: 0.6, color: COLORS.lightGreen }}>
+            <div style={{ fontSize: '14px', opacity: 0.6, color: COLORS.lightGreen }}>
               No chatter yet...
             </div>
           )}
-        </div>
-
-        {/* Bottom Roster */}
-        <div style={{ 
-          background: COLORS.taupe,
-          border: `2px solid ${COLORS.darkOlive}`,
-          borderRadius: 8,
-          padding: 12
-        }}>
-          <div style={{ fontSize: 12, marginBottom: 8, color: COLORS.lightGreen, fontWeight: 'bold' }}>
-            Party Roster
-          </div>
-          <div style={{ display: 'flex', gap: 12, justifyContent: 'center' }}>
-            {roster.map(m => {
-              const morale = clampMorale(m.morale ?? 50)
-              const borderColor = morale <= 30 ? COLORS.orange : morale <= 60 ? COLORS.lightGreen : COLORS.lightGreen
-              return (
-                <div key={m.id} style={{ 
-                  textAlign: 'center',
-                  position: 'relative'
-                }}>
-                  <div style={{
-                    border: `3px solid ${borderColor}`,
-                    borderRadius: 8,
-                    padding: 4,
-                    background: COLORS.darkSlate
-                  }}>
-                    <img 
-                      src={`/resources/portraits/${m.portrait || 'peon.png'}`}
-                      alt={m.name}
-                      style={{
-                        width: 40,
-                        height: 40,
-                        borderRadius: 4,
-                        objectFit: 'cover'
-                      }}
-                    />
-                  </div>
-                  <div style={{ 
-                    fontSize: 10, 
-                    marginTop: 4, 
-                    color: COLORS.lightGreen,
-                    fontWeight: 'bold'
-                  }}>
-                    {m.name}
-                  </div>
-                  <div style={{ 
-                    fontSize: 9, 
-                    color: COLORS.lightGreen,
-                    opacity: 0.7
-                  }}>
-                    {morale}
-                  </div>
-                </div>
-              )
-            })}
-          </div>
         </div>
       </div>
     </div>
