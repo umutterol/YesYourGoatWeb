@@ -60,6 +60,18 @@ Deploy (Vercel)
 - Set Root Directory to `web` and Framework Preset to “Other”.
 - Import the repository and deploy (no build necessary for the static prototype).
 
+Recent Updates (v0.11)
+
+- **UI Fixes and Darker Palette**: Addressed layout and visual issues:
+  - **Morale Positioning**: Numbers now anchored to bottom center of roster portraits with circular badges
+  - **Fixed Event Card Size**: 700x460px fixed dimensions prevent layout shifts from varying text length
+  - **Darker Color Palette**: New atmospheric scheme with better contrast:
+    - Primary: Dark brown (#2c1810), Secondary: Very dark gray (#1a1a1a)
+    - Accent: Saddle brown (#8b4513), Highlight: Goldenrod (#daa520)
+    - Text: Beige (#f5f5dc), Success: Forest green (#228b22)
+  - **Reduced Gaps**: All sections now have 5px margins for tighter, more cohesive layout
+  - **Visual Consistency**: Unified color scheme across all UI elements
+
 Recent Updates (v0.10)
 
 - **Complete UI Redesign**: Restructured layout to match provided design:
@@ -125,6 +137,16 @@ Recent Updates (v0.6)
 - **Roster Expansion**: Expanded from 6 to 20 roster members, randomly selecting 5 per session
 - **UI Improvements**: Enhanced bar color contrast with bold white text and shadows for better readability
 - **Victory Flow**: Added victory detection, celebration banner, and "New Run" reset button
+
+Files Changed (v0.11)
+
+- `web-ts/src/App.tsx`
+  - Fixed morale number positioning to bottom center of roster portraits with circular badges
+  - Implemented fixed event card dimensions (700x460px) to prevent layout shifts
+  - Applied new darker color palette throughout all UI elements
+  - Reduced gaps between sections from 10px to 5px for tighter layout
+  - Updated resource bars, party roster, event card, and chat box with new colors
+  - Improved visual consistency and atmospheric feel
 
 Files Changed (v0.10)
 

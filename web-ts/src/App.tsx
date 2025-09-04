@@ -8,12 +8,17 @@ const BARKS_URL  = '/resources/barks/trait_barks.json'
 
 // Color palette from provided image
 const COLORS = {
-  orange: '#d7913a',
-  lightGreen: '#b9db82', 
-  darkOlive: '#5f4c0c',
-  taupe: '#a28f65',
-  lavender: '#9484bc',
-  darkSlate: '#364652'
+  // Darker, more atmospheric palette
+  primary: '#2c1810',      // Dark brown
+  secondary: '#1a1a1a',    // Very dark gray
+  accent: '#8b4513',       // Saddle brown
+  highlight: '#daa520',    // Goldenrod
+  text: '#f5f5dc',         // Beige
+  textDim: '#d2b48c',      // Tan
+  border: '#654321',       // Dark brown
+  success: '#228b22',      // Forest green
+  warning: '#ff8c00',      // Dark orange
+  danger: '#dc143c'        // Crimson
 }
 
 // Types
@@ -428,23 +433,23 @@ export default function App() {
   return (
     <div style={{ 
       minHeight: '100vh', 
-      background: `linear-gradient(135deg, ${COLORS.darkSlate} 0%, ${COLORS.darkOlive} 100%)`,
-      color: COLORS.lightGreen,
+      background: `linear-gradient(135deg, ${COLORS.primary} 0%, ${COLORS.secondary} 100%)`,
+      color: COLORS.text,
       fontFamily: 'monospace',
       padding: '10px'
     }}>
       {/* Top Resource Bar with Filling Icons */}
       <div style={{
-        background: COLORS.darkSlate,
-        border: `2px solid ${COLORS.orange}`,
+        background: COLORS.secondary,
+        border: `2px solid ${COLORS.border}`,
         borderRadius: '8px',
         padding: '15px 20px',
-        marginBottom: '10px',
+        marginBottom: '5px',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center'
       }}>
-        <div style={{ fontSize: '18px', fontWeight: 'bold', color: COLORS.orange }}>
+        <div style={{ fontSize: '18px', fontWeight: 'bold', color: COLORS.highlight }}>
           Week {week}
         </div>
         <div style={{ display: 'flex', gap: '30px' }}>
@@ -453,8 +458,8 @@ export default function App() {
             <div style={{
               width: '50px',
               height: '25px',
-              background: COLORS.taupe,
-              border: `2px solid ${COLORS.orange}`,
+              background: COLORS.primary,
+              border: `2px solid ${COLORS.border}`,
               borderRadius: '4px',
               position: 'relative',
               overflow: 'hidden'
@@ -462,19 +467,19 @@ export default function App() {
               <div style={{
                 width: `${(meters.funds / 10) * 100}%`,
                 height: '100%',
-                background: COLORS.orange,
+                background: COLORS.warning,
                 transition: 'width 0.3s ease'
               }} />
             </div>
-            <span style={{ fontSize: '16px', fontWeight: 'bold' }}>💰 {meters.funds}</span>
+            <span style={{ fontSize: '16px', fontWeight: 'bold', color: COLORS.text }}>💰 {meters.funds}</span>
           </div>
           {/* Reputation with filling bar */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div style={{
               width: '50px',
               height: '25px',
-              background: COLORS.taupe,
-              border: `2px solid ${COLORS.orange}`,
+              background: COLORS.primary,
+              border: `2px solid ${COLORS.border}`,
               borderRadius: '4px',
               position: 'relative',
               overflow: 'hidden'
@@ -482,19 +487,19 @@ export default function App() {
               <div style={{
                 width: `${(meters.reputation / 10) * 100}%`,
                 height: '100%',
-                background: COLORS.lightGreen,
+                background: COLORS.success,
                 transition: 'width 0.3s ease'
               }} />
             </div>
-            <span style={{ fontSize: '16px', fontWeight: 'bold' }}>⭐ {meters.reputation}</span>
+            <span style={{ fontSize: '16px', fontWeight: 'bold', color: COLORS.text }}>⭐ {meters.reputation}</span>
           </div>
           {/* Readiness with filling bar */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div style={{
               width: '50px',
               height: '25px',
-              background: COLORS.taupe,
-              border: `2px solid ${COLORS.orange}`,
+              background: COLORS.primary,
+              border: `2px solid ${COLORS.border}`,
               borderRadius: '4px',
               position: 'relative',
               overflow: 'hidden'
@@ -502,22 +507,22 @@ export default function App() {
               <div style={{
                 width: `${(meters.readiness / 10) * 100}%`,
                 height: '100%',
-                background: COLORS.lavender,
+                background: COLORS.highlight,
                 transition: 'width 0.3s ease'
               }} />
             </div>
-            <span style={{ fontSize: '16px', fontWeight: 'bold' }}>⚔️ {meters.readiness}</span>
+            <span style={{ fontSize: '16px', fontWeight: 'bold', color: COLORS.text }}>⚔️ {meters.readiness}</span>
           </div>
         </div>
       </div>
 
       {/* Party Roster */}
       <div style={{
-        background: COLORS.taupe,
-        border: `2px solid ${COLORS.orange}`,
+        background: COLORS.accent,
+        border: `2px solid ${COLORS.border}`,
         borderRadius: '8px',
         padding: '15px',
-        marginBottom: '10px'
+        marginBottom: '5px'
       }}>
         <div style={{ 
           display: 'flex', 
@@ -527,40 +532,55 @@ export default function App() {
         }}>
           {roster.map(member => {
             const morale = clampMorale(member.morale ?? 50)
-            const borderColor = morale <= 30 ? COLORS.orange : morale <= 60 ? COLORS.lightGreen : COLORS.lightGreen
+            const borderColor = morale <= 30 ? COLORS.danger : morale <= 60 ? COLORS.warning : COLORS.success
             return (
               <div key={member.id} style={{ 
                 textAlign: 'center',
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center'
+                alignItems: 'center',
+                position: 'relative'
               }}>
-                <img 
-                  src={`/resources/portraits/${member.portrait || 'peon.png'}`}
-                  alt={member.name}
-                  style={{
-                    width: '80px',
-                    height: '80px',
-                    borderRadius: '8px',
-                    border: `3px solid ${borderColor}`,
-                    objectFit: 'cover',
-                    marginBottom: '8px'
-                  }}
-                />
-                <div style={{ 
-                  fontSize: '14px', 
-                  color: COLORS.lightGreen,
-                  fontWeight: 'bold',
-                  marginBottom: '4px'
-                }}>
-                  {member.name}
+                <div style={{ position: 'relative' }}>
+                  <img 
+                    src={`/resources/portraits/${member.portrait || 'peon.png'}`}
+                    alt={member.name}
+                    style={{
+                      width: '80px',
+                      height: '80px',
+                      borderRadius: '8px',
+                      border: `3px solid ${borderColor}`,
+                      objectFit: 'cover'
+                    }}
+                  />
+                  {/* Morale number anchored to bottom center of portrait */}
+                  <div style={{
+                    position: 'absolute',
+                    bottom: '-2px',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    background: COLORS.secondary,
+                    border: `2px solid ${borderColor}`,
+                    borderRadius: '50%',
+                    width: '24px',
+                    height: '24px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '12px',
+                    fontWeight: 'bold',
+                    color: COLORS.text
+                  }}>
+                    {morale}
+                  </div>
                 </div>
                 <div style={{ 
-                  fontSize: '16px', 
-                  color: COLORS.orange,
-                  fontWeight: 'bold'
+                  fontSize: '14px', 
+                  color: COLORS.text,
+                  fontWeight: 'bold',
+                  marginTop: '8px'
                 }}>
-                  {morale}
+                  {member.name}
                 </div>
               </div>
             )
@@ -576,28 +596,31 @@ export default function App() {
         padding: '0'
       }}>
         
-        {/* Center Event Card */}
+        {/* Center Event Card - Fixed Size */}
         {current && (
           <div style={{ 
-            flex: 1,
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            marginBottom: '10px'
+            marginBottom: '5px',
+            height: '500px' // Fixed height
           }}>
             <div style={{
-              background: COLORS.taupe,
-              border: `3px solid ${COLORS.orange}`,
+              background: COLORS.accent,
+              border: `3px solid ${COLORS.border}`,
               borderRadius: '12px',
               padding: '30px',
-              maxWidth: '700px',
-              width: '100%',
+              width: '700px', // Fixed width
+              height: '460px', // Fixed height
               textAlign: 'center',
-              boxShadow: '0 8px 16px rgba(0,0,0,0.3)'
+              boxShadow: '0 8px 16px rgba(0,0,0,0.5)',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between'
             }}>
               {/* Large Character Portrait */}
               {currentEventMember && (
-                <div style={{ marginBottom: '25px' }}>
+                <div style={{ marginBottom: '20px' }}>
                   <img 
                     src={`/resources/portraits/${currentEventMember.portrait || 'peon.png'}`}
                     alt={currentEventMember.name}
@@ -605,34 +628,39 @@ export default function App() {
                       width: '200px',
                       height: '200px',
                       borderRadius: '12px',
-                      border: `4px solid ${COLORS.orange}`,
+                      border: `4px solid ${COLORS.highlight}`,
                       objectFit: 'cover',
-                      boxShadow: '0 4px 8px rgba(0,0,0,0.3)'
+                      boxShadow: '0 4px 8px rgba(0,0,0,0.5)'
                     }}
                   />
                 </div>
               )}
 
-              {/* Event Title */}
-              <h2 style={{ 
-                margin: '0 0 20px', 
-                fontSize: '28px', 
-                color: COLORS.lightGreen,
-                fontWeight: 'bold'
-              }}>
-                {current.title}
-              </h2>
-              
-              {/* Event Body */}
-              <p style={{ 
-                margin: '0 0 30px', 
-                fontSize: '20px',
-                color: COLORS.lightGreen,
-                opacity: 0.9,
-                lineHeight: '1.5'
-              }}>
-                {current.body}
-              </p>
+              {/* Event Content - Fixed height container */}
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                {/* Event Title */}
+                <h2 style={{ 
+                  margin: '0 0 15px', 
+                  fontSize: '24px', 
+                  color: COLORS.text,
+                  fontWeight: 'bold'
+                }}>
+                  {current.title}
+                </h2>
+                
+                {/* Event Body */}
+                <p style={{ 
+                  margin: '0 0 20px', 
+                  fontSize: '16px',
+                  color: COLORS.textDim,
+                  lineHeight: '1.4',
+                  maxHeight: '80px',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}>
+                  {current.body}
+                </p>
+              </div>
 
               {/* Choice Buttons */}
               <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
@@ -640,16 +668,16 @@ export default function App() {
                   disabled={!!victory}
                   onClick={() => decide('left')}
                   style={{
-                    background: COLORS.orange,
+                    background: COLORS.warning,
                     border: 'none',
                     borderRadius: '8px',
-                    padding: '15px 30px',
-                    color: 'white',
-                    fontSize: '18px',
+                    padding: '12px 24px',
+                    color: COLORS.secondary,
+                    fontSize: '16px',
                     fontWeight: 'bold',
                     cursor: victory ? 'not-allowed' : 'pointer',
                     opacity: victory ? 0.5 : 1,
-                    minWidth: '150px',
+                    minWidth: '140px',
                     boxShadow: '0 4px 8px rgba(0,0,0,0.3)'
                   }}
                 >
@@ -659,16 +687,16 @@ export default function App() {
                   disabled={!!victory}
                   onClick={() => decide('right')}
                   style={{
-                    background: COLORS.lightGreen,
+                    background: COLORS.success,
                     border: 'none',
                     borderRadius: '8px',
-                    padding: '15px 30px',
-                    color: COLORS.darkSlate,
-                    fontSize: '18px',
+                    padding: '12px 24px',
+                    color: COLORS.secondary,
+                    fontSize: '16px',
                     fontWeight: 'bold',
                     cursor: victory ? 'not-allowed' : 'pointer',
                     opacity: victory ? 0.5 : 1,
-                    minWidth: '150px',
+                    minWidth: '140px',
                     boxShadow: '0 4px 8px rgba(0,0,0,0.3)'
                   }}
                 >
@@ -682,25 +710,25 @@ export default function App() {
         {/* Victory Banner */}
         {victory && (
           <div style={{ 
-            background: COLORS.lavender,
-            border: `2px solid ${COLORS.darkOlive}`,
-            borderRadius: 8,
-            padding: 16,
-            marginBottom: 16,
+            background: COLORS.highlight,
+            border: `2px solid ${COLORS.border}`,
+            borderRadius: '8px',
+            padding: '16px',
+            marginBottom: '5px',
             textAlign: 'center'
           }}>
-            <div style={{ fontSize: 16, marginBottom: 8, color: COLORS.darkOlive, fontWeight: 'bold' }}>
+            <div style={{ fontSize: '16px', marginBottom: '8px', color: COLORS.secondary, fontWeight: 'bold' }}>
               {victory}
             </div>
             <button 
               onClick={newRun}
               style={{
-                background: COLORS.orange,
-                border: `2px solid ${COLORS.darkOlive}`,
-                borderRadius: 6,
+                background: COLORS.warning,
+                border: `2px solid ${COLORS.border}`,
+                borderRadius: '6px',
                 padding: '8px 16px',
-                color: COLORS.darkOlive,
-                fontSize: 12,
+                color: COLORS.secondary,
+                fontSize: '12px',
                 fontWeight: 'bold',
                 cursor: 'pointer'
               }}
@@ -712,8 +740,8 @@ export default function App() {
 
         {/* Chat Box */}
         <div style={{ 
-          background: COLORS.darkSlate,
-          border: `2px solid ${COLORS.orange}`,
+          background: COLORS.secondary,
+          border: `2px solid ${COLORS.border}`,
           borderRadius: '8px',
           padding: '15px',
           height: '200px',
@@ -722,7 +750,7 @@ export default function App() {
           <div style={{ 
             fontSize: '18px', 
             marginBottom: '10px', 
-            color: COLORS.orange, 
+            color: COLORS.highlight, 
             fontWeight: 'bold',
             textAlign: 'center'
           }}>
@@ -734,12 +762,12 @@ export default function App() {
               marginBottom: '5px',
               textAlign: 'left'
             }}>
-              <span style={{ color: COLORS.orange, fontWeight: 'bold' }}>{c.speakerName}:</span>
-              <span style={{ color: COLORS.lightGreen, marginLeft: '8px' }}>{c.text}</span>
+              <span style={{ color: COLORS.warning, fontWeight: 'bold' }}>{c.speakerName}:</span>
+              <span style={{ color: COLORS.text, marginLeft: '8px' }}>{c.text}</span>
             </div>
           ))}
           {chat.length === 0 && (
-            <div style={{ fontSize: '14px', opacity: 0.6, color: COLORS.lightGreen }}>
+            <div style={{ fontSize: '14px', opacity: 0.6, color: COLORS.textDim }}>
               No chatter yet...
             </div>
           )}
