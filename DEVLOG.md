@@ -60,6 +60,30 @@ Deploy (Vercel)
 - Set Root Directory to `web` and Framework Preset to “Other”.
 - Import the repository and deploy (no build necessary for the static prototype).
 
+Recent Updates (v0.16)
+
+- **Character Expansion**: Added 15 new characters with realistic names and new portraits:
+  - **New Characters**: Alex, Beth, Carl, Dana, Eric, Fiona, Greg, Helen, Ivan, Julia, Kevin, Luna, Mike, Nina, Oscar
+  - **Portrait Assignment**: Each new character assigned to unused portraits from the existing `portraits/` folder
+  - **Trait Distribution**: Balanced trait assignment across all character types
+  - **Roster Size**: Expanded from 20 to 35 total characters for more variety
+  - **Name Quality**: Replaced generic names (Meta, AFK, etc.) with proper realistic names
+  - **Character Diversity**: Mix of male/female names and various trait combinations
+
+Recent Updates (v0.15)
+
+- **Massive Event Expansion**: Added 50+ additional dramatic WoW guild scenarios:
+  - **Server Drama**: Trash-talking other guilds, server forum reputation damage, community conflicts
+  - **Serious Issues**: Racism/harassment, stalking, strategy leaks, griefing, exploit usage
+  - **Performance Problems**: AFK during raids, refusing to learn mechanics, showing up drunk
+  - **Schedule Complications**: Timezone conflicts, school/military/medical issues, childcare, relationships
+  - **Loot Corruption**: Loot whoring, council corruption, trading with other guilds, gambling, hoarding
+  - **Social Drama**: Cross-guild drama, voice chat toxicity, gossip spreading, bullying
+  - **Technical Issues**: Hardware failures, software conflicts, network problems, audio/display issues
+  - **Economic Theft**: Guild bank theft, price gouging, service selling, dues refusal
+  - **Crisis Scenarios**: 10 different quit threat scenarios covering every major issue
+  - **Total Events**: 95+ events covering every aspect of WoW guild management
+
 Recent Updates (v0.14)
 
 - **Dramatic Event Rewrite**: Completely overhauled all events with authentic WoW guild scenarios:
@@ -173,6 +197,30 @@ Recent Updates (v0.6)
 - **Roster Expansion**: Expanded from 6 to 20 roster members, randomly selecting 5 per session
 - **UI Improvements**: Enhanced bar color contrast with bold white text and shadows for better readability
 - **Victory Flow**: Added victory detection, celebration banner, and "New Run" reset button
+
+Files Changed (v0.16)
+
+- `web-ts/public/resources/roster.json`
+  - Added 15 new characters with realistic names and new portraits
+  - Expanded roster from 20 to 35 total characters
+  - New characters: Alex, Beth, Carl, Dana, Eric, Fiona, Greg, Helen, Ivan, Julia, Kevin, Luna, Mike, Nina, Oscar
+  - Assigned unused portraits from existing folder (beastmaster.png, blademaster.png, chieftain.png, darkranger.png, deathknight.png, demonhunter.png, dreadlord.png, farseer.png, keeper.png, lich.png, pandarenbrewmaster.png, priestess.png, seawitch.png, shadowhunter.png, warden.png)
+  - Balanced trait distribution across all character types
+  - Maintained varied morale values (52-69) for realistic character diversity
+
+Files Changed (v0.15)
+
+- `web-ts/public/resources/events/events.json`
+  - Added 50+ additional dramatic WoW guild scenarios (total now 95+ events)
+  - Expanded drama events with server reputation, racism, stalking, strategy leaks
+  - Added performance issues: griefing, exploits, AFK behavior, learning resistance, intoxication
+  - Created comprehensive schedule conflicts: timezone, school, military, medical, childcare, relationships
+  - Added loot corruption scenarios: whoring, council corruption, trading, gambling, hoarding
+  - Expanded social drama: cross-guild conflicts, voice chat toxicity, gossip, bullying
+  - Added technical problems: hardware failures, software conflicts, network, audio, display issues
+  - Created economic theft events: guild bank theft, price gouging, service selling, dues refusal
+  - Added 10 crisis scenarios covering every major quit threat reason
+  - Maintained realistic consequences and authentic decision points throughout
 
 Files Changed (v0.14)
 

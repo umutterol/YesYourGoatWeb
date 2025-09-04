@@ -18,6 +18,21 @@
   { "id": "lyra",  "name": "Lyra",  "traitId": "theorycrafter",          "morale": 54, "portrait": "archmage.png" },
   { "id": "noir",  "name": "Noir",  "traitId": "drama_queen",           "morale": 56, "portrait": "sorceress.png" },
   { "id": "chip",  "name": "Chip",  "traitId": "afk_farmer",            "morale": 62, "portrait": "peon.png" },
-  { "id": "sage",  "name": "Sage",  "traitId": "guild_leader",          "morale": 64, "portrait": "paladin.png" }
+  { "id": "sage",  "name": "Sage",  "traitId": "guild_leader",          "morale": 64, "portrait": "paladin.png" },
+  { "id": "alex",  "name": "Alex",  "traitId": "theorycrafter",          "morale": 58, "portrait": "beastmaster.png" },
+  { "id": "beth",  "name": "Beth",  "traitId": "drama_queen",           "morale": 52, "portrait": "blademaster.png" },
+  { "id": "carl",  "name": "Carl",  "traitId": "afk_farmer",            "morale": 67, "portrait": "chieftain.png" },
+  { "id": "dana",  "name": "Dana",  "traitId": "guild_leader",          "morale": 69, "portrait": "darkranger.png" },
+  { "id": "eric",  "name": "Eric",  "traitId": "meta_slave",            "morale": 61, "portrait": "deathknight.png" },
+  { "id": "fiona", "name": "Fiona", "traitId": "hardcore_permadeather",  "morale": 63, "portrait": "demonhunter.png" },
+  { "id": "greg",  "name": "Greg",  "traitId": "theorycrafter",          "morale": 55, "portrait": "dreadlord.png" },
+  { "id": "helen", "name": "Helen", "traitId": "guild_leader",          "morale": 66, "portrait": "farseer.png" },
+  { "id": "ivan",  "name": "Ivan",  "traitId": "afk_farmer",            "morale": 59, "portrait": "keeper.png" },
+  { "id": "julia", "name": "Julia", "traitId": "meta_slave",            "morale": 57, "portrait": "lich.png" },
+  { "id": "kevin", "name": "Kevin", "traitId": "theorycrafter",          "morale": 62, "portrait": "pandarenbrewmaster.png" },
+  { "id": "luna",  "name": "Luna",  "traitId": "drama_queen",           "morale": 54, "portrait": "priestess.png" },
+  { "id": "mike",  "name": "Mike",  "traitId": "afk_farmer",            "morale": 65, "portrait": "seawitch.png" },
+  { "id": "nina",  "name": "Nina",  "traitId": "hardcore_permadeather",  "morale": 60, "portrait": "shadowhunter.png" },
+  { "id": "oscar", "name": "Oscar", "traitId": "guild_leader",          "morale": 68, "portrait": "warden.png" }
 ]
 
