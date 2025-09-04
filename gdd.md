@@ -257,6 +257,7 @@ See trait definitions and barks: `resources/traits/traits.md`.
 
 ## Changelog
 
+- v0.14: Completely rewrote all events with dramatic WoW-specific scenarios; replaced generic events with realistic guild drama including loot disputes, parse obsession, guild-hopping, officer drama, technical issues, economic problems, and social conflicts; increased event weights and impact values for more meaningful consequences; created authentic decision points that reflect real WoW guild management challenges.
 - v0.13: Made UI fully responsive for mobile devices; reduced sizes and spacing for phones (768px breakpoint); optimized resource bars, party roster, event cards, and chat box for smaller screens; maintained swipe mechanics and visual feedback across all screen sizes; improved touch interaction and readability on mobile devices.
 - v0.12: Added Reigns-style swipe mechanics; implemented touch and mouse drag support for event cards; added visual feedback with card rotation and opacity changes during swipe; included swipe direction indicators and button scaling; maintained traditional button clicking as alternative input method; enhanced user experience with smooth animations and responsive feedback.
 - v0.11: Fixed UI issues and applied darker color palette; morale numbers now anchored to bottom center of roster portraits; event card fixed size (700x460px) to prevent layout shifts; new darker atmospheric color scheme with better contrast; reduced gaps between all sections for tighter layout; improved visual consistency throughout.

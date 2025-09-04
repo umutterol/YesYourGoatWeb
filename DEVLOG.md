@@ -60,6 +60,19 @@ Deploy (Vercel)
 - Set Root Directory to `web` and Framework Preset to “Other”.
 - Import the repository and deploy (no build necessary for the static prototype).
 
+Recent Updates (v0.14)
+
+- **Dramatic Event Rewrite**: Completely overhauled all events with authentic WoW guild scenarios:
+  - **Loot Drama**: Legendary weapon disputes, ninja-looting, loot council favoritism, hoarding
+  - **Performance Issues**: Parse obsession, underperforming players, connection problems, spec refusal
+  - **Social Conflicts**: Guild-hopping, officer drama, cliques, bullying, chat toxicity, rumors
+  - **Technical Problems**: Addon issues, computer crashes, internet problems, voice chat refusal
+  - **Economic Drama**: Consumable costs, guild bank abuse, gold loans, resource hoarding
+  - **Schedule Conflicts**: Work changes, family emergencies, chronic lateness, raid time disputes
+  - **Crisis Events**: Quit threats, betrayal, redemption arcs, officer promotions
+  - **Realistic Consequences**: Higher impact values (-20 morale, -3 reputation, -200 funds)
+  - **Authentic Choices**: Decisions that reflect real guild management dilemmas
+
 Recent Updates (v0.13)
 
 - **Mobile Responsiveness**: Optimized UI for phones and tablets:
@@ -160,6 +173,19 @@ Recent Updates (v0.6)
 - **Roster Expansion**: Expanded from 6 to 20 roster members, randomly selecting 5 per session
 - **UI Improvements**: Enhanced bar color contrast with bold white text and shadows for better readability
 - **Victory Flow**: Added victory detection, celebration banner, and "New Run" reset button
+
+Files Changed (v0.14)
+
+- `web-ts/public/resources/events/events.json`
+  - Completely rewrote all 41 events with dramatic WoW-specific scenarios
+  - Added realistic loot drama events (ninja-looting, legendary disputes, hoarding)
+  - Created performance crisis events (parse obsession, underperforming, technical issues)
+  - Implemented social conflict events (guild-hopping, officer drama, cliques, bullying)
+  - Added economic drama events (consumable costs, guild bank abuse, gold loans)
+  - Created schedule conflict events (work changes, family emergencies, lateness)
+  - Added crisis events (quit threats, betrayal, redemption, officer promotions)
+  - Increased event weights and impact values for more meaningful consequences
+  - Removed all generic placeholder events in favor of authentic scenarios
 
 Files Changed (v0.13)
 
