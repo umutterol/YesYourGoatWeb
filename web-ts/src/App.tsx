@@ -169,6 +169,7 @@ export default function App() {
   const [chat, setChat] = useState<ChatMsg[]>([])
   const [currentEventMember, setCurrentEventMember] = useState<Member | null>(null)
   const [pendingMultiStep, setPendingMultiStep] = useState<string | null>(null)
+  const [hasMultiStepEvent, setHasMultiStepEvent] = useState<boolean>(false)
   
   // Swipe mechanics
   const [swipeStart, setSwipeStart] = useState<{ x: number; y: number } | null>(null)
@@ -318,7 +319,13 @@ export default function App() {
     }
     
     // For raid checks, use existing system
-    const card = weightedPick(cardPool, (e) => weightForEvent(e, meters.reputation, meters.readiness))
+    const card = weightedPick(cardPool, (e) => {
+      // If we haven't had a multi-step event yet and this is a multi-step event, give it high priority
+      if (!hasMultiStepEvent && e.id.startsWith('multistep_')) {
+        return 1000 // Very high weight to ensure it gets selected
+      }
+      return weightForEvent(e, meters.reputation, meters.readiness)
+    })
     currentCardRef.current = card
     setCurrentEventMember(null)
     return card
@@ -460,6 +467,11 @@ export default function App() {
       return
     }
     
+    // Mark that we've encountered a multi-step event if this was one
+    if (ev.id.startsWith('multistep_')) {
+      setHasMultiStepEvent(true)
+    }
+    
     // Check for multi-step event
     if (choice.nextStep) {
       setPendingMultiStep(choice.nextStep)
@@ -483,6 +495,7 @@ export default function App() {
     setPerfStreak(0)
     setLegendStreak(0)
     setPendingMultiStep(null)
+    setHasMultiStepEvent(false)
     setRoster(prev => {
       if (!prev.length) return prev
       const pool = prev

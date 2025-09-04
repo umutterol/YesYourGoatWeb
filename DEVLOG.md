@@ -60,6 +60,16 @@ Deploy (Vercel)
 - Set Root Directory to `web` and Framework Preset to “Other”.
 - Import the repository and deploy (no build necessary for the static prototype).
 
+Recent Updates (v0.18)
+
+- **Guaranteed Multi-Step Events**: Ensured every run includes at least one complex narrative:
+  - **Priority Weighting**: Multi-step events receive 1000x weight when not yet encountered
+  - **State Tracking**: Added hasMultiStepEvent flag to track multi-step event completion
+  - **Early Selection**: Multi-step events prioritized early in each run for maximum impact
+  - **Run Reset**: Multi-step tracking resets on new run initialization
+  - **Reliable Experience**: Every playthrough now guaranteed to include branching narratives
+  - **Improved Logic**: Enhanced event selection to ensure multi-step events appear consistently
+
 Recent Updates (v0.17)
 
 - **Multi-Step Events System**: Implemented complex branching event chains:
@@ -210,6 +220,16 @@ Recent Updates (v0.6)
 - **Roster Expansion**: Expanded from 6 to 20 roster members, randomly selecting 5 per session
 - **UI Improvements**: Enhanced bar color contrast with bold white text and shadows for better readability
 - **Victory Flow**: Added victory detection, celebration banner, and "New Run" reset button
+
+Files Changed (v0.18)
+
+- `web-ts/src/App.tsx`
+  - Added hasMultiStepEvent state to track multi-step event completion per run
+  - Modified drawCard function with priority weighting for multi-step events
+  - Multi-step events receive 1000x weight when not yet encountered in current run
+  - Updated decide function to mark multi-step events when encountered
+  - Enhanced newRun function to reset hasMultiStepEvent flag
+  - Guaranteed every run includes at least one complex branching narrative
 
 Files Changed (v0.17)
 
