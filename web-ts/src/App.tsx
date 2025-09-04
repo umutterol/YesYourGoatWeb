@@ -464,6 +464,7 @@ export default function App() {
     const delta = deltaA
     setLog(prev => [...prev, { week, title: ev.title ?? 'Untitled', choice: choice.label ?? side, delta }].slice(-20))
     if (loss) {
+      setVictory(loss)
       return
     }
     
@@ -481,6 +482,14 @@ export default function App() {
     
     const nextWeek = week + 1
     const nextMeters = { ...meters }
+    
+    // Check for loss conditions after effects are applied
+    const lossMessage = lossCheck()
+    if (lossMessage) {
+      setVictory(lossMessage)
+      return
+    }
+    
     winCheck(nextMeters, nextWeek)
     setWeek(prev => prev + 1)
     setCurrent(drawCard())

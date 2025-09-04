@@ -384,6 +384,14 @@ Files Changed (v0.6)
   - Expanded roster from 6 to 20 members with diverse traits
   - Added 10 new characters with existing trait IDs
 
+Files Changed (v0.19)
+
+- `web-ts/src/App.tsx`
+  - Fixed loss screen bug - loss conditions now properly display victory/loss screen
+  - Added loss checking during both decision making and week progression
+  - Enhanced game flow with clear feedback when players lose
+  - Fixed variable naming conflict in loss detection logic
+
 Next Steps (Planned)
 
 - Hidden content discovery system (rare events, trait combinations)
