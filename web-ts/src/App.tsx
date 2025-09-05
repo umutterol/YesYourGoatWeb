@@ -1083,7 +1083,7 @@ export default function App() {
             justifyContent: 'center',
             alignItems: 'center',
             marginBottom: window.innerWidth < 768 ? '20px' : '35px',
-            height: window.innerWidth < 768 ? '450px' : '550px'
+            height: window.innerWidth < 768 ? '400px' : '450px'
           }}>
             <div 
               ref={cardRef}
@@ -1092,9 +1092,9 @@ export default function App() {
                 border: `3px solid ${COLORS.border}`,
                 borderRadius: '12px',
                 padding: window.innerWidth < 768 ? '25px' : '35px',
-                width: window.innerWidth < 768 ? '95%' : '750px',
-                maxWidth: '750px',
-                height: window.innerWidth < 768 ? '420px' : '520px',
+                width: window.innerWidth < 768 ? '95%' : '650px',
+                maxWidth: '650px',
+                height: window.innerWidth < 768 ? '370px' : '420px',
                 textAlign: 'left',
                 boxShadow: '0 8px 16px rgba(0,0,0,0.5)',
                 display: 'flex',
@@ -1156,19 +1156,18 @@ export default function App() {
                     border: `3px solid ${COLORS.highlight}`,
                     borderRadius: '12px',
                     padding: window.innerWidth < 768 ? '15px' : '20px',
-                    transform: 'rotate(-2deg)',
                     boxShadow: '0 6px 12px rgba(0,0,0,0.4)'
                   }}>
                     <img 
                       src={`/resources/portraits/${currentEventMember.portrait || 'peon.png'}`}
                       alt={currentEventMember.name}
-                      style={getPortraitStyle(clampMorale(currentEventMember.morale ?? 5), {
+                      style={{
                         width: window.innerWidth < 768 ? '100px' : '150px',
                         height: window.innerWidth < 768 ? '100px' : '150px',
                         borderRadius: '8px',
                         objectFit: 'cover',
                         display: 'block'
-                      })}
+                      }}
                     />
                     <div style={{
                       textAlign: 'center',
@@ -1210,7 +1209,7 @@ export default function App() {
                   fontSize: window.innerWidth < 768 ? '14px' : '16px',
                   fontWeight: 'bold',
                   boxShadow: '0 6px 12px rgba(0,0,0,0.4)',
-                  opacity: Math.min(1, Math.abs(swipeOffset) / 40),
+                  opacity: 1, // Always full opacity
                   pointerEvents: 'none',
                   border: `2px solid ${COLORS.secondary}`,
                   zIndex: 10,
