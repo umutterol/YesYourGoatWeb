@@ -1776,7 +1776,14 @@ export default function App() {
 
       {/* Adventure Mode UI */}
       {gameMode === 'adventure' && currentAdventure && (
-        <div>
+        <>
+          <style>{`
+            @keyframes pulse {
+              0% { transform: scale(1); }
+              100% { transform: scale(1.05); }
+            }
+          `}</style>
+          <div>
           {/* Top Bar - Adventure Mode */}
           <div style={{
             background: COLORS.secondary,
@@ -1841,31 +1848,308 @@ export default function App() {
             </div>
           </div>
 
-          {/* Adventure Event Card - Placeholder for now */}
-          <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginBottom: '20px'
-          }}>
+          {/* Adventure Event Card */}
+          {getCurrentAdventureEvent() && (
             <div style={{
-              width: window.innerWidth < 768 ? '95%' : '650px',
-              maxWidth: '650px',
-              height: window.innerWidth < 768 ? '370px' : '420px',
-              background: COLORS.secondary,
-              border: `3px solid ${COLORS.highlight}`,
-              borderRadius: '12px',
-              padding: window.innerWidth < 768 ? '15px' : '20px',
-              boxShadow: '0 6px 12px rgba(0,0,0,0.4)',
+              display: 'flex',
+              justifyContent: 'center',
+              marginBottom: '20px'
+            }}>
+              <div
+                ref={cardRef}
+                onMouseDown={handleMouseDown}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+                style={{
+                  width: window.innerWidth < 768 ? '95%' : '650px',
+                  maxWidth: '650px',
+                  height: window.innerWidth < 768 ? '370px' : '420px',
+                  background: COLORS.secondary,
+                  border: `3px solid ${COLORS.highlight}`,
+                  borderRadius: '12px',
+                  padding: window.innerWidth < 768 ? '15px' : '20px',
+                  boxShadow: '0 6px 12px rgba(0,0,0,0.4)',
+                  cursor: 'grab',
+                  userSelect: 'none',
+                  position: 'relative',
+                  transform: isDragging ? `translateX(${swipeOffset}px) rotate(${swipeOffset * 0.1}deg)` : 'none',
+                  opacity: isDragging ? 0.9 : 1,
+                  transition: isDragging ? 'none' : 'transform 0.3s ease, opacity 0.3s ease',
+                  backgroundColor: swipeDirection ? (swipeDirection === 'left' ? '#4a1a1a' : '#1a4a1a') : COLORS.secondary
+                }}
+              >
+                {/* Event Title */}
+                <div style={{
+                  fontSize: window.innerWidth < 768 ? '18px' : '22px',
+                  fontWeight: 'bold',
+                  color: COLORS.highlight,
+                  marginBottom: '15px',
+                  textAlign: 'center'
+                }}>
+                  {getCurrentAdventureEvent()?.title}
+                </div>
+
+                {/* Event Body */}
+                <div style={{
+                  fontSize: window.innerWidth < 768 ? '14px' : '16px',
+                  lineHeight: '1.4',
+                  marginBottom: '20px',
+                  textAlign: 'center',
+                  color: COLORS.text
+                }}>
+                  {getCurrentAdventureEvent()?.body}
+                </div>
+
+                {/* Character Portrait */}
+                {currentEventMember && (
+                  <div style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginBottom: '20px'
+                  }}>
+                    <div style={{
+                      background: COLORS.secondary,
+                      border: `3px solid ${COLORS.highlight}`,
+                      borderRadius: '12px',
+                      padding: window.innerWidth < 768 ? '15px' : '20px',
+                      boxShadow: '0 6px 12px rgba(0,0,0,0.4)'
+                    }}>
+                      <img
+                        src={`/resources/portraits/${currentEventMember.portrait || 'peon.png'}`}
+                        alt={currentEventMember.name}
+                        style={{
+                          width: window.innerWidth < 768 ? '100px' : '150px',
+                          height: window.innerWidth < 768 ? '100px' : '150px',
+                          borderRadius: '8px',
+                          objectFit: 'cover',
+                          display: 'block'
+                        }}
+                      />
+                      <div style={{
+                        textAlign: 'center',
+                        marginTop: '8px',
+                        fontSize: '14px',
+                        fontWeight: 'bold',
+                        color: COLORS.highlight
+                      }}>
+                        {currentEventMember.name}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Choice Buttons */}
+                {getCurrentAdventureEvent()?.left && getCurrentAdventureEvent()?.right && (
+                  <div style={{
+                    display: 'flex',
+                    gap: '15px',
+                    justifyContent: 'center'
+                  }}>
+                    <button
+                      onClick={() => adventureSubstep ? handleAdventureSubstep('left') : handleAdventureChoice('left')}
+                      style={{
+                        padding: '12px 20px',
+                        background: COLORS.accent,
+                        color: COLORS.text,
+                        border: `2px solid ${COLORS.highlight}`,
+                        borderRadius: '8px',
+                        cursor: 'pointer',
+                        fontSize: '14px',
+                        fontWeight: 'bold',
+                        minWidth: '120px',
+                        transition: 'all 0.3s ease'
+                      }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.background = COLORS.highlight
+                        e.currentTarget.style.color = COLORS.primary
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.background = COLORS.accent
+                        e.currentTarget.style.color = COLORS.text
+                      }}
+                    >
+                      {adventureSubstep ? 
+                        (getCurrentAdventureEvent()?.left?.substeps?.[adventureSubstep]?.left?.label || 'Left') :
+                        (getCurrentAdventureEvent()?.left?.label || 'Left')
+                      }
+                    </button>
+                    
+                    <button
+                      onClick={() => adventureSubstep ? handleAdventureSubstep('right') : handleAdventureChoice('right')}
+                      style={{
+                        padding: '12px 20px',
+                        background: COLORS.accent,
+                        color: COLORS.text,
+                        border: `2px solid ${COLORS.highlight}`,
+                        borderRadius: '8px',
+                        cursor: 'pointer',
+                        fontSize: '14px',
+                        fontWeight: 'bold',
+                        minWidth: '120px',
+                        transition: 'all 0.3s ease'
+                      }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.background = COLORS.highlight
+                        e.currentTarget.style.color = COLORS.primary
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.background = COLORS.accent
+                        e.currentTarget.style.color = COLORS.text
+                      }}
+                    >
+                      {adventureSubstep ? 
+                        (getCurrentAdventureEvent()?.left?.substeps?.[adventureSubstep]?.right?.label || 'Right') :
+                        (getCurrentAdventureEvent()?.right?.label || 'Right')
+                      }
+                    </button>
+                  </div>
+                )}
+
+                {/* Swipe Instructions */}
+                <div style={{
+                  textAlign: 'center',
+                  marginTop: '15px',
+                  fontSize: '12px',
+                  color: COLORS.textDim,
+                  fontStyle: 'italic'
+                }}>
+                  Swipe left or right to choose
+                </div>
+
+                {/* Swipe Visual Feedback */}
+                {isDragging && (
+                  <div style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    background: COLORS.highlight,
+                    color: COLORS.primary,
+                    padding: '10px 20px',
+                    borderRadius: '8px',
+                    fontSize: '16px',
+                    fontWeight: 'bold',
+                    border: `2px solid ${COLORS.secondary}`,
+                    zIndex: 10,
+                    animation: 'pulse 0.5s ease-in-out infinite alternate'
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <div style={{ fontSize: '18px' }}>
+                        {swipeDirection === 'right' ? '→' : '←'}
+                      </div>
+                      <div>
+                        {swipeDirection === 'right' ? 
+                          (adventureSubstep ? 
+                            (getCurrentAdventureEvent()?.left?.substeps?.[adventureSubstep]?.right?.label || 'Right') :
+                            (getCurrentAdventureEvent()?.right?.label || 'Right')
+                          ) : 
+                          (adventureSubstep ? 
+                            (getCurrentAdventureEvent()?.left?.substeps?.[adventureSubstep]?.left?.label || 'Left') :
+                            (getCurrentAdventureEvent()?.left?.label || 'Left')
+                          )
+                        }
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Swipe Direction Indicators */}
+                {isDragging && (
+                  <>
+                    <div style={{
+                      position: 'absolute',
+                      left: '20px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      fontSize: '24px',
+                      color: COLORS.textDim,
+                      opacity: swipeDirection === 'left' ? 1 : 0.3,
+                      transition: 'opacity 0.2s ease'
+                    }}>
+                      ←
+                    </div>
+                    <div style={{
+                      position: 'absolute',
+                      right: '20px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      fontSize: '24px',
+                      color: COLORS.textDim,
+                      opacity: swipeDirection === 'right' ? 1 : 0.3,
+                      transition: 'opacity 0.2s ease'
+                    }}>
+                      →
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Victory/Loss Screen */}
+          {victory && (
+            <div style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'rgba(0,0,0,0.8)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '18px',
-              color: COLORS.textDim
+              zIndex: 1000
             }}>
-              Adventure Mode - Coming Soon
+              <div style={{
+                background: COLORS.secondary,
+                border: `3px solid ${victory.includes('Failed') ? COLORS.danger : COLORS.success}`,
+                borderRadius: '12px',
+                padding: '30px',
+                textAlign: 'center',
+                maxWidth: '400px',
+                margin: '20px'
+              }}>
+                <div style={{
+                  fontSize: '24px',
+                  fontWeight: 'bold',
+                  color: victory.includes('Failed') ? COLORS.danger : COLORS.success,
+                  marginBottom: '20px'
+                }}>
+                  {victory}
+                </div>
+                
+                <div style={{
+                  fontSize: '16px',
+                  marginBottom: '20px',
+                  color: COLORS.text
+                }}>
+                  {victory.includes('Failed') ? 
+                    'Your guild couldn\'t handle the challenge. Better luck next time!' :
+                    'Congratulations! Your guild successfully completed the adventure!'
+                  }
+                </div>
+                
+                <button
+                  onClick={returnToMenu}
+                  style={{
+                    padding: '12px 24px',
+                    background: COLORS.accent,
+                    color: COLORS.text,
+                    border: `2px solid ${COLORS.highlight}`,
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    fontSize: '16px',
+                    fontWeight: 'bold'
+                  }}
+                >
+                  Return to Menu
+                </button>
+              </div>
             </div>
+          )}
           </div>
-        </div>
+        </>
       )}
     </div>
   )
