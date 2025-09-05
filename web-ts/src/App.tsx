@@ -62,7 +62,7 @@ function canTriggerPositiveEffects(morale: number): boolean {
   return morale >= 5
 }
 
-// Dynamic Portrait Effects based on Morale
+// Dynamic Portrait Effects based on Morale - Vertical Gradient Saturation
 function getPortraitStyle(morale: number, baseStyle: React.CSSProperties): React.CSSProperties {
   const saturation = Math.max(0.2, morale / 10) // 0.2 to 1.0 based on morale
   const brightness = Math.max(0.6, 0.4 + (morale / 10) * 0.6) // 0.6 to 1.0 based on morale
@@ -70,9 +70,47 @@ function getPortraitStyle(morale: number, baseStyle: React.CSSProperties): React
   
   return {
     ...baseStyle,
-    filter: `saturate(${saturation}) brightness(${brightness}) contrast(${contrast})`,
-    transition: 'filter 0.3s ease'
+    position: 'relative',
+    transition: 'filter 0.3s ease',
+    // Apply filters to the image itself
+    filter: `saturate(${saturation}) brightness(${brightness}) contrast(${contrast})`
   }
+}
+
+// Create a gradient overlay component for portrait saturation effect
+function PortraitWithGradient({ morale, baseStyle, src, alt }: { 
+  morale: number; 
+  baseStyle: React.CSSProperties; 
+  src: string; 
+  alt: string; 
+}) {
+  const gradientPosition = Math.max(0, Math.min(100, (morale / 10) * 100))
+  
+  return (
+    <div style={{ position: 'relative', display: 'inline-block' }}>
+      <img 
+        src={src}
+        alt={alt}
+        style={getPortraitStyle(morale, baseStyle)}
+      />
+      {/* Gradient overlay for desaturation effect */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: `linear-gradient(to top, 
+          rgba(0,0,0,0) 0%, 
+          rgba(0,0,0,0) ${100 - gradientPosition}%, 
+          rgba(0,0,0,0.6) ${100 - gradientPosition + 5}%, 
+          rgba(0,0,0,0.8) 100%
+        )`,
+        pointerEvents: 'none',
+        borderRadius: baseStyle.borderRadius || '8px'
+      }} />
+    </div>
+  )
 }
 
 function getPortraitBorderColor(morale: number): string {
@@ -851,16 +889,17 @@ export default function App() {
                     position: 'relative'
                   }}>
                     <div style={{ position: 'relative' }}>
-                      <img 
+                      <PortraitWithGradient
+                        morale={morale}
                         src={`/resources/portraits/${member.portrait || 'peon.png'}`}
                         alt={member.name}
-                        style={getPortraitStyle(morale, {
+                        baseStyle={{
                           width: '60px',
                           height: '60px',
                           borderRadius: '8px',
                           border: `3px solid ${borderColor}`,
                           objectFit: 'cover'
-                        })}
+                        }}
                       />
                       <div style={{
                         position: 'absolute',
@@ -923,16 +962,17 @@ export default function App() {
                     position: 'relative'
                   }}>
                     <div style={{ position: 'relative' }}>
-                      <img 
+                      <PortraitWithGradient
+                        morale={morale}
                         src={`/resources/portraits/${member.portrait || 'peon.png'}`}
                         alt={member.name}
-                        style={getPortraitStyle(morale, {
+                        baseStyle={{
                           width: '80px',
                           height: '80px',
                           borderRadius: '8px',
                           border: `3px solid ${borderColor}`,
                           objectFit: 'cover'
-                        })}
+                        }}
                       />
                       <div style={{
                         position: 'absolute',
