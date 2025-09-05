@@ -53,9 +53,48 @@ type ChatMsg = { speakerId?: string; speakerName: string; text: string }
 const CLAMP_MIN = 0, CLAMP_MAX = 10
 
 function clamp(v: number) { return Math.max(CLAMP_MIN, Math.min(CLAMP_MAX, v)) }
-function clampMorale(v: number) { return Math.max(0, Math.min(100, Math.round(v))) }
+function clampMorale(v: number) { return Math.max(1, Math.min(10, Math.round(v))) }
 
 function fmtDelta(v: number) { return v > 0 ? `+${v}` : `${v}` }
+
+// Enhanced Morale System Functions
+function getMoraleEffect(morale: number): string {
+  if (morale >= 8) return 'excellent'
+  if (morale >= 5) return 'good'
+  if (morale >= 4) return 'poor'
+  if (morale >= 3) return 'poor'
+  if (morale >= 1) return 'critical'
+  return 'departed'
+}
+
+function canTriggerPositiveEffects(morale: number): boolean {
+  return morale >= 5
+}
+
+function getDepartureChance(morale: number): number {
+  if (morale >= 3) return 0
+  if (morale === 2) return 0.25
+  if (morale === 1) return 0.35
+  return 1 // morale 0 = immediate departure
+}
+
+function checkCharacterDepartures(roster: Member[]): { departed: Member[], remaining: Member[] } {
+  const departed: Member[] = []
+  const remaining: Member[] = []
+  
+  for (const member of roster) {
+    const morale = member.morale ?? 5
+    const departureChance = getDepartureChance(morale)
+    
+    if (morale === 0 || Math.random() < departureChance) {
+      departed.push(member)
+    } else {
+      remaining.push(member)
+    }
+  }
+  
+  return { departed, remaining }
+}
 
 function eventHasReadinessDecrease(ev: EventCard): boolean {
   const lr = [ev.left, ev.right]
@@ -255,7 +294,7 @@ export default function App() {
       const barksData: Record<string, string[]> = await bRes.json()
 
       // Build pool and select active 5 for this session
-      const withMorale = rosterData.map(m => ({ ...m, morale: clampMorale(m.morale ?? 50) }))
+      const withMorale = rosterData.map(m => ({ ...m, morale: clampMorale(5 + Math.floor(Math.random() * 3)) })) // Random morale 5-7
       const active = shuffle(withMorale).slice(0, 5)
       setRoster(active)
 
@@ -272,7 +311,7 @@ export default function App() {
           if (Number.isInteger(s?.nextRaidDay)) setNextRaidDay(s.nextRaidDay)
           if (Array.isArray(s?.log)) setLog(s.log.slice(-20))
           if (s?.morale) {
-            setRoster(prev => prev.map(m => ({ ...m, morale: clampMorale(s.morale[m.id] ?? m.morale ?? 50) })))
+            setRoster(prev => prev.map(m => ({ ...m, morale: clampMorale(s.morale[m.id] ?? m.morale ?? 5) })))
           }
         } catch {}
       }
@@ -291,7 +330,7 @@ export default function App() {
 
   // Persist: save morale for active roster only
   useEffect(() => {
-    const morale = Object.fromEntries(roster.map(m => [m.id, m.morale ?? 50]))
+    const morale = Object.fromEntries(roster.map(m => [m.id, m.morale ?? 5]))
     localStorage.setItem('yyg_state_ts', JSON.stringify({ meters, day, nextRaidDay, morale, log }))
   }, [meters, day, nextRaidDay, roster, log])
 
@@ -389,27 +428,31 @@ export default function App() {
     return { extraEffects, matchedTraits: Array.from(matchedTraits) }
   }
 
-  function applyEffects(effects?: Effects): string {
+  function applyEffects(effects?: Effects, allowPositiveEffects: boolean = true): string {
     if (!effects) return 'No change'
     const next = { ...meters }
     const deltas: string[] = []
     const moraleDeltas: string[] = []
     for (const [k, v] of Object.entries(effects)) {
       if (k in next && typeof v === 'number') {
+        // Block positive effects if morale is too low
+        if (!allowPositiveEffects && v > 0) {
+          continue
+        }
         // @ts-expect-error narrowed by key check
         next[k] = clamp((next as any)[k] + v)
         deltas.push(`${k}: ${fmtDelta(v)}`)
         continue
       }
       if (k === 'morale_all' && typeof v === 'number') {
-        setRoster(prev => prev.map(mem => ({ ...mem, morale: clampMorale((mem.morale ?? 50) + v) })))
+        setRoster(prev => prev.map(mem => ({ ...mem, morale: clampMorale((mem.morale ?? 5) + v) })))
         moraleDeltas.push(`morale_all: ${fmtDelta(v)}`)
         continue
       }
       const mm = k.match(/^morale_(.+)$/)
       if (mm && typeof v === 'number') {
         const id = mm[1]
-        setRoster(prev => prev.map(mem => mem.id === id ? { ...mem, morale: clampMorale((mem.morale ?? 50) + v) } : mem))
+        setRoster(prev => prev.map(mem => mem.id === id ? { ...mem, morale: clampMorale((mem.morale ?? 5) + v) } : mem))
         moraleDeltas.push(`${k}: ${fmtDelta(v)}`)
         continue
       }
@@ -425,6 +468,7 @@ export default function App() {
     if (meters.funds <= 0) return 'Guild Funds hit 0 - you lose.'
     if (meters.reputation <= 0) return 'Server Reputation hit 0 - you lose.'
     if (meters.readiness <= 0) return 'Raid Readiness hit 0 - you lose.'
+    if (roster.length < 3) return 'Guild collapsed - not enough members to continue.'
     return null
   }
 
@@ -469,8 +513,26 @@ export default function App() {
       }
     }
     
-    const deltaA = applyEffects(choice.effects)
-    for (const ef of extraEffects) applyEffects(ef)
+    // Check if any character has low morale that would block positive effects
+    const hasLowMorale = roster.some(member => !canTriggerPositiveEffects(member.morale ?? 5))
+    
+    const deltaA = applyEffects(choice.effects, !hasLowMorale)
+    for (const ef of extraEffects) applyEffects(ef, !hasLowMorale)
+    
+    // Check for character departures after morale changes
+    const { departed, remaining } = checkCharacterDepartures(roster)
+    if (departed.length > 0) {
+      setRoster(remaining)
+      // Add departure messages to chat
+      for (const member of departed) {
+        pushChat({ 
+          speakerId: member.id, 
+          speakerName: member.name, 
+          text: `I can't take this anymore. I'm leaving the guild.` 
+        })
+      }
+    }
+    
     const loss = lossCheck()
     const delta = deltaA
     setLog(prev => [...prev, { day, title: ev.title ?? 'Untitled', choice: choice.label ?? side, delta }].slice(-20))
@@ -529,7 +591,7 @@ export default function App() {
       if (!prev.length) return prev
       const pool = prev
       const active = shuffle(pool).slice(0, 5)
-      return active.map(m => ({ ...m, morale: clampMorale(m.morale ?? 50) }))
+      return active.map(m => ({ ...m, morale: clampMorale(5 + Math.floor(Math.random() * 3)) })) // Random morale 5-7
     })
     setCurrent(null)
     setCurrent(drawCard())
@@ -705,8 +767,8 @@ export default function App() {
           flexWrap: 'wrap'
         }}>
           {roster.map(member => {
-            const morale = clampMorale(member.morale ?? 50)
-            const borderColor = morale <= 30 ? COLORS.danger : morale <= 60 ? COLORS.warning : COLORS.success
+            const morale = clampMorale(member.morale ?? 5)
+            const borderColor = morale <= 3 ? COLORS.danger : morale <= 5 ? COLORS.warning : COLORS.success
             return (
               <div key={member.id} style={{ 
                 textAlign: 'center',

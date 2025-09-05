@@ -392,8 +392,33 @@ Files Changed (v0.19)
   - Enhanced game flow with clear feedback when players lose
   - Fixed variable naming conflict in loss detection logic
 
+Files Changed (v0.20)
+
+- `gdd.md`
+  - Added Enhanced Morale System section with 1-10 scale
+  - Updated loss conditions to include guild collapse (3+ character departures)
+  - Documented morale effects and departure mechanics
+  - Added morale management guidelines
+- `web-ts/src/App.tsx`
+  - Implemented 1-10 morale scale instead of 0-100
+  - Added character departure mechanics based on morale (3: 10%, 2: 25%, 1: 35% chance per week)
+  - Added guild collapse loss condition (game over if <3 characters remain)
+  - Implemented morale-based choice effect blocking (morale 4-3 prevents positive effects)
+  - Added character departure messages to guild chat
+  - Enhanced UI for morale tracking with color-coded borders (red ≤3, yellow ≤5, green >5)
+  - Updated roster initialization to use random morale 5-7 for new runs
+- `web-ts/public/resources/events/events.json`
+  - Converted all morale effects from 0-100 scale to balanced 1-10 scale
+  - Minor events: ±1 morale (e.g., "AFK for snacks" = -1, "Great raid performance" = +1)
+  - Major events: ±2 morale (e.g., "Loot drama resolved fairly" = +2, "Guild member quits" = -2)
+  - Crisis events: ±3 morale (e.g., "Guild bank scandal" = -3, "Server first achievement" = +3)
+  - Balanced morale changes based on event severity and choice appropriateness
+
 Next Steps (Planned)
 
+- Game mode system (Dungeon Mode, Endless Mode, Challenge Modes)
+- Enhanced UI for morale tracking and departure warnings
+- Special low-morale events and leaving negotiations
 - Hidden content discovery system (rare events, trait combinations)
 - Achievement system to guide exploration
 - Meta-progression unlocks between playthroughs

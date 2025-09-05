@@ -34,10 +34,32 @@ References: see `GDDv1-1.md` for trait, morale, and terminology; reuse tone and 
 
 - Guild Funds: budget for boosts, fees, and recovery. Loss at 0.
 - Server Reputation: public standing on the server; affects event weights and rewards. Loss at 0.
-- Raid Readiness: abstract “power/availability/comp” of the roster. Loss at 0.
-- Morale: pulled from `GDDv1-1.md` thresholds; affects event outcomes and risk.
+- Raid Readiness: abstract "power/availability/comp" of the roster. Loss at 0.
+- Character Morale: 1-10 scale per character; affects performance and departure risk.
 
-Prototype loss: any of Guild Funds, Server Reputation, or Raid Readiness hits 0. Soft fail states surface warnings at <20%.
+**Loss Conditions:**
+- Any meter (Funds, Reputation, Readiness) hits 0
+- Guild collapses if 3+ characters leave due to low morale
+- Soft fail states surface warnings at <20% for meters
+
+## Enhanced Morale System (1-10 Scale)
+
+**Morale Ranges & Effects:**
+- **10-8**: Excellent - May trigger positive events (chance to increase one resource)
+- **7-5**: Good - Normal performance, no penalties
+- **4**: Poor - Character cannot trigger positive effects of choice
+- **3**: Poor - Character cannot trigger positive effects of choice, 10% chance to leave each week
+- **2-1**: Critical - 25% (morale 2) or 35% (morale 1) chance to leave each week
+- **0**: Departed - Character leaves the guild immediately
+
+**Morale Management:**
+- Characters start with random morale 5-7
+- Events change morale by -3 to +3 based on event severity and choice appropriateness
+- Minor events: ±1 morale (e.g., "AFK for snacks" = -1, "Great raid performance" = +1)
+- Major events: ±2 morale (e.g., "Loot drama resolved fairly" = +2, "Guild member quits" = -2)
+- Crisis events: ±3 morale (e.g., "Guild bank scandal" = -3, "Server first achievement" = +3)
+- Low morale characters may trigger special "leaving negotiation" events
+- No recruitment system - guild must survive with remaining characters
 
 ## Systems Integration (GOAT Hooks)
 
