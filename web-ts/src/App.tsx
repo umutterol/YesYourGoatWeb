@@ -84,7 +84,8 @@ function PortraitWithGradient({ morale, baseStyle, src, alt }: {
   src: string; 
   alt: string; 
 }) {
-  const gradientPosition = Math.max(0, Math.min(100, (morale / 10) * 100))
+  // Reverse the gradient: high morale = less overlay, low morale = more overlay
+  const gradientPosition = Math.max(0, Math.min(100, ((10 - morale) / 10) * 100))
   
   return (
     <div style={{ position: 'relative', display: 'inline-block' }}>
@@ -93,7 +94,7 @@ function PortraitWithGradient({ morale, baseStyle, src, alt }: {
         alt={alt}
         style={getPortraitStyle(morale, baseStyle)}
       />
-      {/* Gradient overlay for desaturation effect */}
+      {/* Gradient overlay for desaturation effect - reversed for correct morale display */}
       <div style={{
         position: 'absolute',
         top: 0,
