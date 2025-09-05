@@ -60,6 +60,31 @@ Deploy (Vercel)
 - Set Root Directory to `web` and Framework Preset to “Other”.
 - Import the repository and deploy (no build necessary for the static prototype).
 
+Recent Updates (v0.21)
+
+- **Reigns-Style UI Implementation**: Complete UI redesign to match Reigns game aesthetic:
+  - **Resource Bar Redesign**: Replaced vertical bars with horizontal icons and 10-dot fill indicators
+  - **Event Card Restructure**: Moved event text to top, embedded character portraits, removed visible buttons
+  - **Dynamic Portrait Effects**: Implemented vertical gradient saturation based on morale levels
+  - **Enhanced Swipe System**: Added choice previews, directional indicators, and improved visual feedback
+  - **PortraitWithGradient Component**: Created reusable component for morale-based visual effects
+  - **Smooth Animations**: Added transitions and visual feedback throughout the interface
+  - **Responsive Design**: Maintained mobile and desktop compatibility with new layout
+  - **Visual Polish**: Improved card proportions, character portrait styling, and overall aesthetics
+
+Recent Updates (v0.20)
+
+- **Enhanced Morale System**: Implemented 1-10 scale with character departure mechanics:
+  - **Morale Scale**: Changed from 0-100 to 1-10 scale for better clarity
+  - **Departure Mechanics**: Characters with morale ≤3 have chance to leave (3: 10%, 2: 25%, 1: 35%)
+  - **Guild Collapse**: Game over if fewer than 3 characters remain
+  - **Effect Blocking**: Low morale characters (4-3) cannot trigger positive effects
+  - **Immediate Loss**: Game ends instantly when any meter hits 0
+  - **Departure Notifications**: Clear popup messages when characters leave
+  - **UI Enhancements**: Color-coded borders and visual feedback for morale states
+  - **Fresh Roster**: New runs now select 5 random characters instead of reusing leftovers
+  - **Balanced Values**: Converted all meter and morale effects to 1-10 scale
+
 Recent Updates (v0.18)
 
 - **Guaranteed Multi-Step Events**: Ensured every run includes at least one complex narrative:
@@ -220,6 +245,48 @@ Recent Updates (v0.6)
 - **Roster Expansion**: Expanded from 6 to 20 roster members, randomly selecting 5 per session
 - **UI Improvements**: Enhanced bar color contrast with bold white text and shadows for better readability
 - **Victory Flow**: Added victory detection, celebration banner, and "New Run" reset button
+
+Files Changed (v0.21)
+
+- `web-ts/src/App.tsx`
+  - **Resource Bar Redesign**: Replaced vertical bars with horizontal icons and 10-dot fill indicators
+  - **Event Card Restructure**: Moved event text to top, embedded character portraits, removed visible buttons
+  - **Dynamic Portrait Effects**: Implemented PortraitWithGradient component for vertical gradient saturation
+  - **Enhanced Swipe System**: Added swipe direction tracking, choice previews, and directional indicators
+  - **Visual Improvements**: Enhanced card transforms, opacity effects, and smooth animations
+  - **Responsive Design**: Maintained mobile and desktop compatibility with new layout
+  - **Code Organization**: Created reusable components and improved visual feedback system
+
+Files Changed (v0.20)
+
+- `gdd.md`
+  - Added Enhanced Morale System section with 1-10 scale
+  - Updated loss conditions to include guild collapse (3+ character departures)
+  - Documented morale effects and departure mechanics
+  - Added morale management guidelines
+- `web-ts/src/App.tsx`
+  - Implemented 1-10 morale scale instead of 0-100
+  - Added character departure mechanics based on morale (3: 10%, 2: 25%, 1: 35% chance per week)
+  - Added guild collapse loss condition (game over if <3 characters remain)
+  - Implemented morale-based choice effect blocking (morale 4-3 prevents positive effects)
+  - Added character departure messages to guild chat
+  - Enhanced UI for morale tracking with color-coded borders (red ≤3, yellow ≤5, green >5)
+  - Updated roster initialization to use random morale 5-7 for new runs
+  - Added immediate loss conditions - game ends instantly when any meter hits 0
+  - Added departure notification popup with clear messaging when characters leave
+  - Enhanced departure UI with warning colors and guild collapse alerts
+  - Fixed newRun bug - now selects 5 fresh random characters instead of reusing leftover roster
+- `web-ts/public/resources/events/events.json`
+  - Converted all morale effects from 0-100 scale to balanced 1-10 scale
+  - Minor events: ±1 morale (e.g., "AFK for snacks" = -1, "Great raid performance" = +1)
+  - Major events: ±2 morale (e.g., "Loot drama resolved fairly" = +2, "Guild member quits" = -2)
+  - Crisis events: ±3 morale (e.g., "Guild bank scandal" = -3, "Server first achievement" = +3)
+  - Converted all meter values (funds, reputation, readiness) from 0-100 scale to 1-10 scale
+  - Minor effects: ±1 (e.g., small costs/gains)
+  - Moderate effects: ±2 (e.g., significant costs/gains)
+  - Major effects: ±3 (e.g., major costs/gains)
+  - Crisis effects: ±4 (e.g., catastrophic costs/major achievements)
+  - Balanced morale changes based on event severity and choice appropriateness
 
 Files Changed (v0.18)
 

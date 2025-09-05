@@ -162,10 +162,14 @@ JSON-like entry stored in `resources/events`, loaded at start.
 
 ## UI/UX
 
-- Layout: portrait or narrow landscape; top meter row; center card; bottom Left/Right buttons.  
-- Inputs: swipe/touch, left/right arrow keys, A/D keys, or click buttons.  
-- Feedback: animated meter ticks, brief color flashes, toast for trait hooks, running log.  
-- Accessibility: color + icon for meter deltas; toggle fast text.
+- **Reigns-Style Layout**: Top resource bar with fill dots, center event card with embedded character portrait, bottom roster display
+- **Resource Display**: Horizontal icons (💰⭐⚔️) with 10-dot fill indicators above each icon based on resource levels (1-10 scale)
+- **Event Card Design**: Large event text at top, embedded character portrait with dynamic saturation effects, no visible choice buttons
+- **Character Portraits**: Dynamic vertical gradient saturation based on morale - low morale shows desaturation from bottom to top
+- **Swipe Mechanics**: Touch and mouse drag support with visual feedback, choice previews during swipe, directional indicators
+- **Inputs**: Swipe/touch, left/right arrow keys, A/D keys, or click buttons
+- **Feedback**: Animated meter ticks, character portrait effects, choice previews, running log
+- **Accessibility**: Color + icon for meter deltas, visual saturation effects for character state
 
 ## Roster (Prototype)
 
@@ -279,6 +283,9 @@ See trait definitions and barks: `resources/traits/traits.md`.
 
 ## Changelog
 
+- v0.21: **Reigns-Style UI Implementation**: Complete UI redesign to match Reigns game aesthetic; implemented horizontal resource bar with 10-dot fill indicators above icons; restructured event card with text on top and embedded character portraits; added dynamic vertical gradient saturation effects for character portraits based on morale; enhanced swipe mechanics with choice previews and directional indicators; created PortraitWithGradient component for reusable portrait effects; improved visual feedback and animations throughout; maintained responsive design for mobile and desktop.
+- v0.20: Enhanced morale system with 1-10 scale and character departure mechanics; added guild collapse loss condition; implemented immediate loss conditions; fixed newRun bug for fresh character selection; converted all meter values to 1-10 scale; added departure notifications and enhanced UI feedback.
+- v0.19: Fixed critical loss screen bug - loss conditions now properly display victory/loss screen instead of silently ending the game; added loss checking during both decision making and week progression; enhanced game flow with clear feedback when players lose; fixed variable naming conflict in loss detection logic.
 - v0.18: Guaranteed multi-step events in every run; added hasMultiStepEvent state tracking and priority weighting system; multi-step events receive 1000x weight when not yet encountered in current run; ensures every playthrough includes at least one complex branching narrative; improved event selection logic to prioritize multi-step events early in each run; reset multi-step tracking on new run initialization.
 - v0.17: Implemented multi-step events system; added 5 complex branching event chains with 20+ total steps covering guild bank scandal, raid leader crisis, server transfer drama, loot council revolution, and guild merger scenarios; each step includes immediate effects and consequences; events branch based on player choices with realistic decision points; added nextStep property to Choice type and pendingMultiStep state management; created narrative depth with escalating consequences and character development arcs.
 - v0.16: Added 15 new characters with realistic names and new portraits; expanded roster from 20 to 35 total characters; replaced generic names (Meta, AFK, etc.) with proper names (Alex, Beth, Carl, Dana, Eric, Fiona, Greg, Helen, Ivan, Julia, Kevin, Luna, Mike, Nina, Oscar); assigned new portrait files to each character; maintained trait distribution across all character types for balanced gameplay.
