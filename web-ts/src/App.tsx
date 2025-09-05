@@ -201,6 +201,7 @@ export default function App() {
   const [currentEventMember, setCurrentEventMember] = useState<Member | null>(null)
   const [pendingMultiStep, setPendingMultiStep] = useState<string | null>(null)
   const [hasMultiStepEvent, setHasMultiStepEvent] = useState<boolean>(false)
+  const [departureNotification, setDepartureNotification] = useState<{ member: Member; reason: string } | null>(null)
   
   // Swipe mechanics
   const [swipeStart, setSwipeStart] = useState<{ x: number; y: number } | null>(null)
@@ -449,6 +450,21 @@ export default function App() {
       }
     }
     setMeters(next)
+    
+    // Check for immediate loss conditions after meter changes
+    if (next.funds <= 0) {
+      setVictory('Guild Funds hit 0 - you lose.')
+      return 'Guild Funds hit 0 - you lose.'
+    }
+    if (next.reputation <= 0) {
+      setVictory('Server Reputation hit 0 - you lose.')
+      return 'Server Reputation hit 0 - you lose.'
+    }
+    if (next.readiness <= 0) {
+      setVictory('Raid Readiness hit 0 - you lose.')
+      return 'Raid Readiness hit 0 - you lose.'
+    }
+    
     const parts: string[] = []
     if (deltas.length) parts.push(deltas.join('  •  '))
     if (moraleDeltas.length) parts.push(moraleDeltas.join('  •  '))
@@ -514,6 +530,19 @@ export default function App() {
     const { departed, remaining } = checkCharacterDepartures(roster)
     if (departed.length > 0) {
       setRoster(remaining)
+      // Show departure notification for the first departed member
+      const firstDeparted = departed[0]
+      const morale = firstDeparted.morale ?? 5
+      let reason = "Low morale"
+      if (morale === 0) reason = "Morale completely broken"
+      else if (morale === 1) reason = "Extremely low morale"
+      else if (morale === 2) reason = "Very low morale"
+      
+      setDepartureNotification({ 
+        member: firstDeparted, 
+        reason: reason 
+      })
+      
       // Add departure messages to chat
       for (const member of departed) {
         pushChat({ 
@@ -578,6 +607,7 @@ export default function App() {
     setLegendStreak(0)
     setPendingMultiStep(null)
     setHasMultiStepEvent(false)
+    setDepartureNotification(null)
     setRoster(prev => {
       if (!prev.length) return prev
       const pool = prev
@@ -1000,6 +1030,44 @@ export default function App() {
             >
               New Run
         </button>
+          </div>
+        )}
+
+        {/* Departure Notification */}
+        {departureNotification && (
+          <div style={{ 
+            background: COLORS.danger,
+            border: `2px solid ${COLORS.border}`,
+            borderRadius: '8px',
+            padding: '16px',
+            marginBottom: '5px',
+            textAlign: 'center',
+            animation: 'fadeIn 0.5s ease-in'
+          }}>
+            <div style={{ fontSize: '18px', marginBottom: '8px', color: COLORS.text, fontWeight: 'bold' }}>
+              ⚠️ Guild Member Left! ⚠️
+            </div>
+            <div style={{ fontSize: '16px', marginBottom: '8px', color: COLORS.text }}>
+              <strong>{departureNotification.member.name}</strong> has left the guild due to <strong>{departureNotification.reason}</strong>
+            </div>
+            <div style={{ fontSize: '14px', marginBottom: '12px', color: COLORS.textDim }}>
+              {roster.length < 3 ? '⚠️ WARNING: Guild is at risk of collapse!' : `Guild members remaining: ${roster.length}`}
+            </div>
+            <button 
+              onClick={() => setDepartureNotification(null)}
+              style={{
+                background: COLORS.warning,
+                border: `2px solid ${COLORS.border}`,
+                borderRadius: '6px',
+                padding: '8px 16px',
+                color: COLORS.secondary,
+                fontSize: '12px',
+                fontWeight: 'bold',
+                cursor: 'pointer'
+              }}
+            >
+              Continue
+            </button>
           </div>
         )}
 

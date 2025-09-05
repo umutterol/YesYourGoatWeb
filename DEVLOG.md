@@ -407,6 +407,9 @@ Files Changed (v0.20)
   - Added character departure messages to guild chat
   - Enhanced UI for morale tracking with color-coded borders (red ≤3, yellow ≤5, green >5)
   - Updated roster initialization to use random morale 5-7 for new runs
+  - Added immediate loss conditions - game ends instantly when any meter hits 0
+  - Added departure notification popup with clear messaging when characters leave
+  - Enhanced departure UI with warning colors and guild collapse alerts
 - `web-ts/public/resources/events/events.json`
   - Converted all morale effects from 0-100 scale to balanced 1-10 scale
   - Minor events: ±1 morale (e.g., "AFK for snacks" = -1, "Great raid performance" = +1)
