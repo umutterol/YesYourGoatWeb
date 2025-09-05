@@ -672,7 +672,7 @@ export default function App() {
       fontFamily: 'monospace',
       padding: window.innerWidth < 768 ? '5px' : '10px'
     }}>
-      {/* Top Bar with Day/Week and Roster + Resources */}
+      {/* Top Bar with Roster + Day/Week + Resources */}
       <div style={{
         background: COLORS.secondary,
         border: `2px solid ${COLORS.border}`,
@@ -684,19 +684,7 @@ export default function App() {
         alignItems: 'center',
         flexWrap: window.innerWidth < 768 ? 'wrap' : 'nowrap'
       }}>
-        {/* Left side: Day/Week info */}
-        <div style={{ 
-          fontSize: window.innerWidth < 768 ? '14px' : '18px', 
-          fontWeight: 'bold', 
-          color: COLORS.highlight,
-          marginBottom: window.innerWidth < 768 ? '10px' : '0',
-          width: window.innerWidth < 768 ? '100%' : 'auto',
-          textAlign: window.innerWidth < 768 ? 'center' : 'left'
-        }}>
-          {`Day ${day} (Week ${Math.floor((day - 1) / 7) + 1})`}
-        </div>
-
-        {/* Center: Party Roster */}
+        {/* Left side: Party Roster */}
         <div style={{ 
           display: 'flex', 
           gap: window.innerWidth < 768 ? '10px' : '20px', 
@@ -762,126 +750,84 @@ export default function App() {
           })}
         </div>
 
-        {/* Right side: Resource Icons */}
+        {/* Right side: Day/Week + Resource Icons */}
         <div style={{ 
           display: 'flex', 
-          gap: window.innerWidth < 768 ? '15px' : '20px',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          alignItems: 'flex-end'
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: window.innerWidth < 768 ? '10px' : '15px'
         }}>
-          {/* Funds with vertical filling icon */}
+          {/* Day/Week info */}
           <div style={{ 
-            display: 'flex', 
-            flexDirection: 'column', 
-            alignItems: 'center',
-            gap: '6px'
+            fontSize: window.innerWidth < 768 ? '14px' : '18px', 
+            fontWeight: 'bold', 
+            color: COLORS.highlight,
+            textAlign: 'center'
           }}>
-            <div style={{
-              width: window.innerWidth < 768 ? '35px' : '45px',
-              height: window.innerWidth < 768 ? '50px' : '65px',
-              background: COLORS.primary,
-              border: `3px solid ${COLORS.border}`,
-              borderRadius: '6px',
-              position: 'relative',
-              overflow: 'hidden',
-              display: 'flex',
-              alignItems: 'flex-end'
-            }}>
-              <div style={{
-                width: '100%',
-                height: `${(meters.funds / 10) * 100}%`,
-                background: COLORS.warning,
-                transition: 'height 0.3s ease',
-                borderTopLeftRadius: '3px',
-                borderTopRightRadius: '3px'
-              }} />
-            </div>
-            <div style={{ 
-              fontSize: window.innerWidth < 768 ? '16px' : '20px',
-              textAlign: 'center'
-            }}>💰</div>
-            <span style={{ 
-              fontSize: window.innerWidth < 768 ? '10px' : '12px', 
-              fontWeight: 'bold', 
-              color: COLORS.text 
-            }}>{meters.funds}</span>
+            {`Day ${day} (Week ${Math.floor((day - 1) / 7) + 1})`}
           </div>
-          
-          {/* Reputation with vertical filling icon */}
+
+          {/* Resource Icons */}
           <div style={{ 
             display: 'flex', 
-            flexDirection: 'column', 
-            alignItems: 'center',
-            gap: '6px'
+            gap: window.innerWidth < 768 ? '20px' : '30px',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            alignItems: 'center'
           }}>
-            <div style={{
-              width: window.innerWidth < 768 ? '35px' : '45px',
-              height: window.innerWidth < 768 ? '50px' : '65px',
-              background: COLORS.primary,
-              border: `3px solid ${COLORS.border}`,
-              borderRadius: '6px',
-              position: 'relative',
-              overflow: 'hidden',
-              display: 'flex',
-              alignItems: 'flex-end'
-            }}>
-              <div style={{
-                width: '100%',
-                height: `${(meters.reputation / 10) * 100}%`,
-                background: COLORS.success,
-                transition: 'height 0.3s ease',
-                borderTopLeftRadius: '3px',
-                borderTopRightRadius: '3px'
-              }} />
-            </div>
+            {/* Funds - Simple icon with number */}
             <div style={{ 
-              fontSize: window.innerWidth < 768 ? '16px' : '20px',
-              textAlign: 'center'
-            }}>⭐</div>
-            <span style={{ 
-              fontSize: window.innerWidth < 768 ? '10px' : '12px', 
-              fontWeight: 'bold', 
-              color: COLORS.text 
-            }}>{meters.reputation}</span>
-          </div>
-          
-          {/* Readiness with vertical filling icon */}
-          <div style={{ 
-            display: 'flex', 
-            flexDirection: 'column', 
-            alignItems: 'center',
-            gap: '6px'
-          }}>
-            <div style={{
-              width: window.innerWidth < 768 ? '35px' : '45px',
-              height: window.innerWidth < 768 ? '50px' : '65px',
-              background: COLORS.primary,
-              border: `3px solid ${COLORS.border}`,
-              borderRadius: '6px',
-              position: 'relative',
-              overflow: 'hidden',
-              display: 'flex',
-              alignItems: 'flex-end'
+              display: 'flex', 
+              flexDirection: 'column', 
+              alignItems: 'center',
+              gap: '4px'
             }}>
-              <div style={{
-                width: '100%',
-                height: `${(meters.readiness / 10) * 100}%`,
-                background: COLORS.highlight,
-                transition: 'height 0.3s ease',
-                borderTopLeftRadius: '3px',
-                borderTopRightRadius: '3px'
-              }} />
+              <div style={{ 
+                fontSize: window.innerWidth < 768 ? '24px' : '32px',
+                textAlign: 'center'
+              }}>💰</div>
+              <span style={{ 
+                fontSize: window.innerWidth < 768 ? '14px' : '16px', 
+                fontWeight: 'bold', 
+                color: COLORS.text 
+              }}>{meters.funds}</span>
             </div>
+            
+            {/* Reputation - Simple icon with number */}
             <div style={{ 
-              fontSize: window.innerWidth < 768 ? '16px' : '20px',
-              textAlign: 'center'
-            }}>⚔️</div>
-            <span style={{ 
-              fontSize: window.innerWidth < 768 ? '10px' : '12px', 
-              fontWeight: 'bold', 
-              color: COLORS.text 
-            }}>{meters.readiness}</span>
+              display: 'flex', 
+              flexDirection: 'column', 
+              alignItems: 'center',
+              gap: '4px'
+            }}>
+              <div style={{ 
+                fontSize: window.innerWidth < 768 ? '24px' : '32px',
+                textAlign: 'center'
+              }}>⭐</div>
+              <span style={{ 
+                fontSize: window.innerWidth < 768 ? '14px' : '16px', 
+                fontWeight: 'bold', 
+                color: COLORS.text 
+              }}>{meters.reputation}</span>
+            </div>
+            
+            {/* Readiness - Simple icon with number */}
+            <div style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              alignItems: 'center',
+              gap: '4px'
+            }}>
+              <div style={{ 
+                fontSize: window.innerWidth < 768 ? '24px' : '32px',
+                textAlign: 'center'
+              }}>⚔️</div>
+              <span style={{ 
+                fontSize: window.innerWidth < 768 ? '14px' : '16px', 
+                fontWeight: 'bold', 
+                color: COLORS.text 
+              }}>{meters.readiness}</span>
+            </div>
           </div>
         </div>
       </div>
