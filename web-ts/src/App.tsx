@@ -715,23 +715,82 @@ export default function App() {
                 {`Day ${day} (Week ${Math.floor((day - 1) / 7) + 1})`}
               </div>
 
-              {/* Resources */}
+              {/* Resources - Reigns Style */}
               <div style={{ 
                 display: 'flex', 
-                gap: '15px',
+                gap: '20px',
                 alignItems: 'center'
               }}>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}>
+                {/* Funds */}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    gap: '2px',
+                    marginBottom: '2px'
+                  }}>
+                    {Array.from({ length: 10 }, (_, i) => (
+                      <div
+                        key={i}
+                        style={{
+                          width: '6px',
+                          height: '6px',
+                          borderRadius: '50%',
+                          backgroundColor: i < meters.funds ? COLORS.text : 'transparent',
+                          border: `1px solid ${COLORS.text}`,
+                          opacity: i < meters.funds ? 1 : 0.3
+                        }}
+                      />
+                    ))}
+                  </div>
                   <div style={{ fontSize: '20px' }}>💰</div>
-                  <span style={{ fontSize: '12px', fontWeight: 'bold', color: COLORS.text }}>{meters.funds}</span>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}>
+                
+                {/* Reputation */}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    gap: '2px',
+                    marginBottom: '2px'
+                  }}>
+                    {Array.from({ length: 10 }, (_, i) => (
+                      <div
+                        key={i}
+                        style={{
+                          width: '6px',
+                          height: '6px',
+                          borderRadius: '50%',
+                          backgroundColor: i < meters.reputation ? COLORS.text : 'transparent',
+                          border: `1px solid ${COLORS.text}`,
+                          opacity: i < meters.reputation ? 1 : 0.3
+                        }}
+                      />
+                    ))}
+                  </div>
                   <div style={{ fontSize: '20px' }}>⭐</div>
-                  <span style={{ fontSize: '12px', fontWeight: 'bold', color: COLORS.text }}>{meters.reputation}</span>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}>
+                
+                {/* Readiness */}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    gap: '2px',
+                    marginBottom: '2px'
+                  }}>
+                    {Array.from({ length: 10 }, (_, i) => (
+                      <div
+                        key={i}
+                        style={{
+                          width: '6px',
+                          height: '6px',
+                          borderRadius: '50%',
+                          backgroundColor: i < meters.readiness ? COLORS.text : 'transparent',
+                          border: `1px solid ${COLORS.text}`,
+                          opacity: i < meters.readiness ? 1 : 0.3
+                        }}
+                      />
+                    ))}
+                  </div>
                   <div style={{ fontSize: '20px' }}>⚔️</div>
-                  <span style={{ fontSize: '12px', fontWeight: 'bold', color: COLORS.text }}>{meters.readiness}</span>
                 </div>
               </div>
             </div>
@@ -888,24 +947,83 @@ export default function App() {
                 {`Day ${day} (Week ${Math.floor((day - 1) / 7) + 1})`}
               </div>
 
-              {/* Resource Icons */}
+              {/* Resource Icons - Reigns Style */}
               <div style={{ 
                 display: 'flex', 
-                gap: '30px',
+                gap: '40px',
                 justifyContent: 'center',
                 alignItems: 'center'
               }}>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+                {/* Funds */}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    gap: '3px',
+                    marginBottom: '4px'
+                  }}>
+                    {Array.from({ length: 10 }, (_, i) => (
+                      <div
+                        key={i}
+                        style={{
+                          width: '8px',
+                          height: '8px',
+                          borderRadius: '50%',
+                          backgroundColor: i < meters.funds ? COLORS.text : 'transparent',
+                          border: `1px solid ${COLORS.text}`,
+                          opacity: i < meters.funds ? 1 : 0.3
+                        }}
+                      />
+                    ))}
+                  </div>
                   <div style={{ fontSize: '32px' }}>💰</div>
-                  <span style={{ fontSize: '16px', fontWeight: 'bold', color: COLORS.text }}>{meters.funds}</span>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+                
+                {/* Reputation */}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    gap: '3px',
+                    marginBottom: '4px'
+                  }}>
+                    {Array.from({ length: 10 }, (_, i) => (
+                      <div
+                        key={i}
+                        style={{
+                          width: '8px',
+                          height: '8px',
+                          borderRadius: '50%',
+                          backgroundColor: i < meters.reputation ? COLORS.text : 'transparent',
+                          border: `1px solid ${COLORS.text}`,
+                          opacity: i < meters.reputation ? 1 : 0.3
+                        }}
+                      />
+                    ))}
+                  </div>
                   <div style={{ fontSize: '32px' }}>⭐</div>
-                  <span style={{ fontSize: '16px', fontWeight: 'bold', color: COLORS.text }}>{meters.reputation}</span>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+                
+                {/* Readiness */}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    gap: '3px',
+                    marginBottom: '4px'
+                  }}>
+                    {Array.from({ length: 10 }, (_, i) => (
+                      <div
+                        key={i}
+                        style={{
+                          width: '8px',
+                          height: '8px',
+                          borderRadius: '50%',
+                          backgroundColor: i < meters.readiness ? COLORS.text : 'transparent',
+                          border: `1px solid ${COLORS.text}`,
+                          opacity: i < meters.readiness ? 1 : 0.3
+                        }}
+                      />
+                    ))}
+                  </div>
                   <div style={{ fontSize: '32px' }}>⚔️</div>
-                  <span style={{ fontSize: '16px', fontWeight: 'bold', color: COLORS.text }}>{meters.readiness}</span>
                 </div>
               </div>
             </div>
