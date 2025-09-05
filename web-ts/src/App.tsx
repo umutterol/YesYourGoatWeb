@@ -608,14 +608,29 @@ export default function App() {
     setPendingMultiStep(null)
     setHasMultiStepEvent(false)
     setDepartureNotification(null)
-    setRoster(prev => {
-      if (!prev.length) return prev
-      const pool = prev
-      const active = shuffle(pool).slice(0, 5)
-      return active.map(m => ({ ...m, morale: clampMorale(5 + Math.floor(Math.random() * 3)) })) // Random morale 5-7
-    })
-    setCurrent(null)
-    setCurrent(drawCard())
+    
+    // Get fresh characters from the full roster pool
+    fetch(ROSTER_URL)
+      .then(res => res.json())
+      .then((rosterData: Member[]) => {
+        const withMorale = rosterData.map((m: Member) => ({ ...m, morale: clampMorale(5 + Math.floor(Math.random() * 3)) })) // Random morale 5-7
+        const active = shuffle(withMorale).slice(0, 5)
+        setRoster(active)
+        setCurrent(null)
+        setCurrent(drawCard())
+      })
+      .catch(err => {
+        console.error('Failed to load roster for new run:', err)
+        // Fallback: use current roster if fetch fails
+        setRoster(prev => {
+          if (!prev.length) return prev
+          const pool = prev
+          const active = shuffle(pool).slice(0, 5)
+          return active.map(m => ({ ...m, morale: clampMorale(5 + Math.floor(Math.random() * 3)) }))
+        })
+        setCurrent(null)
+        setCurrent(drawCard())
+      })
   }
 
   // Random chatter loop

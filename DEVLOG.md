@@ -410,6 +410,7 @@ Files Changed (v0.20)
   - Added immediate loss conditions - game ends instantly when any meter hits 0
   - Added departure notification popup with clear messaging when characters leave
   - Enhanced departure UI with warning colors and guild collapse alerts
+  - Fixed newRun bug - now selects 5 fresh random characters instead of reusing leftover roster
 - `web-ts/public/resources/events/events.json`
   - Converted all morale effects from 0-100 scale to balanced 1-10 scale
   - Minor events: ±1 morale (e.g., "AFK for snacks" = -1, "Great raid performance" = +1)
