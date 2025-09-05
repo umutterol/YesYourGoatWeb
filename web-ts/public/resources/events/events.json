@@ -18,8 +18,8 @@
       "effects": {
         "morale_{memberId}": -1,
         "morale_all": -1,
-        "reputation": -3,
-        "funds": -100
+        "reputation": -1,
+        "funds": -4
       }
     },
     "right": {
@@ -28,7 +28,7 @@
         "morale_{memberId}": 1,
         "morale_all": -1,
         "reputation": -1,
-        "funds": -50
+        "funds": -3
       }
     }
   },
@@ -51,7 +51,7 @@
       "effects": {
         "morale_{memberId}": -3,
         "morale_all": 2,
-        "reputation": 2
+        "reputation": 1
       }
     },
     "right": {
@@ -82,8 +82,8 @@
       "effects": {
         "morale_{memberId}": 3,
         "morale_all": -2,
-        "reputation": -2,
-        "funds": -200
+        "reputation": -1,
+        "funds": -4
       }
     },
     "right": {
@@ -92,7 +92,7 @@
         "morale_{memberId}": -3,
         "morale_all": 1,
         "reputation": 1,
-        "readiness": -2
+        "readiness": -1
       }
     }
   },
@@ -115,7 +115,7 @@
       "effects": {
         "morale_{memberId}": -3,
         "morale_all": 1,
-        "reputation": 2
+        "reputation": 1
       }
     },
     "right": {
@@ -177,7 +177,7 @@
       "effects": {
         "morale_{memberId}": -3,
         "morale_all": 2,
-        "readiness": 2
+        "readiness": 1
       }
     },
     "right": {
@@ -185,7 +185,7 @@
       "effects": {
         "morale_{memberId}": 2,
         "morale_all": -1,
-        "funds": -100,
+        "funds": -4,
         "readiness": -1
       }
     }
@@ -279,7 +279,7 @@
       "effects": {
         "morale_{memberId}": 2,
         "morale_all": 1,
-        "funds": -150
+        "funds": -4
       }
     }
   },
@@ -302,7 +302,7 @@
       "effects": {
         "morale_{memberId}": -2,
         "morale_all": 1,
-        "readiness": 2
+        "readiness": 1
       }
     },
     "right": {
@@ -333,7 +333,7 @@
       "effects": {
         "morale_{memberId}": 3,
         "morale_all": -2,
-        "reputation": -2
+        "reputation": -1
       }
     },
     "right": {
@@ -457,7 +457,7 @@
       "effects": {
         "morale_{memberId}": -3,
         "morale_all": 2,
-        "reputation": 2
+        "reputation": 1
       }
     },
     "right": {
@@ -465,7 +465,7 @@
       "effects": {
         "morale_{memberId}": 2,
         "morale_all": -2,
-        "reputation": -2
+        "reputation": -1
       }
     }
   },
@@ -775,7 +775,7 @@
       "effects": {
         "morale_{memberId}": 2,
         "morale_all": -1,
-        "funds": -50
+        "funds": -3
       }
     }
   },
@@ -922,7 +922,7 @@
       "effects": {
         "morale_{memberId}": 2,
         "morale_all": 1,
-        "funds": -200
+        "funds": -4
       }
     },
     "right": {
@@ -961,7 +961,7 @@
       "effects": {
         "morale_{memberId}": 2,
         "morale_all": -1,
-        "funds": -100
+        "funds": -4
       }
     }
   },
@@ -984,7 +984,7 @@
       "effects": {
         "morale_{memberId}": 2,
         "morale_all": -1,
-        "funds": 500
+        "funds": 4
       }
     },
     "right": {
@@ -1015,7 +1015,7 @@
       "effects": {
         "morale_{memberId}": 2,
         "morale_all": -1,
-        "funds": -1000
+        "funds": -4
       }
     },
     "right": {
@@ -1054,7 +1054,7 @@
       "effects": {
         "morale_{memberId}": 1,
         "morale_all": -1,
-        "funds": -100
+        "funds": -4
       }
     }
   },
@@ -1077,7 +1077,7 @@
       "effects": {
         "morale_{memberId}": 3,
         "morale_all": -2,
-        "reputation": -2
+        "reputation": -1
       }
     },
     "right": {
@@ -1103,7 +1103,7 @@
       "label": "Accept sacrifice",
       "effects": {
         "morale_{memberId}": 1,
-        "readiness": 2
+        "readiness": 1
       },
       "hooks": [
         {
@@ -1144,7 +1144,7 @@
       "label": "Forgive and forget",
       "effects": {
         "morale_{memberId}": 1,
-        "reputation": -2
+        "reputation": -1
       },
       "hooks": [
         {
@@ -1600,7 +1600,7 @@
       "effects": {
         "morale_{memberId}": -2,
         "morale_all": 1,
-        "reputation": 2
+        "reputation": 1
       }
     },
     "right": {
@@ -1608,7 +1608,7 @@
       "effects": {
         "morale_{memberId}": 2,
         "morale_all": -1,
-        "reputation": -2
+        "reputation": -1
       }
     }
   },
@@ -1631,7 +1631,7 @@
       "effects": {
         "morale_{memberId}": -3,
         "morale_all": 2,
-        "reputation": 3
+        "reputation": 1
       }
     },
     "right": {
@@ -1639,7 +1639,7 @@
       "effects": {
         "morale_{memberId}": -2,
         "morale_all": -2,
-        "reputation": -3
+        "reputation": -1
       }
     }
   },
@@ -1662,7 +1662,7 @@
       "effects": {
         "morale_{memberId}": -3,
         "morale_all": 2,
-        "reputation": 2
+        "reputation": 1
       }
     },
     "right": {
@@ -1724,7 +1724,7 @@
       "effects": {
         "morale_{memberId}": -3,
         "morale_all": 2,
-        "reputation": 2
+        "reputation": 1
       }
     },
     "right": {
@@ -1763,7 +1763,7 @@
       "effects": {
         "morale_{memberId}": 2,
         "morale_all": -1,
-        "reputation": -2
+        "reputation": -1
       }
     }
   },
@@ -1786,7 +1786,7 @@
       "effects": {
         "morale_{memberId}": -3,
         "morale_all": 2,
-        "reputation": 2
+        "reputation": 1
       }
     },
     "right": {
@@ -1817,7 +1817,7 @@
       "effects": {
         "morale_{memberId}": -3,
         "morale_all": 2,
-        "readiness": 2
+        "readiness": 1
       }
     },
     "right": {
@@ -1910,7 +1910,7 @@
       "effects": {
         "morale_{memberId}": 2,
         "morale_all": -2,
-        "reputation": -2
+        "reputation": -1
       }
     },
     "right": {
@@ -2127,7 +2127,7 @@
       "effects": {
         "morale_{memberId}": -3,
         "morale_all": 2,
-        "reputation": 2
+        "reputation": 1
       }
     },
     "right": {
@@ -2259,7 +2259,7 @@
       "effects": {
         "morale_{memberId}": 1,
         "morale_all": -1,
-        "reputation": -2
+        "reputation": -1
       }
     }
   },
@@ -2538,7 +2538,7 @@
       "effects": {
         "morale_{memberId}": 1,
         "morale_all": -1,
-        "funds": -50
+        "funds": -3
       }
     }
   },
@@ -2592,7 +2592,7 @@
       "effects": {
         "morale_{memberId}": -2,
         "morale_all": 1,
-        "funds": 200
+        "funds": 4
       }
     },
     "right": {
@@ -2654,7 +2654,7 @@
       "effects": {
         "morale_{memberId}": -3,
         "morale_all": 2,
-        "reputation": 2
+        "reputation": 1
       }
     },
     "right": {
@@ -2693,7 +2693,7 @@
       "effects": {
         "morale_{memberId}": 2,
         "morale_all": -1,
-        "funds": -100
+        "funds": -4
       }
     }
   },
@@ -2747,7 +2747,7 @@
       "effects": {
         "morale_{memberId}": 3,
         "morale_all": -2,
-        "reputation": -2
+        "reputation": -1
       }
     },
     "right": {
@@ -2778,7 +2778,7 @@
       "effects": {
         "morale_{memberId}": 2,
         "morale_all": -2,
-        "reputation": -2
+        "reputation": -1
       }
     },
     "right": {
@@ -2902,7 +2902,7 @@
       "effects": {
         "morale_{memberId}": 2,
         "morale_all": -1,
-        "funds": -100
+        "funds": -4
       }
     },
     "right": {
@@ -2933,7 +2933,7 @@
       "effects": {
         "morale_{memberId}": 2,
         "morale_all": -1,
-        "funds": -200
+        "funds": -4
       }
     },
     "right": {
@@ -2993,7 +2993,7 @@
     "left": {
       "label": "Launch investigation",
       "effects": {
-        "funds": -50,
+        "funds": -3,
         "morale_alex": 1,
         "reputation": 1
       },
@@ -3025,7 +3025,7 @@
       "effects": {
         "morale_carl": -3,
         "morale_all": 2,
-        "reputation": 2
+        "reputation": 1
       }
     },
     "right": {
@@ -3033,7 +3033,7 @@
       "effects": {
         "morale_carl": 2,
         "morale_all": -1,
-        "funds": -100
+        "funds": -4
       },
       "nextStep": "multistep_bank_scandal_03a"
     }
@@ -3053,7 +3053,7 @@
     "left": {
       "label": "Emergency investigation",
       "effects": {
-        "funds": -200,
+        "funds": -4,
         "morale_all": -1,
         "reputation": -1
       }
@@ -3062,8 +3062,8 @@
       "label": "Blame external hackers",
       "effects": {
         "morale_all": -2,
-        "reputation": -2,
-        "funds": -50
+        "reputation": -1,
+        "funds": -3
       }
     }
   },
@@ -3084,13 +3084,13 @@
       "effects": {
         "morale_carl": 3,
         "morale_all": -1,
-        "funds": 100
+        "funds": 4
       }
     },
     "right": {
       "label": "Set up surveillance",
       "effects": {
-        "funds": -75,
+        "funds": -4,
         "morale_carl": -1,
         "reputation": 1
       },
@@ -3122,7 +3122,7 @@
       "effects": {
         "morale_carl": -3,
         "morale_all": 1,
-        "funds": 150
+        "funds": 4
       }
     }
   },
@@ -3154,7 +3154,7 @@
       "effects": {
         "morale_dana": 2,
         "morale_all": -1,
-        "readiness": -2
+        "readiness": -1
       },
       "nextStep": "multistep_raid_leader_02b"
     }
@@ -3176,7 +3176,7 @@
       "effects": {
         "morale_dana": 2,
         "morale_all": -1,
-        "readiness": 2,
+        "readiness": 1,
         "reputation": 1
       }
     },
@@ -3239,7 +3239,7 @@
         "morale_dana": 2,
         "morale_all": 1,
         "readiness": 1,
-        "funds": -50
+        "funds": -3
       }
     },
     "right": {
@@ -3277,7 +3277,7 @@
       "effects": {
         "morale_eric": 2,
         "morale_all": -2,
-        "readiness": 2,
+        "readiness": 1,
         "reputation": -1
       }
     }
@@ -3299,8 +3299,8 @@
       "effects": {
         "morale_luna": 2,
         "morale_all": 1,
-        "readiness": -2,
-        "funds": -100
+        "readiness": -1,
+        "funds": -4
       }
     },
     "right": {
@@ -3308,7 +3308,7 @@
       "effects": {
         "morale_luna": 1,
         "morale_all": 1,
-        "funds": -100,
+        "funds": -4,
         "readiness": 1
       }
     }
@@ -3331,7 +3331,7 @@
       "label": "Start planning transfer",
       "effects": {
         "morale_all": 1,
-        "funds": -100,
+        "funds": -4,
         "reputation": 1
       },
       "nextStep": "multistep_server_transfer_02a"
@@ -3361,16 +3361,16 @@
     "left": {
       "label": "Pay for good server",
       "effects": {
-        "funds": -500,
-        "reputation": 3,
-        "readiness": 2,
+        "funds": -4,
+        "reputation": 1,
+        "readiness": 1,
         "morale_all": 1
       }
     },
     "right": {
       "label": "Choose cheap option",
       "effects": {
-        "funds": -200,
+        "funds": -4,
         "reputation": -1,
         "readiness": -1,
         "morale_all": -1
@@ -3393,18 +3393,18 @@
       "label": "Lower standards",
       "effects": {
         "morale_all": -1,
-        "readiness": -2,
-        "reputation": -2,
-        "funds": -50
+        "readiness": -1,
+        "reputation": -1,
+        "funds": -3
       }
     },
     "right": {
       "label": "Maintain high standards",
       "effects": {
         "morale_all": 1,
-        "readiness": -3,
+        "readiness": -1,
         "reputation": 1,
-        "funds": -100
+        "funds": -4
       }
     }
   },
@@ -3427,7 +3427,7 @@
       "effects": {
         "morale_all": 1,
         "reputation": 1,
-        "funds": -25
+        "funds": -2
       },
       "nextStep": "multistep_loot_council_02a"
     },
@@ -3457,8 +3457,8 @@
       "effects": {
         "morale_greg": -3,
         "morale_all": 2,
-        "reputation": 2,
-        "funds": 100
+        "reputation": 1,
+        "funds": 4
       }
     },
     "right": {
@@ -3466,8 +3466,8 @@
       "effects": {
         "morale_greg": 2,
         "morale_all": -2,
-        "reputation": -2,
-        "funds": -50
+        "reputation": -1,
+        "funds": -3
       }
     }
   },
@@ -3488,7 +3488,7 @@
       "effects": {
         "morale_all": 1,
         "reputation": 1,
-        "funds": -100,
+        "funds": -4,
         "readiness": 1
       }
     },
@@ -3496,7 +3496,7 @@
       "label": "Ignore the complaints",
       "effects": {
         "morale_all": -2,
-        "reputation": -3,
+        "reputation": -1,
         "readiness": -1
       }
     }
@@ -3520,7 +3520,7 @@
       "effects": {
         "morale_all": 1,
         "reputation": 1,
-        "funds": -50
+        "funds": -3
       },
       "nextStep": "multistep_guild_merger_02a"
     },
@@ -3548,8 +3548,8 @@
       "label": "Give them equal status",
       "effects": {
         "morale_all": -1,
-        "reputation": 2,
-        "funds": -100
+        "reputation": 1,
+        "funds": -4
       }
     },
     "right": {
@@ -3557,7 +3557,7 @@
       "effects": {
         "morale_all": 1,
         "reputation": -1,
-        "funds": -25
+        "funds": -2
       },
       "nextStep": "multistep_guild_merger_03a"
     }
@@ -3578,8 +3578,8 @@
       "label": "Create separate team",
       "effects": {
         "morale_all": 1,
-        "readiness": -2,
-        "funds": -200,
+        "readiness": -1,
+        "funds": -4,
         "reputation": 1
       }
     },
@@ -3588,8 +3588,8 @@
       "effects": {
         "morale_all": -1,
         "readiness": 1,
-        "funds": -100,
-        "reputation": 2
+        "funds": -4,
+        "reputation": 1
       }
     }
   }

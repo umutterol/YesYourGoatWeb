@@ -416,6 +416,11 @@ Files Changed (v0.20)
   - Minor events: ±1 morale (e.g., "AFK for snacks" = -1, "Great raid performance" = +1)
   - Major events: ±2 morale (e.g., "Loot drama resolved fairly" = +2, "Guild member quits" = -2)
   - Crisis events: ±3 morale (e.g., "Guild bank scandal" = -3, "Server first achievement" = +3)
+  - Converted all meter values (funds, reputation, readiness) from 0-100 scale to 1-10 scale
+  - Minor effects: ±1 (e.g., small costs/gains)
+  - Moderate effects: ±2 (e.g., significant costs/gains)
+  - Major effects: ±3 (e.g., major costs/gains)
+  - Crisis effects: ±4 (e.g., catastrophic costs/major achievements)
   - Balanced morale changes based on event severity and choice appropriateness
 
 Next Steps (Planned)

@@ -687,164 +687,230 @@ export default function App() {
       fontFamily: 'monospace',
       padding: window.innerWidth < 768 ? '5px' : '10px'
     }}>
-      {/* Top Bar with Roster + Day/Week + Resources */}
+      {/* Top Bar - Responsive Layout */}
       <div style={{
         background: COLORS.secondary,
         border: `2px solid ${COLORS.border}`,
         borderRadius: '8px',
         padding: window.innerWidth < 768 ? '10px 15px' : '15px 20px',
-        marginBottom: '5px',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        flexWrap: window.innerWidth < 768 ? 'wrap' : 'nowrap'
+        marginBottom: '5px'
       }}>
-        {/* Left side: Party Roster */}
-        <div style={{ 
-          display: 'flex', 
-          gap: window.innerWidth < 768 ? '10px' : '20px', 
-          justifyContent: 'center',
-          flexWrap: 'wrap',
-          flex: 1,
-          margin: window.innerWidth < 768 ? '0 0 10px 0' : '0 20px'
-        }}>
-          {roster.map(member => {
-            const morale = clampMorale(member.morale ?? 5)
-            const borderColor = morale <= 3 ? COLORS.danger : morale <= 5 ? COLORS.warning : COLORS.success
-            return (
-              <div key={member.id} style={{ 
-                textAlign: 'center',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                position: 'relative'
+        {/* Mobile Layout: Stacked */}
+        {window.innerWidth < 768 ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+            {/* Day/Week + Resources Row */}
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: '10px'
+            }}>
+              {/* Day/Week */}
+              <div style={{ 
+                fontSize: '16px', 
+                fontWeight: 'bold', 
+                color: COLORS.highlight
               }}>
-                <div style={{ position: 'relative' }}>
-                  <img 
-                    src={`/resources/portraits/${member.portrait || 'peon.png'}`}
-                    alt={member.name}
-                    style={{
-                      width: window.innerWidth < 768 ? '60px' : '80px',
-                      height: window.innerWidth < 768 ? '60px' : '80px',
-                      borderRadius: '8px',
-                      border: `3px solid ${borderColor}`,
-                      objectFit: 'cover'
-                    }}
-                  />
-                  {/* Morale number anchored to bottom center of portrait */}
-                  <div style={{
-                    position: 'absolute',
-                    bottom: '-2px',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    background: COLORS.secondary,
-                    border: `2px solid ${borderColor}`,
-                    borderRadius: '50%',
-                    width: window.innerWidth < 768 ? '20px' : '24px',
-                    height: window.innerWidth < 768 ? '20px' : '24px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: window.innerWidth < 768 ? '10px' : '12px',
-                    fontWeight: 'bold',
-                    color: COLORS.text
-                  }}>
-                    {morale}
-                  </div>
+                {`Day ${day} (Week ${Math.floor((day - 1) / 7) + 1})`}
+              </div>
+
+              {/* Resources */}
+              <div style={{ 
+                display: 'flex', 
+                gap: '15px',
+                alignItems: 'center'
+              }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}>
+                  <div style={{ fontSize: '20px' }}>💰</div>
+                  <span style={{ fontSize: '12px', fontWeight: 'bold', color: COLORS.text }}>{meters.funds}</span>
                 </div>
-                <div style={{ 
-                  fontSize: window.innerWidth < 768 ? '12px' : '14px', 
-                  color: COLORS.text,
-                  fontWeight: 'bold',
-                  marginTop: '8px'
-                }}>
-                  {member.name}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}>
+                  <div style={{ fontSize: '20px' }}>⭐</div>
+                  <span style={{ fontSize: '12px', fontWeight: 'bold', color: COLORS.text }}>{meters.reputation}</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}>
+                  <div style={{ fontSize: '20px' }}>⚔️</div>
+                  <span style={{ fontSize: '12px', fontWeight: 'bold', color: COLORS.text }}>{meters.readiness}</span>
                 </div>
               </div>
-            )
-          })}
-        </div>
+            </div>
 
-        {/* Right side: Day/Week + Resource Icons */}
-        <div style={{ 
-          display: 'flex', 
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: window.innerWidth < 768 ? '10px' : '15px'
-        }}>
-          {/* Day/Week info */}
-          <div style={{ 
-            fontSize: window.innerWidth < 768 ? '14px' : '18px', 
-            fontWeight: 'bold', 
-            color: COLORS.highlight,
-            textAlign: 'center'
-          }}>
-            {`Day ${day} (Week ${Math.floor((day - 1) / 7) + 1})`}
+            {/* Roster Row */}
+            <div style={{ 
+              display: 'flex', 
+              gap: '10px', 
+              justifyContent: 'center',
+              flexWrap: 'wrap'
+            }}>
+              {roster.map(member => {
+                const morale = clampMorale(member.morale ?? 5)
+                const borderColor = morale <= 3 ? COLORS.danger : morale <= 5 ? COLORS.warning : COLORS.success
+                return (
+                  <div key={member.id} style={{ 
+                    textAlign: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    position: 'relative'
+                  }}>
+                    <div style={{ position: 'relative' }}>
+                      <img 
+                        src={`/resources/portraits/${member.portrait || 'peon.png'}`}
+                        alt={member.name}
+                        style={{
+                          width: '60px',
+                          height: '60px',
+                          borderRadius: '8px',
+                          border: `3px solid ${borderColor}`,
+                          objectFit: 'cover'
+                        }}
+                      />
+                      <div style={{
+                        position: 'absolute',
+                        bottom: '-2px',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        background: COLORS.secondary,
+                        border: `2px solid ${borderColor}`,
+                        borderRadius: '50%',
+                        width: '20px',
+                        height: '20px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '10px',
+                        fontWeight: 'bold',
+                        color: COLORS.text
+                      }}>
+                        {morale}
+                      </div>
+                    </div>
+                    <div style={{ 
+                      fontSize: '12px', 
+                      color: COLORS.text,
+                      fontWeight: 'bold',
+                      marginTop: '8px'
+                    }}>
+                      {member.name}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
           </div>
-
-          {/* Resource Icons */}
+        ) : (
+          /* Desktop Layout: Side by side */
           <div style={{ 
             display: 'flex', 
-            gap: window.innerWidth < 768 ? '20px' : '30px',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
+            justifyContent: 'space-between', 
             alignItems: 'center'
           }}>
-            {/* Funds - Simple icon with number */}
+            {/* Left side: Party Roster */}
             <div style={{ 
               display: 'flex', 
-              flexDirection: 'column', 
-              alignItems: 'center',
-              gap: '4px'
+              gap: '20px', 
+              justifyContent: 'center',
+              flexWrap: 'wrap',
+              flex: 1,
+              margin: '0 20px'
             }}>
-              <div style={{ 
-                fontSize: window.innerWidth < 768 ? '24px' : '32px',
-                textAlign: 'center'
-              }}>💰</div>
-              <span style={{ 
-                fontSize: window.innerWidth < 768 ? '14px' : '16px', 
-                fontWeight: 'bold', 
-                color: COLORS.text 
-              }}>{meters.funds}</span>
+              {roster.map(member => {
+                const morale = clampMorale(member.morale ?? 5)
+                const borderColor = morale <= 3 ? COLORS.danger : morale <= 5 ? COLORS.warning : COLORS.success
+                return (
+                  <div key={member.id} style={{ 
+                    textAlign: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    position: 'relative'
+                  }}>
+                    <div style={{ position: 'relative' }}>
+                      <img 
+                        src={`/resources/portraits/${member.portrait || 'peon.png'}`}
+                        alt={member.name}
+                        style={{
+                          width: '80px',
+                          height: '80px',
+                          borderRadius: '8px',
+                          border: `3px solid ${borderColor}`,
+                          objectFit: 'cover'
+                        }}
+                      />
+                      <div style={{
+                        position: 'absolute',
+                        bottom: '-2px',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        background: COLORS.secondary,
+                        border: `2px solid ${borderColor}`,
+                        borderRadius: '50%',
+                        width: '24px',
+                        height: '24px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '12px',
+                        fontWeight: 'bold',
+                        color: COLORS.text
+                      }}>
+                        {morale}
+                      </div>
+                    </div>
+                    <div style={{ 
+                      fontSize: '14px', 
+                      color: COLORS.text,
+                      fontWeight: 'bold',
+                      marginTop: '8px'
+                    }}>
+                      {member.name}
+                    </div>
+                  </div>
+                )
+              })}
             </div>
-            
-            {/* Reputation - Simple icon with number */}
+
+            {/* Right side: Day/Week + Resource Icons */}
             <div style={{ 
               display: 'flex', 
-              flexDirection: 'column', 
+              flexDirection: 'column',
               alignItems: 'center',
-              gap: '4px'
+              gap: '15px'
             }}>
+              {/* Day/Week info */}
               <div style={{ 
-                fontSize: window.innerWidth < 768 ? '24px' : '32px',
-                textAlign: 'center'
-              }}>⭐</div>
-              <span style={{ 
-                fontSize: window.innerWidth < 768 ? '14px' : '16px', 
+                fontSize: '18px', 
                 fontWeight: 'bold', 
-                color: COLORS.text 
-              }}>{meters.reputation}</span>
-            </div>
-            
-            {/* Readiness - Simple icon with number */}
-            <div style={{ 
-              display: 'flex', 
-              flexDirection: 'column', 
-              alignItems: 'center',
-              gap: '4px'
-            }}>
+                color: COLORS.highlight,
+                textAlign: 'center'
+              }}>
+                {`Day ${day} (Week ${Math.floor((day - 1) / 7) + 1})`}
+              </div>
+
+              {/* Resource Icons */}
               <div style={{ 
-                fontSize: window.innerWidth < 768 ? '24px' : '32px',
-                textAlign: 'center'
-              }}>⚔️</div>
-              <span style={{ 
-                fontSize: window.innerWidth < 768 ? '14px' : '16px', 
-                fontWeight: 'bold', 
-                color: COLORS.text 
-              }}>{meters.readiness}</span>
+                display: 'flex', 
+                gap: '30px',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+                  <div style={{ fontSize: '32px' }}>💰</div>
+                  <span style={{ fontSize: '16px', fontWeight: 'bold', color: COLORS.text }}>{meters.funds}</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+                  <div style={{ fontSize: '32px' }}>⭐</div>
+                  <span style={{ fontSize: '16px', fontWeight: 'bold', color: COLORS.text }}>{meters.reputation}</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+                  <div style={{ fontSize: '32px' }}>⚔️</div>
+                  <span style={{ fontSize: '16px', fontWeight: 'bold', color: COLORS.text }}>{meters.readiness}</span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Main Content */}
