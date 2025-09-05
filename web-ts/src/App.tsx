@@ -672,7 +672,7 @@ export default function App() {
       fontFamily: 'monospace',
       padding: window.innerWidth < 768 ? '5px' : '10px'
     }}>
-      {/* Top Resource Bar with Filling Icons */}
+      {/* Top Bar with Day/Week and Roster + Resources */}
       <div style={{
         background: COLORS.secondary,
         border: `2px solid ${COLORS.border}`,
@@ -684,108 +684,26 @@ export default function App() {
         alignItems: 'center',
         flexWrap: window.innerWidth < 768 ? 'wrap' : 'nowrap'
       }}>
+        {/* Left side: Day/Week info */}
         <div style={{ 
           fontSize: window.innerWidth < 768 ? '14px' : '18px', 
           fontWeight: 'bold', 
           color: COLORS.highlight,
-          marginBottom: window.innerWidth < 768 ? '5px' : '0'
+          marginBottom: window.innerWidth < 768 ? '10px' : '0',
+          width: window.innerWidth < 768 ? '100%' : 'auto',
+          textAlign: window.innerWidth < 768 ? 'center' : 'left'
         }}>
           {`Day ${day} (Week ${Math.floor((day - 1) / 7) + 1})`}
         </div>
-        <div style={{ 
-          display: 'flex', 
-          gap: window.innerWidth < 768 ? '15px' : '30px',
-          flexWrap: 'wrap',
-          justifyContent: 'center'
-        }}>
-          {/* Funds with filling bar */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: window.innerWidth < 768 ? '5px' : '10px' }}>
-            <div style={{
-              width: window.innerWidth < 768 ? '35px' : '50px',
-              height: window.innerWidth < 768 ? '18px' : '25px',
-              background: COLORS.primary,
-              border: `2px solid ${COLORS.border}`,
-              borderRadius: '4px',
-              position: 'relative',
-              overflow: 'hidden'
-            }}>
-              <div style={{
-                width: `${(meters.funds / 10) * 100}%`,
-                height: '100%',
-                background: COLORS.warning,
-                transition: 'width 0.3s ease'
-              }} />
-            </div>
-            <span style={{ 
-              fontSize: window.innerWidth < 768 ? '12px' : '16px', 
-              fontWeight: 'bold', 
-              color: COLORS.text 
-            }}>💰 {meters.funds}</span>
-          </div>
-          {/* Reputation with filling bar */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: window.innerWidth < 768 ? '5px' : '10px' }}>
-            <div style={{
-              width: window.innerWidth < 768 ? '35px' : '50px',
-              height: window.innerWidth < 768 ? '18px' : '25px',
-              background: COLORS.primary,
-              border: `2px solid ${COLORS.border}`,
-              borderRadius: '4px',
-              position: 'relative',
-              overflow: 'hidden'
-            }}>
-              <div style={{
-                width: `${(meters.reputation / 10) * 100}%`,
-                height: '100%',
-                background: COLORS.success,
-                transition: 'width 0.3s ease'
-              }} />
-            </div>
-            <span style={{ 
-              fontSize: window.innerWidth < 768 ? '12px' : '16px', 
-              fontWeight: 'bold', 
-              color: COLORS.text 
-            }}>⭐ {meters.reputation}</span>
-          </div>
-          {/* Readiness with filling bar */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: window.innerWidth < 768 ? '5px' : '10px' }}>
-            <div style={{
-              width: window.innerWidth < 768 ? '35px' : '50px',
-              height: window.innerWidth < 768 ? '18px' : '25px',
-              background: COLORS.primary,
-              border: `2px solid ${COLORS.border}`,
-              borderRadius: '4px',
-              position: 'relative',
-              overflow: 'hidden'
-            }}>
-              <div style={{
-                width: `${(meters.readiness / 10) * 100}%`,
-                height: '100%',
-                background: COLORS.highlight,
-                transition: 'width 0.3s ease'
-              }} />
-            </div>
-            <span style={{ 
-              fontSize: window.innerWidth < 768 ? '12px' : '16px', 
-              fontWeight: 'bold', 
-              color: COLORS.text 
-            }}>⚔️ {meters.readiness}</span>
-          </div>
-        </div>
-      </div>
 
-      {/* Party Roster */}
-      <div style={{
-        background: COLORS.secondary,
-        border: `2px solid ${COLORS.border}`,
-        borderRadius: '8px',
-        padding: window.innerWidth < 768 ? '10px' : '15px',
-        marginBottom: window.innerWidth < 768 ? '20px' : '35px' // GAP: Adjust this value to change spacing between roster and event box
-      }}>
+        {/* Center: Party Roster */}
         <div style={{ 
           display: 'flex', 
           gap: window.innerWidth < 768 ? '10px' : '20px', 
           justifyContent: 'center',
-          flexWrap: 'wrap'
+          flexWrap: 'wrap',
+          flex: 1,
+          margin: window.innerWidth < 768 ? '0 0 10px 0' : '0 20px'
         }}>
           {roster.map(member => {
             const morale = clampMorale(member.morale ?? 5)
@@ -842,6 +760,129 @@ export default function App() {
               </div>
             )
           })}
+        </div>
+
+        {/* Right side: Resource Icons */}
+        <div style={{ 
+          display: 'flex', 
+          gap: window.innerWidth < 768 ? '15px' : '20px',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          alignItems: 'flex-end'
+        }}>
+          {/* Funds with vertical filling icon */}
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center',
+            gap: '6px'
+          }}>
+            <div style={{
+              width: window.innerWidth < 768 ? '35px' : '45px',
+              height: window.innerWidth < 768 ? '50px' : '65px',
+              background: COLORS.primary,
+              border: `3px solid ${COLORS.border}`,
+              borderRadius: '6px',
+              position: 'relative',
+              overflow: 'hidden',
+              display: 'flex',
+              alignItems: 'flex-end'
+            }}>
+              <div style={{
+                width: '100%',
+                height: `${(meters.funds / 10) * 100}%`,
+                background: COLORS.warning,
+                transition: 'height 0.3s ease',
+                borderTopLeftRadius: '3px',
+                borderTopRightRadius: '3px'
+              }} />
+            </div>
+            <div style={{ 
+              fontSize: window.innerWidth < 768 ? '16px' : '20px',
+              textAlign: 'center'
+            }}>💰</div>
+            <span style={{ 
+              fontSize: window.innerWidth < 768 ? '10px' : '12px', 
+              fontWeight: 'bold', 
+              color: COLORS.text 
+            }}>{meters.funds}</span>
+          </div>
+          
+          {/* Reputation with vertical filling icon */}
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center',
+            gap: '6px'
+          }}>
+            <div style={{
+              width: window.innerWidth < 768 ? '35px' : '45px',
+              height: window.innerWidth < 768 ? '50px' : '65px',
+              background: COLORS.primary,
+              border: `3px solid ${COLORS.border}`,
+              borderRadius: '6px',
+              position: 'relative',
+              overflow: 'hidden',
+              display: 'flex',
+              alignItems: 'flex-end'
+            }}>
+              <div style={{
+                width: '100%',
+                height: `${(meters.reputation / 10) * 100}%`,
+                background: COLORS.success,
+                transition: 'height 0.3s ease',
+                borderTopLeftRadius: '3px',
+                borderTopRightRadius: '3px'
+              }} />
+            </div>
+            <div style={{ 
+              fontSize: window.innerWidth < 768 ? '16px' : '20px',
+              textAlign: 'center'
+            }}>⭐</div>
+            <span style={{ 
+              fontSize: window.innerWidth < 768 ? '10px' : '12px', 
+              fontWeight: 'bold', 
+              color: COLORS.text 
+            }}>{meters.reputation}</span>
+          </div>
+          
+          {/* Readiness with vertical filling icon */}
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center',
+            gap: '6px'
+          }}>
+            <div style={{
+              width: window.innerWidth < 768 ? '35px' : '45px',
+              height: window.innerWidth < 768 ? '50px' : '65px',
+              background: COLORS.primary,
+              border: `3px solid ${COLORS.border}`,
+              borderRadius: '6px',
+              position: 'relative',
+              overflow: 'hidden',
+              display: 'flex',
+              alignItems: 'flex-end'
+            }}>
+              <div style={{
+                width: '100%',
+                height: `${(meters.readiness / 10) * 100}%`,
+                background: COLORS.highlight,
+                transition: 'height 0.3s ease',
+                borderTopLeftRadius: '3px',
+                borderTopRightRadius: '3px'
+              }} />
+            </div>
+            <div style={{ 
+              fontSize: window.innerWidth < 768 ? '16px' : '20px',
+              textAlign: 'center'
+            }}>⚔️</div>
+            <span style={{ 
+              fontSize: window.innerWidth < 768 ? '10px' : '12px', 
+              fontWeight: 'bold', 
+              color: COLORS.text 
+            }}>{meters.readiness}</span>
+          </div>
         </div>
       </div>
 
