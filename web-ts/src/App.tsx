@@ -46,7 +46,7 @@ type EventCard = {
 
 type Member = { id: string; name: string; traitId: string; morale?: number; portrait?: string }
 
-type LogEntry = { week: number; title: string; choice: string; delta: string }
+type LogEntry = { day: number; title: string; choice: string; delta: string }
 
 type ChatMsg = { speakerId?: string; speakerName: string; text: string }
 
@@ -104,13 +104,13 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 // Generate party-based events from roster members
-function generatePartyEvent(member: Member, week: number, eventTemplates: EventCard[]): EventCard {
+function generatePartyEvent(member: Member, day: number, eventTemplates: EventCard[]): EventCard {
   // Filter for member-based events (excluding raid checks)
   const memberEvents = eventTemplates.filter(e => e.id.startsWith('member_'))
   if (!memberEvents.length) {
     // Fallback if no member events found
     return {
-      id: `${member.id}_fallback_${week}`,
+      id: `${member.id}_fallback_${day}`,
       title: `${member.name} has a problem`,
       body: `${member.name} is causing issues in the guild. How do you handle this?`,
       tags: ["player_drama"],
@@ -141,7 +141,7 @@ function generatePartyEvent(member: Member, week: number, eventTemplates: EventC
   
   return {
     ...template,
-    id: `${member.id}_${template.id}_${week}`,
+    id: `${member.id}_${template.id}_${day}`,
     title: replaceMember(template.title),
     body: replaceMember(template.body),
     left: {
@@ -157,9 +157,10 @@ function generatePartyEvent(member: Member, week: number, eventTemplates: EventC
 
 export default function App() {
   const [meters, setMeters] = useState<Meters>({ funds: 5, reputation: 5, readiness: 5 })
-  const [week, setWeek] = useState<number>(1)
+  const [day, setDay] = useState<number>(1)
   const [events, setEvents] = useState<EventCard[]>([])
   const [raidChecks, setRaidChecks] = useState<EventCard[]>([])
+  const [nextRaidDay, setNextRaidDay] = useState<number>(6)
   const [roster, setRoster] = useState<Member[]>([])
   const [barks, setBarks] = useState<Record<string, string[]>>({})
   const [log, setLog] = useState<LogEntry[]>([])
@@ -266,7 +267,9 @@ export default function App() {
         try {
           const s = JSON.parse(raw)
           if (s?.meters) setMeters((prev) => ({ ...prev, ...s.meters }))
-          if (Number.isInteger(s?.week)) setWeek(s.week)
+          if (Number.isInteger(s?.day)) setDay(s.day)
+          else if (Number.isInteger(s?.week)) setDay(s.week)
+          if (Number.isInteger(s?.nextRaidDay)) setNextRaidDay(s.nextRaidDay)
           if (Array.isArray(s?.log)) setLog(s.log.slice(-20))
           if (s?.morale) {
             setRoster(prev => prev.map(m => ({ ...m, morale: clampMorale(s.morale[m.id] ?? m.morale ?? 50) })))
@@ -289,12 +292,12 @@ export default function App() {
   // Persist: save morale for active roster only
   useEffect(() => {
     const morale = Object.fromEntries(roster.map(m => [m.id, m.morale ?? 50]))
-    localStorage.setItem('yyg_state_ts', JSON.stringify({ meters, week, morale, log }))
-  }, [meters, week, roster, log])
+    localStorage.setItem('yyg_state_ts', JSON.stringify({ meters, day, nextRaidDay, morale, log }))
+  }, [meters, day, nextRaidDay, roster, log])
 
   const cardPool = useMemo(() => {
-    return (week % 3 === 0 && raidChecks.length) ? raidChecks : events
-  }, [week, raidChecks, events])
+    return events
+  }, [events])
 
   const currentCardRef = useRef<EventCard | null>(null)
   function drawCard(): EventCard | null {
@@ -308,17 +311,24 @@ export default function App() {
         return nextEvent
       }
     }
+    // If it's raid day, draw a raid check
+    if (day === nextRaidDay && raidChecks.length) {
+      const raidCard = weightedPick(raidChecks, (e) => weightForEvent(e, meters.reputation, meters.readiness)) || raidChecks[0]
+      currentCardRef.current = raidCard
+      setCurrentEventMember(null)
+      return raidCard
+    }
     
     // For party-based events, generate from a random party member
-    if (week % 3 !== 0 && roster.length) {
+    if (roster.length) {
       const member = roster[Math.floor(Math.random() * roster.length)]
-      const partyEvent = generatePartyEvent(member, week, events)
+      const partyEvent = generatePartyEvent(member, day, events)
       setCurrentEventMember(member)
       currentCardRef.current = partyEvent
       return partyEvent
     }
     
-    // For raid checks, use existing system
+    // Default weighted pick
     const card = weightedPick(cardPool, (e) => {
       // If we haven't had a multi-step event yet and this is a multi-step event, give it high priority
       if (!hasMultiStepEvent && e.id.startsWith('multistep_')) {
@@ -418,9 +428,10 @@ export default function App() {
     return null
   }
 
-  function winCheck(nextMeters: Meters, nextWeek: number) {
+  function winCheck(nextMeters: Meters, nextDay: number) {
     if (victory) return
-    if (nextWeek >= 25) {
+    const nextWeeks = Math.floor((nextDay - 1) / 7) + 1
+    if (nextWeeks >= 25) {
       setVictory('Victory — Survivor: Your guild endured to Week 25!')
       return
     }
@@ -429,11 +440,11 @@ export default function App() {
     const nextLegend = nextMeters.reputation === 10 ? legendStreak + 1 : 0
     setPerfStreak(nextPerf)
     setLegendStreak(nextLegend)
-    if (nextPerf >= 10) {
+    if (nextPerf >= 70) { // 10 weeks
       setVictory('Victory — Perfectionist: Maintained all meters ≥ 8 for 10 weeks!')
       return
     }
-    if (nextLegend >= 10) {
+    if (nextLegend >= 70) { // 10 weeks
       setVictory('Victory — Legend: Maintained Reputation = 10 for 10 weeks!')
       return
     }
@@ -462,7 +473,7 @@ export default function App() {
     for (const ef of extraEffects) applyEffects(ef)
     const loss = lossCheck()
     const delta = deltaA
-    setLog(prev => [...prev, { week, title: ev.title ?? 'Untitled', choice: choice.label ?? side, delta }].slice(-20))
+    setLog(prev => [...prev, { day, title: ev.title ?? 'Untitled', choice: choice.label ?? side, delta }].slice(-20))
     if (loss) {
       setVictory(loss)
       return
@@ -480,7 +491,7 @@ export default function App() {
       return
     }
     
-    const nextWeek = week + 1
+    const nextDay = day + 1
     const nextMeters = { ...meters }
     
     // Check for loss conditions after effects are applied
@@ -490,15 +501,24 @@ export default function App() {
       return
     }
     
-    winCheck(nextMeters, nextWeek)
-    setWeek(prev => prev + 1)
+    // If a raid card was played today, schedule the next raid in 5–7 days
+    const wasRaid = (currentCardRef.current?.tags ?? []).includes('raid_night_check')
+    if (wasRaid) {
+      const interval = 5 + Math.floor(Math.random() * 3) // 5,6,7
+      setNextRaidDay(nextDay + interval)
+    }
+
+    winCheck(nextMeters, nextDay)
+    setDay(prev => prev + 1)
     setCurrent(drawCard())
   }
 
   function newRun() {
     localStorage.removeItem('yyg_state_ts')
     setMeters({ funds: 5, reputation: 5, readiness: 5 })
-    setWeek(1)
+    setDay(1)
+    // First raid scheduled between day 6–8
+    setNextRaidDay(1 + (5 + Math.floor(Math.random() * 3)))
     setLog([])
     setVictory('')
     setPerfStreak(0)
@@ -587,7 +607,7 @@ export default function App() {
           color: COLORS.highlight,
           marginBottom: window.innerWidth < 768 ? '5px' : '0'
         }}>
-          Week {week}
+          {`Day ${day} (Week ${Math.floor((day - 1) / 7) + 1})`}
         </div>
         <div style={{ 
           display: 'flex', 
