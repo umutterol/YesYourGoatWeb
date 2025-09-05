@@ -1039,14 +1039,14 @@ export default function App() {
         padding: '0'
       }}>
         
-        {/* Center Event Card - Responsive Size */}
+        {/* Center Event Card - Reigns Style */}
         {current && (
           <div style={{ 
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            marginBottom: window.innerWidth < 768 ? '20px' : '35px', // GAP: Adjust this value to change spacing between event box and chat box
-            height: window.innerWidth < 768 ? '400px' : '500px' // Responsive height
+            marginBottom: window.innerWidth < 768 ? '20px' : '35px',
+            height: window.innerWidth < 768 ? '450px' : '550px'
           }}>
             <div 
               ref={cardRef}
@@ -1054,15 +1054,15 @@ export default function App() {
                 background: COLORS.accent,
                 border: `3px solid ${COLORS.border}`,
                 borderRadius: '12px',
-                padding: window.innerWidth < 768 ? '20px' : '30px',
-                width: window.innerWidth < 768 ? '95%' : '700px', // Responsive width
-                maxWidth: '700px',
-                height: window.innerWidth < 768 ? '360px' : '460px', // Responsive height
-                textAlign: 'center',
+                padding: window.innerWidth < 768 ? '25px' : '35px',
+                width: window.innerWidth < 768 ? '95%' : '750px',
+                maxWidth: '750px',
+                height: window.innerWidth < 768 ? '420px' : '520px',
+                textAlign: 'left',
                 boxShadow: '0 8px 16px rgba(0,0,0,0.5)',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'space-between',
+                position: 'relative',
                 // Swipe transform
                 transform: `translateX(${swipeOffset}px)`,
                 transition: isDragging ? 'none' : 'transform 0.3s ease',
@@ -1078,112 +1078,105 @@ export default function App() {
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
             >
-              {/* Large Character Portrait */}
-              {currentEventMember && (
-                <div style={{ marginBottom: window.innerWidth < 768 ? '15px' : '20px' }}>
-                  <img 
-                    src={`/resources/portraits/${currentEventMember.portrait || 'peon.png'}`}
-                    alt={currentEventMember.name}
-                    style={{
-                      width: window.innerWidth < 768 ? '120px' : '200px',
-                      height: window.innerWidth < 768 ? '120px' : '200px',
-                      borderRadius: '12px',
-                      border: `4px solid ${COLORS.highlight}`,
-                      objectFit: 'cover',
-                      boxShadow: '0 4px 8px rgba(0,0,0,0.5)'
-                    }}
-                  />
-                </div>
-              )}
-
-              {/* Event Content - Responsive container */}
-              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                {/* Event Title */}
+              {/* Event Text - Prominently at Top */}
+              <div style={{ 
+                marginBottom: window.innerWidth < 768 ? '20px' : '25px',
+                textAlign: 'left'
+              }}>
                 <h2 style={{ 
                   margin: '0 0 15px', 
-                  fontSize: window.innerWidth < 768 ? '18px' : '24px', 
+                  fontSize: window.innerWidth < 768 ? '20px' : '28px', 
                   color: COLORS.text,
-                  fontWeight: 'bold'
+                  fontWeight: 'bold',
+                  lineHeight: '1.3'
                 }}>
                   {current.title}
                 </h2>
                 
-                {/* Event Body */}
                 <p style={{ 
-                  margin: '0 0 20px', 
-                  fontSize: window.innerWidth < 768 ? '14px' : '16px',
+                  margin: '0', 
+                  fontSize: window.innerWidth < 768 ? '16px' : '18px',
                   color: COLORS.textDim,
-                  lineHeight: '1.4',
-                  maxHeight: window.innerWidth < 768 ? '60px' : '80px',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis'
+                  lineHeight: '1.5'
                 }}>
                   {current.body}
                 </p>
               </div>
 
-              {/* Swipe Instructions */}
+              {/* Character Portrait - Embedded in Card */}
+              {currentEventMember && (
+                <div style={{ 
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginBottom: window.innerWidth < 768 ? '20px' : '25px',
+                  position: 'relative'
+                }}>
+                  <div style={{
+                    background: COLORS.secondary,
+                    border: `3px solid ${COLORS.highlight}`,
+                    borderRadius: '12px',
+                    padding: window.innerWidth < 768 ? '15px' : '20px',
+                    transform: 'rotate(-2deg)',
+                    boxShadow: '0 6px 12px rgba(0,0,0,0.4)'
+                  }}>
+                    <img 
+                      src={`/resources/portraits/${currentEventMember.portrait || 'peon.png'}`}
+                      alt={currentEventMember.name}
+                      style={{
+                        width: window.innerWidth < 768 ? '100px' : '150px',
+                        height: window.innerWidth < 768 ? '100px' : '150px',
+                        borderRadius: '8px',
+                        objectFit: 'cover',
+                        display: 'block'
+                      }}
+                    />
+                    <div style={{
+                      textAlign: 'center',
+                      marginTop: '8px',
+                      fontSize: window.innerWidth < 768 ? '12px' : '14px',
+                      color: COLORS.text,
+                      fontWeight: 'bold'
+                    }}>
+                      {currentEventMember.name}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Swipe Instructions - Subtle */}
               <div style={{ 
-                fontSize: window.innerWidth < 768 ? '10px' : '12px', 
+                fontSize: window.innerWidth < 768 ? '12px' : '14px', 
                 color: COLORS.textDim, 
-                marginBottom: '15px',
-                opacity: isDragging ? 0.5 : 1
+                textAlign: 'center',
+                opacity: isDragging ? 0.3 : 0.7,
+                marginTop: 'auto',
+                paddingTop: '15px'
               }}>
-                Swipe left or right, or click buttons below
+                Swipe left or right to choose
               </div>
 
-              {/* Choice Buttons */}
-              <div style={{ 
-                display: 'flex', 
-                gap: window.innerWidth < 768 ? '10px' : '20px', 
-                justifyContent: 'center',
-                flexWrap: window.innerWidth < 768 ? 'wrap' : 'nowrap'
-              }}>
-                <button 
-                  disabled={!!victory}
-                  onClick={() => decide('left')}
-                  style={{
-                    background: COLORS.warning,
-                    border: 'none',
-                    borderRadius: '8px',
-                    padding: window.innerWidth < 768 ? '10px 16px' : '12px 24px',
-                    color: COLORS.secondary,
-                    fontSize: window.innerWidth < 768 ? '14px' : '16px',
-                    fontWeight: 'bold',
-                    cursor: victory ? 'not-allowed' : 'pointer',
-                    opacity: victory ? 0.5 : 1,
-                    minWidth: window.innerWidth < 768 ? '120px' : '140px',
-                    boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
-                    // Visual feedback for swipe direction
-                    transform: isDragging && swipeOffset < -50 ? 'scale(1.05)' : 'scale(1)',
-                    transition: 'transform 0.2s ease'
-                  }}
-                >
-                  ← {current.left.label}
-                </button>
-                <button 
-                  disabled={!!victory}
-                  onClick={() => decide('right')}
-                  style={{
-                    background: COLORS.success,
-                    border: 'none',
-                    borderRadius: '8px',
-                    padding: window.innerWidth < 768 ? '10px 16px' : '12px 24px',
-                    color: COLORS.secondary,
-                    fontSize: window.innerWidth < 768 ? '14px' : '16px',
-                    fontWeight: 'bold',
-                    cursor: victory ? 'not-allowed' : 'pointer',
-                    opacity: victory ? 0.5 : 1,
-                    minWidth: window.innerWidth < 768 ? '120px' : '140px',
-                    boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
-                    // Visual feedback for swipe direction
-                    transform: isDragging && swipeOffset > 50 ? 'scale(1.05)' : 'scale(1)',
-                    transition: 'transform 0.2s ease'
-                  }}
-                >
-                  {current.right.label} →
-                </button>
-              </div>
+              {/* Choice Preview - Show during swipe */}
+              {isDragging && (
+                <div style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: swipeOffset > 0 ? '20px' : 'auto',
+                  right: swipeOffset < 0 ? '20px' : 'auto',
+                  transform: 'translateY(-50%)',
+                  background: swipeOffset > 0 ? COLORS.success : COLORS.warning,
+                  color: COLORS.secondary,
+                  padding: '12px 20px',
+                  borderRadius: '8px',
+                  fontSize: window.innerWidth < 768 ? '14px' : '16px',
+                  fontWeight: 'bold',
+                  boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+                  opacity: Math.min(1, Math.abs(swipeOffset) / 50),
+                  pointerEvents: 'none'
+                }}>
+                  {swipeOffset > 0 ? current.right.label : current.left.label}
+                </div>
+              )}
             </div>
           </div>
         )}
