@@ -62,6 +62,26 @@ function canTriggerPositiveEffects(morale: number): boolean {
   return morale >= 5
 }
 
+// Dynamic Portrait Effects based on Morale
+function getPortraitStyle(morale: number, baseStyle: React.CSSProperties): React.CSSProperties {
+  const saturation = Math.max(0.2, morale / 10) // 0.2 to 1.0 based on morale
+  const brightness = Math.max(0.6, 0.4 + (morale / 10) * 0.6) // 0.6 to 1.0 based on morale
+  const contrast = Math.max(0.8, 0.6 + (morale / 10) * 0.4) // 0.8 to 1.0 based on morale
+  
+  return {
+    ...baseStyle,
+    filter: `saturate(${saturation}) brightness(${brightness}) contrast(${contrast})`,
+    transition: 'filter 0.3s ease'
+  }
+}
+
+function getPortraitBorderColor(morale: number): string {
+  if (morale <= 2) return COLORS.danger
+  if (morale <= 4) return COLORS.warning
+  if (morale <= 6) return COLORS.highlight
+  return COLORS.success
+}
+
 function getDepartureChance(morale: number): number {
   if (morale >= 3) return 0
   if (morale === 2) return 0.25
@@ -804,7 +824,7 @@ export default function App() {
             }}>
               {roster.map(member => {
                 const morale = clampMorale(member.morale ?? 5)
-                const borderColor = morale <= 3 ? COLORS.danger : morale <= 5 ? COLORS.warning : COLORS.success
+                const borderColor = getPortraitBorderColor(morale)
                 return (
                   <div key={member.id} style={{ 
                     textAlign: 'center',
@@ -817,13 +837,13 @@ export default function App() {
                       <img 
                         src={`/resources/portraits/${member.portrait || 'peon.png'}`}
                         alt={member.name}
-                        style={{
+                        style={getPortraitStyle(morale, {
                           width: '60px',
                           height: '60px',
                           borderRadius: '8px',
                           border: `3px solid ${borderColor}`,
                           objectFit: 'cover'
-                        }}
+                        })}
                       />
                       <div style={{
                         position: 'absolute',
@@ -876,7 +896,7 @@ export default function App() {
             }}>
               {roster.map(member => {
                 const morale = clampMorale(member.morale ?? 5)
-                const borderColor = morale <= 3 ? COLORS.danger : morale <= 5 ? COLORS.warning : COLORS.success
+                const borderColor = getPortraitBorderColor(morale)
                 return (
                   <div key={member.id} style={{ 
                     textAlign: 'center',
@@ -889,13 +909,13 @@ export default function App() {
                       <img 
                         src={`/resources/portraits/${member.portrait || 'peon.png'}`}
                         alt={member.name}
-                        style={{
+                        style={getPortraitStyle(morale, {
                           width: '80px',
                           height: '80px',
                           borderRadius: '8px',
                           border: `3px solid ${borderColor}`,
                           objectFit: 'cover'
-                        }}
+                        })}
                       />
                       <div style={{
                         position: 'absolute',
@@ -1123,13 +1143,13 @@ export default function App() {
                     <img 
                       src={`/resources/portraits/${currentEventMember.portrait || 'peon.png'}`}
                       alt={currentEventMember.name}
-                      style={{
+                      style={getPortraitStyle(clampMorale(currentEventMember.morale ?? 5), {
                         width: window.innerWidth < 768 ? '100px' : '150px',
                         height: window.innerWidth < 768 ? '100px' : '150px',
                         borderRadius: '8px',
                         objectFit: 'cover',
                         display: 'block'
-                      }}
+                      })}
                     />
                     <div style={{
                       textAlign: 'center',
