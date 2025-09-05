@@ -1,0 +1,447 @@
+{
+  "adventures": {
+    "great_guild_raid": {
+      "id": "great_guild_raid",
+      "name": "The Great Guild Raid",
+      "description": "Lead your guild through their first major dungeon run from preparation to completion.",
+      "difficulty": "beginner",
+      "targetWinRate": 66,
+      "steps": [
+        {
+          "step": 1,
+          "type": "gameplay",
+          "id": "adventure_raid_prep",
+          "title": "Guild Preparation",
+          "body": "Your tank shows up in level 1 gear claiming it's 'retro chic' and has hidden stats that only they can see.",
+          "tags": ["adventure", "raid_prep", "step_1"],
+          "adventure": "great_guild_raid",
+          "nextStep": "adventure_raid_strategy",
+          "left": {
+            "label": "Accept the Challenge",
+            "effects": {"funds": -1, "readiness": 1, "morale": 1},
+            "substeps": {
+              "a": {
+                "title": "The tank insists their 'retro gear' has hidden stats",
+                "body": "Your tank is adamant that their level 1 gear has secret bonuses that don't show up in tooltips.",
+                "left": {
+                  "label": "Trust the tank",
+                  "effects": {"funds": -1, "readiness": 2, "morale": 1}
+                },
+                "right": {
+                  "label": "Demand proof",
+                  "effects": {"morale": -1, "readiness": 1}
+                }
+              }
+            }
+          },
+          "right": {
+            "label": "Force Proper Gear",
+            "effects": {"morale": -1, "readiness": 2, "reputation": -1},
+            "substeps": {
+              "b": {
+                "title": "The tank is upset but agrees to change one piece",
+                "body": "Your tank reluctantly agrees to upgrade their weapon but keeps the rest of their 'retro' gear.",
+                "left": {
+                  "label": "Compromise on one piece",
+                  "effects": {"morale": 1, "readiness": 1}
+                },
+                "right": {
+                  "label": "Insist on full gear change",
+                  "effects": {"morale": -1, "readiness": 2}
+                }
+              }
+            }
+          }
+        },
+        {
+          "step": 2,
+          "type": "story",
+          "id": "adventure_raid_banter",
+          "title": "Guild Banter",
+          "body": "As you prepare, your guild members start chatting about their previous dungeon experiences. The drama queen claims they soloed a world boss with 1 HP, while the theorycrafter starts calculating optimal DPS rotations.",
+          "tags": ["adventure", "story", "step_2"],
+          "adventure": "great_guild_raid",
+          "nextStep": "adventure_raid_strategy",
+          "effects": {"morale": 1}
+        },
+        {
+          "step": 3,
+          "type": "gameplay",
+          "id": "adventure_raid_strategy",
+          "title": "Strategy Meeting",
+          "body": "The theorycrafter wants to use a 0.1% DPS increase strat that requires perfect execution from everyone, including frame-perfect timing.",
+          "tags": ["adventure", "strategy", "step_3"],
+          "adventure": "great_guild_raid",
+          "nextStep": "adventure_raid_travel",
+          "left": {
+            "label": "Trust the Numbers",
+            "effects": {"readiness": 1, "morale": -1, "reputation": -1},
+            "substeps": {
+              "a": {
+                "title": "The strat requires perfect execution from everyone",
+                "body": "Your theorycrafter explains that this strat will only work if everyone follows the exact sequence with no mistakes.",
+                "left": {
+                  "label": "Practice until perfect",
+                  "effects": {"readiness": 2, "morale": -1, "funds": -1}
+                },
+                "right": {
+                  "label": "Accept 90% success rate",
+                  "effects": {"readiness": 1, "morale": 1}
+                }
+              }
+            }
+          },
+          "right": {
+            "label": "Keep it Simple",
+            "effects": {"morale": 1, "readiness": -1},
+            "substeps": {
+              "b": {
+                "title": "The theorycrafter is disappointed but agrees",
+                "body": "Your theorycrafter sighs and puts away their spreadsheets, muttering about 'suboptimal strategies'.",
+                "left": {
+                  "label": "Hear them out",
+                  "effects": {"morale": 1, "readiness": -1}
+                },
+                "right": {
+                  "label": "Stick to the plan",
+                  "effects": {"morale": -1, "readiness": 1}
+                }
+              }
+            }
+          }
+        },
+        {
+          "step": 4,
+          "type": "story",
+          "id": "adventure_raid_portal",
+          "title": "Portal to the Dungeon",
+          "body": "You arrive at the dungeon portal. The ancient stone archway hums with magical energy, and your guild members can see shadowy figures moving inside. The hardcore permadeather cracks their knuckles and grins.",
+          "tags": ["adventure", "story", "step_4"],
+          "adventure": "great_guild_raid",
+          "nextStep": "adventure_raid_travel",
+          "effects": {"readiness": 1}
+        },
+        {
+          "step": 5,
+          "type": "gameplay",
+          "id": "adventure_raid_travel",
+          "title": "Travel to Dungeon",
+          "body": "The AFK farmer wants to 'quickly' farm some rare herbs on the way, claiming they'll be useful for the final boss fight.",
+          "tags": ["adventure", "travel", "step_5"],
+          "adventure": "great_guild_raid",
+          "nextStep": "adventure_raid_encounter",
+          "left": {
+            "label": "Let Them Farm",
+            "effects": {"funds": 1, "readiness": -1},
+            "substeps": {
+              "a": {
+                "title": "The farmer finds a rare herb but takes 2 hours",
+                "body": "Your AFK farmer returns with a glowing herb but the rest of the guild is getting impatient.",
+                "left": {
+                  "label": "Wait for the rare herb",
+                  "effects": {"funds": 2, "readiness": -2, "morale": -1}
+                },
+                "right": {
+                  "label": "Move on without them",
+                  "effects": {"morale": -1, "readiness": 1}
+                }
+              }
+            }
+          },
+          "right": {
+            "label": "Stay Focused",
+            "effects": {"readiness": 1, "morale": -1, "reputation": -1},
+            "substeps": {
+              "b": {
+                "title": "The farmer is sulking and moving slowly",
+                "body": "Your AFK farmer is clearly upset about missing the herb farming opportunity.",
+                "left": {
+                  "label": "Motivate them",
+                  "effects": {"morale": 1, "readiness": -1}
+                },
+                "right": {
+                  "label": "Ignore the sulking",
+                  "effects": {"readiness": 1, "morale": -1}
+                }
+              }
+            }
+          }
+        },
+        {
+          "step": 6,
+          "type": "gameplay",
+          "id": "adventure_raid_encounter",
+          "title": "First Encounter",
+          "body": "The first room has 12 enemies, but your DPS wants to pull them all at once to 'test the waters' and show off their skills.",
+          "tags": ["adventure", "encounter", "step_6"],
+          "adventure": "great_guild_raid",
+          "nextStep": "adventure_raid_miniboss",
+          "left": {
+            "label": "Go Big or Go Home",
+            "effects": {"readiness": 2, "morale": -1},
+            "substeps": {
+              "a": {
+                "title": "The pull works but your healer is overwhelmed",
+                "body": "The massive pull is successful but your healer is struggling to keep everyone alive.",
+                "left": {
+                  "label": "Trust the healer",
+                  "effects": {"readiness": 2, "morale": -1}
+                },
+                "right": {
+                  "label": "Help with crowd control",
+                  "effects": {"readiness": 1, "morale": 1}
+                }
+              }
+            }
+          },
+          "right": {
+            "label": "Play it Safe",
+            "effects": {"morale": 1, "readiness": -1},
+            "substeps": {
+              "b": {
+                "title": "The DPS is bored and starts pulling extra mobs",
+                "body": "Your DPS gets impatient and starts pulling additional enemies despite your orders.",
+                "left": {
+                  "label": "Let them have fun",
+                  "effects": {"morale": 1, "readiness": -1}
+                },
+                "right": {
+                  "label": "Enforce discipline",
+                  "effects": {"morale": -1, "readiness": 1}
+                }
+              }
+            }
+          }
+        },
+        {
+          "step": 7,
+          "type": "story",
+          "id": "adventure_raid_loot",
+          "title": "Loot Discovery",
+          "body": "After clearing the room, you find a chest with glowing loot. The drama queen immediately claims the best item, while the meta slave starts checking if it's on the current tier list.",
+          "tags": ["adventure", "story", "step_7"],
+          "adventure": "great_guild_raid",
+          "nextStep": "adventure_raid_miniboss",
+          "effects": {"funds": 1, "morale": 1}
+        },
+        {
+          "step": 8,
+          "type": "gameplay",
+          "id": "adventure_raid_miniboss",
+          "title": "Mini-Boss Drama",
+          "body": "The boss has a mechanic that requires perfect timing - exactly 1.5 seconds between each phase transition. Your drama queen is excited about the challenge.",
+          "tags": ["adventure", "miniboss", "step_8"],
+          "adventure": "great_guild_raid",
+          "nextStep": "adventure_raid_hazard",
+          "left": {
+            "label": "Trust the Theorycrafter",
+            "effects": {"readiness": 2, "morale": -1},
+            "substeps": {
+              "a": {
+                "title": "The strat works but the drama queen wants credit",
+                "body": "The perfect timing strat succeeds, but your drama queen claims they could have done it better.",
+                "left": {
+                  "label": "Share the glory",
+                  "effects": {"morale": 1, "readiness": -1}
+                },
+                "right": {
+                  "label": "Credit goes to the theorycrafter",
+                  "effects": {"morale": -1, "readiness": 1}
+                }
+              }
+            }
+          },
+          "right": {
+            "label": "Use the Safe Strat",
+            "effects": {"morale": 1, "readiness": -1},
+            "substeps": {
+              "b": {
+                "title": "The safe strat takes longer but is more reliable",
+                "body": "The safer approach works but takes twice as long, testing everyone's patience.",
+                "left": {
+                  "label": "Accept the longer fight",
+                  "effects": {"morale": 1, "readiness": -1}
+                },
+                "right": {
+                  "label": "Try to optimize it",
+                  "effects": {"readiness": 1, "morale": -1}
+                }
+              }
+            }
+          }
+        },
+        {
+          "step": 9,
+          "type": "story",
+          "id": "adventure_raid_celebration",
+          "title": "Mini-Boss Defeated",
+          "body": "The mini-boss falls! Your guild celebrates briefly before the hardcore permadeather reminds everyone that 'the real challenge is still ahead'.",
+          "tags": ["adventure", "story", "step_9"],
+          "adventure": "great_guild_raid",
+          "nextStep": "adventure_raid_hazard",
+          "effects": {"morale": 2, "readiness": 1}
+        },
+        {
+          "step": 10,
+          "type": "gameplay",
+          "id": "adventure_raid_hazard",
+          "title": "Environmental Hazard",
+          "body": "The floor is lava, but your hardcore permadeather wants to try crossing it directly, claiming they can 'dodge the fireballs'.",
+          "tags": ["adventure", "hazard", "step_10"],
+          "adventure": "great_guild_raid",
+          "nextStep": "adventure_raid_final_prep",
+          "left": {
+            "label": "Send the Permadeather",
+            "effects": {"readiness": 3, "morale": -1},
+            "substeps": {
+              "a": {
+                "title": "The permadeather succeeds but almost dies",
+                "body": "Your permadeather makes it across but is badly burned and barely conscious.",
+                "left": {
+                  "label": "Celebrate the victory",
+                  "effects": {"readiness": 3, "morale": 1}
+                },
+                "right": {
+                  "label": "Scold them for the risk",
+                  "effects": {"readiness": 2, "morale": -1}
+                }
+              }
+            }
+          },
+          "right": {
+            "label": "Find Another Way",
+            "effects": {"morale": 2, "readiness": -1},
+            "substeps": {
+              "b": {
+                "title": "The detour takes longer but everyone stays safe",
+                "body": "You find a safer path around the lava, but it adds significant time to your journey.",
+                "left": {
+                  "label": "Accept the delay",
+                  "effects": {"morale": 2, "readiness": -1}
+                },
+                "right": {
+                  "label": "Try to speed up",
+                  "effects": {"readiness": 1, "morale": -1}
+                }
+              }
+            }
+          }
+        },
+        {
+          "step": 11,
+          "type": "story",
+          "id": "adventure_raid_rest",
+          "title": "Brief Rest",
+          "body": "You find a safe spot to rest before the final boss. Your guild members share stories and the AFK farmer finally explains what that rare herb was for - it's actually just a pretty flower.",
+          "tags": ["adventure", "story", "step_11"],
+          "adventure": "great_guild_raid",
+          "nextStep": "adventure_raid_final_prep",
+          "effects": {"morale": 1}
+        },
+        {
+          "step": 12,
+          "type": "gameplay",
+          "id": "adventure_raid_final_prep",
+          "title": "Final Boss Prep",
+          "body": "The raid leader is having a meltdown before the final boss, worried that all your previous decisions were wrong and you're all going to die.",
+          "tags": ["adventure", "final_prep", "step_12"],
+          "adventure": "great_guild_raid",
+          "nextStep": "adventure_raid_final_boss",
+          "left": {
+            "label": "Let Them Lead",
+            "effects": {"morale": 1, "readiness": -1},
+            "substeps": {
+              "a": {
+                "title": "The leader calms down and gives a rousing speech",
+                "body": "Your raid leader takes a deep breath and delivers an inspiring speech about teamwork and determination.",
+                "left": {
+                  "label": "Follow their lead",
+                  "effects": {"morale": 2, "readiness": 1}
+                },
+                "right": {
+                  "label": "Add your own input",
+                  "effects": {"morale": 1, "readiness": 1}
+                }
+              }
+            }
+          },
+          "right": {
+            "label": "Take Control",
+            "effects": {"readiness": 1, "morale": -1, "reputation": -1},
+            "substeps": {
+              "b": {
+                "title": "The leader steps back but is clearly upset",
+                "body": "Your raid leader reluctantly steps aside but you can see they're hurt by the lack of trust.",
+                "left": {
+                  "label": "Reassure them",
+                  "effects": {"morale": 1, "readiness": 1}
+                },
+                "right": {
+                  "label": "Focus on the boss",
+                  "effects": {"readiness": 2, "morale": -1}
+                }
+              }
+            }
+          }
+        },
+        {
+          "step": 13,
+          "type": "story",
+          "id": "adventure_raid_boss_room",
+          "title": "Boss Chamber",
+          "body": "You enter the final boss chamber. The massive dragon roars as it awakens, and your guild members exchange nervous glances. The theorycrafter starts muttering calculations under their breath.",
+          "tags": ["adventure", "story", "step_13"],
+          "adventure": "great_guild_raid",
+          "nextStep": "adventure_raid_final_boss",
+          "effects": {"readiness": 1}
+        },
+        {
+          "step": 14,
+          "type": "gameplay",
+          "id": "adventure_raid_final_boss",
+          "title": "Final Boss",
+          "body": "The server crashes during the final boss fight! Your guild is left staring at frozen screens as the dragon's attack animation hangs in mid-air.",
+          "tags": ["adventure", "final_boss", "step_14"],
+          "adventure": "great_guild_raid",
+          "nextStep": "adventure_raid_completion",
+          "left": {
+            "label": "Blame the Theorycrafter",
+            "effects": {"morale": -1, "funds": -1, "reputation": -1},
+            "substeps": {
+              "a": {
+                "title": "The theorycrafter is devastated by the accusation",
+                "body": "Your theorycrafter is heartbroken that you'd blame them for a server issue, and the rest of the guild looks uncomfortable.",
+                "left": {
+                  "label": "Apologize and regroup",
+                  "effects": {"morale": 1, "readiness": 1}
+                },
+                "right": {
+                  "label": "Stick to your guns",
+                  "effects": {"morale": -1, "readiness": -1}
+                }
+              }
+            }
+          },
+          "right": {
+            "label": "Stay Calm and Adapt",
+            "effects": {"morale": 1, "readiness": 1},
+            "substeps": {
+              "b": {
+                "title": "The server comes back up and you're ready to continue",
+                "body": "The server reconnects and you're back in the fight. Your guild is impressed by your calm leadership.",
+                "left": {
+                  "label": "Use the same strat",
+                  "effects": {"readiness": 1, "morale": 1}
+                },
+                "right": {
+                  "label": "Try a different approach",
+                  "effects": {"readiness": 2, "morale": -1}
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

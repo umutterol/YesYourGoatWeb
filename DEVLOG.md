@@ -2,6 +2,24 @@ YesYourGoatWeb – Dev Log
 
 This document summarizes the changes and additions made so far to migrate the project to a web-focused setup and to deliver a working web prototype.
 
+## Recent Updates (v0.22)
+
+### Adventure Mode System Design
+- **Complete Adventure Mode Framework**: Designed multi-step event chains with branching narratives and difficulty progression
+- **Simulation Testing**: Conducted extensive 100-run simulations to achieve optimal balance across 4 difficulty tiers
+- **"The Great Guild Raid" Adventure**: Created first adventure with 66% win rate for beginner-friendly introduction
+- **Story Event Integration**: Added narrative events that provide flavor without gameplay impact
+- **Resource Balance**: Achieved meaningful threat distribution across Funds, Reputation, Readiness, and Morale
+- **Difficulty Curve**: Established progression from 66% (beginner) to 35% (master) win rates
+
+### Balance Testing Results
+- **Adventure 1**: 66% win rate - Perfect for learning mechanics
+- **Adventure 2**: 55% win rate - Intermediate challenge
+- **Adventure 3**: 45% win rate - Expert level difficulty  
+- **Adventure 4**: 35% win rate - Master challenge
+- **Resource Distribution**: All resources remain meaningful threats throughout progression
+- **Failure Points**: Multiple steps can cause failure, preventing single-point-of-failure design
+
 Scope Completed
 
 - Web-focused docs and paths

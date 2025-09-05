@@ -3,6 +3,7 @@ import './App.css'
 
 // Data URLs (served from public/)
 const EVENTS_URL = '/resources/events/events.json'
+const ADVENTURE_EVENTS_URL = '/resources/events/adventure_events.json'
 const ROSTER_URL = '/resources/roster.json'
 const BARKS_URL  = '/resources/barks/trait_barks.json'
 
@@ -32,6 +33,20 @@ type Choice = {
   effects: Effects
   hooks?: Hook[]
   nextStep?: string
+  substeps?: {
+    a?: {
+      title: string
+      body: string
+      left: Choice
+      right: Choice
+    }
+    b?: {
+      title: string
+      body: string
+      left: Choice
+      right: Choice
+    }
+  }
 }
 
 type EventCard = {
@@ -43,6 +58,31 @@ type EventCard = {
   left: Choice
   right: Choice
 }
+
+type AdventureEvent = {
+  step: number
+  type: 'gameplay' | 'story'
+  id: string
+  title: string
+  body: string
+  tags?: string[]
+  adventure: string
+  nextStep: string
+  effects?: Effects
+  left?: Choice
+  right?: Choice
+}
+
+type Adventure = {
+  id: string
+  name: string
+  description: string
+  difficulty: string
+  targetWinRate: number
+  steps: AdventureEvent[]
+}
+
+type GameMode = 'menu' | 'regular' | 'adventure'
 
 type Member = { id: string; name: string; traitId: string; morale?: number; portrait?: string }
 
@@ -245,6 +285,13 @@ function generatePartyEvent(member: Member, day: number, eventTemplates: EventCa
 }
 
 export default function App() {
+  const [gameMode, setGameMode] = useState<GameMode>('menu')
+  const [adventures, setAdventures] = useState<Record<string, Adventure>>({})
+  const [currentAdventure, setCurrentAdventure] = useState<Adventure | null>(null)
+  const [adventureStep, setAdventureStep] = useState<number>(0)
+  const [adventureSubstep, setAdventureSubstep] = useState<'a' | 'b' | null>(null)
+  const [adventureChoice, setAdventureChoice] = useState<'left' | 'right' | null>(null)
+  
   const [meters, setMeters] = useState<Meters>({ funds: 5, reputation: 5, readiness: 5 })
   const [day, setDay] = useState<number>(1)
   const [events, setEvents] = useState<EventCard[]>([])
@@ -273,9 +320,161 @@ export default function App() {
     setChat(prev => [...prev, msg].slice(-40))
   }
 
+  // Main menu functions
+  function startRegularMode() {
+    setGameMode('regular')
+    setVictory('')
+    setDay(1)
+    setMeters({ funds: 5, reputation: 5, readiness: 5 })
+    setLog([])
+    setChat([])
+    setDepartureNotification(null)
+    setPendingMultiStep(null)
+    setHasMultiStepEvent(false)
+  }
+
+  function startAdventureMode(adventureId: string) {
+    const adventure = adventures[adventureId]
+    if (!adventure) return
+    
+    setCurrentAdventure(adventure)
+    setAdventureStep(0)
+    setAdventureSubstep(null)
+    setAdventureChoice(null)
+    setGameMode('adventure')
+    setVictory('')
+    setMeters({ funds: 5, reputation: 5, readiness: 5 })
+    setLog([])
+    setChat([])
+    setDepartureNotification(null)
+  }
+
+  function returnToMenu() {
+    setGameMode('menu')
+    setCurrentAdventure(null)
+    setAdventureStep(0)
+    setAdventureSubstep(null)
+    setAdventureChoice(null)
+    setVictory('')
+  }
+
+  // Adventure mode functions
+  function getCurrentAdventureEvent(): AdventureEvent | null {
+    if (!currentAdventure) return null
+    return currentAdventure.steps[adventureStep] || null
+  }
+
+  function handleAdventureChoice(choice: 'left' | 'right') {
+    const event = getCurrentAdventureEvent()
+    if (!event || !event.left || !event.right) return
+
+    setAdventureChoice(choice)
+    
+    const selectedChoice = choice === 'left' ? event.left : event.right
+    
+    // Apply effects
+    if (selectedChoice.effects) {
+      setMeters(prev => {
+        const newMeters = { ...prev }
+        Object.entries(selectedChoice.effects).forEach(([key, value]) => {
+          if (key in newMeters) {
+            newMeters[key as keyof Meters] = clamp(newMeters[key as keyof Meters] + value)
+          }
+        })
+        return newMeters
+      })
+    }
+
+    // Check for loss
+    const newMeters = { ...meters }
+    if (selectedChoice.effects) {
+      Object.entries(selectedChoice.effects).forEach(([key, value]) => {
+        if (key in newMeters) {
+          newMeters[key as keyof Meters] = clamp(newMeters[key as keyof Meters] + value)
+        }
+      })
+    }
+
+    if (newMeters.funds <= 0 || newMeters.reputation <= 0 || newMeters.readiness <= 0) {
+      setVictory('Adventure Failed!')
+      return
+    }
+
+    // Check if there are substeps
+    if (selectedChoice.substeps) {
+      setAdventureSubstep('a') // Default to first substep
+    } else {
+      // Move to next step
+      nextAdventureStep()
+    }
+  }
+
+  function handleAdventureSubstep(choice: 'left' | 'right') {
+    const event = getCurrentAdventureEvent()
+    if (!event || !adventureChoice) return
+
+    const selectedChoice = adventureChoice === 'left' ? event.left : event.right
+    if (!selectedChoice || !selectedChoice.substeps) return
+
+    const substepKey = adventureSubstep || 'a'
+    const substep = selectedChoice.substeps[substepKey]
+    if (!substep) return
+
+    const selectedSubstep = choice === 'left' ? substep.left : substep.right
+    if (!selectedSubstep) return
+
+    // Apply substep effects
+    if (selectedSubstep.effects) {
+      setMeters(prev => {
+        const newMeters = { ...prev }
+        Object.entries(selectedSubstep.effects).forEach(([key, value]) => {
+          if (key in newMeters && typeof value === 'number') {
+            newMeters[key as keyof Meters] = clamp(newMeters[key as keyof Meters] + value)
+          }
+        })
+        return newMeters
+      })
+    }
+
+    // Check for loss
+    const newMeters = { ...meters }
+    if (selectedSubstep.effects) {
+      Object.entries(selectedSubstep.effects).forEach(([key, value]) => {
+        if (key in newMeters && typeof value === 'number') {
+          newMeters[key as keyof Meters] = clamp(newMeters[key as keyof Meters] + value)
+        }
+      })
+    }
+
+    if (newMeters.funds <= 0 || newMeters.reputation <= 0 || newMeters.readiness <= 0) {
+      setVictory('Adventure Failed!')
+      return
+    }
+
+    // Move to next step
+    nextAdventureStep()
+  }
+
+  function nextAdventureStep() {
+    if (!currentAdventure) return
+
+    const nextStep = adventureStep + 1
+    if (nextStep >= currentAdventure.steps.length) {
+      // Adventure completed successfully
+      setVictory('Adventure Completed!')
+      return
+    }
+
+    setAdventureStep(nextStep)
+    setAdventureSubstep(null)
+    setAdventureChoice(null)
+  }
+
   // Swipe handling functions
   const handleSwipeStart = (e: React.MouseEvent | React.TouchEvent) => {
-    if (victory || !current) return
+    if (victory) return
+    if (gameMode === 'regular' && !current) return
+    if (gameMode === 'adventure' && !getCurrentAdventureEvent()) return
     
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
     const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY
@@ -286,7 +485,9 @@ export default function App() {
   }
 
   const handleSwipeMove = (e: React.MouseEvent | React.TouchEvent) => {
-    if (!isDragging || !swipeStart || victory || !current) return
+    if (!isDragging || !swipeStart || victory) return
+    if (gameMode === 'regular' && !current) return
+    if (gameMode === 'adventure' && !getCurrentAdventureEvent()) return
     
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
     const deltaX = clientX - swipeStart.x
@@ -307,13 +508,23 @@ export default function App() {
   }
 
   const handleSwipeEnd = () => {
-    if (!isDragging || !swipeStart || victory || !current) return
+    if (!isDragging || !swipeStart || victory) return
+    if (gameMode === 'regular' && !current) return
+    if (gameMode === 'adventure' && !getCurrentAdventureEvent()) return
     
     const swipeThreshold = 100
     const finalDirection = swipeOffset > swipeThreshold ? 'right' : swipeOffset < -swipeThreshold ? 'left' : null
     
     if (finalDirection) {
-      decide(finalDirection)
+      if (gameMode === 'regular') {
+        decide(finalDirection)
+      } else if (gameMode === 'adventure') {
+        if (adventureSubstep) {
+          handleAdventureSubstep(finalDirection)
+        } else {
+          handleAdventureChoice(finalDirection)
+        }
+      }
     }
     
     // Reset swipe state
@@ -388,6 +599,21 @@ export default function App() {
     run().catch(err => {
       console.error(String(err?.message ?? err))
     })
+  }, [])
+
+  // Load adventure data
+  useEffect(() => {
+    const loadAdventures = async () => {
+      try {
+        const res = await fetch(ADVENTURE_EVENTS_URL)
+        if (!res.ok) throw new Error(`Failed adventures: ${res.status}`)
+        const data = await res.json()
+        setAdventures(data.adventures)
+      } catch (err) {
+        console.error('Failed to load adventures:', err)
+      }
+    }
+    loadAdventures()
   }, [])
 
   // Persist: save morale for active roster only
@@ -757,12 +983,146 @@ export default function App() {
       fontFamily: 'monospace',
       padding: window.innerWidth < 768 ? '5px' : '10px'
     }}>
-      <style>{`
-        @keyframes pulse {
-          0% { transform: scale(1); }
-          100% { transform: scale(1.05); }
-        }
-      `}</style>
+      {/* Main Menu */}
+      {gameMode === 'menu' && (
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          minHeight: '100vh',
+          gap: '30px'
+        }}>
+          <h1 style={{
+            fontSize: '48px',
+            color: COLORS.highlight,
+            textAlign: 'center',
+            margin: 0,
+            textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
+          }}>
+            Guilds of Arcana Terra
+          </h1>
+          
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '20px',
+            alignItems: 'center'
+          }}>
+            <button
+              onClick={startRegularMode}
+              style={{
+                padding: '15px 30px',
+                fontSize: '20px',
+                background: COLORS.accent,
+                color: COLORS.text,
+                border: `2px solid ${COLORS.highlight}`,
+                borderRadius: '8px',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                minWidth: '200px',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.background = COLORS.highlight
+                e.currentTarget.style.color = COLORS.primary
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.background = COLORS.accent
+                e.currentTarget.style.color = COLORS.text
+              }}
+            >
+              Regular Mode
+            </button>
+            
+            <div style={{
+              fontSize: '16px',
+              color: COLORS.textDim,
+              textAlign: 'center',
+              maxWidth: '400px'
+            }}>
+              Manage your guild week by week with random events and resource management
+            </div>
+          </div>
+          
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '20px',
+            alignItems: 'center'
+          }}>
+            <h2 style={{
+              fontSize: '24px',
+              color: COLORS.highlight,
+              margin: 0
+            }}>
+              Adventure Mode
+            </h2>
+            
+            {Object.values(adventures).map(adventure => (
+              <div key={adventure.id} style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '10px',
+                alignItems: 'center'
+              }}>
+                <button
+                  onClick={() => startAdventureMode(adventure.id)}
+                  style={{
+                    padding: '15px 30px',
+                    fontSize: '18px',
+                    background: COLORS.accent,
+                    color: COLORS.text,
+                    border: `2px solid ${COLORS.highlight}`,
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    fontWeight: 'bold',
+                    minWidth: '200px',
+                    transition: 'all 0.3s ease'
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.background = COLORS.highlight
+                    e.currentTarget.style.color = COLORS.primary
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.background = COLORS.accent
+                    e.currentTarget.style.color = COLORS.text
+                  }}
+                >
+                  {adventure.name}
+                </button>
+                
+                <div style={{
+                  fontSize: '14px',
+                  color: COLORS.textDim,
+                  textAlign: 'center',
+                  maxWidth: '300px'
+                }}>
+                  {adventure.description}
+                </div>
+                
+                <div style={{
+                  fontSize: '12px',
+                  color: COLORS.highlight,
+                  fontWeight: 'bold'
+                }}>
+                  Difficulty: {adventure.difficulty} • Target Win Rate: {adventure.targetWinRate}%
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Regular Mode UI */}
+      {gameMode === 'regular' && (
+        <>
+          <style>{`
+            @keyframes pulse {
+              0% { transform: scale(1); }
+              100% { transform: scale(1.05); }
+            }
+          `}</style>
       {/* Top Bar - Responsive Layout */}
       <div style={{
         background: COLORS.secondary,
@@ -1411,6 +1771,102 @@ export default function App() {
           )}
         </div>
       </div>
+        </>
+      )}
+
+      {/* Adventure Mode UI */}
+      {gameMode === 'adventure' && currentAdventure && (
+        <div>
+          {/* Top Bar - Adventure Mode */}
+          <div style={{
+            background: COLORS.secondary,
+            border: `2px solid ${COLORS.border}`,
+            borderRadius: '8px',
+            padding: window.innerWidth < 768 ? '10px 15px' : '15px 20px',
+            marginBottom: '5px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+              <button
+                onClick={returnToMenu}
+                style={{
+                  padding: '8px 16px',
+                  background: COLORS.accent,
+                  color: COLORS.text,
+                  border: `1px solid ${COLORS.highlight}`,
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontSize: '14px'
+                }}
+              >
+                ← Menu
+              </button>
+              
+              <div style={{ fontSize: '18px', fontWeight: 'bold', color: COLORS.highlight }}>
+                {currentAdventure.name}
+              </div>
+              
+              <div style={{ fontSize: '14px', color: COLORS.textDim }}>
+                Step {adventureStep + 1} of {currentAdventure.steps.length}
+              </div>
+            </div>
+
+            {/* Resources - Same as regular mode */}
+            <div style={{ display: 'flex', gap: '20px' }}>
+              {Object.entries(meters).map(([key, value]) => (
+                <div key={key} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px' }}>
+                  <div style={{ fontSize: '20px' }}>
+                    {key === 'funds' ? '💰' : key === 'reputation' ? '⭐' : '⚔️'}
+                  </div>
+                  <div style={{ fontSize: '16px', fontWeight: 'bold' }}>{value}</div>
+                  {/* Fill dots */}
+                  <div style={{ display: 'flex', gap: '2px' }}>
+                    {Array.from({ length: 10 }, (_, i) => (
+                      <div
+                        key={i}
+                        style={{
+                          width: '6px',
+                          height: '6px',
+                          borderRadius: '50%',
+                          background: i < value ? COLORS.highlight : COLORS.border,
+                          transition: 'background 0.3s ease'
+                        }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Adventure Event Card - Placeholder for now */}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginBottom: '20px'
+          }}>
+            <div style={{
+              width: window.innerWidth < 768 ? '95%' : '650px',
+              maxWidth: '650px',
+              height: window.innerWidth < 768 ? '370px' : '420px',
+              background: COLORS.secondary,
+              border: `3px solid ${COLORS.highlight}`,
+              borderRadius: '12px',
+              padding: window.innerWidth < 768 ? '15px' : '20px',
+              boxShadow: '0 6px 12px rgba(0,0,0,0.4)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '18px',
+              color: COLORS.textDim
+            }}>
+              Adventure Mode - Coming Soon
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
