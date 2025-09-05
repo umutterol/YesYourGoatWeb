@@ -227,6 +227,7 @@ export default function App() {
   const [swipeStart, setSwipeStart] = useState<{ x: number; y: number } | null>(null)
   const [swipeOffset, setSwipeOffset] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
+  const [swipeDirection, setSwipeDirection] = useState<'left' | 'right' | null>(null)
   const cardRef = useRef<HTMLDivElement>(null)
 
   function pushChat(msg: ChatMsg) {
@@ -255,22 +256,32 @@ export default function App() {
     const maxSwipe = 150
     const limitedDeltaX = Math.max(-maxSwipe, Math.min(maxSwipe, deltaX))
     setSwipeOffset(limitedDeltaX)
+    
+    // Update swipe direction for visual feedback
+    if (limitedDeltaX > 20) {
+      setSwipeDirection('right')
+    } else if (limitedDeltaX < -20) {
+      setSwipeDirection('left')
+    } else {
+      setSwipeDirection(null)
+    }
   }
 
   const handleSwipeEnd = () => {
     if (!isDragging || !swipeStart || victory || !current) return
     
     const swipeThreshold = 100
-    const swipeDirection = swipeOffset > swipeThreshold ? 'right' : swipeOffset < -swipeThreshold ? 'left' : null
+    const finalDirection = swipeOffset > swipeThreshold ? 'right' : swipeOffset < -swipeThreshold ? 'left' : null
     
-    if (swipeDirection) {
-      decide(swipeDirection)
+    if (finalDirection) {
+      decide(finalDirection)
     }
     
     // Reset swipe state
     setSwipeStart(null)
     setSwipeOffset(0)
     setIsDragging(false)
+    setSwipeDirection(null)
   }
 
   // Mouse events
@@ -707,6 +718,12 @@ export default function App() {
       fontFamily: 'monospace',
       padding: window.innerWidth < 768 ? '5px' : '10px'
     }}>
+      <style>{`
+        @keyframes pulse {
+          0% { transform: scale(1); }
+          100% { transform: scale(1.05); }
+        }
+      `}</style>
       {/* Top Bar - Responsive Layout */}
       <div style={{
         background: COLORS.secondary,
@@ -1084,14 +1101,16 @@ export default function App() {
                 flexDirection: 'column',
                 position: 'relative',
                 // Swipe transform
-                transform: `translateX(${swipeOffset}px)`,
+                transform: `translateX(${swipeOffset}px) ${isDragging ? `rotate(${swipeOffset * 0.1}deg)` : ''}`,
                 transition: isDragging ? 'none' : 'transform 0.3s ease',
                 cursor: isDragging ? 'grabbing' : 'grab',
                 userSelect: 'none',
-                // Visual feedback for swipe direction
-                opacity: isDragging ? Math.max(0.7, 1 - Math.abs(swipeOffset) / 200) : 1,
-                // Rotation based on swipe
-                rotate: isDragging ? `${swipeOffset * 0.1}deg` : '0deg'
+                // Enhanced visual feedback for swipe direction
+                opacity: isDragging ? Math.max(0.6, 1 - Math.abs(swipeOffset) / 300) : 1,
+                // Scale effect during swipe
+                scale: isDragging ? Math.max(0.95, 1 - Math.abs(swipeOffset) / 1000) : 1,
+                // Background color hint based on swipe direction
+                backgroundColor: swipeDirection === 'left' ? '#8b4513' : swipeDirection === 'right' ? '#8b4513' : COLORS.accent
               }}
               onMouseDown={handleMouseDown}
               onTouchStart={handleTouchStart}
@@ -1176,26 +1195,69 @@ export default function App() {
                 Swipe left or right to choose
               </div>
 
-              {/* Choice Preview - Show during swipe */}
-              {isDragging && (
+              {/* Choice Preview - Enhanced during swipe */}
+              {isDragging && swipeDirection && (
                 <div style={{
                   position: 'absolute',
                   top: '50%',
-                  left: swipeOffset > 0 ? '20px' : 'auto',
-                  right: swipeOffset < 0 ? '20px' : 'auto',
+                  left: swipeDirection === 'right' ? '20px' : 'auto',
+                  right: swipeDirection === 'left' ? '20px' : 'auto',
                   transform: 'translateY(-50%)',
-                  background: swipeOffset > 0 ? COLORS.success : COLORS.warning,
+                  background: swipeDirection === 'right' ? COLORS.success : COLORS.warning,
                   color: COLORS.secondary,
-                  padding: '12px 20px',
-                  borderRadius: '8px',
+                  padding: window.innerWidth < 768 ? '10px 16px' : '12px 20px',
+                  borderRadius: '12px',
                   fontSize: window.innerWidth < 768 ? '14px' : '16px',
                   fontWeight: 'bold',
-                  boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
-                  opacity: Math.min(1, Math.abs(swipeOffset) / 50),
-                  pointerEvents: 'none'
+                  boxShadow: '0 6px 12px rgba(0,0,0,0.4)',
+                  opacity: Math.min(1, Math.abs(swipeOffset) / 40),
+                  pointerEvents: 'none',
+                  border: `2px solid ${COLORS.secondary}`,
+                  zIndex: 10,
+                  // Animation for better visibility
+                  animation: 'pulse 0.5s ease-in-out infinite alternate'
                 }}>
-                  {swipeOffset > 0 ? current.right.label : current.left.label}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <div style={{ fontSize: '18px' }}>
+                      {swipeDirection === 'right' ? '→' : '←'}
+                    </div>
+                    <div>
+                      {swipeDirection === 'right' ? current.right.label : current.left.label}
+                    </div>
+                  </div>
                 </div>
+              )}
+
+              {/* Swipe Direction Indicators */}
+              {isDragging && (
+                <>
+                  {/* Left Arrow Indicator */}
+                  <div style={{
+                    position: 'absolute',
+                    left: '20px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    fontSize: '24px',
+                    color: COLORS.textDim,
+                    opacity: swipeDirection === 'left' ? 1 : 0.3,
+                    transition: 'opacity 0.2s ease'
+                  }}>
+                    ←
+                  </div>
+                  {/* Right Arrow Indicator */}
+                  <div style={{
+                    position: 'absolute',
+                    right: '20px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    fontSize: '24px',
+                    color: COLORS.textDim,
+                    opacity: swipeDirection === 'right' ? 1 : 0.3,
+                    transition: 'opacity 0.2s ease'
+                  }}>
+                    →
+                  </div>
+                </>
               )}
             </div>
           </div>
