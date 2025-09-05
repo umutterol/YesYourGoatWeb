@@ -58,15 +58,6 @@ function clampMorale(v: number) { return Math.max(1, Math.min(10, Math.round(v))
 function fmtDelta(v: number) { return v > 0 ? `+${v}` : `${v}` }
 
 // Enhanced Morale System Functions
-function getMoraleEffect(morale: number): string {
-  if (morale >= 8) return 'excellent'
-  if (morale >= 5) return 'good'
-  if (morale >= 4) return 'poor'
-  if (morale >= 3) return 'poor'
-  if (morale >= 1) return 'critical'
-  return 'departed'
-}
-
 function canTriggerPositiveEffects(morale: number): boolean {
   return morale >= 5
 }
