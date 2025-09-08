@@ -19,10 +19,13 @@ export default function YesYourGoat() {
   const [sawRival, setSawRival] = useState(false)
   const [victoryText, setVictoryText] = useState('')
   const [showSummary, setShowSummary] = useState(false)
+  const [summaryMeters, setSummaryMeters] = useState<Meters | null>(null)
+  const [summaryDay, setSummaryDay] = useState<number | null>(null)
 
   const milestones = useMemo(() => [3, 6, 9, 12, 15, 18], [])
   const nextMilestone = milestones.find(m => day <= m) ?? null
   const collapseCount = Number(localStorage.getItem('yyg_collapse_count') || '0')
+  const [usedMilestoneIds, setUsedMilestoneIds] = useState<string[]>([])
 
   useEffect(() => {
     fetch(EVENTS_URL).then(r => r.json()).then((data: EventCard[]) => {
@@ -50,8 +53,11 @@ export default function YesYourGoat() {
     // Collapse override handled at decide time
     // Inject milestone when threshold hits
     if (nextMilestone && day === nextMilestone) {
-      const milestoneCard = events.find(e => (e.tags || []).includes('meta:dungeon_progress'))
-      if (milestoneCard) return milestoneCard
+      const milestoneCard = events.find(e => (e.tags || []).includes('meta:dungeon_progress') && !usedMilestoneIds.includes(e.id))
+      if (milestoneCard) {
+        setUsedMilestoneIds(prev => [...prev, milestoneCard.id])
+        return milestoneCard
+      }
     }
     // Council cadence ~ every 5
     if (day % 5 === 0) {
@@ -71,6 +77,8 @@ export default function YesYourGoat() {
     const pool = events.filter(e => {
       const tags = e.tags || []
       if (tags.includes('run:intro') || tags.includes('run:outro')) return false
+      if (tags.includes('meta:dungeon_progress')) return false
+      if (tags.includes('meta:collapse')) return false
       const at = tags.find(t => t.startsWith('archetype:'))
       if (!at) return true
       const id = at.split(':')[1]
@@ -101,6 +109,8 @@ export default function YesYourGoat() {
       setMeters(nextMeters)
       setCurrent(collapseCard || null)
       setVictoryText(collapse)
+      setSummaryMeters(nextMeters)
+      setSummaryDay(day)
       // persistence: collapse_count and history
       const prev = Number(localStorage.getItem('yyg_collapse_count') || '0')
       localStorage.setItem('yyg_collapse_count', String(prev + 1))
@@ -185,12 +195,12 @@ export default function YesYourGoat() {
             <div className="text-xl font-bold mb-2">Run Collapsed</div>
             <div className="opacity-90 mb-4">{victoryText}</div>
             <div className="text-sm mb-4">
-              <div><span className="opacity-80">Day:</span> <span className="font-mono font-bold">{day}</span></div>
+              <div><span className="opacity-80">Day:</span> <span className="font-mono font-bold">{summaryDay ?? day}</span></div>
               <div><span className="opacity-80">Milestones reached:</span> <span className="font-mono font-bold">{journeyCount}/{milestones.length}</span></div>
               <div className="mt-2 flex gap-4">
-                <div>💰 <span className="font-mono">{meters.funds}</span></div>
-                <div>⭐ <span className="font-mono">{meters.reputation}</span></div>
-                <div>⚔️ <span className="font-mono">{meters.readiness}</span></div>
+                <div>💰 <span className="font-mono">{(summaryMeters ?? meters).funds}</span></div>
+                <div>⭐ <span className="font-mono">{(summaryMeters ?? meters).reputation}</span></div>
+                <div>⚔️ <span className="font-mono">{(summaryMeters ?? meters).readiness}</span></div>
               </div>
             </div>
             <div className="flex justify-end gap-3">
