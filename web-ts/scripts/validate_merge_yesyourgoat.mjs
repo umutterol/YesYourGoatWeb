@@ -17,6 +17,17 @@ function validateEvent(ev) {
   if (!ev.body || ev.body.length > 120) fail(`Event ${ev.id} body invalid (≤120)`)   
   if (!Array.isArray(ev.tags) || !ev.tags.length) fail(`Event ${ev.id} must have tags`)
   if (!ev.left || !ev.right) fail(`Event ${ev.id} must have two choices`)
+  // conversational authoring: require speaker for most runtime cards
+  const tags = ev.tags || []
+  const isCollapse = tags.includes('meta:collapse')
+  const isRunMeta = tags.includes('run:intro') || tags.includes('run:outro')
+  if (!isCollapse && !isRunMeta) {
+    if (!ev.speaker || typeof ev.speaker !== 'string') {
+      console.warn(`[YYG Validate] warn — Event ${ev.id} missing speaker (recommended)`) 
+    }
+    // portrait is optional but recommended; if provided, must be a string
+    if (ev.portrait !== undefined && typeof ev.portrait !== 'string') fail(`Event ${ev.id} portrait must be string if provided`)
+  }
   // enforce archetype allowlist if present
   const archetype = (ev.tags || []).find(t => t.startsWith('archetype:'))
   if (archetype) {

@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react'
 type Meters = { funds: number; reputation: number; readiness: number }
 type Effects = Partial<Meters & { morale_all: number }> & Record<string, number>
 type Choice = { label: string; effects: Effects; nextStep?: string }
-type EventCard = { id: string; title: string; body: string; tags?: string[]; left: Choice; right: Choice }
+type EventCard = { id: string; title: string; body: string; tags?: string[]; speaker?: string; portrait?: string; left: Choice; right: Choice }
 
 const CLAMP_MIN = 0, CLAMP_MAX = 10
 function clamp(v: number) { return Math.max(CLAMP_MIN, Math.min(CLAMP_MAX, v)) }
@@ -196,6 +196,18 @@ export default function YesYourGoat() {
       </div>
       {current && (
         <div className="border-2 border-[#654321] rounded-lg p-4 md:p-6 bg-[#8b4513] max-w-[720px]">
+          {(current.speaker || current.portrait) && (
+            <div className="flex items-center gap-3 mb-2">
+              {current.portrait && (
+                <img
+                  src={current.portrait}
+                  alt={current.speaker || 'speaker'}
+                  className="w-10 h-10 rounded-full object-cover border border-[#daa520]"
+                />
+              )}
+              <div className="text-sm opacity-90">{current.speaker}</div>
+            </div>
+          )}
           <div className="font-bold text-lg mb-2">{current.title}</div>
           <div className="opacity-90 mb-3 leading-relaxed">{current.body}</div>
           <div className="flex gap-3">

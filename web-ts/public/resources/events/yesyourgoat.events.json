@@ -2,18 +2,20 @@
   {
     "id": "bard_anthem_01",
     "title": "Anthem Request",
-    "body": "The Bard asks for time to write a guild anthem.",
+    "speaker": "Bard",
+    "portrait": "/resources/portraits/bard.png",
+    "body": "Give me time and I’ll write an anthem they’ll sing for years.",
     "tags": [
       "archetype:bard"
     ],
     "left": {
-      "label": "Give time",
+      "label": "Take the time.",
       "effects": {
         "reputation": 2
       }
     },
     "right": {
-      "label": "Push training",
+      "label": "Focus training.",
       "effects": {
         "readiness": 1,
         "morale_all": -1
@@ -23,18 +25,20 @@
   {
     "id": "bard_hype_01",
     "title": "Hype vs Honesty",
-    "body": "They ask whether to hype progress or keep it honest.",
+    "speaker": "Bard",
+    "portrait": "/resources/portraits/bard.png",
+    "body": "Should I hype our progress or keep it honest?",
     "tags": [
       "archetype:bard"
     ],
     "left": {
-      "label": "Hype it",
+      "label": "Hype it.",
       "effects": {
         "reputation": 1
       }
     },
     "right": {
-      "label": "Honest report",
+      "label": "Be honest.",
       "effects": {
         "readiness": 1
       }
@@ -43,19 +47,21 @@
   {
     "id": "merchant_tax_01",
     "title": "Guild Tax Talk",
-    "body": "The Merchant proposes a 3% guild tax for repairs.",
+    "speaker": "Merchant",
+    "portrait": "/resources/portraits/merchant.png",
+    "body": "Three percent dues covers repairs and potions. Sensible, yes?",
     "tags": [
       "archetype:merchant"
     ],
     "left": {
-      "label": "Approve tax",
+      "label": "Approve it.",
       "effects": {
         "funds": 2,
         "reputation": -1
       }
     },
     "right": {
-      "label": "Keep free",
+      "label": "Keep it free.",
       "effects": {
         "reputation": 1
       }
@@ -64,19 +70,21 @@
   {
     "id": "merchant_sale_01",
     "title": "Sell the Spare",
-    "body": "They offer to sell a duplicate item to fund potions.",
+    "speaker": "Merchant",
+    "portrait": "/resources/portraits/merchant.png",
+    "body": "Duplicate item gathering dust. Shall we sell to fund potions?",
     "tags": [
       "archetype:merchant"
     ],
     "left": {
-      "label": "Authorize sale",
+      "label": "Sell it.",
       "effects": {
         "funds": 2,
         "readiness": 1
       }
     },
     "right": {
-      "label": "Keep it banked",
+      "label": "Bank it.",
       "effects": {
         "reputation": 1
       }
@@ -85,19 +93,21 @@
   {
     "id": "recruiter_standards_01",
     "title": "Standards vs Numbers",
-    "body": "The Recruiter: lower standards to fill roster?",
+    "speaker": "Recruiter",
+    "portrait": "/resources/portraits/recruiter.png",
+    "body": "Lower standards to fill the roster, or keep the bar high?",
     "tags": [
       "archetype:recruiter"
     ],
     "left": {
-      "label": "Lower bar",
+      "label": "Lower it.",
       "effects": {
         "readiness": 1,
         "reputation": -1
       }
     },
     "right": {
-      "label": "Keep standards",
+      "label": "Keep it high.",
       "effects": {
         "reputation": 1
       }
@@ -106,19 +116,21 @@
   {
     "id": "recruiter_trials_01",
     "title": "Trial Spam",
-    "body": "They want to run back-to-back trials this week.",
+    "speaker": "Recruiter",
+    "portrait": "/resources/portraits/recruiter.png",
+    "body": "Back-to-back trials this week will fill slots fast. Approve?",
     "tags": [
       "archetype:recruiter"
     ],
     "left": {
-      "label": "Approve",
+      "label": "Approve.",
       "effects": {
         "readiness": 2,
         "morale_all": -1
       }
     },
     "right": {
-      "label": "Limit trials",
+      "label": "Limit it.",
       "effects": {
         "reputation": 1
       }
@@ -127,19 +139,21 @@
   {
     "id": "meta_intro_01",
     "title": "A New Charter",
-    "body": "The Moderator: Another guild. Another dream of legend.",
+    "speaker": "Moderator",
+    "portrait": "/resources/portraits/paladin.png",
+    "body": "Another guild. Another dream of legend. Ready to sign?",
     "tags": [
       "meta:moderator",
       "run:intro"
     ],
     "left": {
-      "label": "Nod solemnly",
+      "label": "We are.",
       "effects": {
         "reputation": 1
       }
     },
     "right": {
-      "label": "Talk big",
+      "label": "We’ll be legends.",
       "effects": {
         "reputation": 1
       }
@@ -148,20 +162,22 @@
   {
     "id": "journey_camp_01",
     "title": "First Camp",
-    "body": "You pitch camp on the road to the Legendary Dungeon.",
+    "speaker": "Quartermaster",
+    "portrait": "/resources/portraits/peon.png",
+    "body": "First camp. Drill a bit or let them rest?",
     "tags": [
       "meta:dungeon_progress",
       "journey:1"
     ],
     "left": {
-      "label": "Drill formations",
+      "label": "Drill.",
       "effects": {
         "readiness": 1,
         "funds": -1
       }
     },
     "right": {
-      "label": "Rest and chat",
+      "label": "Let them rest.",
       "effects": {
         "reputation": 1
       }
@@ -170,20 +186,22 @@
   {
     "id": "journey_gate_01",
     "title": "Distant Gates",
-    "body": "The gate glints on the horizon. Spirits rise, supplies thin.",
+    "speaker": "Scout",
+    "portrait": "/resources/portraits/warden.png",
+    "body": "Gates in sight. Spirits up, supplies thin. Ration or rally?",
     "tags": [
       "meta:dungeon_progress",
       "journey:3"
     ],
     "left": {
-      "label": "Ration strictly",
+      "label": "Ration.",
       "effects": {
         "funds": 1,
         "morale_all": -1
       }
     },
     "right": {
-      "label": "Boost morale",
+      "label": "Rally them.",
       "effects": {
         "funds": -1,
         "morale_all": 1
@@ -215,18 +233,20 @@
   {
     "id": "council_audit_01",
     "title": "Surprise Audit",
-    "body": "The Council audits your books; fees are due.",
+    "speaker": "Councilor",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "Your ledgers are… thin. Shall we settle the fees now, Guildmaster?",
     "tags": [
       "meta:council"
     ],
     "left": {
-      "label": "Pay fines",
+      "label": "We’ll pay.",
       "effects": {
         "funds": -2
       }
     },
     "right": {
-      "label": "Delay payment",
+      "label": "We’ll delay.",
       "effects": {
         "reputation": -2
       }
@@ -235,19 +255,21 @@
   {
     "id": "council_readiness_01",
     "title": "Training Standards",
-    "body": "Council: raise training intensity or lose standing.",
+    "speaker": "Councilor",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "Standards are slipping. Shall we raise intensity or accept penalties?",
     "tags": [
       "meta:council"
     ],
     "left": {
-      "label": "Intensify",
+      "label": "Raise it.",
       "effects": {
         "readiness": -2,
         "reputation": 1
       }
     },
     "right": {
-      "label": "Hold steady",
+      "label": "Accept penalty.",
       "effects": {
         "reputation": -2
       }
@@ -256,18 +278,20 @@
   {
     "id": "meta_maintenance_01",
     "title": "Maintenance Night",
-    "body": "Server downtime cuts your practice short.",
+    "speaker": "Quartermaster",
+    "portrait": "/resources/portraits/tinker.png",
+    "body": "Servers are down. Cancel drills or switch to theorycraft?",
     "tags": [
       "meta:maintenance"
     ],
     "left": {
-      "label": "Take the hit",
+      "label": "Cancel.",
       "effects": {
         "readiness": -2
       }
     },
     "right": {
-      "label": "Theorycraft only",
+      "label": "Theorycraft.",
       "effects": {
         "readiness": -1,
         "reputation": 1
@@ -277,19 +301,21 @@
   {
     "id": "rival_taunt_01",
     "title": "Rival’s Boast",
-    "body": "Rival Guildmaster: We’ll be at the gates long before you.",
+    "speaker": "Rival",
+    "portrait": "/resources/portraits/dreadlord.png",
+    "body": "We’ll be at the gates long before you. Care to embarrass yourselves sooner?",
     "tags": [
       "meta:rival"
     ],
     "left": {
-      "label": "Clap back",
+      "label": "We clap back.",
       "effects": {
         "reputation": 1,
         "readiness": -1
       }
     },
     "right": {
-      "label": "Ignore and grind",
+      "label": "Ignore it.",
       "effects": {
         "readiness": 1
       }
@@ -298,19 +324,21 @@
   {
     "id": "rival_sabotage_01",
     "title": "Sabotage Rumors",
-    "body": "Rival recruits snipe your parses; focus slips.",
+    "speaker": "Rival",
+    "portrait": "/resources/portraits/dreadlord.png",
+    "body": "Sloppy already? Your best parses look… fragile.",
     "tags": [
       "meta:rival"
     ],
     "left": {
-      "label": "Public callout",
+      "label": "Call them out.",
       "effects": {
         "reputation": -1,
         "readiness": -1
       }
     },
     "right": {
-      "label": "Refocus team",
+      "label": "Refocus team.",
       "effects": {
         "readiness": -2
       }
@@ -319,19 +347,21 @@
   {
     "id": "general_lead_01",
     "title": "Lead or Leave",
-    "body": "The General demands to lead the next push.",
+    "speaker": "General",
+    "portrait": "/resources/portraits/mountainking.png",
+    "body": "Give me the next push or find another tank.",
     "tags": [
       "archetype:general"
     ],
     "left": {
-      "label": "Hand him the reins",
+      "label": "You lead.",
       "effects": {
         "readiness": 1,
         "morale_all": -1
       }
     },
     "right": {
-      "label": "Deny firmly",
+      "label": "Not this time.",
       "effects": {
         "readiness": -1
       }
@@ -362,19 +392,21 @@
   {
     "id": "witch_ritual_01",
     "title": "Expedient Ritual",
-    "body": "The Witch proposes a risky damage ritual on trash packs.",
+    "speaker": "Witch",
+    "portrait": "/resources/portraits/sorceress.png",
+    "body": "A quick ritual boosts damage. It might sting. Approve?",
     "tags": [
       "archetype:witch"
     ],
     "left": {
-      "label": "Approve the risk",
+      "label": "Do it.",
       "effects": {
         "readiness": 2,
         "reputation": -1
       }
     },
     "right": {
-      "label": "Forbid it",
+      "label": "Not worth it.",
       "effects": {
         "readiness": -1,
         "reputation": 1
@@ -406,18 +438,20 @@
   {
     "id": "priest_burnout_01",
     "title": "Healer’s Threat",
-    "body": "The Priest: ‘No one respects healers. Maybe I stop trying.’",
+    "speaker": "Priest",
+    "portrait": "/resources/portraits/priestess.png",
+    "body": "No one respects healers. Maybe I stop trying.",
     "tags": [
       "archetype:priest"
     ],
     "left": {
-      "label": "Reassure in public",
+      "label": "You’re valued.",
       "effects": {
         "reputation": 1
       }
     },
     "right": {
-      "label": "Dismiss privately",
+      "label": "Do your job.",
       "effects": {
         "readiness": -1
       }
@@ -447,18 +481,20 @@
   {
     "id": "rogue_loot_01",
     "title": "Pocketed Trinket",
-    "body": "The Rogue ‘misplaces’ a shiny trinket.",
+    "speaker": "Rogue",
+    "portrait": "/resources/portraits/rogue.png",
+    "body": "What trinket? Must’ve slipped into my pocket.",
     "tags": [
       "archetype:rogue"
     ],
     "left": {
-      "label": "Crack down",
+      "label": "Return it.",
       "effects": {
         "reputation": 1
       }
     },
     "right": {
-      "label": "Let it slide",
+      "label": "Keep it.",
       "effects": {
         "readiness": -1
       }
@@ -539,17 +575,19 @@
   {
     "id": "meta_outro_01",
     "title": "The Dust Settles",
-    "body": "Moderator: Another fine failure. New charter?",
+    "speaker": "Moderator",
+    "portrait": "/resources/portraits/paladin.png",
+    "body": "Another fine failure. New charter?",
     "tags": [
       "meta:moderator",
       "run:outro"
     ],
     "left": {
-      "label": "Sign again",
+      "label": "Again.",
       "effects": {}
     },
     "right": {
-      "label": "Sign again",
+      "label": "Again.",
       "effects": {}
     }
   },

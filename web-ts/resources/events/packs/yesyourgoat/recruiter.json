@@ -2,18 +2,22 @@
   {
     "id": "recruiter_standards_01",
     "title": "Standards vs Numbers",
-    "body": "The Recruiter: lower standards to fill roster?",
+    "speaker": "Recruiter",
+    "portrait": "/resources/portraits/recruiter.png",
+    "body": "Lower standards to fill the roster, or keep the bar high?",
     "tags": ["archetype:recruiter"],
-    "left": {"label": "Lower bar", "effects": {"readiness": 1, "reputation": -1}},
-    "right": {"label": "Keep standards", "effects": {"reputation": 1}}
+    "left": {"label": "Lower it.", "effects": {"readiness": 1, "reputation": -1}},
+    "right": {"label": "Keep it high.", "effects": {"reputation": 1}}
   },
   {
     "id": "recruiter_trials_01",
     "title": "Trial Spam",
-    "body": "They want to run back-to-back trials this week.",
+    "speaker": "Recruiter",
+    "portrait": "/resources/portraits/recruiter.png",
+    "body": "Back-to-back trials this week will fill slots fast. Approve?",
     "tags": ["archetype:recruiter"],
-    "left": {"label": "Approve", "effects": {"readiness": 2, "morale_all": -1}},
-    "right": {"label": "Limit trials", "effects": {"reputation": 1}}
+    "left": {"label": "Approve.", "effects": {"readiness": 2, "morale_all": -1}},
+    "right": {"label": "Limit it.", "effects": {"reputation": 1}}
   }
 ]
 

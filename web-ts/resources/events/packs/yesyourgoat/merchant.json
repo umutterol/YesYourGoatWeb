@@ -2,18 +2,22 @@
   {
     "id": "merchant_tax_01",
     "title": "Guild Tax Talk",
-    "body": "The Merchant proposes a 3% guild tax for repairs.",
+    "speaker": "Merchant",
+    "portrait": "/resources/portraits/merchant.png",
+    "body": "Three percent dues covers repairs and potions. Sensible, yes?",
     "tags": ["archetype:merchant"],
-    "left": {"label": "Approve tax", "effects": {"funds": 2, "reputation": -1}},
-    "right": {"label": "Keep free", "effects": {"reputation": 1}}
+    "left": {"label": "Approve it.", "effects": {"funds": 2, "reputation": -1}},
+    "right": {"label": "Keep it free.", "effects": {"reputation": 1}}
   },
   {
     "id": "merchant_sale_01",
     "title": "Sell the Spare",
-    "body": "They offer to sell a duplicate item to fund potions.",
+    "speaker": "Merchant",
+    "portrait": "/resources/portraits/merchant.png",
+    "body": "Duplicate item gathering dust. Shall we sell to fund potions?",
     "tags": ["archetype:merchant"],
-    "left": {"label": "Authorize sale", "effects": {"funds": 2, "readiness": 1}},
-    "right": {"label": "Keep it banked", "effects": {"reputation": 1}}
+    "left": {"label": "Sell it.", "effects": {"funds": 2, "readiness": 1}},
+    "right": {"label": "Bank it.", "effects": {"reputation": 1}}
   }
 ]
 
