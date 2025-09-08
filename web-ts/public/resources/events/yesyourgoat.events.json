@@ -211,19 +211,21 @@
   {
     "id": "council_quota_01",
     "title": "Council Quotas",
-    "body": "The Council demands you maintain standards or lose your charter.",
+    "speaker": "Councilor",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "Your performance metrics are... concerning. Shall we discuss your charter renewal?",
     "tags": [
       "meta:council"
     ],
     "left": {
-      "label": "Invest in training",
+      "label": "We'll invest more.",
       "effects": {
         "funds": -1,
         "readiness": 2
       }
     },
     "right": {
-      "label": "Massage the numbers",
+      "label": "The numbers are fine.",
       "effects": {
         "reputation": -2,
         "readiness": 1
@@ -370,19 +372,21 @@
   {
     "id": "general_loot_01",
     "title": "Shield of Promise",
-    "body": "A bulwark drops. The General says it’s his by right.",
+    "speaker": "General",
+    "portrait": "/resources/portraits/mountainking.png",
+    "body": "That bulwark is mine by right of service. Award it now or face the consequences.",
     "tags": [
       "archetype:general"
     ],
     "left": {
-      "label": "Award now",
+      "label": "It's yours.",
       "effects": {
         "readiness": 1,
         "reputation": -1
       }
     },
     "right": {
-      "label": "Roll fairly",
+      "label": "We roll fairly.",
       "effects": {
         "reputation": 1,
         "morale_all": -1
@@ -416,19 +420,21 @@
   {
     "id": "witch_aoe_01",
     "title": "Collateral Fire",
-    "body": "Her AoE singes allies. Complaints flare.",
+    "speaker": "Witch",
+    "portrait": "/resources/portraits/sorceress.png",
+    "body": "My flames may singe a few allies, but the damage output is worth it. Trust me?",
     "tags": [
       "archetype:witch"
     ],
     "left": {
-      "label": "Public scold",
+      "label": "Control your magic.",
       "effects": {
         "funds": -1,
         "readiness": 1
       }
     },
     "right": {
-      "label": "Excuse it as progress",
+      "label": "It's progress.",
       "effects": {
         "reputation": 1,
         "morale_all": -1
@@ -460,19 +466,21 @@
   {
     "id": "priest_supplies_01",
     "title": "Potion Budget",
-    "body": "They request a bigger budget for consumables.",
+    "speaker": "Priest",
+    "portrait": "/resources/portraits/priestess.png",
+    "body": "Our healing supplies are running low. Can we increase the potion budget?",
     "tags": [
       "archetype:priest"
     ],
     "left": {
-      "label": "Fund generously",
+      "label": "Fund generously.",
       "effects": {
         "funds": -2,
         "readiness": 1
       }
     },
     "right": {
-      "label": "Refuse for now",
+      "label": "Not right now.",
       "effects": {
         "readiness": -1
       }
@@ -503,19 +511,21 @@
   {
     "id": "rogue_shortcut_01",
     "title": "Skip the Slow Boss",
-    "body": "They suggest skipping a loot-poor boss for speed.",
+    "speaker": "Rogue",
+    "portrait": "/resources/portraits/rogue.png",
+    "body": "That boss drops nothing useful. We could skip it and save time. What do you say?",
     "tags": [
       "archetype:rogue"
     ],
     "left": {
-      "label": "Approve speedrun",
+      "label": "Speedrun it.",
       "effects": {
         "readiness": 1,
         "funds": -1
       }
     },
     "right": {
-      "label": "Full clear",
+      "label": "Full clear.",
       "effects": {
         "reputation": 1
       }
@@ -594,18 +604,20 @@
   {
     "id": "general_strategy_01",
     "title": "Rigid Strategy",
-    "body": "The General insists on the same plan every push.",
+    "speaker": "General",
+    "portrait": "/resources/portraits/mountainking.png",
+    "body": "The plan worked before. Why change what brings victory? Trust in proven tactics.",
     "tags": [
       "archetype:general"
     ],
     "left": {
-      "label": "Follow plan",
+      "label": "Follow the plan.",
       "effects": {
         "readiness": 1
       }
     },
     "right": {
-      "label": "Adapt on fly",
+      "label": "Adapt as needed.",
       "effects": {
         "reputation": 1,
         "morale_all": -1
@@ -615,19 +627,21 @@
   {
     "id": "witch_tome_01",
     "title": "Forbidden Tome",
-    "body": "The Witch finds a tome promising power at a cost.",
+    "speaker": "Witch",
+    "portrait": "/resources/portraits/sorceress.png",
+    "body": "I found ancient knowledge that could make us unstoppable. The price might be... steep.",
     "tags": [
       "archetype:witch"
     ],
     "left": {
-      "label": "Skim quickly",
+      "label": "Use it carefully.",
       "effects": {
         "readiness": 1,
         "reputation": -1
       }
     },
     "right": {
-      "label": "Lock it away",
+      "label": "Lock it away.",
       "effects": {
         "reputation": 1
       }
@@ -636,19 +650,21 @@
   {
     "id": "priest_shift_01",
     "title": "Extra Shift",
-    "body": "The Priest offers to cover burnout for one more week.",
+    "speaker": "Priest",
+    "portrait": "/resources/portraits/priestess.png",
+    "body": "I can push through one more week. The divine light still burns within me.",
     "tags": [
       "archetype:priest"
     ],
     "left": {
-      "label": "Accept help",
+      "label": "Accept the help.",
       "effects": {
         "readiness": 1,
         "morale_all": -1
       }
     },
     "right": {
-      "label": "Force rest",
+      "label": "Rest is needed.",
       "effects": {
         "reputation": 1
       }
@@ -657,18 +673,20 @@
   {
     "id": "rogue_stream_01",
     "title": "Stream the Run",
-    "body": "The Rogue wants to stream tonight’s push.",
+    "speaker": "Rogue",
+    "portrait": "/resources/portraits/rogue.png",
+    "body": "I could stream tonight's push. Might bring in some viewers and gold. Worth it?",
     "tags": [
       "archetype:rogue"
     ],
     "left": {
-      "label": "Permit stream",
+      "label": "Go for it.",
       "effects": {
         "reputation": 1
       }
     },
     "right": {
-      "label": "No distractions",
+      "label": "Focus on the run.",
       "effects": {
         "readiness": 1
       }
@@ -833,6 +851,102 @@
       "label": "Play through",
       "effects": {
         "readiness": -2
+      }
+    }
+  },
+  {
+    "id": "ogrrynn_legion_01",
+    "title": "Ogrrynn Legion",
+    "speaker": "Ogrrynn Commander",
+    "portrait": "/resources/portraits/mountainking.png",
+    "body": "The Ogrrynn Empire offers military support. Their discipline is legendary, but their methods are... harsh.",
+    "tags": [
+      "race:ogrrynn"
+    ],
+    "left": {
+      "label": "Accept their aid.",
+      "effects": {
+        "readiness": 2,
+        "morale_all": -1
+      }
+    },
+    "right": {
+      "label": "Politely decline.",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "dwarven_oil_01",
+    "title": "Dwarven Oil Trade",
+    "speaker": "Dwarven Merchant",
+    "portrait": "/resources/portraits/tinker.png",
+    "body": "The Sultanate offers oil-powered contraptions. They're expensive but incredibly effective.",
+    "tags": [
+      "race:dwarven"
+    ],
+    "left": {
+      "label": "Invest in oil tech.",
+      "effects": {
+        "funds": -2,
+        "readiness": 2
+      }
+    },
+    "right": {
+      "label": "Stick to basics.",
+      "effects": {
+        "funds": 1,
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "elf_ritual_01",
+    "title": "Elven Blood Ritual",
+    "speaker": "Elven Shaman",
+    "portrait": "/resources/portraits/sorceress.png",
+    "body": "The jungle tribes offer ancient rituals for power. They require... sacrifice.",
+    "tags": [
+      "race:elf"
+    ],
+    "left": {
+      "label": "Accept the ritual.",
+      "effects": {
+        "readiness": 3,
+        "reputation": -2
+      }
+    },
+    "right": {
+      "label": "Reject their ways.",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "human_diplomacy_01",
+    "title": "Human Mediation",
+    "speaker": "Human Diplomat",
+    "portrait": "/resources/portraits/paladin.png",
+    "body": "The old empire offers to mediate between guilds. They're experienced but... boring.",
+    "tags": [
+      "race:human"
+    ],
+    "left": {
+      "label": "Accept mediation.",
+      "effects": {
+        "reputation": 2,
+        "readiness": -1
+      }
+    },
+    "right": {
+      "label": "Handle it ourselves.",
+      "effects": {
+        "readiness": 1,
+        "reputation": -1
       }
     }
   },
