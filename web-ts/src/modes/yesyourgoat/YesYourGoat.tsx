@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 type Meters = { funds: number; reputation: number; readiness: number }
 type Effects = Partial<Meters & { morale_all: number }> & Record<string, number>
@@ -81,9 +81,9 @@ export default function YesYourGoat() {
     const collapse = collapseIfAnyZero(nextMeters)
     if (collapse) {
       const causeTag = nextMeters.funds <= 0 ? 'cause:funds' : nextMeters.reputation <= 0 ? 'cause:reputation' : 'cause:readiness'
-      let collapseCard = events.find(e => (e.tags || []).includes('meta:collapse') && (e.tags || []).includes(causeTag))
+      let collapseCard: EventCard | null = events.find(e => (e.tags || []).includes('meta:collapse') && (e.tags || []).includes(causeTag)) ?? null
       if (!collapseCard) {
-        collapseCard = events.find(e => (e.tags || []).includes('meta:collapse')) || null
+        collapseCard = events.find(e => (e.tags || []).includes('meta:collapse')) ?? null
       }
       setMeters(nextMeters)
       setCurrent(collapseCard || null)

@@ -1,0 +1,349 @@
+[
+  {
+    "id": "meta_intro_01",
+    "title": "A New Charter",
+    "body": "The Moderator: Another guild. Another dream of legend.",
+    "tags": [
+      "meta:moderator",
+      "run:intro"
+    ],
+    "left": {
+      "label": "Nod solemnly",
+      "effects": {
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Talk big",
+      "effects": {
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "journey_camp_01",
+    "title": "First Camp",
+    "body": "You pitch camp on the road to the Legendary Dungeon.",
+    "tags": [
+      "meta:dungeon_progress",
+      "journey:1"
+    ],
+    "left": {
+      "label": "Drill formations",
+      "effects": {
+        "readiness": 1,
+        "funds": -1
+      }
+    },
+    "right": {
+      "label": "Rest and chat",
+      "effects": {
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "journey_gate_01",
+    "title": "Distant Gates",
+    "body": "The gate glints on the horizon. Spirits rise, supplies thin.",
+    "tags": [
+      "meta:dungeon_progress",
+      "journey:3"
+    ],
+    "left": {
+      "label": "Ration strictly",
+      "effects": {
+        "funds": 1,
+        "morale_all": -1
+      }
+    },
+    "right": {
+      "label": "Boost morale",
+      "effects": {
+        "funds": -1,
+        "morale_all": 1
+      }
+    }
+  },
+  {
+    "id": "council_quota_01",
+    "title": "Council Quotas",
+    "body": "The Council demands you maintain standards or lose your charter.",
+    "tags": [
+      "meta:council"
+    ],
+    "left": {
+      "label": "Invest in training",
+      "effects": {
+        "funds": -2,
+        "readiness": 2
+      }
+    },
+    "right": {
+      "label": "Massage the numbers",
+      "effects": {
+        "reputation": -2,
+        "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "rival_taunt_01",
+    "title": "Rival’s Boast",
+    "body": "Rival Guildmaster: We’ll be at the gates long before you.",
+    "tags": [
+      "meta:rival"
+    ],
+    "left": {
+      "label": "Clap back",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    },
+    "right": {
+      "label": "Ignore and grind",
+      "effects": {
+        "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "general_lead_01",
+    "title": "Lead or Leave",
+    "body": "The General demands to lead the next push.",
+    "tags": [
+      "archetype:general"
+    ],
+    "left": {
+      "label": "Hand him the reins",
+      "effects": {
+        "readiness": 1,
+        "morale_all": -1
+      }
+    },
+    "right": {
+      "label": "Deny firmly",
+      "effects": {
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "general_loot_01",
+    "title": "Shield of Promise",
+    "body": "A bulwark drops. The General says it’s his by right.",
+    "tags": [
+      "archetype:general"
+    ],
+    "left": {
+      "label": "Award now",
+      "effects": {
+        "readiness": 1,
+        "reputation": -1
+      }
+    },
+    "right": {
+      "label": "Roll fairly",
+      "effects": {
+        "reputation": 1,
+        "morale_all": -1
+      }
+    }
+  },
+  {
+    "id": "witch_ritual_01",
+    "title": "Expedient Ritual",
+    "body": "The Witch proposes a risky damage ritual on trash packs.",
+    "tags": [
+      "archetype:witch"
+    ],
+    "left": {
+      "label": "Approve the risk",
+      "effects": {
+        "readiness": 2,
+        "reputation": -1
+      }
+    },
+    "right": {
+      "label": "Forbid it",
+      "effects": {
+        "readiness": -1,
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "witch_aoe_01",
+    "title": "Collateral Fire",
+    "body": "Her AoE singes allies. Complaints flare.",
+    "tags": [
+      "archetype:witch"
+    ],
+    "left": {
+      "label": "Public scold",
+      "effects": {
+        "reputation": -1,
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Excuse it as progress",
+      "effects": {
+        "reputation": 1,
+        "morale_all": -1
+      }
+    }
+  },
+  {
+    "id": "priest_burnout_01",
+    "title": "Healer’s Threat",
+    "body": "The Priest: ‘No one respects healers. Maybe I stop trying.’",
+    "tags": [
+      "archetype:priest"
+    ],
+    "left": {
+      "label": "Reassure in public",
+      "effects": {
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Dismiss privately",
+      "effects": {
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "priest_supplies_01",
+    "title": "Potion Budget",
+    "body": "They request a bigger budget for consumables.",
+    "tags": [
+      "archetype:priest"
+    ],
+    "left": {
+      "label": "Fund generously",
+      "effects": {
+        "funds": -2,
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Refuse for now",
+      "effects": {
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "rogue_loot_01",
+    "title": "Pocketed Trinket",
+    "body": "The Rogue ‘misplaces’ a shiny trinket.",
+    "tags": [
+      "archetype:rogue"
+    ],
+    "left": {
+      "label": "Crack down",
+      "effects": {
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Let it slide",
+      "effects": {
+        "readiness": 1,
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "rogue_shortcut_01",
+    "title": "Skip the Slow Boss",
+    "body": "They suggest skipping a loot-poor boss for speed.",
+    "tags": [
+      "archetype:rogue"
+    ],
+    "left": {
+      "label": "Approve speedrun",
+      "effects": {
+        "readiness": 1,
+        "funds": -1
+      }
+    },
+    "right": {
+      "label": "Full clear",
+      "effects": {
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "collapse_morale_01",
+    "title": "Mass Exodus",
+    "body": "Morale implodes; raiders leave in droves.",
+    "tags": [
+      "meta:collapse",
+      "cause:morale"
+    ],
+    "left": {
+      "label": "Accept defeat",
+      "effects": {}
+    },
+    "right": {
+      "label": "Accept defeat",
+      "effects": {}
+    }
+  },
+  {
+    "id": "collapse_funds_01",
+    "title": "Bankrupt Guild",
+    "body": "The coffers run dry. No repairs. No fees.",
+    "tags": [
+      "meta:collapse",
+      "cause:funds"
+    ],
+    "left": {
+      "label": "Accept defeat",
+      "effects": {}
+    },
+    "right": {
+      "label": "Accept defeat",
+      "effects": {}
+    }
+  },
+  {
+    "id": "collapse_rep_01",
+    "title": "Forgotten Name",
+    "body": "The server shrugs; no one joins.",
+    "tags": [
+      "meta:collapse",
+      "cause:reputation"
+    ],
+    "left": {
+      "label": "Accept defeat",
+      "effects": {}
+    },
+    "right": {
+      "label": "Accept defeat",
+      "effects": {}
+    }
+  },
+  {
+    "id": "meta_outro_01",
+    "title": "The Dust Settles",
+    "body": "Moderator: Another fine failure. New charter?",
+    "tags": [
+      "meta:moderator",
+      "run:outro"
+    ],
+    "left": {
+      "label": "Sign again",
+      "effects": {}
+    },
+    "right": {
+      "label": "Sign again",
+      "effects": {}
+    }
+  }
+]
