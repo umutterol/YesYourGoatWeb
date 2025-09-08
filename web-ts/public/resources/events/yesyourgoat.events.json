@@ -200,7 +200,7 @@
     "left": {
       "label": "Invest in training",
       "effects": {
-        "funds": -2,
+        "funds": -1,
         "readiness": 2
       }
     },
@@ -209,6 +209,68 @@
       "effects": {
         "reputation": -2,
         "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "council_audit_01",
+    "title": "Surprise Audit",
+    "body": "The Council audits your books; fees are due.",
+    "tags": [
+      "meta:council"
+    ],
+    "left": {
+      "label": "Pay fines",
+      "effects": {
+        "funds": -2
+      }
+    },
+    "right": {
+      "label": "Delay payment",
+      "effects": {
+        "reputation": -2
+      }
+    }
+  },
+  {
+    "id": "council_readiness_01",
+    "title": "Training Standards",
+    "body": "Council: raise training intensity or lose standing.",
+    "tags": [
+      "meta:council"
+    ],
+    "left": {
+      "label": "Intensify",
+      "effects": {
+        "readiness": -2,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Hold steady",
+      "effects": {
+        "reputation": -2
+      }
+    }
+  },
+  {
+    "id": "meta_maintenance_01",
+    "title": "Maintenance Night",
+    "body": "Server downtime cuts your practice short.",
+    "tags": [
+      "meta:maintenance"
+    ],
+    "left": {
+      "label": "Take the hit",
+      "effects": {
+        "readiness": -2
+      }
+    },
+    "right": {
+      "label": "Theorycraft only",
+      "effects": {
+        "readiness": -1,
+        "reputation": 1
       }
     }
   },
@@ -230,6 +292,27 @@
       "label": "Ignore and grind",
       "effects": {
         "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "rival_sabotage_01",
+    "title": "Sabotage Rumors",
+    "body": "Rival recruits snipe your parses; focus slips.",
+    "tags": [
+      "meta:rival"
+    ],
+    "left": {
+      "label": "Public callout",
+      "effects": {
+        "reputation": -1,
+        "readiness": -1
+      }
+    },
+    "right": {
+      "label": "Refocus team",
+      "effects": {
+        "readiness": -2
       }
     }
   },
@@ -308,7 +391,7 @@
     "left": {
       "label": "Public scold",
       "effects": {
-        "reputation": -1,
+        "funds": -1,
         "readiness": 1
       }
     },
@@ -377,8 +460,7 @@
     "right": {
       "label": "Let it slide",
       "effects": {
-        "readiness": 1,
-        "reputation": -1
+        "readiness": -1
       }
     }
   },
@@ -551,6 +633,1814 @@
       "label": "No distractions",
       "effects": {
         "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "meta_pr_scandal_01",
+    "title": "PR Scandal",
+    "body": "A clip goes viral; accusations fly.",
+    "tags": [
+      "meta:pr"
+    ],
+    "left": {
+      "label": "Apologize",
+      "effects": {
+        "reputation": -1
+      }
+    },
+    "right": {
+      "label": "Double down",
+      "effects": {
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "training_accident_01",
+    "title": "Training Accident",
+    "body": "Sparring injures two raiders.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Push through",
+      "effects": {
+        "readiness": -2
+      }
+    },
+    "right": {
+      "label": "Cancel session",
+      "effects": {
+        "readiness": -1,
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "streamer_backlash_01",
+    "title": "Streamer Backlash",
+    "body": "A mid-tier streamer trashes your comp.",
+    "tags": [
+      "meta:pr"
+    ],
+    "left": {
+      "label": "Respond calmly",
+      "effects": {
+        "reputation": -1
+      }
+    },
+    "right": {
+      "label": "Start a feud",
+      "effects": {
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "patch_emergency_01",
+    "title": "Patch Emergency",
+    "body": "Hotfix breaks a core rotation.",
+    "tags": [
+      "meta:maintenance"
+    ],
+    "left": {
+      "label": "Relearn fast",
+      "effects": {
+        "readiness": -2
+      }
+    },
+    "right": {
+      "label": "Wait it out",
+      "effects": {
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "burnout_cycle_01",
+    "title": "Burnout Cycle",
+    "body": "Back-to-back pushes wear the roster thin.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Push again",
+      "effects": {
+        "readiness": -2
+      }
+    },
+    "right": {
+      "label": "Light week",
+      "effects": {
+        "readiness": -1,
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "strategy_overhaul_01",
+    "title": "Strategy Overhaul",
+    "body": "New strat invalidates last week’s prep.",
+    "tags": [
+      "meta:maintenance"
+    ],
+    "left": {
+      "label": "Switch now",
+      "effects": {
+        "readiness": -2
+      }
+    },
+    "right": {
+      "label": "Stay course",
+      "effects": {
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "meta_scrim_fail_01",
+    "title": "Scrim Failure",
+    "body": "Practice versus rivals goes poorly.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Analyze later",
+      "effects": {
+        "readiness": -2
+      }
+    },
+    "right": {
+      "label": "Immediate rematch",
+      "effects": {
+        "readiness": -2
+      }
+    }
+  },
+  {
+    "id": "weather_lag_01",
+    "title": "Lag Storm",
+    "body": "Network hiccups ruin execution.",
+    "tags": [
+      "meta:maintenance"
+    ],
+    "left": {
+      "label": "Call early",
+      "effects": {
+        "readiness": -2
+      }
+    },
+    "right": {
+      "label": "Play through",
+      "effects": {
+        "readiness": -2
+      }
+    }
+  },
+  {
+    "id": "general_reshuffle_01",
+    "title": "Role Reshuffle",
+    "body": "The General demands a mid-run role swap.",
+    "tags": [
+      "archetype:general"
+    ],
+    "left": {
+      "label": "Approve swap",
+      "effects": {
+        "readiness": -2
+      }
+    },
+    "right": {
+      "label": "Hold roles",
+      "effects": {
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "general_discipline_01",
+    "title": "Discipline Problem",
+    "body": "The General wants to bench a slacking raider.",
+    "tags": [
+      "archetype:general"
+    ],
+    "left": {
+      "label": "Support discipline",
+      "effects": {
+        "readiness": 1,
+        "morale_all": -1
+      }
+    },
+    "right": {
+      "label": "Give second chance",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "general_gear_01",
+    "title": "Gear Priority",
+    "body": "The General demands first pick on all tank gear.",
+    "tags": [
+      "archetype:general"
+    ],
+    "left": {
+      "label": "Agree to terms",
+      "effects": {
+        "readiness": 1,
+        "reputation": -1
+      }
+    },
+    "right": {
+      "label": "Fair distribution",
+      "effects": {
+        "reputation": 1,
+        "morale_all": -1
+      }
+    }
+  },
+  {
+    "id": "general_retreat_01",
+    "title": "Tactical Retreat",
+    "body": "The General calls for a full retreat mid-pull.",
+    "tags": [
+      "archetype:general"
+    ],
+    "left": {
+      "label": "Trust judgment",
+      "effects": {
+        "readiness": -1,
+        "funds": 1
+      }
+    },
+    "right": {
+      "label": "Push forward",
+      "effects": {
+        "readiness": -2,
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "general_recruit_01",
+    "title": "Recruitment Drive",
+    "body": "The General wants to recruit more tanks.",
+    "tags": [
+      "archetype:general"
+    ],
+    "left": {
+      "label": "Fund recruitment",
+      "effects": {
+        "funds": -2,
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Work with current",
+      "effects": {
+        "readiness": -1,
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "witch_experiment_01",
+    "title": "Dangerous Experiment",
+    "body": "The Witch wants to test a new damage rotation.",
+    "tags": [
+      "archetype:witch"
+    ],
+    "left": {
+      "label": "Allow testing",
+      "effects": {
+        "readiness": 2,
+        "funds": -1
+      }
+    },
+    "right": {
+      "label": "Stick to known",
+      "effects": {
+        "readiness": -1,
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "witch_curse_01",
+    "title": "Cursed Loot",
+    "body": "The Witch claims a piece of loot is cursed.",
+    "tags": [
+      "archetype:witch"
+    ],
+    "left": {
+      "label": "Destroy it",
+      "effects": {
+        "funds": -1,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Use anyway",
+      "effects": {
+        "readiness": 1,
+        "morale_all": -1
+      }
+    }
+  },
+  {
+    "id": "witch_ritual_02",
+    "title": "Blood Ritual",
+    "body": "The Witch proposes a risky power ritual.",
+    "tags": [
+      "archetype:witch"
+    ],
+    "left": {
+      "label": "Forbid it",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    },
+    "right": {
+      "label": "Supervise closely",
+      "effects": {
+        "readiness": 1,
+        "funds": -1
+      }
+    }
+  },
+  {
+    "id": "witch_mana_01",
+    "title": "Mana Burnout",
+    "body": "The Witch overexerts and needs rest.",
+    "tags": [
+      "archetype:witch"
+    ],
+    "left": {
+      "label": "Force rest",
+      "effects": {
+        "readiness": -1,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Push through",
+      "effects": {
+        "readiness": -2,
+        "morale_all": -1
+      }
+    }
+  },
+  {
+    "id": "witch_familiar_01",
+    "title": "Familiar Trouble",
+    "body": "The Witch's familiar causes chaos in camp.",
+    "tags": [
+      "archetype:witch"
+    ],
+    "left": {
+      "label": "Banish familiar",
+      "effects": {
+        "readiness": 1,
+        "morale_all": -1
+      }
+    },
+    "right": {
+      "label": "Work around it",
+      "effects": {
+        "readiness": -1,
+        "funds": -1
+      }
+    }
+  },
+  {
+    "id": "priest_healing_01",
+    "title": "Healing Crisis",
+    "body": "The Priest struggles with complex healing mechanics.",
+    "tags": [
+      "archetype:priest"
+    ],
+    "left": {
+      "label": "Provide training",
+      "effects": {
+        "funds": -1,
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Simplify strategy",
+      "effects": {
+        "readiness": -1,
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "priest_faith_01",
+    "title": "Crisis of Faith",
+    "body": "The Priest questions their divine calling.",
+    "tags": [
+      "archetype:priest"
+    ],
+    "left": {
+      "label": "Reassure them",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    },
+    "right": {
+      "label": "Let them decide",
+      "effects": {
+        "readiness": -1,
+        "morale_all": -1
+      }
+    }
+  },
+  {
+    "id": "priest_blessing_01",
+    "title": "Divine Blessing",
+    "body": "The Priest offers to bless the raid.",
+    "tags": [
+      "archetype:priest"
+    ],
+    "left": {
+      "label": "Accept blessing",
+      "effects": {
+        "readiness": 1,
+        "funds": -1
+      }
+    },
+    "right": {
+      "label": "Decline politely",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "priest_confession_01",
+    "title": "Confession Time",
+    "body": "The Priest wants to hear everyone's sins.",
+    "tags": [
+      "archetype:priest"
+    ],
+    "left": {
+      "label": "Encourage sharing",
+      "effects": {
+        "morale_all": 1,
+        "readiness": -1
+      }
+    },
+    "right": {
+      "label": "Keep it private",
+      "effects": {
+        "readiness": 1,
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "priest_sacrifice_01",
+    "title": "Personal Sacrifice",
+    "body": "The Priest offers to take on extra healing duties.",
+    "tags": [
+      "archetype:priest"
+    ],
+    "left": {
+      "label": "Accept help",
+      "effects": {
+        "readiness": 1,
+        "morale_all": -1
+      }
+    },
+    "right": {
+      "label": "Share the load",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "rogue_stealth_01",
+    "title": "Stealth Mission",
+    "body": "The Rogue wants to scout ahead alone.",
+    "tags": [
+      "archetype:rogue"
+    ],
+    "left": {
+      "label": "Allow scouting",
+      "effects": {
+        "readiness": 1,
+        "funds": -1
+      }
+    },
+    "right": {
+      "label": "Stay together",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "rogue_trap_01",
+    "title": "Trap Expert",
+    "body": "The Rogue offers to handle all trap disarming.",
+    "tags": [
+      "archetype:rogue"
+    ],
+    "left": {
+      "label": "Accept expertise",
+      "effects": {
+        "readiness": 1,
+        "morale_all": -1
+      }
+    },
+    "right": {
+      "label": "Share knowledge",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "rogue_gambling_01",
+    "title": "Gambling Problem",
+    "body": "The Rogue bets guild funds on raid outcomes.",
+    "tags": [
+      "archetype:rogue"
+    ],
+    "left": {
+      "label": "Stop the betting",
+      "effects": {
+        "funds": 1,
+        "reputation": -1
+      }
+    },
+    "right": {
+      "label": "Let them play",
+      "effects": {
+        "funds": -2,
+        "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "rogue_poison_01",
+    "title": "Poisoned Blade",
+    "body": "The Rogue wants to use poison on bosses.",
+    "tags": [
+      "archetype:rogue"
+    ],
+    "left": {
+      "label": "Approve poison",
+      "effects": {
+        "readiness": 1,
+        "reputation": -1
+      }
+    },
+    "right": {
+      "label": "Keep it clean",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "rogue_lockpick_01",
+    "title": "Lockpicking Contest",
+    "body": "The Rogue challenges others to a lockpicking contest.",
+    "tags": [
+      "archetype:rogue"
+    ],
+    "left": {
+      "label": "Join the fun",
+      "effects": {
+        "morale_all": 1,
+        "readiness": -1
+      }
+    },
+    "right": {
+      "label": "Stay focused",
+      "effects": {
+        "readiness": 1,
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "council_fees_01",
+    "title": "Rising Fees",
+    "body": "The Council increases guild registration fees.",
+    "tags": [
+      "meta:council"
+    ],
+    "left": {
+      "label": "Pay immediately",
+      "effects": {
+        "funds": -2
+      }
+    },
+    "right": {
+      "label": "Negotiate delay",
+      "effects": {
+        "reputation": -1,
+        "funds": -1
+      }
+    }
+  },
+  {
+    "id": "council_inspection_01",
+    "title": "Safety Inspection",
+    "body": "The Council inspects your training facilities.",
+    "tags": [
+      "meta:council"
+    ],
+    "left": {
+      "label": "Show everything",
+      "effects": {
+        "reputation": 1,
+        "funds": -1
+      }
+    },
+    "right": {
+      "label": "Hide problems",
+      "effects": {
+        "reputation": -2,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "council_standards_01",
+    "title": "New Standards",
+    "body": "The Council raises minimum performance requirements.",
+    "tags": [
+      "meta:council"
+    ],
+    "left": {
+      "label": "Meet standards",
+      "effects": {
+        "readiness": -2,
+        "funds": -1
+      }
+    },
+    "right": {
+      "label": "Appeal decision",
+      "effects": {
+        "reputation": -1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "council_competition_01",
+    "title": "Guild Competition",
+    "body": "The Council announces a guild vs guild tournament.",
+    "tags": [
+      "meta:council"
+    ],
+    "left": {
+      "label": "Enter competition",
+      "effects": {
+        "funds": -1,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Skip this year",
+      "effects": {
+        "reputation": -1,
+        "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "council_penalty_01",
+    "title": "Performance Penalty",
+    "body": "The Council fines you for poor performance.",
+    "tags": [
+      "meta:council"
+    ],
+    "left": {
+      "label": "Pay penalty",
+      "effects": {
+        "funds": -2
+      }
+    },
+    "right": {
+      "label": "Challenge fine",
+      "effects": {
+        "reputation": -2,
+        "funds": -1
+      }
+    }
+  },
+  {
+    "id": "rival_recruit_01",
+    "title": "Recruitment War",
+    "body": "Rival guild poaches your best raider.",
+    "tags": [
+      "meta:rival"
+    ],
+    "left": {
+      "label": "Counter-offer",
+      "effects": {
+        "funds": -2,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Let them go",
+      "effects": {
+        "readiness": -1,
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "rival_rumor_01",
+    "title": "Rumors Spread",
+    "body": "Rival guild spreads rumors about your methods.",
+    "tags": [
+      "meta:rival"
+    ],
+    "left": {
+      "label": "Deny publicly",
+      "effects": {
+        "reputation": 1,
+        "funds": -1
+      }
+    },
+    "right": {
+      "label": "Ignore rumors",
+      "effects": {
+        "reputation": -1,
+        "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "rival_challenge_01",
+    "title": "Direct Challenge",
+    "body": "Rival guildmaster challenges you to a duel.",
+    "tags": [
+      "meta:rival"
+    ],
+    "left": {
+      "label": "Accept duel",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    },
+    "right": {
+      "label": "Decline politely",
+      "effects": {
+        "reputation": -1,
+        "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "rival_sabotage_02",
+    "title": "Equipment Sabotage",
+    "body": "Rival guild damages your training equipment.",
+    "tags": [
+      "meta:rival"
+    ],
+    "left": {
+      "label": "Replace gear",
+      "effects": {
+        "funds": -2,
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Work around it",
+      "effects": {
+        "readiness": -2,
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "rival_spy_01",
+    "title": "Spy in Ranks",
+    "body": "You suspect a rival spy in your guild.",
+    "tags": [
+      "meta:rival"
+    ],
+    "left": {
+      "label": "Investigate thoroughly",
+      "effects": {
+        "funds": -1,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Trust everyone",
+      "effects": {
+        "reputation": -1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "meta_server_01",
+    "title": "Server Maintenance",
+    "body": "Extended server downtime disrupts training.",
+    "tags": [
+      "meta:maintenance"
+    ],
+    "left": {
+      "label": "Wait patiently",
+      "effects": {
+        "readiness": -1,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Find alternatives",
+      "effects": {
+        "funds": -1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "meta_patch_01",
+    "title": "Balance Patch",
+    "body": "A major patch changes class mechanics.",
+    "tags": [
+      "meta:maintenance"
+    ],
+    "left": {
+      "label": "Adapt quickly",
+      "effects": {
+        "readiness": -2,
+        "funds": -1
+      }
+    },
+    "right": {
+      "label": "Wait and see",
+      "effects": {
+        "reputation": -1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "meta_lag_01",
+    "title": "Network Issues",
+    "body": "Persistent lag makes raiding difficult.",
+    "tags": [
+      "meta:maintenance"
+    ],
+    "left": {
+      "label": "Upgrade connection",
+      "effects": {
+        "funds": -2,
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Work through it",
+      "effects": {
+        "readiness": -2,
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "meta_ddos_01",
+    "title": "DDoS Attack",
+    "body": "Servers are under attack; raids are cancelled.",
+    "tags": [
+      "meta:maintenance"
+    ],
+    "left": {
+      "label": "Reschedule raids",
+      "effects": {
+        "reputation": 1,
+        "funds": -1
+      }
+    },
+    "right": {
+      "label": "Wait it out",
+      "effects": {
+        "readiness": -1,
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "meta_hotfix_01",
+    "title": "Emergency Hotfix",
+    "body": "A critical bug requires immediate patching.",
+    "tags": [
+      "meta:maintenance"
+    ],
+    "left": {
+      "label": "Test thoroughly",
+      "effects": {
+        "readiness": -1,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Deploy quickly",
+      "effects": {
+        "readiness": -2,
+        "funds": -1
+      }
+    }
+  },
+  {
+    "id": "meta_stream_01",
+    "title": "Streaming Pressure",
+    "body": "Fans demand more streaming content.",
+    "tags": [
+      "meta:pr"
+    ],
+    "left": {
+      "label": "Increase streams",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    },
+    "right": {
+      "label": "Focus on raiding",
+      "effects": {
+        "readiness": 1,
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "meta_controversy_01",
+    "title": "Public Controversy",
+    "body": "Your guild's methods spark online debate.",
+    "tags": [
+      "meta:pr"
+    ],
+    "left": {
+      "label": "Address concerns",
+      "effects": {
+        "reputation": 1,
+        "funds": -1
+      }
+    },
+    "right": {
+      "label": "Ignore criticism",
+      "effects": {
+        "reputation": -1,
+        "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "meta_influencer_01",
+    "title": "Influencer Backlash",
+    "body": "A popular streamer criticizes your strategy.",
+    "tags": [
+      "meta:pr"
+    ],
+    "left": {
+      "label": "Respond publicly",
+      "effects": {
+        "reputation": -1,
+        "funds": -1
+      }
+    },
+    "right": {
+      "label": "Stay silent",
+      "effects": {
+        "reputation": -1,
+        "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "meta_drama_01",
+    "title": "Guild Drama",
+    "body": "Internal conflicts spill into public view.",
+    "tags": [
+      "meta:pr"
+    ],
+    "left": {
+      "label": "Address publicly",
+      "effects": {
+        "reputation": 1,
+        "morale_all": -1
+      }
+    },
+    "right": {
+      "label": "Handle privately",
+      "effects": {
+        "reputation": -1,
+        "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "meta_burnout_01",
+    "title": "Collective Burnout",
+    "body": "The entire guild shows signs of exhaustion.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Force rest",
+      "effects": {
+        "readiness": -1,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Push through",
+      "effects": {
+        "readiness": -2,
+        "morale_all": -1
+      }
+    }
+  },
+  {
+    "id": "meta_schedule_01",
+    "title": "Schedule Conflict",
+    "body": "Raiding schedule conflicts with real life.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Adjust schedule",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    },
+    "right": {
+      "label": "Stick to plan",
+      "effects": {
+        "readiness": -1,
+        "morale_all": -1
+      }
+    }
+  },
+  {
+    "id": "meta_skill_01",
+    "title": "Skill Gap",
+    "body": "Some raiders struggle with new mechanics.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Provide extra training",
+      "effects": {
+        "funds": -1,
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Replace weak links",
+      "effects": {
+        "readiness": -1,
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "meta_fatigue_01",
+    "title": "Mental Fatigue",
+    "body": "Long hours are taking their toll.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Reduce hours",
+      "effects": {
+        "readiness": -1,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Maintain intensity",
+      "effects": {
+        "readiness": -2,
+        "morale_all": -1
+      }
+    }
+  },
+  {
+    "id": "meta_equipment_01",
+    "title": "Equipment Failure",
+    "body": "Critical raiding equipment breaks down.",
+    "tags": [
+      "meta:maintenance"
+    ],
+    "left": {
+      "label": "Replace immediately",
+      "effects": {
+        "funds": -2,
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Make do",
+      "effects": {
+        "readiness": -2,
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "meta_power_01",
+    "title": "Power Outage",
+    "body": "A power outage cancels raid night.",
+    "tags": [
+      "meta:maintenance"
+    ],
+    "left": {
+      "label": "Reschedule",
+      "effects": {
+        "reputation": 1,
+        "funds": -1
+      }
+    },
+    "right": {
+      "label": "Wait it out",
+      "effects": {
+        "readiness": -1,
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "meta_weather_01",
+    "title": "Severe Weather",
+    "body": "Bad weather disrupts internet connectivity.",
+    "tags": [
+      "meta:maintenance"
+    ],
+    "left": {
+      "label": "Find backup location",
+      "effects": {
+        "funds": -1,
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Wait for improvement",
+      "effects": {
+        "readiness": -1,
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "meta_hardware_01",
+    "title": "Hardware Upgrade",
+    "body": "Server hardware needs upgrading for better performance.",
+    "tags": [
+      "meta:maintenance"
+    ],
+    "left": {
+      "label": "Invest in upgrade",
+      "effects": {
+        "funds": -2,
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Work with current",
+      "effects": {
+        "readiness": -1,
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "meta_software_01",
+    "title": "Software Bug",
+    "body": "A critical bug prevents proper raiding.",
+    "tags": [
+      "meta:maintenance"
+    ],
+    "left": {
+      "label": "Report and wait",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    },
+    "right": {
+      "label": "Find workaround",
+      "effects": {
+        "readiness": -2,
+        "funds": -1
+      }
+    }
+  },
+  {
+    "id": "meta_balance_01",
+    "title": "Class Balance",
+    "body": "Your main class gets nerfed in a patch.",
+    "tags": [
+      "meta:maintenance"
+    ],
+    "left": {
+      "label": "Adapt strategy",
+      "effects": {
+        "readiness": -2,
+        "funds": -1
+      }
+    },
+    "right": {
+      "label": "Switch classes",
+      "effects": {
+        "readiness": -1,
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "meta_meta_01",
+    "title": "Meta Shift",
+    "body": "The raiding meta changes completely.",
+    "tags": [
+      "meta:maintenance"
+    ],
+    "left": {
+      "label": "Follow new meta",
+      "effects": {
+        "readiness": -2,
+        "funds": -1
+      }
+    },
+    "right": {
+      "label": "Stick to old ways",
+      "effects": {
+        "reputation": -1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "meta_competition_01",
+    "title": "Increased Competition",
+    "body": "More guilds are competing for the same goals.",
+    "tags": [
+      "meta:pr"
+    ],
+    "left": {
+      "label": "Step up game",
+      "effects": {
+        "funds": -1,
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Find niche",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "meta_recognition_01",
+    "title": "Lack of Recognition",
+    "body": "Your guild's achievements go unnoticed.",
+    "tags": [
+      "meta:pr"
+    ],
+    "left": {
+      "label": "Seek attention",
+      "effects": {
+        "reputation": 1,
+        "funds": -1
+      }
+    },
+    "right": {
+      "label": "Stay humble",
+      "effects": {
+        "reputation": -1,
+        "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "meta_community_01",
+    "title": "Community Backlash",
+    "body": "The gaming community turns against your methods.",
+    "tags": [
+      "meta:pr"
+    ],
+    "left": {
+      "label": "Defend approach",
+      "effects": {
+        "reputation": -1,
+        "funds": -1
+      }
+    },
+    "right": {
+      "label": "Change methods",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "meta_expectations_01",
+    "title": "High Expectations",
+    "body": "Fans expect perfect performance every raid.",
+    "tags": [
+      "meta:pr"
+    ],
+    "left": {
+      "label": "Meet expectations",
+      "effects": {
+        "readiness": -2,
+        "funds": -1
+      }
+    },
+    "right": {
+      "label": "Set boundaries",
+      "effects": {
+        "reputation": -1,
+        "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "meta_pressure_01",
+    "title": "External Pressure",
+    "body": "Sponsors demand better results.",
+    "tags": [
+      "meta:pr"
+    ],
+    "left": {
+      "label": "Deliver results",
+      "effects": {
+        "funds": 1,
+        "readiness": -2
+      }
+    },
+    "right": {
+      "label": "Maintain integrity",
+      "effects": {
+        "reputation": 1,
+        "funds": -1
+      }
+    }
+  },
+  {
+    "id": "meta_standards_01",
+    "title": "Rising Standards",
+    "body": "The bar for success keeps getting higher.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Rise to challenge",
+      "effects": {
+        "funds": -1,
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Set realistic goals",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "meta_innovation_01",
+    "title": "Need for Innovation",
+    "body": "Old strategies are no longer effective.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Innovate quickly",
+      "effects": {
+        "readiness": -2,
+        "funds": -1
+      }
+    },
+    "right": {
+      "label": "Refine existing",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "meta_coordination_01",
+    "title": "Coordination Issues",
+    "body": "Team coordination is breaking down.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Intensify practice",
+      "effects": {
+        "funds": -1,
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Simplify approach",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "meta_focus_01",
+    "title": "Loss of Focus",
+    "body": "Raiders are losing focus during raids.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Strict discipline",
+      "effects": {
+        "readiness": 1,
+        "morale_all": -1
+      }
+    },
+    "right": {
+      "label": "Motivate gently",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "meta_consistency_01",
+    "title": "Inconsistent Performance",
+    "body": "Performance varies wildly between raids.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Standardize approach",
+      "effects": {
+        "readiness": 1,
+        "morale_all": -1
+      }
+    },
+    "right": {
+      "label": "Embrace flexibility",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "meta_communication_01",
+    "title": "Communication Breakdown",
+    "body": "Raiders stop communicating effectively.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Enforce protocols",
+      "effects": {
+        "readiness": 1,
+        "morale_all": -1
+      }
+    },
+    "right": {
+      "label": "Encourage openness",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "meta_trust_01",
+    "title": "Trust Issues",
+    "body": "Raiders lose trust in each other.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Rebuild trust",
+      "effects": {
+        "funds": -1,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Let it resolve",
+      "effects": {
+        "reputation": -1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "meta_leadership_01",
+    "title": "Leadership Crisis",
+    "body": "Leadership decisions are being questioned.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Assert authority",
+      "effects": {
+        "readiness": 1,
+        "morale_all": -1
+      }
+    },
+    "right": {
+      "label": "Seek consensus",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "meta_vision_01",
+    "title": "Lost Vision",
+    "body": "The guild's original vision is fading.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Reaffirm goals",
+      "effects": {
+        "reputation": 1,
+        "funds": -1
+      }
+    },
+    "right": {
+      "label": "Evolve naturally",
+      "effects": {
+        "readiness": 1,
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "meta_identity_01",
+    "title": "Identity Crisis",
+    "body": "The guild struggles to define itself.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Define clearly",
+      "effects": {
+        "reputation": 1,
+        "morale_all": -1
+      }
+    },
+    "right": {
+      "label": "Stay fluid",
+      "effects": {
+        "readiness": 1,
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "meta_purpose_01",
+    "title": "Lost Purpose",
+    "body": "Raiders question why they're still raiding.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Find new purpose",
+      "effects": {
+        "funds": -1,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Remember roots",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "meta_motivation_01",
+    "title": "Motivation Drop",
+    "body": "General motivation is at an all-time low.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Boost morale",
+      "effects": {
+        "funds": -1,
+        "morale_all": 1
+      }
+    },
+    "right": {
+      "label": "Let it pass",
+      "effects": {
+        "reputation": -1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "meta_energy_01",
+    "title": "Low Energy",
+    "body": "The guild lacks the energy for serious raiding.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Rest and recharge",
+      "effects": {
+        "readiness": -1,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Push through",
+      "effects": {
+        "readiness": -2,
+        "morale_all": -1
+      }
+    }
+  },
+  {
+    "id": "meta_enthusiasm_01",
+    "title": "Lost Enthusiasm",
+    "body": "The excitement for raiding has disappeared.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Reignite passion",
+      "effects": {
+        "funds": -1,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Accept reality",
+      "effects": {
+        "reputation": -1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "meta_spirit_01",
+    "title": "Broken Spirit",
+    "body": "The guild's fighting spirit is broken.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Rebuild spirit",
+      "effects": {
+        "funds": -2,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Start fresh",
+      "effects": {
+        "reputation": -1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "meta_hope_01",
+    "title": "Lost Hope",
+    "body": "Raiders have lost hope of success.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Restore hope",
+      "effects": {
+        "funds": -1,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Face facts",
+      "effects": {
+        "reputation": -1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "meta_dream_01",
+    "title": "Shattered Dreams",
+    "body": "The dream of legendary status seems impossible.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Keep dreaming",
+      "effects": {
+        "funds": -1,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Accept limits",
+      "effects": {
+        "reputation": -1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "meta_legend_01",
+    "title": "Legend Fades",
+    "body": "The legend you're building is starting to fade.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Reignite legend",
+      "effects": {
+        "funds": -2,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Let it fade",
+      "effects": {
+        "reputation": -1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "meta_glory_01",
+    "title": "Glory Days",
+    "body": "The glory days seem far behind you.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Chase glory",
+      "effects": {
+        "funds": -1,
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Find new glory",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "meta_legacy_01",
+    "title": "Legacy at Stake",
+    "body": "Your guild's legacy is on the line.",
+    "tags": [
+      "meta:training"
+    ],
+    "left": {
+      "label": "Protect legacy",
+      "effects": {
+        "funds": -2,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Build new legacy",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
       }
     }
   }

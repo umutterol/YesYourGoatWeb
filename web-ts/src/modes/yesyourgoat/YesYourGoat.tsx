@@ -63,8 +63,8 @@ export default function YesYourGoat() {
         return milestoneCard
       }
     }
-    // Council cadence ~ every 5
-    if (day % 5 === 0) {
+    // Council cadence ~ every 4 (harsher pressure)
+    if (day % 4 === 0) {
       const council = events.find(e => (e.tags || []).includes('meta:council'))
       if (council) return council
     }
@@ -78,7 +78,7 @@ export default function YesYourGoat() {
     if (collapseCount >= 3) unlocked.add('merchant')
     if (collapseCount >= 7) unlocked.add('bard')
     if (collapseCount >= 10) unlocked.add('recruiter')
-    const pool = events.filter(e => {
+    let pool = events.filter(e => {
       const tags = e.tags || []
       if (tags.includes('run:intro') || tags.includes('run:outro')) return false
       if (tags.includes('meta:dungeon_progress')) return false
@@ -89,7 +89,28 @@ export default function YesYourGoat() {
       const id = at.split(':')[1]
       return unlocked.has(id)
     })
-    return pool[Math.floor(Math.random() * Math.max(1, pool.length))] || null
+    // Bias: when rep is high, prefer events that can drop reputation; when readiness high, prefer readiness drops
+    const bias = (ev: EventCard) => {
+      const effects = [ev.left?.effects || {}, ev.right?.effects || {}]
+      const dropsRep = effects.some(e => typeof e.reputation === 'number' && e.reputation < 0)
+      const dropsReady = effects.some(e => typeof e.readiness === 'number' && e.readiness < 0)
+      const dropsFunds = effects.some(e => typeof e.funds === 'number' && e.funds < 0)
+      let w = 1
+      // steer toward the current highest meter to even out failures
+      const highest = Math.max(meters.funds, meters.reputation, meters.readiness)
+      if (meters.funds === highest && dropsFunds) w += 2
+      if (meters.reputation === highest && dropsRep) w += 2
+      if (meters.readiness === highest && dropsReady) w += 2
+      return w
+    }
+    if (!pool.length) return null
+    const total = pool.reduce((a,e)=>a+bias(e),0)
+    let r = Math.random()*total
+    for (const ev of pool) {
+      r -= bias(ev)
+      if (r <= 0) return ev
+    }
+    return pool[pool.length-1]
   }
 
   function SawRivalMid() { return sawRival }
