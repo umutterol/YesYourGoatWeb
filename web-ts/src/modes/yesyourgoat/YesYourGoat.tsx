@@ -120,7 +120,12 @@ export default function YesYourGoat() {
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-[#2c1810] to-[#1a1a1a] text-[#f5f5dc] p-4 md:p-6">
-      <h1 className="text-2xl md:text-3xl font-bold mb-3">YesYourGoat — Collapse Run</h1>
+      <div className="flex items-center justify-between mb-3 max-w-[720px]">
+        <h1 className="text-2xl md:text-3xl font-bold">YesYourGoat — Collapse Run</h1>
+        <div className="text-xs md:text-sm px-2 py-1 rounded-full border border-[#daa520] bg-[#2c1810] text-[#f5f5dc]">
+          Deck: YesYourGoat ({events.length})
+        </div>
+      </div>
       <div className="flex flex-wrap items-center gap-4 mb-3">
         <div className="inline-flex items-center gap-2"><span>💰</span><span className="font-mono font-bold">{meters.funds}</span></div>
         <div className="inline-flex items-center gap-2"><span>⭐</span><span className="font-mono font-bold">{meters.reputation}</span></div>
