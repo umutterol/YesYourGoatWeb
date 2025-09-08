@@ -15,6 +15,13 @@ This document summarizes the changes and additions made so far to migrate the pr
 - Expanded total events to 114; deck exhaustion eliminated in sims.
 - Current 100-run sim: avgDays ~14.9; causes Funds 83%, Reputation 11%, Readiness 6% (next: profile-based weighting + additional rewrites).
 
+### Worldbuilding
+- Added concise race/culture notes to `gdd.md`:
+  - Ogrrynn Empire: Roman-inspired civilized orcs
+  - Dwarven Sultanate: Ottoman/Persian-inspired desert dwarves with oilpunk tech
+  - Elves: Aztec/Inca-inspired jungle tribes (ritualistic/brutal)
+  - Humans: baseline pragmatic “old empire”
+
 ---
 
 ## Recent Updates (v0.23)

@@ -142,6 +142,18 @@ JSON-like entry stored in `resources/events`, loaded at start.
 - Community/PR: streamer review, world chat rumor, recruitment trials.
 - Market/Economy: guild bank deficit, consumables spike, boost requests.
 
+## Worldbuilding (Races & Cultures)
+
+- Ogrrynn Empire (Orcs): Highly civilized imperial orcs inspired by the Roman Empire. Urban high society, disciplined legions, bureaucratic prowess. Speech tends to be formal, legalistic, and proud; motifs of eagles, laurels, marble, and red-gold standards.
+- Dwarven Sultanate: Desert-dwelling dwarves inspired by Ottoman/Persian courts. They tunneled under the sands to escape heat and discovered vast oil reserves. Culture blends artisan guilds with courtly titles; aesthetics of filigree brass, lapis, and oilpunk contraptions (pumps, automata, boilers).
+- Elves (Jungle Tribes): Tribal, brutal civilizations inspired by Aztec/Inca traditions. Ritualistic, honor-bound, and fearsome. Language is direct, ceremonial; motifs of obsidian, jade, stepped pyramids, blood-red dyes, deep-canopy forests.
+- Humans: Baseline “old empire” humans; adaptable, pragmatic, and administratively competent but culturally unremarkable compared to the others. Useful as a neutral foil for cross-cultural events.
+
+Authoring Guidance
+- Flavor lines and portraits should reflect speaker culture where relevant (titles, metaphors, materials).
+- Avoid parody; ground dilemmas in socioeconomic, military, or spiritual pressures consistent with each culture.
+- Cross-guild drama can include cultural friction; keep choices concise and respectful.
+
 ## Sample Event Seeds (Swipe Prompts)
 
 - AFK Tank: “Main tank missed pull timer again.” Left: bench 1 week (Readiness -1, Rep +1). Right: warn only (Rep -1, Morale MT -1).
