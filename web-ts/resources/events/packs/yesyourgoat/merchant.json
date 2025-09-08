@@ -1,0 +1,19 @@
+[
+  {
+    "id": "merchant_tax_01",
+    "title": "Guild Tax Talk",
+    "body": "The Merchant proposes a 3% guild tax for repairs.",
+    "tags": ["archetype:merchant"],
+    "left": {"label": "Approve tax", "effects": {"funds": 2, "reputation": -1}},
+    "right": {"label": "Keep free", "effects": {"reputation": 1}}
+  },
+  {
+    "id": "merchant_sale_01",
+    "title": "Sell the Spare",
+    "body": "They offer to sell a duplicate item to fund potions.",
+    "tags": ["archetype:merchant"],
+    "left": {"label": "Authorize sale", "effects": {"funds": 2, "readiness": 1}},
+    "right": {"label": "Keep it banked", "effects": {"reputation": 1}}
+  }
+]
+

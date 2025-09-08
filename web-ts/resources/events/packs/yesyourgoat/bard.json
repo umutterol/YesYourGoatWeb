@@ -1,0 +1,19 @@
+[
+  {
+    "id": "bard_anthem_01",
+    "title": "Anthem Request",
+    "body": "The Bard asks for time to write a guild anthem.",
+    "tags": ["archetype:bard"],
+    "left": {"label": "Give time", "effects": {"reputation": 2}},
+    "right": {"label": "Push training", "effects": {"readiness": 1, "morale_all": -1}}
+  },
+  {
+    "id": "bard_hype_01",
+    "title": "Hype vs Honesty",
+    "body": "They ask whether to hype progress or keep it honest.",
+    "tags": ["archetype:bard"],
+    "left": {"label": "Hype it", "effects": {"reputation": 1}},
+    "right": {"label": "Honest report", "effects": {"readiness": 1}}
+  }
+]
+

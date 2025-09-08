@@ -1,5 +1,130 @@
 [
   {
+    "id": "bard_anthem_01",
+    "title": "Anthem Request",
+    "body": "The Bard asks for time to write a guild anthem.",
+    "tags": [
+      "archetype:bard"
+    ],
+    "left": {
+      "label": "Give time",
+      "effects": {
+        "reputation": 2
+      }
+    },
+    "right": {
+      "label": "Push training",
+      "effects": {
+        "readiness": 1,
+        "morale_all": -1
+      }
+    }
+  },
+  {
+    "id": "bard_hype_01",
+    "title": "Hype vs Honesty",
+    "body": "They ask whether to hype progress or keep it honest.",
+    "tags": [
+      "archetype:bard"
+    ],
+    "left": {
+      "label": "Hype it",
+      "effects": {
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Honest report",
+      "effects": {
+        "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "merchant_tax_01",
+    "title": "Guild Tax Talk",
+    "body": "The Merchant proposes a 3% guild tax for repairs.",
+    "tags": [
+      "archetype:merchant"
+    ],
+    "left": {
+      "label": "Approve tax",
+      "effects": {
+        "funds": 2,
+        "reputation": -1
+      }
+    },
+    "right": {
+      "label": "Keep free",
+      "effects": {
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "merchant_sale_01",
+    "title": "Sell the Spare",
+    "body": "They offer to sell a duplicate item to fund potions.",
+    "tags": [
+      "archetype:merchant"
+    ],
+    "left": {
+      "label": "Authorize sale",
+      "effects": {
+        "funds": 2,
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Keep it banked",
+      "effects": {
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "recruiter_standards_01",
+    "title": "Standards vs Numbers",
+    "body": "The Recruiter: lower standards to fill roster?",
+    "tags": [
+      "archetype:recruiter"
+    ],
+    "left": {
+      "label": "Lower bar",
+      "effects": {
+        "readiness": 1,
+        "reputation": -1
+      }
+    },
+    "right": {
+      "label": "Keep standards",
+      "effects": {
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "recruiter_trials_01",
+    "title": "Trial Spam",
+    "body": "They want to run back-to-back trials this week.",
+    "tags": [
+      "archetype:recruiter"
+    ],
+    "left": {
+      "label": "Approve",
+      "effects": {
+        "readiness": 2,
+        "morale_all": -1
+      }
+    },
+    "right": {
+      "label": "Limit trials",
+      "effects": {
+        "reputation": 1
+      }
+    }
+  },
+  {
     "id": "meta_intro_01",
     "title": "A New Charter",
     "body": "The Moderator: Another guild. Another dream of legend.",

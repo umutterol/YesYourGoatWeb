@@ -22,6 +22,7 @@ export default function YesYourGoat() {
 
   const milestones = useMemo(() => [3, 6, 9, 12, 15, 18], [])
   const nextMilestone = milestones.find(m => day <= m) ?? null
+  const collapseCount = Number(localStorage.getItem('yyg_collapse_count') || '0')
 
   useEffect(() => {
     fetch(EVENTS_URL).then(r => r.json()).then((data: EventCard[]) => {
@@ -62,8 +63,19 @@ export default function YesYourGoat() {
       const rival = events.find(e => (e.tags || []).includes('meta:rival'))
       if (rival) { setSawRival(true); return rival }
     }
-    // Otherwise pick any archetype/meta non-intro/outro
-    const pool = events.filter(e => !(e.tags || []).includes('run:intro') && !(e.tags || []).includes('run:outro'))
+    // Otherwise pick any archetype/meta non-intro/outro, filtered by unlocks
+    const unlocked = new Set<string>(['general','witch','priest','rogue'])
+    if (collapseCount >= 3) unlocked.add('merchant')
+    if (collapseCount >= 7) unlocked.add('bard')
+    if (collapseCount >= 10) unlocked.add('recruiter')
+    const pool = events.filter(e => {
+      const tags = e.tags || []
+      if (tags.includes('run:intro') || tags.includes('run:outro')) return false
+      const at = tags.find(t => t.startsWith('archetype:'))
+      if (!at) return true
+      const id = at.split(':')[1]
+      return unlocked.has(id)
+    })
     return pool[Math.floor(Math.random() * Math.max(1, pool.length))] || null
   }
 
