@@ -29,6 +29,7 @@ export default function YesYourGoat() {
   const nextMilestone = milestones.find(m => day <= m) ?? null
   const collapseCount = Number(localStorage.getItem('yyg_collapse_count') || '0')
   const [usedMilestoneIds, setUsedMilestoneIds] = useState<string[]>([])
+  const [usedEventIds, setUsedEventIds] = useState<string[]>([])
 
   useEffect(() => {
     fetch(EVENTS_URL).then(r => r.json()).then((data: EventCard[]) => {
@@ -82,6 +83,7 @@ export default function YesYourGoat() {
       if (tags.includes('run:intro') || tags.includes('run:outro')) return false
       if (tags.includes('meta:dungeon_progress')) return false
       if (tags.includes('meta:collapse')) return false
+      if (usedEventIds.includes(e.id)) return false
       const at = tags.find(t => t.startsWith('archetype:'))
       if (!at) return true
       const id = at.split(':')[1]
@@ -142,7 +144,9 @@ export default function YesYourGoat() {
 
     const newDay = day + 1
     setDay(newDay)
-    setCurrent(drawNext())
+    const nxt = drawNext()
+    if (nxt) setUsedEventIds(prev => [...prev, nxt.id])
+    setCurrent(nxt)
   }
 
   return (

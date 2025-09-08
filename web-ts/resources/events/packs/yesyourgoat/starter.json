@@ -15,6 +15,10 @@
   {"id":"collapse_morale_01","title":"Mass Exodus","body":"Morale implodes; raiders leave in droves.","tags":["meta:collapse","cause:morale"],"left":{"label":"Accept defeat","effects":{}},"right":{"label":"Accept defeat","effects":{}}},
   {"id":"collapse_funds_01","title":"Bankrupt Guild","body":"The coffers run dry. No repairs. No fees.","tags":["meta:collapse","cause:funds"],"left":{"label":"Accept defeat","effects":{}},"right":{"label":"Accept defeat","effects":{}}},
   {"id":"collapse_rep_01","title":"Forgotten Name","body":"The server shrugs; no one joins.","tags":["meta:collapse","cause:reputation"],"left":{"label":"Accept defeat","effects":{}},"right":{"label":"Accept defeat","effects":{}}},
-  {"id":"meta_outro_01","title":"The Dust Settles","body":"Moderator: Another fine failure. New charter?","tags":["meta:moderator","run:outro"],"left":{"label":"Sign again","effects":{}},"right":{"label":"Sign again","effects":{}}}
+  {"id":"meta_outro_01","title":"The Dust Settles","body":"Moderator: Another fine failure. New charter?","tags":["meta:moderator","run:outro"],"left":{"label":"Sign again","effects":{}},"right":{"label":"Sign again","effects":{}}},
+  {"id":"general_strategy_01","title":"Rigid Strategy","body":"The General insists on the same plan every push.","tags":["archetype:general"],"left":{"label":"Follow plan","effects":{"readiness":1}},"right":{"label":"Adapt on fly","effects":{"reputation":1,"morale_all":-1}}},
+  {"id":"witch_tome_01","title":"Forbidden Tome","body":"The Witch finds a tome promising power at a cost.","tags":["archetype:witch"],"left":{"label":"Skim quickly","effects":{"readiness":1,"reputation":-1}},"right":{"label":"Lock it away","effects":{"reputation":1}}},
+  {"id":"priest_shift_01","title":"Extra Shift","body":"The Priest offers to cover burnout for one more week.","tags":["archetype:priest"],"left":{"label":"Accept help","effects":{"readiness":1,"morale_all":-1}},"right":{"label":"Force rest","effects":{"reputation":1}}},
+  {"id":"rogue_stream_01","title":"Stream the Run","body":"The Rogue wants to stream tonight’s push.","tags":["archetype:rogue"],"left":{"label":"Permit stream","effects":{"reputation":1}},"right":{"label":"No distractions","effects":{"readiness":1}}}
 ]
 
