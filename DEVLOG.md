@@ -2,6 +2,21 @@ YesYourGoatWeb – Dev Log
 
 This document summarizes the changes and additions made so far to migrate the project to a web-focused setup and to deliver a working web prototype.
 
+## Recent Updates (v0.24)
+
+### Dialog-Style Events (Reigns-like), Validator, and UI
+- Event authoring now supports conversational cards with `speaker` and optional `portrait`.
+- Validator updated to recommend `speaker` (warns if missing) and validate `portrait` type.
+- YesYourGoat UI shows speaker name and portrait above the card title.
+- Rewrote a first batch of high-frequency cards (Moderator intro/outro, Council audit/standards, Rival taunt/sabotage, journey milestones, plus key General/Witch/Priest/Rogue and unlock cards) into dialog style.
+- Portraits use existing assets under `public/resources/portraits/`.
+
+### Balance/Content
+- Expanded total events to 114; deck exhaustion eliminated in sims.
+- Current 100-run sim: avgDays ~14.9; causes Funds 83%, Reputation 11%, Readiness 6% (next: profile-based weighting + additional rewrites).
+
+---
+
 ## Recent Updates (v0.23)
 
 ### YesYourGoat Mode (Collapse Run) + Tooling

@@ -227,6 +227,26 @@ See trait definitions and barks: `resources/traits/traits.md`.
 - Event Source: `public/resources/events/yesyourgoat.events.json` generated via prebuild validator/merge
 - Authoring Rules: enforced by `spinoff_authoring_guide.md` (two choices; effects keys funds|reputation|readiness|morale_*; values −3..+3; required tags)
 
+#### Conversational Authoring (Reigns-like)
+- Each event should read like a dialog: a single `speaker` addresses the Guildmaster; choices are short replies.
+- Optional `portrait` string points to an image under `public/resources/portraits/`.
+- Validator: recommends `speaker` for all non-collapse/non-runmeta events; warns if missing (non-blocking), enforces `portrait` type when present.
+- UI: YesYourGoat card displays `speaker` and `portrait` above title; choices remain concise.
+
+Example (schema addition):
+```
+{
+  "id": "council_audit_01",
+  "title": "Surprise Audit",
+  "speaker": "Councilor",
+  "portrait": "/resources/portraits/archmage.png",
+  "body": "Your ledgers are… thin. Shall we settle the fees now, Guildmaster?",
+  "tags": ["meta:council"],
+  "left": {"label": "We’ll pay.", "effects": {"funds": -2}},
+  "right": {"label": "We’ll delay.", "effects": {"reputation": -2}}
+}
+```
+
 ### Tooling
 - Tailwind CSS adopted in `web-ts` (utility-first styling)
 - Prebuild validator+merge script at `web-ts/scripts/validate_merge_yesyourgoat.mjs` merges packs from `web-ts/resources/events/packs/yesyourgoat/*.json` to runtime file
