@@ -219,6 +219,18 @@ See trait definitions and barks: `resources/traits/traits.md`.
 - BarkBus: rate-limited emitter for trait/morale barks; subscribes to ChoiceResolver outcomes.
 - UI: meters bar, card panel, left/right buttons, swipe gesture; small toast system for deltas and barks.
 
+### YesYourGoat Mode (Collapse Run)
+- Route: `/yesyourgoat` (client-side routed in `web-ts`)
+- Cadence: Moderator intro/outro, Council every ~5 events, Rival at least once mid-run, Journey milestones at events survived [3,6,9,12,15,18]
+- Collapse Override: on any meter hitting 0, draw a matching `meta:collapse` event by `cause:*`
+- Persistence: `yyg_collapse_count`, `yyg_history` in `localStorage`
+- Event Source: `public/resources/events/yesyourgoat.events.json` generated via prebuild validator/merge
+- Authoring Rules: enforced by `spinoff_authoring_guide.md` (two choices; effects keys funds|reputation|readiness|morale_*; values −3..+3; required tags)
+
+### Tooling
+- Tailwind CSS adopted in `web-ts` (utility-first styling)
+- Prebuild validator+merge script at `web-ts/scripts/validate_merge_yesyourgoat.mjs` merges packs from `web-ts/resources/events/packs/yesyourgoat/*.json` to runtime file
+
 
 ## Tech Plan (Web Deploy)
 

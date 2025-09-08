@@ -985,43 +985,19 @@ export default function App() {
     }}>
       {/* Main Menu */}
       {gameMode === 'menu' && (
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: '100vh',
-          gap: '30px'
-        }}>
-          <h1 style={{
-            fontSize: '48px',
-            color: COLORS.highlight,
-            textAlign: 'center',
-            margin: 0,
-            textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
-          }}>
+        <div className="min-h-screen w-full flex flex-col items-center justify-center gap-8">
+          <h1 className="text-4xl md:text-5xl text-center m-0" style={{ color: COLORS.highlight }}>
             Guilds of Arcana Terra
           </h1>
           
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '20px',
-            alignItems: 'center'
-          }}>
+          <div className="flex flex-col items-center gap-5">
             <button
               onClick={startRegularMode}
+              className="px-6 py-3 text-lg font-bold min-w-[200px] rounded-md border-2 transition"
               style={{
-                padding: '15px 30px',
-                fontSize: '20px',
                 background: COLORS.accent,
                 color: COLORS.text,
-                border: `2px solid ${COLORS.highlight}`,
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontWeight: 'bold',
-                minWidth: '200px',
-                transition: 'all 0.3s ease'
+                borderColor: COLORS.highlight
               }}
               onMouseOver={(e) => {
                 e.currentTarget.style.background = COLORS.highlight
@@ -1034,51 +1010,29 @@ export default function App() {
             >
               Regular Mode
             </button>
+            <a href="/yesyourgoat" className="underline text-base" style={{ color: COLORS.highlight }}>
+              YesYourGoat Mode (Collapse Run)
+            </a>
             
-            <div style={{
-              fontSize: '16px',
-              color: COLORS.textDim,
-              textAlign: 'center',
-              maxWidth: '400px'
-            }}>
+            <div className="text-center max-w-[400px] text-base" style={{ color: COLORS.textDim }}>
               Manage your guild week by week with random events and resource management
             </div>
           </div>
           
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '20px',
-            alignItems: 'center'
-          }}>
-            <h2 style={{
-              fontSize: '24px',
-              color: COLORS.highlight,
-              margin: 0
-            }}>
+          <div className="flex flex-col items-center gap-5">
+            <h2 className="text-2xl" style={{ color: COLORS.highlight, margin: 0 }}>
               Adventure Mode
             </h2>
             
             {Object.values(adventures).map(adventure => (
-              <div key={adventure.id} style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '10px',
-                alignItems: 'center'
-              }}>
+              <div key={adventure.id} className="flex flex-col items-center gap-2.5">
                 <button
                   onClick={() => startAdventureMode(adventure.id)}
+                  className="px-6 py-3 text-base font-bold min-w-[200px] rounded-md border-2 transition"
                   style={{
-                    padding: '15px 30px',
-                    fontSize: '18px',
                     background: COLORS.accent,
                     color: COLORS.text,
-                    border: `2px solid ${COLORS.highlight}`,
-                    borderRadius: '8px',
-                    cursor: 'pointer',
-                    fontWeight: 'bold',
-                    minWidth: '200px',
-                    transition: 'all 0.3s ease'
+                    borderColor: COLORS.highlight
                   }}
                   onMouseOver={(e) => {
                     e.currentTarget.style.background = COLORS.highlight
@@ -1092,20 +1046,11 @@ export default function App() {
                   {adventure.name}
                 </button>
                 
-                <div style={{
-                  fontSize: '14px',
-                  color: COLORS.textDim,
-                  textAlign: 'center',
-                  maxWidth: '300px'
-                }}>
+                <div className="text-sm text-center max-w-[300px]" style={{ color: COLORS.textDim }}>
                   {adventure.description}
                 </div>
                 
-                <div style={{
-                  fontSize: '12px',
-                  color: COLORS.highlight,
-                  fontWeight: 'bold'
-                }}>
+                <div className="text-xs font-bold" style={{ color: COLORS.highlight }}>
                   Difficulty: {adventure.difficulty} • Target Win Rate: {adventure.targetWinRate}%
                 </div>
               </div>

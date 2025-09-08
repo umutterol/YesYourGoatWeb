@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/yesyourgoat", "destination": "/" },
+    { "source": "/yesyourgoat/(.*)", "destination": "/" }
+  ]
+}
+
+

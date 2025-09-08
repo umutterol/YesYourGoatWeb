@@ -2,6 +2,27 @@ YesYourGoatWeb – Dev Log
 
 This document summarizes the changes and additions made so far to migrate the project to a web-focused setup and to deliver a working web prototype.
 
+## Recent Updates (v0.23)
+
+### YesYourGoat Mode (Collapse Run) + Tooling
+- Added separate route: `/yesyourgoat` in `web-ts` (client-side routing)
+- Implemented basic loop with meters (Funds/Reputation/Readiness), intro/outro, Council cadence (~every 5), Rival once, collapse overrides, and Journey Track milestones (3/6/9/12/15/18)
+- Persistence: `localStorage` keys `yyg_collapse_count`, `yyg_history` (storing { day, cause, meters })
+- Event source isolated: `public/resources/events/yesyourgoat.events.json` (not touching existing events)
+- Prebuild validator+merge: `web-ts/scripts/validate_merge_yesyourgoat.mjs` validates per `spinoff_authoring_guide.md` (two choices, -3..+3 bounds, allowed keys, required tags) and merges packs from `web-ts/resources/events/packs/yesyourgoat/*.json`
+- Tailwind CSS added to `web-ts` (config + PostCSS) and applied to `/yesyourgoat` UI and main menu; further migration planned
+
+Scope Completed
+- Route wiring (`/` and `/yesyourgoat`) and YesYourGoat mode scaffold
+- Starter pack moved to `web-ts/resources/events/packs/yesyourgoat/starter.json` and merged to runtime file on build
+- Minimal Journey Track UI (6 nodes) and collapse summary text
+- Menu link to YesYourGoat mode
+
+Next Steps
+- Expand Journey Track visuals and add collapse summary screen UI
+- Author more YesYourGoat packs; validator enforces `spinoff_authoring_guide.md`
+- Optional: Vercel SPA rewrites (ensure deep-link `/yesyourgoat` opens `index.html`)
+
 ## Recent Updates (v0.22)
 
 ### Adventure Mode System Design
