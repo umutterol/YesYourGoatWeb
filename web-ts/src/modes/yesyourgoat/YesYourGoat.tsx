@@ -21,6 +21,9 @@ export default function YesYourGoat() {
   const [showSummary, setShowSummary] = useState(false)
   const [summaryMeters, setSummaryMeters] = useState<Meters | null>(null)
   const [summaryDay, setSummaryDay] = useState<number | null>(null)
+  const [debugLog, setDebugLog] = useState<{
+    id: string; title: string; choice: string; pre: Meters; post: Meters; effects: Effects
+  }[]>([])
 
   const milestones = useMemo(() => [3, 6, 9, 12, 15, 18], [])
   const nextMilestone = milestones.find(m => day <= m) ?? null
@@ -92,6 +95,7 @@ export default function YesYourGoat() {
   function decide(side: 'left' | 'right') {
     if (!current) return
     const choice = side === 'left' ? current.left : current.right
+    const preMeters: Meters = { ...meters }
     const nextMeters: Meters = { ...meters }
     for (const [k, v] of Object.entries(choice.effects || {})) {
       if (k in nextMeters && typeof v === 'number') {
@@ -99,6 +103,14 @@ export default function YesYourGoat() {
         nextMeters[k] = clamp((nextMeters as any)[k] + v)
       }
     }
+    setDebugLog(prev => [{
+      id: current.id,
+      title: current.title,
+      choice: choice.label,
+      pre: preMeters,
+      post: nextMeters,
+      effects: choice.effects || {}
+    }, ...prev].slice(0, 20))
     const collapse = collapseIfAnyZero(nextMeters)
     if (collapse) {
       const causeTag = nextMeters.funds <= 0 ? 'cause:funds' : nextMeters.reputation <= 0 ? 'cause:reputation' : 'cause:readiness'
@@ -128,15 +140,8 @@ export default function YesYourGoat() {
       setJourneyCount(j => j + 1)
     }
 
-    // Outro if we just passed last milestone or reached high day
-    const lastMilestone = milestones[milestones.length - 1]
     const newDay = day + 1
     setDay(newDay)
-    if (newDay > lastMilestone) {
-      const outro = events.find(e => (e.tags || []).includes('run:outro'))
-      setCurrent(outro || drawNext())
-      return
-    }
     setCurrent(drawNext())
   }
 
@@ -181,6 +186,23 @@ export default function YesYourGoat() {
             >
               {current.right?.label || 'Right'}
             </button>
+          </div>
+        </div>
+      )}
+      {/* Debug panel */}
+      {debugLog.length > 0 && (
+        <div className="mt-4 max-w-[720px] text-xs bg-[#1a1a1a]/60 border border-[#654321] rounded p-3">
+          <div className="font-bold mb-2">Debug Log (last {debugLog.length})</div>
+          <div className="space-y-1 max-h-48 overflow-y-auto">
+            {debugLog.map((d, i) => (
+              <div key={i} className="flex flex-col">
+                <div className="opacity-80">{d.title} — {d.choice}</div>
+                <div className="flex gap-4">
+                  <div>pre: 💰{d.pre.funds} ⭐{d.pre.reputation} ⚔️{d.pre.readiness}</div>
+                  <div>post: 💰{d.post.funds} ⭐{d.post.reputation} ⚔️{d.post.readiness}</div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}

@@ -17,6 +17,13 @@ function validateEvent(ev) {
   if (!ev.body || ev.body.length > 120) fail(`Event ${ev.id} body invalid (≤120)`)   
   if (!Array.isArray(ev.tags) || !ev.tags.length) fail(`Event ${ev.id} must have tags`)
   if (!ev.left || !ev.right) fail(`Event ${ev.id} must have two choices`)
+  // enforce archetype allowlist if present
+  const archetype = (ev.tags || []).find(t => t.startsWith('archetype:'))
+  if (archetype) {
+    const id = archetype.split(':')[1]
+    const allowed = new Set(['general','witch','priest','rogue','merchant','bard','recruiter'])
+    if (!allowed.has(id)) fail(`Event ${ev.id} archetype ${id} not allowed`)
+  }
   for (const side of ['left','right']) {
     const ch = ev[side]
     if (!ch || !ch.label) fail(`Event ${ev.id} ${side}.label missing`)
