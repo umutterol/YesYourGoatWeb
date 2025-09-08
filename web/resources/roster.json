@@ -1,9 +1,0 @@
-[
-  { "id": "gio",   "name": "Gio",   "traitId": "theorycrafter",         "morale": 60 },
-  { "id": "diva",  "name": "Diva",  "traitId": "drama_queen",          "morale": 55 },
-  { "id": "afk",   "name": "AFK",   "traitId": "afk_farmer",           "morale": 65 },
-  { "id": "umut",  "name": "Umut",  "traitId": "guild_leader",         "morale": 70 },
-  { "id": "fazli",  "name": "Fazli",  "traitId": "meta_slave",           "morale": 60 },
-  { "id": "hc",    "name": "HC",    "traitId": "hardcore_permadeather", "morale": 60 }
-]
-
