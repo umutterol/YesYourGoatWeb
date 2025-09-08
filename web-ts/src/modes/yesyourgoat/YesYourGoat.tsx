@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react'
 type Meters = { funds: number; reputation: number; readiness: number }
 type Effects = Partial<Meters & { morale_all: number }> & Record<string, number>
 type Choice = { label: string; effects: Effects; nextStep?: string }
-type EventCard = { id: string; title: string; body: string; tags?: string[]; speaker?: string; portrait?: string; left: Choice; right: Choice }
+type EventCard = { id: string; title: string; body: string; tags?: string[]; speaker?: string; portrait?: string; weights?: { base?: number }; left: Choice; right: Choice }
 
 const CLAMP_MIN = 0, CLAMP_MAX = 10
 function clamp(v: number) { return Math.max(CLAMP_MIN, Math.min(CLAMP_MAX, v)) }
@@ -89,18 +89,26 @@ export default function YesYourGoat() {
       const id = at.split(':')[1]
       return unlocked.has(id)
     })
-    // Bias: when rep is high, prefer events that can drop reputation; when readiness high, prefer readiness drops
+    // Bias: use event weights, add recency penalty, and balance meter targeting
     const bias = (ev: EventCard) => {
       const effects = [ev.left?.effects || {}, ev.right?.effects || {}]
       const dropsRep = effects.some(e => typeof e.reputation === 'number' && e.reputation < 0)
       const dropsReady = effects.some(e => typeof e.readiness === 'number' && e.readiness < 0)
       const dropsFunds = effects.some(e => typeof e.funds === 'number' && e.funds < 0)
-      let w = 1
-      // steer toward the current highest meter to even out failures
+      
+      // Start with base weight from event data
+      let w = ev.weights?.base || 1
+      
+      // Recency penalty: reduce weight for events that appeared recently
+      const recentCount = usedEventIds.filter(id => id.startsWith(ev.id.split('_')[0])).length
+      if (recentCount > 0) w = Math.max(0.1, w * (0.5 ** recentCount))
+      
+      // Balance meter targeting: steer toward the current highest meter to even out failures
       const highest = Math.max(meters.funds, meters.reputation, meters.readiness)
-      if (meters.funds === highest && dropsFunds) w += 2
-      if (meters.reputation === highest && dropsRep) w += 2
-      if (meters.readiness === highest && dropsReady) w += 2
+      if (meters.funds === highest && dropsFunds) w += 1
+      if (meters.reputation === highest && dropsRep) w += 1
+      if (meters.readiness === highest && dropsReady) w += 1
+      
       return w
     }
     if (!pool.length) return null

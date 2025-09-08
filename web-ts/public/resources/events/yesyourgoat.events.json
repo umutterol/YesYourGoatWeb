@@ -217,6 +217,9 @@
     "tags": [
       "meta:council"
     ],
+    "weights": {
+      "base": 1
+    },
     "left": {
       "label": "We'll invest more.",
       "effects": {
@@ -241,14 +244,17 @@
     "tags": [
       "meta:council"
     ],
+    "weights": {
+      "base": 1
+    },
     "left": {
-      "label": "We’ll pay.",
+      "label": "We'll pay.",
       "effects": {
         "funds": -2
       }
     },
     "right": {
-      "label": "We’ll delay.",
+      "label": "We'll delay.",
       "effects": {
         "reputation": -2
       }
@@ -947,6 +953,141 @@
       "effects": {
         "readiness": 1,
         "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "council_fees_02",
+    "title": "Rising Fees",
+    "speaker": "Councilor",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "The Council raises operational fees. Pay now or negotiate a delay?",
+    "tags": [
+      "meta:council"
+    ],
+    "weights": {
+      "base": 1
+    },
+    "left": {
+      "label": "Pay immediately.",
+      "effects": {
+        "funds": -2,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Negotiate delay.",
+      "effects": {
+        "reputation": -1,
+        "funds": -1
+      }
+    }
+  },
+  {
+    "id": "council_inspection_02",
+    "title": "Safety Inspection",
+    "speaker": "Councilor",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "Safety protocols need updating. Invest in compliance or face penalties?",
+    "tags": [
+      "meta:council"
+    ],
+    "weights": {
+      "base": 1
+    },
+    "left": {
+      "label": "Update protocols.",
+      "effects": {
+        "funds": -1,
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Risk the penalty.",
+      "effects": {
+        "reputation": -1,
+        "funds": 1
+      }
+    }
+  },
+  {
+    "id": "council_standards_02",
+    "title": "Quality Control",
+    "speaker": "Councilor",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "Your recent performance doesn't meet standards. Training or consequences?",
+    "tags": [
+      "meta:council"
+    ],
+    "weights": {
+      "base": 1
+    },
+    "left": {
+      "label": "Invest in training.",
+      "effects": {
+        "funds": -1,
+        "readiness": 2
+      }
+    },
+    "right": {
+      "label": "Accept consequences.",
+      "effects": {
+        "reputation": -2,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "council_competition_02",
+    "title": "Guild Competition",
+    "speaker": "Councilor",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "Other guilds are outperforming you. Join the competition or focus internally?",
+    "tags": [
+      "meta:council"
+    ],
+    "weights": {
+      "base": 1
+    },
+    "left": {
+      "label": "Join competition.",
+      "effects": {
+        "reputation": 1,
+        "funds": -1
+      }
+    },
+    "right": {
+      "label": "Focus internally.",
+      "effects": {
+        "readiness": 1,
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "council_penalty_02",
+    "title": "Late Payment",
+    "speaker": "Councilor",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "Your last payment was late. Pay the fine or explain the delay?",
+    "tags": [
+      "meta:council"
+    ],
+    "weights": {
+      "base": 1
+    },
+    "left": {
+      "label": "Pay the fine.",
+      "effects": {
+        "funds": -1,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Explain delay.",
+      "effects": {
+        "reputation": -1,
+        "readiness": 1
       }
     }
   },
