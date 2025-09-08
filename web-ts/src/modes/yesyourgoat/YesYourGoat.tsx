@@ -18,6 +18,7 @@ export default function YesYourGoat() {
   const [journeyCount, setJourneyCount] = useState(0)
   const [sawRival, setSawRival] = useState(false)
   const [victoryText, setVictoryText] = useState('')
+  const [showSummary, setShowSummary] = useState(false)
 
   const milestones = useMemo(() => [3, 6, 9, 12, 15, 18], [])
   const nextMilestone = milestones.find(m => day <= m) ?? null
@@ -95,6 +96,7 @@ export default function YesYourGoat() {
       const hist = Array.isArray(JSON.parse(histRaw || '[]')) ? JSON.parse(histRaw || '[]') : []
       hist.push({ day, cause: causeTag.replace('cause:',''), meters: nextMeters })
       localStorage.setItem('yyg_history', JSON.stringify(hist))
+      setShowSummary(true)
       return
     }
     setMeters(nextMeters)
@@ -129,7 +131,10 @@ export default function YesYourGoat() {
       {/* Simple Journey Track */}
       <div className="flex items-center gap-2 mb-4">
         {milestones.map((_, i) => (
-          <div key={i} className={`w-5 h-5 rounded-full border-2 ${i < journeyCount ? 'bg-amber-400 border-amber-200' : 'bg-[#654321] border-[#f5f5dc]'}`} />
+          <div key={i} className="flex items-center gap-2">
+            <div className={`w-5 h-5 rounded-full border-2 ${i < journeyCount ? 'bg-amber-400 border-amber-200' : 'bg-[#654321] border-[#f5f5dc]'}`} />
+            {i < milestones.length - 1 && <div className="w-8 h-[2px] bg-[#654321]" />}
+          </div>
         ))}
       </div>
       {current && (
@@ -154,6 +159,35 @@ export default function YesYourGoat() {
       )}
       {!!victoryText && (
         <div className="mt-4 text-amber-400 font-semibold">{victoryText}</div>
+      )}
+
+      {/* Collapse Summary Modal */}
+      {showSummary && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+          <div className="bg-[#1a1a1a] text-[#f5f5dc] rounded-lg border-2 border-[#654321] p-6 w-[90%] max-w-md">
+            <div className="text-xl font-bold mb-2">Run Collapsed</div>
+            <div className="opacity-90 mb-4">{victoryText}</div>
+            <div className="text-sm mb-4">
+              <div><span className="opacity-80">Day:</span> <span className="font-mono font-bold">{day}</span></div>
+              <div><span className="opacity-80">Milestones reached:</span> <span className="font-mono font-bold">{journeyCount}/{milestones.length}</span></div>
+              <div className="mt-2 flex gap-4">
+                <div>💰 <span className="font-mono">{meters.funds}</span></div>
+                <div>⭐ <span className="font-mono">{meters.reputation}</span></div>
+                <div>⚔️ <span className="font-mono">{meters.readiness}</span></div>
+              </div>
+            </div>
+            <div className="flex justify-end gap-3">
+              <button
+                className="px-4 py-2 rounded-md border border-[#daa520] hover:bg-[#2a2a2a]"
+                onClick={() => setShowSummary(false)}
+              >Close</button>
+              <button
+                className="px-4 py-2 rounded-md border-2" style={{ borderColor: '#daa520', background: '#8b4513', color: '#f5f5dc' }}
+                onClick={() => { setShowSummary(false); window.location.reload() }}
+              >New Run</button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   )
