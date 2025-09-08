@@ -89,7 +89,7 @@ export default function YesYourGoat() {
       const id = at.split(':')[1]
       return unlocked.has(id)
     })
-    // Bias: use event weights, add recency penalty, and balance meter targeting
+    // Bias: use event weights, aggressive anti-repetition, and balance meter targeting
     const bias = (ev: EventCard) => {
       const effects = [ev.left?.effects || {}, ev.right?.effects || {}]
       const dropsRep = effects.some(e => typeof e.reputation === 'number' && e.reputation < 0)
@@ -99,9 +99,18 @@ export default function YesYourGoat() {
       // Start with base weight from event data
       let w = ev.weights?.base || 1
       
-      // Recency penalty: reduce weight for events that appeared recently
-      const recentCount = usedEventIds.filter(id => id.startsWith(ev.id.split('_')[0])).length
-      if (recentCount > 0) w = Math.max(0.1, w * (0.5 ** recentCount))
+      // AGGRESSIVE anti-repetition: completely block events that appeared in last 5 events
+      const recentEvents = usedEventIds.slice(-5)
+      if (recentEvents.includes(ev.id)) {
+        return 0 // Completely block recently used events
+      }
+      
+      // Strong penalty for similar event types (same prefix) in recent history
+      const eventPrefix = ev.id.split('_')[0]
+      const similarRecentCount = recentEvents.filter(id => id.startsWith(eventPrefix)).length
+      if (similarRecentCount > 0) {
+        w = Math.max(0.01, w * (0.1 ** similarRecentCount)) // Much stronger penalty
+      }
       
       // Balance meter targeting: steer toward the current highest meter to even out failures
       const highest = Math.max(meters.funds, meters.reputation, meters.readiness)

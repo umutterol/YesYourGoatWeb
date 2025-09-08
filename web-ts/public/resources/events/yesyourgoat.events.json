@@ -218,7 +218,7 @@
       "meta:council"
     ],
     "weights": {
-      "base": 1
+      "base": 0.3
     },
     "left": {
       "label": "We'll invest more.",
@@ -245,7 +245,7 @@
       "meta:council"
     ],
     "weights": {
-      "base": 1
+      "base": 0.3
     },
     "left": {
       "label": "We'll pay.",
@@ -966,7 +966,7 @@
       "meta:council"
     ],
     "weights": {
-      "base": 1
+      "base": 0.3
     },
     "left": {
       "label": "Pay immediately.",
@@ -993,7 +993,7 @@
       "meta:council"
     ],
     "weights": {
-      "base": 1
+      "base": 0.3
     },
     "left": {
       "label": "Update protocols.",
@@ -1020,7 +1020,7 @@
       "meta:council"
     ],
     "weights": {
-      "base": 1
+      "base": 0.3
     },
     "left": {
       "label": "Invest in training.",
@@ -1047,7 +1047,7 @@
       "meta:council"
     ],
     "weights": {
-      "base": 1
+      "base": 0.3
     },
     "left": {
       "label": "Join competition.",
@@ -1074,7 +1074,7 @@
       "meta:council"
     ],
     "weights": {
-      "base": 1
+      "base": 0.3
     },
     "left": {
       "label": "Pay the fine.",
