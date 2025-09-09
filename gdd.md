@@ -169,18 +169,19 @@ Authoring Guidance
 - Optional `portrait` string points to an image under `public/resources/portraits/`.
 - Validator: recommends `speaker` for all non-collapse/non-runmeta events; warns if missing (non-blocking), enforces `portrait` type when present.
 - UI: YesYourGoat card displays `speaker` and `portrait` above title; choices remain concise.
+- **Player Response Tone**: All choice labels use "only sane person in the building" personality - exasperated, world-weary, and slightly condescending responses that make the player feel like the only rational person managing chaotic guild members.
 
 Example (schema addition):
 ```
 {
   "id": "council_audit_01",
   "title": "Surprise Audit",
-  "speaker": "Councilor",
+  "speaker": "Treasurer",
   "portrait": "/resources/portraits/archmage.png",
   "body": "Your ledgers are… thin. Shall we settle the fees now, Guildmaster?",
   "tags": ["meta:council"],
-  "left": {"label": "We’ll pay.", "effects": {"funds": -2}},
-  "right": {"label": "We’ll delay.", "effects": {"reputation": -2}}
+  "left": {"label": "Pay up.", "effects": {"funds": -2}},
+  "right": {"label": "Stall for time.", "effects": {"reputation": -2}}
 }
 ```
 
@@ -253,6 +254,7 @@ Example (schema addition):
 
 ## Changelog
 
+- v0.25: **Complete Event System Overhaul**: Full rewrite of all 91 events according to authoring guide standards; removed morale system and simplified to 3-resource system (Funds/Reputation/Readiness); updated all speakers to canonical roster; implemented Reigns-style satirical deadpan tone with MMO-specific humor; added "only sane person in the building" personality to all player response choices; eliminated all morale_all references; ensured proper archetypal voices and moral ambiguity throughout.
 - v0.21: **Reigns-Style UI Implementation**: Complete UI redesign to match Reigns game aesthetic; implemented horizontal resource bar with 10-dot fill indicators above icons; restructured event card with text on top and embedded character portraits; enhanced swipe mechanics with choice previews and directional indicators; improved visual feedback and animations throughout; maintained responsive design for mobile and desktop.
 - v0.19: Fixed critical loss screen bug - loss conditions now properly display victory/loss screen instead of silently ending the game; added loss checking during both decision making and week progression; enhanced game flow with clear feedback when players lose; fixed variable naming conflict in loss detection logic.
 - v0.15: Massively expanded event library with 50+ additional dramatic scenarios; added comprehensive coverage of WoW guild drama including server reputation issues, racism/harassment, stalking, strategy leaks, griefing, exploits, AFK behavior, learning resistance, intoxication, timezone conflicts, school/military/medical issues, loot corruption, gambling, hoarding, voice chat drama, hardware problems, economic theft, and multiple crisis scenarios; created 95+ total events covering every aspect of guild management with realistic consequences and authentic decision points.

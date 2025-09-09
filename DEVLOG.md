@@ -2,17 +2,24 @@ YesYourGoatWeb – Dev Log
 
 This document summarizes the changes and additions made so far to migrate the project to a web-focused setup and to deliver a working web prototype.
 
-## Recent Updates (v0.24)
+## Recent Updates (v0.25)
+
+### Complete Event System Overhaul
+- **Full Event Rewrite**: Completely rewrote all 91 events according to `event_authoring_guide.md` standards
+- **Removed Morale System**: Eliminated all `morale_all` references, simplified to 3-resource system (Funds/Reputation/Readiness)
+- **Canonical Speaker Roster**: Updated all speakers to match defined roster (Tank, Mage, Priest, Rogue, etc.)
+- **Reigns-Style Tone**: Implemented satirical deadpan with MMO-specific humor and moral ambiguity
+- **Response Personality**: Added "only sane person in the building" tone to all player choice labels
 
 ### Dialog-Style Events (Reigns-like), Validator, and UI
 - Event authoring now supports conversational cards with `speaker` and optional `portrait`.
 - Validator updated to recommend `speaker` (warns if missing) and validate `portrait` type.
 - YesYourGoat UI shows speaker name and portrait above the card title.
-- Rewrote a first batch of high-frequency cards (Moderator intro/outro, Council audit/standards, Rival taunt/sabotage, journey milestones, plus key General/Witch/Priest/Rogue and unlock cards) into dialog style.
+- All events now use proper archetypal voices with consistent personalities.
 - Portraits use existing assets under `public/resources/portraits/`.
 
 ### Balance/Content
-- Expanded total events to 114; deck exhaustion eliminated in sims.
+- Expanded total events to 91; deck exhaustion eliminated in sims.
 - Current 100-run sim: avgDays ~14.9; causes Funds 83%, Reputation 11%, Readiness 6% (next: profile-based weighting + additional rewrites).
 
 ### Worldbuilding
@@ -20,7 +27,7 @@ This document summarizes the changes and additions made so far to migrate the pr
   - Ogrrynn Empire: Roman-inspired civilized orcs
   - Dwarven Sultanate: Ottoman/Persian-inspired desert dwarves with oilpunk tech
   - Elves: Aztec/Inca-inspired jungle tribes (ritualistic/brutal)
-  - Humans: baseline pragmatic “old empire”
+  - Humans: baseline pragmatic "old empire"
 
 ---
 
