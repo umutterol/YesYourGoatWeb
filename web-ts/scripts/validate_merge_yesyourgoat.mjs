@@ -25,6 +25,13 @@ function validateEvent(ev) {
     if (!ev.speaker || typeof ev.speaker !== 'string') {
       console.warn(`[YYG Validate] warn — Event ${ev.id} missing speaker (recommended)`) 
     }
+    // speakers allowlist
+    const allowedSpeakers = new Set([
+      'Council Moderator','Treasurer','Councilor','Tank','Officer','Healer','Priest','Rogue','Bard','Mage','Arcanist','Lifebinder','Recruiter','Streamer','Dev Liaison','Scout','Rival'
+    ])
+    if (ev.speaker && !allowedSpeakers.has(ev.speaker)) {
+      console.warn(`[YYG Validate] warn — Event ${ev.id} speaker '${ev.speaker}' not in canonical roster`) 
+    }
     // portrait is optional but recommended; if provided, must be a string
     if (ev.portrait !== undefined && typeof ev.portrait !== 'string') fail(`Event ${ev.id} portrait must be string if provided`)
   }

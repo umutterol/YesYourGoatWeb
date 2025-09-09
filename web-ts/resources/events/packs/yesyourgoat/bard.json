@@ -3,8 +3,8 @@
     "id": "bard_anthem_01",
     "title": "Anthem Request",
     "speaker": "Bard",
-    "portrait": "/resources/portraits/bard.png",
-    "body": "Give me time and I’ll write an anthem they’ll sing for years.",
+    "portrait": "/resources/portraits/darkranger.png",
+    "body": "Give me a week and a beat. I’ll make ‘em chant our tag.",
     "tags": ["archetype:bard"],
     "left": {"label": "Take the time.", "effects": {"reputation": 2}},
     "right": {"label": "Focus training.", "effects": {"readiness": 1, "morale_all": -1}}
@@ -13,8 +13,8 @@
     "id": "bard_hype_01",
     "title": "Hype vs Honesty",
     "speaker": "Bard",
-    "portrait": "/resources/portraits/bard.png",
-    "body": "Should I hype our progress or keep it honest?",
+    "portrait": "/resources/portraits/darkranger.png",
+    "body": "Do we sell the dream or keep it real on socials?",
     "tags": ["archetype:bard"],
     "left": {"label": "Hype it.", "effects": {"reputation": 1}},
     "right": {"label": "Be honest.", "effects": {"readiness": 1}}

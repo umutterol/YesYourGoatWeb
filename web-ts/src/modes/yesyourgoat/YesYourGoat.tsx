@@ -63,8 +63,12 @@ export default function YesYourGoat() {
         return milestoneCard
       }
     }
-    // Council cadence ~ every 5 (ease early pressure)
-    if (day % 5 === 0) {
+    // Determine council cooldown from recent events (last 2)
+    const recent2 = usedEventIds.slice(-2)
+    const councilOnCooldown = recent2.some(id => (events.find(e => e.id === id)?.tags || []).includes('meta:council'))
+
+    // Council cadence ~ every 5 (ease early pressure) respecting cooldown
+    if (!councilOnCooldown && day % 5 === 0) {
       const council = events.find(e => (e.tags || []).includes('meta:council'))
       if (council) return council
     }
@@ -83,6 +87,8 @@ export default function YesYourGoat() {
       if (tags.includes('run:intro') || tags.includes('run:outro')) return false
       if (tags.includes('meta:dungeon_progress')) return false
       if (tags.includes('meta:collapse')) return false
+      if (tags.includes('disabled')) return false
+      if (tags.some(t => t.startsWith('race:'))) return false
       if (usedEventIds.includes(e.id)) return false
       const at = tags.find(t => t.startsWith('archetype:'))
       if (!at) return true
@@ -112,9 +118,14 @@ export default function YesYourGoat() {
         w = Math.max(0.01, w * (0.1 ** similarRecentCount)) // Much stronger penalty
       }
 
-      // Narrative phases: early (1-4), mid (5-10), late (11+)
+      // Additional council cooldown at weight level
       const tags = ev.tags || []
       const isCouncil = tags.includes('meta:council')
+      if (isCouncil && councilOnCooldown) {
+        return 0
+      }
+
+      // Narrative phases: early (1-4), mid (5-10), late (11+)
       const isRival = tags.includes('meta:rival')
       const isMaintenance = tags.includes('meta:maintenance') || tags.includes('meta:pr')
       const isArchetype = tags.some(t => t.startsWith('archetype:')) || tags.some(t => t.startsWith('race:'))

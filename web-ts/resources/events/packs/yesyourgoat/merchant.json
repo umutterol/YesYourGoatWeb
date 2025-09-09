@@ -2,9 +2,9 @@
   {
     "id": "merchant_tax_01",
     "title": "Guild Tax Talk",
-    "speaker": "Merchant",
-    "portrait": "/resources/portraits/merchant.png",
-    "body": "Three percent dues covers repairs and potions. Sensible, yes?",
+    "speaker": "Treasurer",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "3% dues covers repairs and pots. Reasonable or riot?",
     "tags": ["archetype:merchant"],
     "left": {"label": "Approve it.", "effects": {"funds": 2, "reputation": -1}},
     "right": {"label": "Keep it free.", "effects": {"reputation": 1}}
@@ -12,9 +12,9 @@
   {
     "id": "merchant_sale_01",
     "title": "Sell the Spare",
-    "speaker": "Merchant",
-    "portrait": "/resources/portraits/merchant.png",
-    "body": "Duplicate item gathering dust. Shall we sell to fund potions?",
+    "speaker": "Treasurer",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "Duplicate drop gathering dust. List it to fund mats?",
     "tags": ["archetype:merchant"],
     "left": {"label": "Sell it.", "effects": {"funds": 2, "readiness": 1}},
     "right": {"label": "Bank it.", "effects": {"reputation": 1}}

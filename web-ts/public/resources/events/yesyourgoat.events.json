@@ -3,8 +3,8 @@
     "id": "bard_anthem_01",
     "title": "Anthem Request",
     "speaker": "Bard",
-    "portrait": "/resources/portraits/bard.png",
-    "body": "Give me time and I’ll write an anthem they’ll sing for years.",
+    "portrait": "/resources/portraits/darkranger.png",
+    "body": "Give me a week and a beat. I’ll make ‘em chant our tag.",
     "tags": [
       "archetype:bard"
     ],
@@ -26,8 +26,8 @@
     "id": "bard_hype_01",
     "title": "Hype vs Honesty",
     "speaker": "Bard",
-    "portrait": "/resources/portraits/bard.png",
-    "body": "Should I hype our progress or keep it honest?",
+    "portrait": "/resources/portraits/darkranger.png",
+    "body": "Do we sell the dream or keep it real on socials?",
     "tags": [
       "archetype:bard"
     ],
@@ -47,9 +47,9 @@
   {
     "id": "merchant_tax_01",
     "title": "Guild Tax Talk",
-    "speaker": "Merchant",
-    "portrait": "/resources/portraits/merchant.png",
-    "body": "Three percent dues covers repairs and potions. Sensible, yes?",
+    "speaker": "Treasurer",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "3% dues covers repairs and pots. Reasonable or riot?",
     "tags": [
       "archetype:merchant"
     ],
@@ -70,9 +70,9 @@
   {
     "id": "merchant_sale_01",
     "title": "Sell the Spare",
-    "speaker": "Merchant",
-    "portrait": "/resources/portraits/merchant.png",
-    "body": "Duplicate item gathering dust. Shall we sell to fund potions?",
+    "speaker": "Treasurer",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "Duplicate drop gathering dust. List it to fund mats?",
     "tags": [
       "archetype:merchant"
     ],
@@ -94,8 +94,8 @@
     "id": "recruiter_standards_01",
     "title": "Standards vs Numbers",
     "speaker": "Recruiter",
-    "portrait": "/resources/portraits/recruiter.png",
-    "body": "Lower standards to fill the roster, or keep the bar high?",
+    "portrait": "/resources/portraits/paladin.png",
+    "body": "We can fill slots fast if we drop reqs a bit. Bad look?",
     "tags": [
       "archetype:recruiter"
     ],
@@ -117,8 +117,8 @@
     "id": "recruiter_trials_01",
     "title": "Trial Spam",
     "speaker": "Recruiter",
-    "portrait": "/resources/portraits/recruiter.png",
-    "body": "Back-to-back trials this week will fill slots fast. Approve?",
+    "portrait": "/resources/portraits/paladin.png",
+    "body": "Back-to-back trials this week. Aggressive, but it works.",
     "tags": [
       "archetype:recruiter"
     ],
@@ -139,7 +139,7 @@
   {
     "id": "meta_intro_01",
     "title": "A New Charter",
-    "speaker": "Moderator",
+    "speaker": "Council Moderator",
     "portrait": "/resources/portraits/paladin.png",
     "body": "Another guild. Another dream of legend. Ready to sign?",
     "tags": [
@@ -162,7 +162,7 @@
   {
     "id": "journey_camp_01",
     "title": "First Camp",
-    "speaker": "Quartermaster",
+    "speaker": "Officer",
     "portrait": "/resources/portraits/peon.png",
     "body": "First camp. Drill a bit or let them rest?",
     "tags": [
@@ -211,9 +211,9 @@
   {
     "id": "council_quota_01",
     "title": "Council Quotas",
-    "speaker": "Councilor",
+    "speaker": "Treasurer",
     "portrait": "/resources/portraits/archmage.png",
-    "body": "Your performance metrics are... concerning. Shall we discuss your charter renewal?",
+    "body": "Numbers don’t love you this month. Charter talk now or later?",
     "tags": [
       "meta:council"
     ],
@@ -221,14 +221,14 @@
       "base": 0.3
     },
     "left": {
-      "label": "We'll invest more.",
+      "label": "Invest, fine.",
       "effects": {
         "funds": -1,
         "readiness": 2
       }
     },
     "right": {
-      "label": "The numbers are fine.",
+      "label": "They’re fine.",
       "effects": {
         "reputation": -2,
         "readiness": 1
@@ -238,7 +238,7 @@
   {
     "id": "council_audit_01",
     "title": "Surprise Audit",
-    "speaker": "Councilor",
+    "speaker": "Treasurer",
     "portrait": "/resources/portraits/archmage.png",
     "body": "Your ledgers are… thin. Shall we settle the fees now, Guildmaster?",
     "tags": [
@@ -263,7 +263,7 @@
   {
     "id": "council_readiness_01",
     "title": "Training Standards",
-    "speaker": "Councilor",
+    "speaker": "Treasurer",
     "portrait": "/resources/portraits/archmage.png",
     "body": "Standards are slipping. Shall we raise intensity or accept penalties?",
     "tags": [
@@ -286,7 +286,7 @@
   {
     "id": "meta_maintenance_01",
     "title": "Maintenance Night",
-    "speaker": "Quartermaster",
+    "speaker": "Officer",
     "portrait": "/resources/portraits/tinker.png",
     "body": "Servers are down. Cancel drills or switch to theorycraft?",
     "tags": [
@@ -311,19 +311,19 @@
     "title": "Rival’s Boast",
     "speaker": "Rival",
     "portrait": "/resources/portraits/dreadlord.png",
-    "body": "We’ll be at the gates long before you. Care to embarrass yourselves sooner?",
+    "body": "lol we’re ahead. You wanna speedrun your wipe too?",
     "tags": [
       "meta:rival"
     ],
     "left": {
-      "label": "We clap back.",
+      "label": "Clap back.",
       "effects": {
         "reputation": 1,
         "readiness": -1
       }
     },
     "right": {
-      "label": "Ignore it.",
+      "label": "Mute them.",
       "effects": {
         "readiness": 1
       }
@@ -355,7 +355,7 @@
   {
     "id": "general_lead_01",
     "title": "Lead or Leave",
-    "speaker": "General",
+    "speaker": "Tank",
     "portrait": "/resources/portraits/mountainking.png",
     "body": "Give me the next push or find another tank.",
     "tags": [
@@ -378,7 +378,7 @@
   {
     "id": "general_loot_01",
     "title": "Shield of Promise",
-    "speaker": "General",
+    "speaker": "Tank",
     "portrait": "/resources/portraits/mountainking.png",
     "body": "That bulwark is mine by right of service. Award it now or face the consequences.",
     "tags": [
@@ -452,12 +452,12 @@
     "title": "Healer’s Threat",
     "speaker": "Priest",
     "portrait": "/resources/portraits/priestess.png",
-    "body": "No one respects healers. Maybe I stop trying.",
+    "body": "Feels like heals are invisible. Kinda done, ngl.",
     "tags": [
       "archetype:priest"
     ],
     "left": {
-      "label": "You’re valued.",
+      "label": "We see you.",
       "effects": {
         "reputation": 1
       }
@@ -591,7 +591,7 @@
   {
     "id": "meta_outro_01",
     "title": "The Dust Settles",
-    "speaker": "Moderator",
+    "speaker": "Council Moderator",
     "portrait": "/resources/portraits/paladin.png",
     "body": "Another fine failure. New charter?",
     "tags": [
@@ -610,7 +610,7 @@
   {
     "id": "general_strategy_01",
     "title": "Rigid Strategy",
-    "speaker": "General",
+    "speaker": "Tank",
     "portrait": "/resources/portraits/mountainking.png",
     "body": "The plan worked before. Why change what brings victory? Trust in proven tactics.",
     "tags": [
@@ -867,7 +867,8 @@
     "portrait": "/resources/portraits/mountainking.png",
     "body": "The Ogrrynn Empire offers military support. Their discipline is legendary, but their methods are... harsh.",
     "tags": [
-      "race:ogrrynn"
+      "race:ogrrynn",
+      "disabled"
     ],
     "left": {
       "label": "Accept their aid.",
@@ -891,7 +892,8 @@
     "portrait": "/resources/portraits/tinker.png",
     "body": "The Sultanate offers oil-powered contraptions. They're expensive but incredibly effective.",
     "tags": [
-      "race:dwarven"
+      "race:dwarven",
+      "disabled"
     ],
     "left": {
       "label": "Invest in oil tech.",
@@ -915,7 +917,8 @@
     "portrait": "/resources/portraits/sorceress.png",
     "body": "The jungle tribes offer ancient rituals for power. They require... sacrifice.",
     "tags": [
-      "race:elf"
+      "race:elf",
+      "disabled"
     ],
     "left": {
       "label": "Accept the ritual.",
@@ -939,7 +942,8 @@
     "portrait": "/resources/portraits/paladin.png",
     "body": "The old empire offers to mediate between guilds. They're experienced but... boring.",
     "tags": [
-      "race:human"
+      "race:human",
+      "disabled"
     ],
     "left": {
       "label": "Accept mediation.",
@@ -959,7 +963,7 @@
   {
     "id": "council_fees_02",
     "title": "Rising Fees",
-    "speaker": "Councilor",
+    "speaker": "Treasurer",
     "portrait": "/resources/portraits/archmage.png",
     "body": "The Council raises operational fees. Pay now or negotiate a delay?",
     "tags": [
@@ -986,7 +990,7 @@
   {
     "id": "council_inspection_02",
     "title": "Safety Inspection",
-    "speaker": "Councilor",
+    "speaker": "Treasurer",
     "portrait": "/resources/portraits/archmage.png",
     "body": "Safety protocols need updating. Invest in compliance or face penalties?",
     "tags": [
@@ -1013,7 +1017,7 @@
   {
     "id": "council_standards_02",
     "title": "Quality Control",
-    "speaker": "Councilor",
+    "speaker": "Treasurer",
     "portrait": "/resources/portraits/archmage.png",
     "body": "Your recent performance doesn't meet standards. Training or consequences?",
     "tags": [
@@ -1040,7 +1044,7 @@
   {
     "id": "council_competition_02",
     "title": "Guild Competition",
-    "speaker": "Councilor",
+    "speaker": "Treasurer",
     "portrait": "/resources/portraits/archmage.png",
     "body": "Other guilds are outperforming you. Join the competition or focus internally?",
     "tags": [
@@ -1067,7 +1071,7 @@
   {
     "id": "council_penalty_02",
     "title": "Late Payment",
-    "speaker": "Councilor",
+    "speaker": "Treasurer",
     "portrait": "/resources/portraits/archmage.png",
     "body": "Your last payment was late. Pay the fine or explain the delay?",
     "tags": [
@@ -1202,7 +1206,9 @@
   {
     "id": "witch_experiment_01",
     "title": "Dangerous Experiment",
-    "body": "The Witch wants to test a new damage rotation.",
+    "speaker": "Mage",
+    "portrait": "/resources/portraits/sorceress.png",
+    "body": "I can test a new rotation tonight. Big numbers or big oof.",
     "tags": [
       "archetype:witch"
     ],
@@ -1224,7 +1230,9 @@
   {
     "id": "witch_curse_01",
     "title": "Cursed Loot",
-    "body": "The Witch claims a piece of loot is cursed.",
+    "speaker": "Arcanist",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "That trinket feels… wrong. Disenchant or risk it?",
     "tags": [
       "archetype:witch"
     ],
@@ -1246,7 +1254,9 @@
   {
     "id": "witch_ritual_02",
     "title": "Blood Ritual",
-    "body": "The Witch proposes a risky power ritual.",
+    "speaker": "Mage",
+    "portrait": "/resources/portraits/sorceress.png",
+    "body": "There’s a power window if we push a risky ritual.",
     "tags": [
       "archetype:witch"
     ],
@@ -1268,7 +1278,9 @@
   {
     "id": "witch_mana_01",
     "title": "Mana Burnout",
-    "body": "The Witch overexerts and needs rest.",
+    "speaker": "Healer",
+    "portrait": "/resources/portraits/priestess.png",
+    "body": "Mage’s tapped. We rest or we risk tilt.",
     "tags": [
       "archetype:witch"
     ],
@@ -1290,7 +1302,9 @@
   {
     "id": "witch_familiar_01",
     "title": "Familiar Trouble",
-    "body": "The Witch's familiar causes chaos in camp.",
+    "speaker": "Arcanist",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "Familiar’s acting up in camp. Clean removal or workaround?",
     "tags": [
       "archetype:witch"
     ],
@@ -1312,7 +1326,9 @@
   {
     "id": "priest_healing_01",
     "title": "Healing Crisis",
-    "body": "The Priest struggles with complex healing mechanics.",
+    "speaker": "Healer",
+    "portrait": "/resources/portraits/priestess.png",
+    "body": "Some fights are scuffing us. Training day or strat swap?",
     "tags": [
       "archetype:priest"
     ],
@@ -1334,7 +1350,9 @@
   {
     "id": "priest_faith_01",
     "title": "Crisis of Faith",
-    "body": "The Priest questions their divine calling.",
+    "speaker": "Priest",
+    "portrait": "/resources/portraits/priestess.png",
+    "body": "Not gonna lie, I’m questioning why we do this.",
     "tags": [
       "archetype:priest"
     ],
@@ -1356,7 +1374,9 @@
   {
     "id": "priest_blessing_01",
     "title": "Divine Blessing",
-    "body": "The Priest offers to bless the raid.",
+    "speaker": "Priest",
+    "portrait": "/resources/portraits/priestess.png",
+    "body": "I can pop a blessing. Costs mats, helps vibe.",
     "tags": [
       "archetype:priest"
     ],
@@ -1378,7 +1398,9 @@
   {
     "id": "priest_confession_01",
     "title": "Confession Time",
-    "body": "The Priest wants to hear everyone's sins.",
+    "speaker": "Priest",
+    "portrait": "/resources/portraits/priestess.png",
+    "body": "If folks vent tonight, we reset faster. Your call.",
     "tags": [
       "archetype:priest"
     ],
@@ -1400,7 +1422,9 @@
   {
     "id": "priest_sacrifice_01",
     "title": "Personal Sacrifice",
-    "body": "The Priest offers to take on extra healing duties.",
+    "speaker": "Healer",
+    "portrait": "/resources/portraits/priestess.png",
+    "body": "I’ll cover extra if needed. I’ll be cooked though.",
     "tags": [
       "archetype:priest"
     ],
@@ -1422,7 +1446,9 @@
   {
     "id": "rogue_stealth_01",
     "title": "Stealth Mission",
-    "body": "The Rogue wants to scout ahead alone.",
+    "speaker": "Rogue",
+    "portrait": "/resources/portraits/rogue.png",
+    "body": "I can scout solo, less noise. Risky, faster.",
     "tags": [
       "archetype:rogue"
     ],
@@ -1444,7 +1470,9 @@
   {
     "id": "rogue_trap_01",
     "title": "Trap Expert",
-    "body": "The Rogue offers to handle all trap disarming.",
+    "speaker": "Rogue",
+    "portrait": "/resources/portraits/rogue.png",
+    "body": "Let me handle traps. Fewer booms.",
     "tags": [
       "archetype:rogue"
     ],
@@ -1466,7 +1494,9 @@
   {
     "id": "rogue_gambling_01",
     "title": "Gambling Problem",
-    "body": "The Rogue bets guild funds on raid outcomes.",
+    "speaker": "Rogue",
+    "portrait": "/resources/portraits/rogue.png",
+    "body": "Ok I may have bet the bank on our parse. Tiny bit.",
     "tags": [
       "archetype:rogue"
     ],
@@ -1488,7 +1518,9 @@
   {
     "id": "rogue_poison_01",
     "title": "Poisoned Blade",
-    "body": "The Rogue wants to use poison on bosses.",
+    "speaker": "Rogue",
+    "portrait": "/resources/portraits/rogue.png",
+    "body": "Poison will shave seconds. Not exactly PR-friendly.",
     "tags": [
       "archetype:rogue"
     ],
@@ -1510,7 +1542,9 @@
   {
     "id": "rogue_lockpick_01",
     "title": "Lockpicking Contest",
-    "body": "The Rogue challenges others to a lockpicking contest.",
+    "speaker": "Rogue",
+    "portrait": "/resources/portraits/rogue.png",
+    "body": "Lock-off at camp? Winner gets bragging rights.",
     "tags": [
       "archetype:rogue"
     ],
@@ -1532,7 +1566,9 @@
   {
     "id": "council_fees_01",
     "title": "Rising Fees",
-    "body": "The Council increases guild registration fees.",
+    "speaker": "Treasurer",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "Ops fees went up. Pay now or try sweet-talk?",
     "tags": [
       "meta:council"
     ],
@@ -1553,7 +1589,9 @@
   {
     "id": "council_inspection_01",
     "title": "Safety Inspection",
-    "body": "The Council inspects your training facilities.",
+    "speaker": "Treasurer",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "Inspectors want a full tour. We showing everything?",
     "tags": [
       "meta:council"
     ],
@@ -1575,7 +1613,9 @@
   {
     "id": "council_standards_01",
     "title": "New Standards",
-    "body": "The Council raises minimum performance requirements.",
+    "speaker": "Treasurer",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "Standards went up again. Train more or appeal?",
     "tags": [
       "meta:council"
     ],
@@ -1597,7 +1637,9 @@
   {
     "id": "council_competition_01",
     "title": "Guild Competition",
-    "body": "The Council announces a guild vs guild tournament.",
+    "speaker": "Treasurer",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "Tournament invite came in. Good PR, some cost.",
     "tags": [
       "meta:council"
     ],
@@ -1619,7 +1661,9 @@
   {
     "id": "council_penalty_01",
     "title": "Performance Penalty",
-    "body": "The Council fines you for poor performance.",
+    "speaker": "Treasurer",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "Penalty notice. We pay or fight it?",
     "tags": [
       "meta:council"
     ],
@@ -1640,7 +1684,9 @@
   {
     "id": "rival_recruit_01",
     "title": "Recruitment War",
-    "body": "Rival guild poaches your best raider.",
+    "speaker": "Rival",
+    "portrait": "/resources/portraits/dreadlord.png",
+    "body": "He’s with us now unless you match. Ball’s in your court.",
     "tags": [
       "meta:rival"
     ],
@@ -1662,7 +1708,9 @@
   {
     "id": "rival_rumor_01",
     "title": "Rumors Spread",
-    "body": "Rival guild spreads rumors about your methods.",
+    "speaker": "Rival",
+    "portrait": "/resources/portraits/dreadlord.png",
+    "body": "Heard your bench is carrying. Chat’s eating it up.",
     "tags": [
       "meta:rival"
     ],
@@ -1684,7 +1732,9 @@
   {
     "id": "rival_challenge_01",
     "title": "Direct Challenge",
-    "body": "Rival guildmaster challenges you to a duel.",
+    "speaker": "Rival",
+    "portrait": "/resources/portraits/dreadlord.png",
+    "body": "1v1 me, guildmaster. For the content.",
     "tags": [
       "meta:rival"
     ],
@@ -1706,7 +1756,9 @@
   {
     "id": "rival_sabotage_02",
     "title": "Equipment Sabotage",
-    "body": "Rival guild damages your training equipment.",
+    "speaker": "Rival",
+    "portrait": "/resources/portraits/dreadlord.png",
+    "body": "Shame about those dummies breaking. Again.",
     "tags": [
       "meta:rival"
     ],
@@ -1728,7 +1780,9 @@
   {
     "id": "rival_spy_01",
     "title": "Spy in Ranks",
-    "body": "You suspect a rival spy in your guild.",
+    "speaker": "Rival",
+    "portrait": "/resources/portraits/dreadlord.png",
+    "body": "Crazy if true: your strats doc leaked.",
     "tags": [
       "meta:rival"
     ],
@@ -2734,6 +2788,192 @@
       "effects": {
         "reputation": 1,
         "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "healer_triage_01",
+    "title": "Triage Night",
+    "speaker": "Healer",
+    "portrait": "/resources/portraits/priestess.png",
+    "body": "Roster’s cooked. I can patch them up, but we burn stock. Your call.",
+    "tags": [
+      "theme:readiness"
+    ],
+    "left": {
+      "label": "Spend supplies.",
+      "effects": {
+        "funds": -1,
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Let them rest.",
+      "effects": {
+        "readiness": -1,
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "bard_hype_02",
+    "title": "Hype Video",
+    "speaker": "Bard",
+    "portrait": "/resources/portraits/darkranger.png",
+    "body": "I cut a sick montage. Post it now or save for the push?",
+    "tags": [
+      "theme:pr"
+    ],
+    "left": {
+      "label": "Post now.",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    },
+    "right": {
+      "label": "Hold it.",
+      "effects": {
+        "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "mage_window_01",
+    "title": "Burst Window",
+    "speaker": "Mage",
+    "portrait": "/resources/portraits/sorceress.png",
+    "body": "I can line cooldowns if we reroute tonight. Risky, but juicy.",
+    "tags": [
+      "theme:readiness"
+    ],
+    "left": {
+      "label": "Send it.",
+      "effects": {
+        "readiness": 1,
+        "reputation": -1
+      }
+    },
+    "right": {
+      "label": "Play safe.",
+      "effects": {
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "arcanist_barrier_01",
+    "title": "Safety First",
+    "speaker": "Arcanist",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "We can layer barriers and avoid dumb wipes. Costs prep time.",
+    "tags": [
+      "theme:mitigation"
+    ],
+    "left": {
+      "label": "Do it.",
+      "effects": {
+        "readiness": -1,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Skip it.",
+      "effects": {
+        "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "lifebinder_recovery_01",
+    "title": "Recovery Day",
+    "speaker": "Lifebinder",
+    "portrait": "/resources/portraits/keeper.png",
+    "body": "If we water the roots, we bloom next week. Short-term hit.",
+    "tags": [
+      "theme:morale"
+    ],
+    "left": {
+      "label": "Greenlight.",
+      "effects": {
+        "readiness": -1,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Not now.",
+      "effects": {
+        "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "recruiter_trials_02",
+    "title": "Open Trials",
+    "speaker": "Recruiter",
+    "portrait": "/resources/portraits/paladin.png",
+    "body": "Got applicants. Fast-track a carry tonight or run a proper trial?",
+    "tags": [
+      "theme:recruitment"
+    ],
+    "left": {
+      "label": "Fast-track.",
+      "effects": {
+        "readiness": 1,
+        "reputation": -1
+      }
+    },
+    "right": {
+      "label": "Proper trial.",
+      "effects": {
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "streamer_sponsor_01",
+    "title": "Sponsor Offer",
+    "speaker": "Streamer",
+    "portrait": "/resources/portraits/dreadlord.png",
+    "body": "Small brand wants a shoutout. Minor bag, little cringe.",
+    "tags": [
+      "theme:pr"
+    ],
+    "left": {
+      "label": "Take it.",
+      "effects": {
+        "funds": 1,
+        "reputation": -1
+      }
+    },
+    "right": {
+      "label": "Pass.",
+      "effects": {
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "devliaison_hotfix_01",
+    "title": "Hotfix Tomorrow",
+    "speaker": "Dev Liaison",
+    "portrait": "/resources/portraits/tinker.png",
+    "body": "Damage spell bugged. Hotfix hits tomorrow. Pivot comp or ride it?",
+    "tags": [
+      "theme:maintenance"
+    ],
+    "left": {
+      "label": "Pivot.",
+      "effects": {
+        "readiness": -1,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Ride it.",
+      "effects": {
+        "readiness": 1,
+        "reputation": -1
       }
     }
   }
