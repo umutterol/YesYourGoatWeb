@@ -4,7 +4,7 @@
     "title": "Anthem Request",
     "speaker": "Bard",
     "portrait": "/resources/portraits/darkranger.png",
-    "body": "Give me a week and a beat. I’ll make ‘em chant our tag.",
+    "body": "Give me a week and a beat. I'll make 'em chant our tag.",
     "tags": [
       "archetype:bard"
     ],
@@ -18,7 +18,7 @@
       "label": "Focus training.",
       "effects": {
         "readiness": 1,
-        "morale_all": -1
+        "reputation": -1
       }
     }
   },
@@ -126,7 +126,7 @@
       "label": "Approve.",
       "effects": {
         "readiness": 2,
-        "morale_all": -1
+        "reputation": -1
       }
     },
     "right": {
@@ -153,7 +153,7 @@
       }
     },
     "right": {
-      "label": "We’ll be legends.",
+      "label": "We'll be legends.",
       "effects": {
         "reputation": 1
       }
@@ -197,14 +197,14 @@
       "label": "Ration.",
       "effects": {
         "funds": 1,
-        "morale_all": -1
+        "reputation": -1
       }
     },
     "right": {
       "label": "Rally them.",
       "effects": {
         "funds": -1,
-        "morale_all": 1
+        "reputation": 1
       }
     }
   },
@@ -338,7 +338,7 @@
     "title": "Council Quotas",
     "speaker": "Treasurer",
     "portrait": "/resources/portraits/archmage.png",
-    "body": "Numbers don’t love you this month. Charter talk now or later?",
+    "body": "Numbers don't love you this month. Charter talk now or later?",
     "tags": [
       "meta:council"
     ],
@@ -353,7 +353,7 @@
       }
     },
     "right": {
-      "label": "They’re fine.",
+      "label": "They're fine.",
       "effects": {
         "reputation": -2,
         "readiness": 1
@@ -436,10 +436,10 @@
   },
   {
     "id": "rival_taunt_01",
-    "title": "Rival’s Boast",
+    "title": "Rival's Boast",
     "speaker": "Rival",
     "portrait": "/resources/portraits/dreadlord.png",
-    "body": "lol we’re ahead. You wanna speedrun your wipe too?",
+    "body": "lol we're ahead. You wanna speedrun your wipe too?",
     "tags": [
       "meta:rival"
     ],
@@ -493,7 +493,7 @@
       "label": "You lead.",
       "effects": {
         "readiness": 1,
-        "morale_all": -1
+        "reputation": -1
       }
     },
     "right": {
@@ -523,14 +523,14 @@
       "label": "We roll fairly.",
       "effects": {
         "reputation": 1,
-        "morale_all": -1
+        "readiness": -1
       }
     }
   },
   {
     "id": "witch_ritual_01",
     "title": "Expedient Ritual",
-    "speaker": "Witch",
+    "speaker": "Mage",
     "portrait": "/resources/portraits/sorceress.png",
     "body": "A quick ritual boosts damage. It might sting. Approve?",
     "tags": [
@@ -554,7 +554,7 @@
   {
     "id": "witch_aoe_01",
     "title": "Collateral Fire",
-    "speaker": "Witch",
+    "speaker": "Mage",
     "portrait": "/resources/portraits/sorceress.png",
     "body": "My flames may singe a few allies, but the damage output is worth it. Trust me?",
     "tags": [
@@ -571,13 +571,13 @@
       "label": "It's progress.",
       "effects": {
         "reputation": 1,
-        "morale_all": -1
+        "readiness": -1
       }
     }
   },
   {
     "id": "priest_burnout_01",
-    "title": "Healer’s Threat",
+    "title": "Healer's Threat",
     "speaker": "Priest",
     "portrait": "/resources/portraits/priestess.png",
     "body": "Feels like heals are invisible. Kinda done, ngl.",
@@ -625,7 +625,7 @@
     "title": "Pocketed Trinket",
     "speaker": "Rogue",
     "portrait": "/resources/portraits/rogue.png",
-    "body": "What trinket? Must’ve slipped into my pocket.",
+    "body": "What trinket? Must've slipped into my pocket.",
     "tags": [
       "archetype:rogue"
     ],
@@ -754,14 +754,14 @@
       "label": "Adapt as needed.",
       "effects": {
         "reputation": 1,
-        "morale_all": -1
+        "readiness": -1
       }
     }
   },
   {
     "id": "witch_tome_01",
     "title": "Forbidden Tome",
-    "speaker": "Witch",
+    "speaker": "Mage",
     "portrait": "/resources/portraits/sorceress.png",
     "body": "I found ancient knowledge that could make us unstoppable. The price might be... steep.",
     "tags": [
@@ -794,7 +794,7 @@
       "label": "Accept the help.",
       "effects": {
         "readiness": 1,
-        "morale_all": -1
+        "reputation": -1
       }
     },
     "right": {
@@ -831,7 +831,7 @@
     "title": "PR Scandal",
     "speaker": "Streamer",
     "portrait": "/resources/portraits/dreadlord.png",
-    "body": "Clip’s viral. We apologize or double down?",
+    "body": "Clip's viral. We apologize or double down?",
     "tags": [
       "meta:pr"
     ],
@@ -1018,7 +1018,7 @@
       "label": "Accept their aid.",
       "effects": {
         "readiness": 2,
-        "morale_all": -1
+        "reputation": -1
       }
     },
     "right": {
@@ -1242,6 +1242,8 @@
   {
     "id": "general_reshuffle_01",
     "title": "Role Reshuffle",
+    "speaker": "Tank",
+    "portrait": "/resources/portraits/mountainking.png",
     "body": "The General demands a mid-run role swap.",
     "tags": [
       "archetype:general"
@@ -1262,6 +1264,8 @@
   {
     "id": "general_discipline_01",
     "title": "Discipline Problem",
+    "speaker": "Tank",
+    "portrait": "/resources/portraits/mountainking.png",
     "body": "The General wants to bench a slacking raider.",
     "tags": [
       "archetype:general"
@@ -1270,7 +1274,7 @@
       "label": "Support discipline",
       "effects": {
         "readiness": 1,
-        "morale_all": -1
+        "reputation": -1
       }
     },
     "right": {
@@ -1284,6 +1288,8 @@
   {
     "id": "general_gear_01",
     "title": "Gear Priority",
+    "speaker": "Tank",
+    "portrait": "/resources/portraits/mountainking.png",
     "body": "The General demands first pick on all tank gear.",
     "tags": [
       "archetype:general"
@@ -1299,13 +1305,15 @@
       "label": "Fair distribution",
       "effects": {
         "reputation": 1,
-        "morale_all": -1
+        "readiness": -1
       }
     }
   },
   {
     "id": "general_retreat_01",
     "title": "Tactical Retreat",
+    "speaker": "Tank",
+    "portrait": "/resources/portraits/mountainking.png",
     "body": "The General calls for a full retreat mid-pull.",
     "tags": [
       "archetype:general"
@@ -1328,6 +1336,8 @@
   {
     "id": "general_recruit_01",
     "title": "Recruitment Drive",
+    "speaker": "Tank",
+    "portrait": "/resources/portraits/mountainking.png",
     "body": "The General wants to recruit more tanks.",
     "tags": [
       "archetype:general"
@@ -1391,7 +1401,7 @@
       "label": "Use anyway",
       "effects": {
         "readiness": 1,
-        "morale_all": -1
+        "reputation": -1
       }
     }
   },
@@ -1400,7 +1410,7 @@
     "title": "Blood Ritual",
     "speaker": "Mage",
     "portrait": "/resources/portraits/sorceress.png",
-    "body": "There’s a power window if we push a risky ritual.",
+    "body": "There's a power window if we push a risky ritual.",
     "tags": [
       "archetype:witch"
     ],
@@ -1424,7 +1434,7 @@
     "title": "Mana Burnout",
     "speaker": "Healer",
     "portrait": "/resources/portraits/priestess.png",
-    "body": "Mage’s tapped. We rest or we risk tilt.",
+    "body": "Mage's tapped. We rest or we risk tilt.",
     "tags": [
       "archetype:witch"
     ],
@@ -1439,7 +1449,7 @@
       "label": "Push through",
       "effects": {
         "readiness": -2,
-        "morale_all": -1
+        "reputation": -1
       }
     }
   },
@@ -1448,7 +1458,7 @@
     "title": "Familiar Trouble",
     "speaker": "Arcanist",
     "portrait": "/resources/portraits/archmage.png",
-    "body": "Familiar’s acting up in camp. Clean removal or workaround?",
+    "body": "Familiar's acting up in camp. Clean removal or workaround?",
     "tags": [
       "archetype:witch"
     ],
@@ -1456,7 +1466,7 @@
       "label": "Banish familiar",
       "effects": {
         "readiness": 1,
-        "morale_all": -1
+        "reputation": -1
       }
     },
     "right": {
@@ -1496,7 +1506,7 @@
     "title": "Crisis of Faith",
     "speaker": "Priest",
     "portrait": "/resources/portraits/priestess.png",
-    "body": "Not gonna lie, I’m questioning why we do this.",
+    "body": "Not gonna lie, I'm questioning why we do this.",
     "tags": [
       "archetype:priest"
     ],
@@ -1511,7 +1521,7 @@
       "label": "Let them decide",
       "effects": {
         "readiness": -1,
-        "morale_all": -1
+        "reputation": -1
       }
     }
   },
@@ -1551,7 +1561,7 @@
     "left": {
       "label": "Encourage sharing",
       "effects": {
-        "morale_all": 1,
+        "reputation": 1,
         "readiness": -1
       }
     },
@@ -1568,7 +1578,7 @@
     "title": "Personal Sacrifice",
     "speaker": "Healer",
     "portrait": "/resources/portraits/priestess.png",
-    "body": "I’ll cover extra if needed. I’ll be cooked though.",
+    "body": "I'll cover extra if needed. I'll be cooked though.",
     "tags": [
       "archetype:priest"
     ],
@@ -1576,7 +1586,7 @@
       "label": "Accept help",
       "effects": {
         "readiness": 1,
-        "morale_all": -1
+        "reputation": -1
       }
     },
     "right": {
@@ -1624,7 +1634,7 @@
       "label": "Accept expertise",
       "effects": {
         "readiness": 1,
-        "morale_all": -1
+        "reputation": -1
       }
     },
     "right": {
@@ -1695,7 +1705,7 @@
     "left": {
       "label": "Join the fun",
       "effects": {
-        "morale_all": 1,
+        "reputation": 1,
         "readiness": -1
       }
     },
@@ -1712,7 +1722,7 @@
     "title": "Recruitment War",
     "speaker": "Rival",
     "portrait": "/resources/portraits/dreadlord.png",
-    "body": "He’s with us now unless you match. Ball’s in your court.",
+    "body": "He's with us now unless you match. Ball's in your court.",
     "tags": [
       "meta:rival"
     ],
@@ -1736,7 +1746,7 @@
     "title": "Rumors Spread",
     "speaker": "Rival",
     "portrait": "/resources/portraits/dreadlord.png",
-    "body": "Heard your bench is carrying. Chat’s eating it up.",
+    "body": "Heard your bench is carrying. Chat's eating it up.",
     "tags": [
       "meta:rival"
     ],
@@ -1976,7 +1986,7 @@
     "title": "Public Controversy",
     "speaker": "Council Moderator",
     "portrait": "/resources/portraits/paladin.png",
-    "body": "Thread’s on fire. Statement or silence?",
+    "body": "Thread's on fire. Statement or silence?",
     "tags": [
       "meta:pr"
     ],
@@ -2032,7 +2042,7 @@
       "label": "Address publicly",
       "effects": {
         "reputation": 1,
-        "morale_all": -1
+        "readiness": -1
       }
     },
     "right": {
@@ -2046,6 +2056,8 @@
   {
     "id": "meta_burnout_01",
     "title": "Collective Burnout",
+    "speaker": "Healer",
+    "portrait": "/resources/portraits/priestess.png",
     "body": "The entire guild shows signs of exhaustion.",
     "tags": [
       "meta:training"
@@ -2061,7 +2073,7 @@
       "label": "Push through",
       "effects": {
         "readiness": -2,
-        "morale_all": -1
+        "reputation": -1
       }
     }
   },
@@ -2085,7 +2097,7 @@
       "label": "Stick to plan",
       "effects": {
         "readiness": -1,
-        "morale_all": -1
+        "reputation": -1
       }
     }
   },
@@ -2133,7 +2145,7 @@
       "label": "Maintain intensity",
       "effects": {
         "readiness": -2,
-        "morale_all": -1
+        "reputation": -1
       }
     }
   }

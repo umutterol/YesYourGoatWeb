@@ -16,8 +16,7 @@
     "portrait": "/resources/portraits/paladin.png",
     "body": "Back-to-back trials this week. Aggressive, but it works.",
     "tags": ["archetype:recruiter"],
-    "left": {"label": "Approve.", "effects": {"readiness": 2, "morale_all": -1}},
+    "left": {"label": "Approve.", "effects": {"readiness": 2, "reputation": -1}},
     "right": {"label": "Limit it.", "effects": {"reputation": 1}}
   }
 ]
-
