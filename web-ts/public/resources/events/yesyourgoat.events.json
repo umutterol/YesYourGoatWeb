@@ -269,6 +269,9 @@
     "tags": [
       "meta:council"
     ],
+    "weights": {
+      "base": 0.3
+    },
     "left": {
       "label": "Raise it.",
       "effects": {
@@ -1576,124 +1579,6 @@
       "effects": {
         "readiness": 1,
         "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "council_fees_01",
-    "title": "Rising Fees",
-    "speaker": "Treasurer",
-    "portrait": "/resources/portraits/archmage.png",
-    "body": "Ops fees went up. Pay now or try sweet-talk?",
-    "tags": [
-      "meta:council"
-    ],
-    "left": {
-      "label": "Pay immediately",
-      "effects": {
-        "funds": -2
-      }
-    },
-    "right": {
-      "label": "Negotiate delay",
-      "effects": {
-        "reputation": -1,
-        "funds": -1
-      }
-    }
-  },
-  {
-    "id": "council_inspection_01",
-    "title": "Safety Inspection",
-    "speaker": "Treasurer",
-    "portrait": "/resources/portraits/archmage.png",
-    "body": "Inspectors want a full tour. We showing everything?",
-    "tags": [
-      "meta:council"
-    ],
-    "left": {
-      "label": "Show everything",
-      "effects": {
-        "reputation": 1,
-        "funds": -1
-      }
-    },
-    "right": {
-      "label": "Hide problems",
-      "effects": {
-        "reputation": -2,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "council_standards_01",
-    "title": "New Standards",
-    "speaker": "Treasurer",
-    "portrait": "/resources/portraits/archmage.png",
-    "body": "Standards went up again. Train more or appeal?",
-    "tags": [
-      "meta:council"
-    ],
-    "left": {
-      "label": "Meet standards",
-      "effects": {
-        "readiness": -2,
-        "funds": -1
-      }
-    },
-    "right": {
-      "label": "Appeal decision",
-      "effects": {
-        "reputation": -1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "council_competition_01",
-    "title": "Guild Competition",
-    "speaker": "Treasurer",
-    "portrait": "/resources/portraits/archmage.png",
-    "body": "Tournament invite came in. Good PR, some cost.",
-    "tags": [
-      "meta:council"
-    ],
-    "left": {
-      "label": "Enter competition",
-      "effects": {
-        "funds": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Skip this year",
-      "effects": {
-        "reputation": -1,
-        "readiness": 1
-      }
-    }
-  },
-  {
-    "id": "council_penalty_01",
-    "title": "Performance Penalty",
-    "speaker": "Treasurer",
-    "portrait": "/resources/portraits/archmage.png",
-    "body": "Penalty notice. We pay or fight it?",
-    "tags": [
-      "meta:council"
-    ],
-    "left": {
-      "label": "Pay penalty",
-      "effects": {
-        "funds": -2
-      }
-    },
-    "right": {
-      "label": "Challenge fine",
-      "effects": {
-        "reputation": -2,
-        "funds": -1
       }
     }
   },

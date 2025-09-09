@@ -69,8 +69,12 @@ export default function YesYourGoat() {
 
     // Council cadence ~ every 5 (ease early pressure) respecting cooldown
     if (!councilOnCooldown && day % 5 === 0) {
-      const council = events.find(e => (e.tags || []).includes('meta:council'))
-      if (council) return council
+      const councilEvents = events.filter(e => (e.tags || []).includes('meta:council') && !usedEventIds.includes(e.id))
+      if (councilEvents.length > 0) {
+        // Randomly select from available council events
+        const randomIndex = Math.floor(Math.random() * councilEvents.length)
+        return councilEvents[randomIndex]
+      }
     }
     // Ensure Rival at least once mid-run (~day 8)
     if (!SawRivalMid() && day >= 8) {
