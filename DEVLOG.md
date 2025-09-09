@@ -45,23 +45,6 @@ Next Steps
 - Author more YesYourGoat packs; validator enforces `spinoff_authoring_guide.md`
 - Optional: Vercel SPA rewrites (ensure deep-link `/yesyourgoat` opens `index.html`)
 
-## Recent Updates (v0.22)
-
-### Adventure Mode System Design
-- **Complete Adventure Mode Framework**: Designed multi-step event chains with branching narratives and difficulty progression
-- **Simulation Testing**: Conducted extensive 100-run simulations to achieve optimal balance across 4 difficulty tiers
-- **"The Great Guild Raid" Adventure**: Created first adventure with 66% win rate for beginner-friendly introduction
-- **Story Event Integration**: Added narrative events that provide flavor without gameplay impact
-- **Resource Balance**: Achieved meaningful threat distribution across Funds, Reputation, Readiness, and Morale
-- **Difficulty Curve**: Established progression from 66% (beginner) to 35% (master) win rates
-
-### Balance Testing Results
-- **Adventure 1**: 66% win rate - Perfect for learning mechanics
-- **Adventure 2**: 55% win rate - Intermediate challenge
-- **Adventure 3**: 45% win rate - Expert level difficulty  
-- **Adventure 4**: 35% win rate - Master challenge
-- **Resource Distribution**: All resources remain meaningful threats throughout progression
-- **Failure Points**: Multiple steps can cause failure, preventing single-point-of-failure design
 
 Scope Completed
 
@@ -126,58 +109,11 @@ Recent Updates (v0.21)
 - **Reigns-Style UI Implementation**: Complete UI redesign to match Reigns game aesthetic:
   - **Resource Bar Redesign**: Replaced vertical bars with horizontal icons and 10-dot fill indicators
   - **Event Card Restructure**: Moved event text to top, embedded character portraits, removed visible buttons
-  - **Dynamic Portrait Effects**: Implemented vertical gradient saturation based on morale levels
   - **Enhanced Swipe System**: Added choice previews, directional indicators, and improved visual feedback
-  - **PortraitWithGradient Component**: Created reusable component for morale-based visual effects
   - **Smooth Animations**: Added transitions and visual feedback throughout the interface
   - **Responsive Design**: Maintained mobile and desktop compatibility with new layout
   - **Visual Polish**: Improved card proportions, character portrait styling, and overall aesthetics
 
-Recent Updates (v0.20)
-
-- **Enhanced Morale System**: Implemented 1-10 scale with character departure mechanics:
-  - **Morale Scale**: Changed from 0-100 to 1-10 scale for better clarity
-  - **Departure Mechanics**: Characters with morale ≤3 have chance to leave (3: 10%, 2: 25%, 1: 35%)
-  - **Guild Collapse**: Game over if fewer than 3 characters remain
-  - **Effect Blocking**: Low morale characters (4-3) cannot trigger positive effects
-  - **Immediate Loss**: Game ends instantly when any meter hits 0
-  - **Departure Notifications**: Clear popup messages when characters leave
-  - **UI Enhancements**: Color-coded borders and visual feedback for morale states
-  - **Fresh Roster**: New runs now select 5 random characters instead of reusing leftovers
-  - **Balanced Values**: Converted all meter and morale effects to 1-10 scale
-
-Recent Updates (v0.18)
-
-- **Guaranteed Multi-Step Events**: Ensured every run includes at least one complex narrative:
-  - **Priority Weighting**: Multi-step events receive 1000x weight when not yet encountered
-  - **State Tracking**: Added hasMultiStepEvent flag to track multi-step event completion
-  - **Early Selection**: Multi-step events prioritized early in each run for maximum impact
-  - **Run Reset**: Multi-step tracking resets on new run initialization
-  - **Reliable Experience**: Every playthrough now guaranteed to include branching narratives
-  - **Improved Logic**: Enhanced event selection to ensure multi-step events appear consistently
-
-Recent Updates (v0.17)
-
-- **Multi-Step Events System**: Implemented complex branching event chains:
-  - **Guild Bank Scandal**: 4-step investigation with theft, redemption, and surveillance
-  - **Raid Leader Crisis**: 3-step leadership transition with multiple candidate paths
-  - **Server Transfer Drama**: 2-step decision between expensive/cheap servers or staying
-  - **Loot Council Revolution**: 2-step transparency vs corruption investigation
-  - **Guild Merger**: 3-step merger negotiations with officer status and team structure
-  - **Immediate Effects**: Every step has immediate consequences and resource costs
-  - **Branching Paths**: Player choices determine which steps follow
-  - **Narrative Depth**: Events create ongoing story arcs with escalating consequences
-  - **State Management**: Added pendingMultiStep state and nextStep property to choices
-
-Recent Updates (v0.16)
-
-- **Character Expansion**: Added 15 new characters with realistic names and new portraits:
-  - **New Characters**: Alex, Beth, Carl, Dana, Eric, Fiona, Greg, Helen, Ivan, Julia, Kevin, Luna, Mike, Nina, Oscar
-  - **Portrait Assignment**: Each new character assigned to unused portraits from the existing `portraits/` folder
-  - **Trait Distribution**: Balanced trait assignment across all character types
-  - **Roster Size**: Expanded from 20 to 35 total characters for more variety
-  - **Name Quality**: Replaced generic names (Meta, AFK, etc.) with proper realistic names
-  - **Character Diversity**: Mix of male/female names and various trait combinations
 
 Recent Updates (v0.15)
 

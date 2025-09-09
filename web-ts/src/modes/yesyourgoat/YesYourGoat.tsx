@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 
 type Meters = { funds: number; reputation: number; readiness: number }
-type Effects = Partial<Meters & { morale_all: number }> & Record<string, number>
+type Effects = Partial<Meters> & Record<string, number>
 type Choice = { label: string; effects: Effects; nextStep?: string }
 type EventCard = { id: string; title: string; body: string; tags?: string[]; speaker?: string; portrait?: string; weights?: { base?: number }; left: Choice; right: Choice }
 
