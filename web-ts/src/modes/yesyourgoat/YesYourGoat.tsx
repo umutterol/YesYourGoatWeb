@@ -63,8 +63,8 @@ export default function YesYourGoat() {
         return milestoneCard
       }
     }
-    // Council cadence ~ every 4 (harsher pressure)
-    if (day % 4 === 0) {
+    // Council cadence ~ every 5 (ease early pressure)
+    if (day % 5 === 0) {
       const council = events.find(e => (e.tags || []).includes('meta:council'))
       if (council) return council
     }
@@ -89,35 +89,58 @@ export default function YesYourGoat() {
       const id = at.split(':')[1]
       return unlocked.has(id)
     })
-    // Bias: use event weights, aggressive anti-repetition, and balance meter targeting
+    // Bias: use event weights, aggressive anti-repetition, and balance meter targeting with narrative phases
     const bias = (ev: EventCard) => {
       const effects = [ev.left?.effects || {}, ev.right?.effects || {}]
       const dropsRep = effects.some(e => typeof e.reputation === 'number' && e.reputation < 0)
       const dropsReady = effects.some(e => typeof e.readiness === 'number' && e.readiness < 0)
       const dropsFunds = effects.some(e => typeof e.funds === 'number' && e.funds < 0)
-      
+
       // Start with base weight from event data
       let w = ev.weights?.base || 1
-      
+
       // AGGRESSIVE anti-repetition: completely block events that appeared in last 5 events
       const recentEvents = usedEventIds.slice(-5)
       if (recentEvents.includes(ev.id)) {
         return 0 // Completely block recently used events
       }
-      
+
       // Strong penalty for similar event types (same prefix) in recent history
       const eventPrefix = ev.id.split('_')[0]
       const similarRecentCount = recentEvents.filter(id => id.startsWith(eventPrefix)).length
       if (similarRecentCount > 0) {
         w = Math.max(0.01, w * (0.1 ** similarRecentCount)) // Much stronger penalty
       }
-      
+
+      // Narrative phases: early (1-4), mid (5-10), late (11+)
+      const tags = ev.tags || []
+      const isCouncil = tags.includes('meta:council')
+      const isRival = tags.includes('meta:rival')
+      const isMaintenance = tags.includes('meta:maintenance') || tags.includes('meta:pr')
+      const isArchetype = tags.some(t => t.startsWith('archetype:')) || tags.some(t => t.startsWith('race:'))
+
+      if (day <= 4) {
+        // Early: favor archetype/race onboarding; suppress council/rival/maintenance
+        if (isArchetype) w += 1
+        if (isCouncil) w *= 0.3
+        if (isRival) w *= 0.5
+        if (isMaintenance) w *= 0.6
+      } else if (day <= 10) {
+        // Mid: allow rival/council, balanced
+        if (isRival) w += 0.5
+        if (isCouncil) w += 0.3
+      } else {
+        // Late: higher stakes meta/maintenance and council pressure
+        if (isMaintenance) w += 0.7
+        if (isCouncil) w += 0.5
+      }
+
       // Balance meter targeting: steer toward the current highest meter to even out failures
       const highest = Math.max(meters.funds, meters.reputation, meters.readiness)
       if (meters.funds === highest && dropsFunds) w += 1
       if (meters.reputation === highest && dropsRep) w += 1
       if (meters.readiness === highest && dropsReady) w += 1
-      
+
       return w
     }
     if (!pool.length) return null
