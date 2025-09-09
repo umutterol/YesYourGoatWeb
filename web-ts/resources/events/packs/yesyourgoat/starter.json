@@ -84,4 +84,5 @@
   , {"id":"meta_schedule_01","title":"Schedule Conflict","speaker":"Officer","portrait":"/resources/portraits/warden.png","body":"IRL clashes with raid night. Adjust or hold?","tags":["meta:training"],"left":{"label":"Adjust schedule","effects":{"reputation":1,"readiness":-1}},"right":{"label":"Stick to plan","effects":{"readiness":-1,"morale_all":-1}}}
   , {"id":"meta_skill_01","title":"Skill Gap","speaker":"Tank","portrait":"/resources/portraits/mountainking.png","body":"Some folks need reps. Bootcamp or bench?","tags":["meta:training"],"left":{"label":"Provide extra training","effects":{"funds":-1,"readiness":1}},"right":{"label":"Replace weak links","effects":{"readiness":-1,"reputation":-1}}}
   , {"id":"meta_fatigue_01","title":"Mental Fatigue","speaker":"Healer","portrait":"/resources/portraits/priestess.png","body":"People look smoked. Ease up or push?","tags":["meta:training"],"left":{"label":"Reduce hours","effects":{"readiness":-1,"reputation":1}},"right":{"label":"Maintain intensity","effects":{"readiness":-2,"morale_all":-1}}}
+]
 

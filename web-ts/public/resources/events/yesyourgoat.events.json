@@ -701,7 +701,9 @@
   {
     "id": "meta_pr_scandal_01",
     "title": "PR Scandal",
-    "body": "A clip goes viral; accusations fly.",
+    "speaker": "Streamer",
+    "portrait": "/resources/portraits/dreadlord.png",
+    "body": "Clip’s viral. We apologize or double down?",
     "tags": [
       "meta:pr"
     ],
@@ -721,7 +723,9 @@
   {
     "id": "training_accident_01",
     "title": "Training Accident",
-    "body": "Sparring injures two raiders.",
+    "speaker": "Officer",
+    "portrait": "/resources/portraits/warden.png",
+    "body": "Two raiders dinged. Push anyway or cancel?",
     "tags": [
       "meta:training"
     ],
@@ -742,7 +746,9 @@
   {
     "id": "streamer_backlash_01",
     "title": "Streamer Backlash",
-    "body": "A mid-tier streamer trashes your comp.",
+    "speaker": "Streamer",
+    "portrait": "/resources/portraits/dreadlord.png",
+    "body": "Mid-tier streamer flaming our comp. Respond?",
     "tags": [
       "meta:pr"
     ],
@@ -762,7 +768,9 @@
   {
     "id": "patch_emergency_01",
     "title": "Patch Emergency",
-    "body": "Hotfix breaks a core rotation.",
+    "speaker": "Dev Liaison",
+    "portrait": "/resources/portraits/tinker.png",
+    "body": "Hotfix nuked a rotation. Pivot or wait?",
     "tags": [
       "meta:maintenance"
     ],
@@ -782,7 +790,9 @@
   {
     "id": "burnout_cycle_01",
     "title": "Burnout Cycle",
-    "body": "Back-to-back pushes wear the roster thin.",
+    "speaker": "Officer",
+    "portrait": "/resources/portraits/warden.png",
+    "body": "Back-to-back pushes are frying folks.",
     "tags": [
       "meta:training"
     ],
@@ -803,7 +813,9 @@
   {
     "id": "strategy_overhaul_01",
     "title": "Strategy Overhaul",
-    "body": "New strat invalidates last week’s prep.",
+    "speaker": "Tank",
+    "portrait": "/resources/portraits/mountainking.png",
+    "body": "New strat invalidated prep. Swap now or stick?",
     "tags": [
       "meta:maintenance"
     ],
@@ -823,7 +835,9 @@
   {
     "id": "meta_scrim_fail_01",
     "title": "Scrim Failure",
-    "body": "Practice versus rivals goes poorly.",
+    "speaker": "Tank",
+    "portrait": "/resources/portraits/mountainking.png",
+    "body": "Rivals farmed us in scrims. Reset or rematch?",
     "tags": [
       "meta:training"
     ],
@@ -843,7 +857,9 @@
   {
     "id": "weather_lag_01",
     "title": "Lag Storm",
-    "body": "Network hiccups ruin execution.",
+    "speaker": "Scout",
+    "portrait": "/resources/portraits/warden.png",
+    "body": "Lag spikes everywhere. Call or play through?",
     "tags": [
       "meta:maintenance"
     ],
@@ -1804,7 +1820,9 @@
   {
     "id": "meta_server_01",
     "title": "Server Maintenance",
-    "body": "Extended server downtime disrupts training.",
+    "speaker": "Dev Liaison",
+    "portrait": "/resources/portraits/tinker.png",
+    "body": "Extended downtime incoming. Wait or pivot plans?",
     "tags": [
       "meta:maintenance"
     ],
@@ -1826,7 +1844,9 @@
   {
     "id": "meta_patch_01",
     "title": "Balance Patch",
-    "body": "A major patch changes class mechanics.",
+    "speaker": "Dev Liaison",
+    "portrait": "/resources/portraits/tinker.png",
+    "body": "Patch notes dropped. Adapt now or hold?",
     "tags": [
       "meta:maintenance"
     ],
@@ -1848,7 +1868,9 @@
   {
     "id": "meta_lag_01",
     "title": "Network Issues",
-    "body": "Persistent lag makes raiding difficult.",
+    "speaker": "Dev Liaison",
+    "portrait": "/resources/portraits/tinker.png",
+    "body": "ISP scuffed tonight. Upgrade or grind?",
     "tags": [
       "meta:maintenance"
     ],
@@ -1870,7 +1892,9 @@
   {
     "id": "meta_ddos_01",
     "title": "DDoS Attack",
-    "body": "Servers are under attack; raids are cancelled.",
+    "speaker": "Dev Liaison",
+    "portrait": "/resources/portraits/tinker.png",
+    "body": "Servers under fire. Resched or wait?",
     "tags": [
       "meta:maintenance"
     ],
@@ -1892,7 +1916,9 @@
   {
     "id": "meta_hotfix_01",
     "title": "Emergency Hotfix",
-    "body": "A critical bug requires immediate patching.",
+    "speaker": "Dev Liaison",
+    "portrait": "/resources/portraits/tinker.png",
+    "body": "Critical bug fix rolling. Test or YOLO?",
     "tags": [
       "meta:maintenance"
     ],
@@ -1914,7 +1940,9 @@
   {
     "id": "meta_stream_01",
     "title": "Streaming Pressure",
-    "body": "Fans demand more streaming content.",
+    "speaker": "Streamer",
+    "portrait": "/resources/portraits/dreadlord.png",
+    "body": "Chat wants more streams. Grind or go live?",
     "tags": [
       "meta:pr"
     ],
@@ -1936,7 +1964,9 @@
   {
     "id": "meta_controversy_01",
     "title": "Public Controversy",
-    "body": "Your guild's methods spark online debate.",
+    "speaker": "Council Moderator",
+    "portrait": "/resources/portraits/paladin.png",
+    "body": "Thread’s on fire. Statement or silence?",
     "tags": [
       "meta:pr"
     ],
@@ -1948,7 +1978,7 @@
       }
     },
     "right": {
-      "label": "Ignore criticism",
+      "label": "Ignore",
       "effects": {
         "reputation": -1,
         "readiness": 1
@@ -1958,7 +1988,9 @@
   {
     "id": "meta_influencer_01",
     "title": "Influencer Backlash",
-    "body": "A popular streamer criticizes your strategy.",
+    "speaker": "Streamer",
+    "portrait": "/resources/portraits/dreadlord.png",
+    "body": "Popular streamer dragging us. Clap back?",
     "tags": [
       "meta:pr"
     ],
@@ -1980,7 +2012,9 @@
   {
     "id": "meta_drama_01",
     "title": "Guild Drama",
-    "body": "Internal conflicts spill into public view.",
+    "speaker": "Officer",
+    "portrait": "/resources/portraits/warden.png",
+    "body": "Drama spilled to TL. Public post or handle inside?",
     "tags": [
       "meta:pr"
     ],
@@ -2024,7 +2058,9 @@
   {
     "id": "meta_schedule_01",
     "title": "Schedule Conflict",
-    "body": "Raiding schedule conflicts with real life.",
+    "speaker": "Officer",
+    "portrait": "/resources/portraits/warden.png",
+    "body": "IRL clashes with raid night. Adjust or hold?",
     "tags": [
       "meta:training"
     ],
@@ -2046,7 +2082,9 @@
   {
     "id": "meta_skill_01",
     "title": "Skill Gap",
-    "body": "Some raiders struggle with new mechanics.",
+    "speaker": "Tank",
+    "portrait": "/resources/portraits/mountainking.png",
+    "body": "Some folks need reps. Bootcamp or bench?",
     "tags": [
       "meta:training"
     ],
@@ -2068,7 +2106,9 @@
   {
     "id": "meta_fatigue_01",
     "title": "Mental Fatigue",
-    "body": "Long hours are taking their toll.",
+    "speaker": "Healer",
+    "portrait": "/resources/portraits/priestess.png",
+    "body": "People look smoked. Ease up or push?",
     "tags": [
       "meta:training"
     ],
@@ -2084,896 +2124,6 @@
       "effects": {
         "readiness": -2,
         "morale_all": -1
-      }
-    }
-  },
-  {
-    "id": "meta_equipment_01",
-    "title": "Equipment Failure",
-    "body": "Critical raiding equipment breaks down.",
-    "tags": [
-      "meta:maintenance"
-    ],
-    "left": {
-      "label": "Replace immediately",
-      "effects": {
-        "funds": -2,
-        "readiness": 1
-      }
-    },
-    "right": {
-      "label": "Make do",
-      "effects": {
-        "readiness": -2,
-        "reputation": 1
-      }
-    }
-  },
-  {
-    "id": "meta_power_01",
-    "title": "Power Outage",
-    "body": "A power outage cancels raid night.",
-    "tags": [
-      "meta:maintenance"
-    ],
-    "left": {
-      "label": "Reschedule",
-      "effects": {
-        "reputation": 1,
-        "funds": -1
-      }
-    },
-    "right": {
-      "label": "Wait it out",
-      "effects": {
-        "readiness": -1,
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "meta_weather_01",
-    "title": "Severe Weather",
-    "body": "Bad weather disrupts internet connectivity.",
-    "tags": [
-      "meta:maintenance"
-    ],
-    "left": {
-      "label": "Find backup location",
-      "effects": {
-        "funds": -1,
-        "readiness": 1
-      }
-    },
-    "right": {
-      "label": "Wait for improvement",
-      "effects": {
-        "readiness": -1,
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "meta_hardware_01",
-    "title": "Hardware Upgrade",
-    "body": "Server hardware needs upgrading for better performance.",
-    "tags": [
-      "meta:maintenance"
-    ],
-    "left": {
-      "label": "Invest in upgrade",
-      "effects": {
-        "funds": -2,
-        "readiness": 1
-      }
-    },
-    "right": {
-      "label": "Work with current",
-      "effects": {
-        "readiness": -1,
-        "reputation": 1
-      }
-    }
-  },
-  {
-    "id": "meta_software_01",
-    "title": "Software Bug",
-    "body": "A critical bug prevents proper raiding.",
-    "tags": [
-      "meta:maintenance"
-    ],
-    "left": {
-      "label": "Report and wait",
-      "effects": {
-        "reputation": 1,
-        "readiness": -1
-      }
-    },
-    "right": {
-      "label": "Find workaround",
-      "effects": {
-        "readiness": -2,
-        "funds": -1
-      }
-    }
-  },
-  {
-    "id": "meta_balance_01",
-    "title": "Class Balance",
-    "body": "Your main class gets nerfed in a patch.",
-    "tags": [
-      "meta:maintenance"
-    ],
-    "left": {
-      "label": "Adapt strategy",
-      "effects": {
-        "readiness": -2,
-        "funds": -1
-      }
-    },
-    "right": {
-      "label": "Switch classes",
-      "effects": {
-        "readiness": -1,
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "meta_meta_01",
-    "title": "Meta Shift",
-    "body": "The raiding meta changes completely.",
-    "tags": [
-      "meta:maintenance"
-    ],
-    "left": {
-      "label": "Follow new meta",
-      "effects": {
-        "readiness": -2,
-        "funds": -1
-      }
-    },
-    "right": {
-      "label": "Stick to old ways",
-      "effects": {
-        "reputation": -1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "meta_competition_01",
-    "title": "Increased Competition",
-    "body": "More guilds are competing for the same goals.",
-    "tags": [
-      "meta:pr"
-    ],
-    "left": {
-      "label": "Step up game",
-      "effects": {
-        "funds": -1,
-        "readiness": 1
-      }
-    },
-    "right": {
-      "label": "Find niche",
-      "effects": {
-        "reputation": 1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "meta_recognition_01",
-    "title": "Lack of Recognition",
-    "body": "Your guild's achievements go unnoticed.",
-    "tags": [
-      "meta:pr"
-    ],
-    "left": {
-      "label": "Seek attention",
-      "effects": {
-        "reputation": 1,
-        "funds": -1
-      }
-    },
-    "right": {
-      "label": "Stay humble",
-      "effects": {
-        "reputation": -1,
-        "readiness": 1
-      }
-    }
-  },
-  {
-    "id": "meta_community_01",
-    "title": "Community Backlash",
-    "body": "The gaming community turns against your methods.",
-    "tags": [
-      "meta:pr"
-    ],
-    "left": {
-      "label": "Defend approach",
-      "effects": {
-        "reputation": -1,
-        "funds": -1
-      }
-    },
-    "right": {
-      "label": "Change methods",
-      "effects": {
-        "reputation": 1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "meta_expectations_01",
-    "title": "High Expectations",
-    "body": "Fans expect perfect performance every raid.",
-    "tags": [
-      "meta:pr"
-    ],
-    "left": {
-      "label": "Meet expectations",
-      "effects": {
-        "readiness": -2,
-        "funds": -1
-      }
-    },
-    "right": {
-      "label": "Set boundaries",
-      "effects": {
-        "reputation": -1,
-        "readiness": 1
-      }
-    }
-  },
-  {
-    "id": "meta_pressure_01",
-    "title": "External Pressure",
-    "body": "Sponsors demand better results.",
-    "tags": [
-      "meta:pr"
-    ],
-    "left": {
-      "label": "Deliver results",
-      "effects": {
-        "funds": 1,
-        "readiness": -2
-      }
-    },
-    "right": {
-      "label": "Maintain integrity",
-      "effects": {
-        "reputation": 1,
-        "funds": -1
-      }
-    }
-  },
-  {
-    "id": "meta_standards_01",
-    "title": "Rising Standards",
-    "body": "The bar for success keeps getting higher.",
-    "tags": [
-      "meta:training"
-    ],
-    "left": {
-      "label": "Rise to challenge",
-      "effects": {
-        "funds": -1,
-        "readiness": 1
-      }
-    },
-    "right": {
-      "label": "Set realistic goals",
-      "effects": {
-        "reputation": 1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "meta_innovation_01",
-    "title": "Need for Innovation",
-    "body": "Old strategies are no longer effective.",
-    "tags": [
-      "meta:training"
-    ],
-    "left": {
-      "label": "Innovate quickly",
-      "effects": {
-        "readiness": -2,
-        "funds": -1
-      }
-    },
-    "right": {
-      "label": "Refine existing",
-      "effects": {
-        "reputation": 1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "meta_coordination_01",
-    "title": "Coordination Issues",
-    "body": "Team coordination is breaking down.",
-    "tags": [
-      "meta:training"
-    ],
-    "left": {
-      "label": "Intensify practice",
-      "effects": {
-        "funds": -1,
-        "readiness": 1
-      }
-    },
-    "right": {
-      "label": "Simplify approach",
-      "effects": {
-        "reputation": 1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "meta_focus_01",
-    "title": "Loss of Focus",
-    "body": "Raiders are losing focus during raids.",
-    "tags": [
-      "meta:training"
-    ],
-    "left": {
-      "label": "Strict discipline",
-      "effects": {
-        "readiness": 1,
-        "morale_all": -1
-      }
-    },
-    "right": {
-      "label": "Motivate gently",
-      "effects": {
-        "reputation": 1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "meta_consistency_01",
-    "title": "Inconsistent Performance",
-    "body": "Performance varies wildly between raids.",
-    "tags": [
-      "meta:training"
-    ],
-    "left": {
-      "label": "Standardize approach",
-      "effects": {
-        "readiness": 1,
-        "morale_all": -1
-      }
-    },
-    "right": {
-      "label": "Embrace flexibility",
-      "effects": {
-        "reputation": 1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "meta_communication_01",
-    "title": "Communication Breakdown",
-    "body": "Raiders stop communicating effectively.",
-    "tags": [
-      "meta:training"
-    ],
-    "left": {
-      "label": "Enforce protocols",
-      "effects": {
-        "readiness": 1,
-        "morale_all": -1
-      }
-    },
-    "right": {
-      "label": "Encourage openness",
-      "effects": {
-        "reputation": 1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "meta_trust_01",
-    "title": "Trust Issues",
-    "body": "Raiders lose trust in each other.",
-    "tags": [
-      "meta:training"
-    ],
-    "left": {
-      "label": "Rebuild trust",
-      "effects": {
-        "funds": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Let it resolve",
-      "effects": {
-        "reputation": -1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "meta_leadership_01",
-    "title": "Leadership Crisis",
-    "body": "Leadership decisions are being questioned.",
-    "tags": [
-      "meta:training"
-    ],
-    "left": {
-      "label": "Assert authority",
-      "effects": {
-        "readiness": 1,
-        "morale_all": -1
-      }
-    },
-    "right": {
-      "label": "Seek consensus",
-      "effects": {
-        "reputation": 1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "meta_vision_01",
-    "title": "Lost Vision",
-    "body": "The guild's original vision is fading.",
-    "tags": [
-      "meta:training"
-    ],
-    "left": {
-      "label": "Reaffirm goals",
-      "effects": {
-        "reputation": 1,
-        "funds": -1
-      }
-    },
-    "right": {
-      "label": "Evolve naturally",
-      "effects": {
-        "readiness": 1,
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "meta_identity_01",
-    "title": "Identity Crisis",
-    "body": "The guild struggles to define itself.",
-    "tags": [
-      "meta:training"
-    ],
-    "left": {
-      "label": "Define clearly",
-      "effects": {
-        "reputation": 1,
-        "morale_all": -1
-      }
-    },
-    "right": {
-      "label": "Stay fluid",
-      "effects": {
-        "readiness": 1,
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "meta_purpose_01",
-    "title": "Lost Purpose",
-    "body": "Raiders question why they're still raiding.",
-    "tags": [
-      "meta:training"
-    ],
-    "left": {
-      "label": "Find new purpose",
-      "effects": {
-        "funds": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Remember roots",
-      "effects": {
-        "reputation": 1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "meta_motivation_01",
-    "title": "Motivation Drop",
-    "body": "General motivation is at an all-time low.",
-    "tags": [
-      "meta:training"
-    ],
-    "left": {
-      "label": "Boost morale",
-      "effects": {
-        "funds": -1,
-        "morale_all": 1
-      }
-    },
-    "right": {
-      "label": "Let it pass",
-      "effects": {
-        "reputation": -1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "meta_energy_01",
-    "title": "Low Energy",
-    "body": "The guild lacks the energy for serious raiding.",
-    "tags": [
-      "meta:training"
-    ],
-    "left": {
-      "label": "Rest and recharge",
-      "effects": {
-        "readiness": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Push through",
-      "effects": {
-        "readiness": -2,
-        "morale_all": -1
-      }
-    }
-  },
-  {
-    "id": "meta_enthusiasm_01",
-    "title": "Lost Enthusiasm",
-    "body": "The excitement for raiding has disappeared.",
-    "tags": [
-      "meta:training"
-    ],
-    "left": {
-      "label": "Reignite passion",
-      "effects": {
-        "funds": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Accept reality",
-      "effects": {
-        "reputation": -1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "meta_spirit_01",
-    "title": "Broken Spirit",
-    "body": "The guild's fighting spirit is broken.",
-    "tags": [
-      "meta:training"
-    ],
-    "left": {
-      "label": "Rebuild spirit",
-      "effects": {
-        "funds": -2,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Start fresh",
-      "effects": {
-        "reputation": -1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "meta_hope_01",
-    "title": "Lost Hope",
-    "body": "Raiders have lost hope of success.",
-    "tags": [
-      "meta:training"
-    ],
-    "left": {
-      "label": "Restore hope",
-      "effects": {
-        "funds": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Face facts",
-      "effects": {
-        "reputation": -1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "meta_dream_01",
-    "title": "Shattered Dreams",
-    "body": "The dream of legendary status seems impossible.",
-    "tags": [
-      "meta:training"
-    ],
-    "left": {
-      "label": "Keep dreaming",
-      "effects": {
-        "funds": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Accept limits",
-      "effects": {
-        "reputation": -1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "meta_legend_01",
-    "title": "Legend Fades",
-    "body": "The legend you're building is starting to fade.",
-    "tags": [
-      "meta:training"
-    ],
-    "left": {
-      "label": "Reignite legend",
-      "effects": {
-        "funds": -2,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Let it fade",
-      "effects": {
-        "reputation": -1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "meta_glory_01",
-    "title": "Glory Days",
-    "body": "The glory days seem far behind you.",
-    "tags": [
-      "meta:training"
-    ],
-    "left": {
-      "label": "Chase glory",
-      "effects": {
-        "funds": -1,
-        "readiness": 1
-      }
-    },
-    "right": {
-      "label": "Find new glory",
-      "effects": {
-        "reputation": 1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "meta_legacy_01",
-    "title": "Legacy at Stake",
-    "body": "Your guild's legacy is on the line.",
-    "tags": [
-      "meta:training"
-    ],
-    "left": {
-      "label": "Protect legacy",
-      "effects": {
-        "funds": -2,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Build new legacy",
-      "effects": {
-        "reputation": 1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "healer_triage_01",
-    "title": "Triage Night",
-    "speaker": "Healer",
-    "portrait": "/resources/portraits/priestess.png",
-    "body": "Roster’s cooked. I can patch them up, but we burn stock. Your call.",
-    "tags": [
-      "theme:readiness"
-    ],
-    "left": {
-      "label": "Spend supplies.",
-      "effects": {
-        "funds": -1,
-        "readiness": 1
-      }
-    },
-    "right": {
-      "label": "Let them rest.",
-      "effects": {
-        "readiness": -1,
-        "reputation": 1
-      }
-    }
-  },
-  {
-    "id": "bard_hype_02",
-    "title": "Hype Video",
-    "speaker": "Bard",
-    "portrait": "/resources/portraits/darkranger.png",
-    "body": "I cut a sick montage. Post it now or save for the push?",
-    "tags": [
-      "theme:pr"
-    ],
-    "left": {
-      "label": "Post now.",
-      "effects": {
-        "reputation": 1,
-        "readiness": -1
-      }
-    },
-    "right": {
-      "label": "Hold it.",
-      "effects": {
-        "readiness": 1
-      }
-    }
-  },
-  {
-    "id": "mage_window_01",
-    "title": "Burst Window",
-    "speaker": "Mage",
-    "portrait": "/resources/portraits/sorceress.png",
-    "body": "I can line cooldowns if we reroute tonight. Risky, but juicy.",
-    "tags": [
-      "theme:readiness"
-    ],
-    "left": {
-      "label": "Send it.",
-      "effects": {
-        "readiness": 1,
-        "reputation": -1
-      }
-    },
-    "right": {
-      "label": "Play safe.",
-      "effects": {
-        "reputation": 1
-      }
-    }
-  },
-  {
-    "id": "arcanist_barrier_01",
-    "title": "Safety First",
-    "speaker": "Arcanist",
-    "portrait": "/resources/portraits/archmage.png",
-    "body": "We can layer barriers and avoid dumb wipes. Costs prep time.",
-    "tags": [
-      "theme:mitigation"
-    ],
-    "left": {
-      "label": "Do it.",
-      "effects": {
-        "readiness": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Skip it.",
-      "effects": {
-        "readiness": 1
-      }
-    }
-  },
-  {
-    "id": "lifebinder_recovery_01",
-    "title": "Recovery Day",
-    "speaker": "Lifebinder",
-    "portrait": "/resources/portraits/keeper.png",
-    "body": "If we water the roots, we bloom next week. Short-term hit.",
-    "tags": [
-      "theme:morale"
-    ],
-    "left": {
-      "label": "Greenlight.",
-      "effects": {
-        "readiness": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Not now.",
-      "effects": {
-        "readiness": 1
-      }
-    }
-  },
-  {
-    "id": "recruiter_trials_02",
-    "title": "Open Trials",
-    "speaker": "Recruiter",
-    "portrait": "/resources/portraits/paladin.png",
-    "body": "Got applicants. Fast-track a carry tonight or run a proper trial?",
-    "tags": [
-      "theme:recruitment"
-    ],
-    "left": {
-      "label": "Fast-track.",
-      "effects": {
-        "readiness": 1,
-        "reputation": -1
-      }
-    },
-    "right": {
-      "label": "Proper trial.",
-      "effects": {
-        "reputation": 1
-      }
-    }
-  },
-  {
-    "id": "streamer_sponsor_01",
-    "title": "Sponsor Offer",
-    "speaker": "Streamer",
-    "portrait": "/resources/portraits/dreadlord.png",
-    "body": "Small brand wants a shoutout. Minor bag, little cringe.",
-    "tags": [
-      "theme:pr"
-    ],
-    "left": {
-      "label": "Take it.",
-      "effects": {
-        "funds": 1,
-        "reputation": -1
-      }
-    },
-    "right": {
-      "label": "Pass.",
-      "effects": {
-        "reputation": 1
-      }
-    }
-  },
-  {
-    "id": "devliaison_hotfix_01",
-    "title": "Hotfix Tomorrow",
-    "speaker": "Dev Liaison",
-    "portrait": "/resources/portraits/tinker.png",
-    "body": "Damage spell bugged. Hotfix hits tomorrow. Pivot comp or ride it?",
-    "tags": [
-      "theme:maintenance"
-    ],
-    "left": {
-      "label": "Pivot.",
-      "effects": {
-        "readiness": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Ride it.",
-      "effects": {
-        "readiness": 1,
-        "reputation": -1
       }
     }
   }
