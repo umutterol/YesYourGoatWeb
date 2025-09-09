@@ -6,7 +6,7 @@
     "portrait": "/resources/portraits/paladin.png",
     "body": "We can fill slots fast if we drop reqs a bit. Bad look?",
     "tags": ["archetype:recruiter"],
-    "left": {"label": "Lower it.", "effects": {"readiness": 1, "reputation": -1}},
+    "left": {"label": "Lower standards.", "effects": {"readiness": 1, "reputation": -1}},
     "right": {"label": "Keep it high.", "effects": {"reputation": 1}}
   },
   {
@@ -16,7 +16,7 @@
     "portrait": "/resources/portraits/paladin.png",
     "body": "Back-to-back trials this week. Aggressive, but it works.",
     "tags": ["archetype:recruiter"],
-    "left": {"label": "Approve.", "effects": {"readiness": 2, "reputation": -1}},
-    "right": {"label": "Limit it.", "effects": {"reputation": 1}}
+    "left": {"label": "Spam trials.", "effects": {"readiness": 2, "reputation": -1}},
+    "right": {"label": "Be reasonable.", "effects": {"reputation": 1}}
   }
 ]

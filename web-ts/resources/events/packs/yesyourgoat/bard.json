@@ -6,8 +6,8 @@
     "portrait": "/resources/portraits/darkranger.png",
     "body": "Give me a week and a beat. I'll make 'em chant our tag.",
     "tags": ["archetype:bard"],
-    "left": {"label": "Take the time.", "effects": {"reputation": 2}},
-    "right": {"label": "Focus training.", "effects": {"readiness": 1, "reputation": -1}}
+    "left": {"label": "Waste time on this.", "effects": {"reputation": 2}},
+    "right": {"label": "Focus on training.", "effects": {"readiness": 1, "reputation": -1}}
   },
   {
     "id": "bard_hype_01",
@@ -16,7 +16,7 @@
     "portrait": "/resources/portraits/darkranger.png",
     "body": "Do we sell the dream or keep it real on socials?",
     "tags": ["archetype:bard"],
-    "left": {"label": "Hype it.", "effects": {"reputation": 1}},
-    "right": {"label": "Be honest.", "effects": {"readiness": 1}}
+    "left": {"label": "Lie to them.", "effects": {"reputation": 1}},
+    "right": {"label": "Tell the truth.", "effects": {"readiness": 1}}
   }
 ]

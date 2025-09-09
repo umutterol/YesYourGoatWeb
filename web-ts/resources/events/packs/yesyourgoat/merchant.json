@@ -6,7 +6,7 @@
     "portrait": "/resources/portraits/archmage.png",
     "body": "3% dues covers repairs and pots. Reasonable or riot?",
     "tags": ["archetype:merchant"],
-    "left": {"label": "Approve it.", "effects": {"funds": 2, "reputation": -1}},
+    "left": {"label": "Fair enough.", "effects": {"funds": 2, "reputation": -1}},
     "right": {"label": "Keep it free.", "effects": {"reputation": 1}}
   },
   {
@@ -16,7 +16,7 @@
     "portrait": "/resources/portraits/archmage.png",
     "body": "Duplicate drop gathering dust. List it to fund mats?",
     "tags": ["archetype:merchant"],
-    "left": {"label": "Sell it.", "effects": {"funds": 2, "readiness": 1}},
-    "right": {"label": "Bank it.", "effects": {"reputation": 1}}
+    "left": {"label": "Cash it in.", "effects": {"funds": 2, "readiness": 1}},
+    "right": {"label": "Hoard it.", "effects": {"reputation": 1}}
   }
 ]
