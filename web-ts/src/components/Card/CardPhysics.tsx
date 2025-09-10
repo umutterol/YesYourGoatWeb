@@ -5,18 +5,21 @@ interface CardPhysicsProps {
   onChoice: (side: 'left' | 'right') => void;
   onDragStart?: () => void;
   onDragEnd?: () => void;
+  showChoicePreview?: boolean;
 }
 
 const CardPhysics: React.FC<CardPhysicsProps> = ({ 
   children, 
   onChoice, 
   onDragStart,
-  onDragEnd 
+  onDragEnd,
+  showChoicePreview = true
 }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   // const [rotation, setRotation] = useState(0); // Disabled for now
   const [scale, setScale] = useState(1);
+  const [choicePreview, setChoicePreview] = useState<'left' | 'right' | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const startPos = useRef({ x: 0, y: 0 });
   const dragStartTime = useRef(0);
@@ -64,6 +67,17 @@ const CardPhysics: React.FC<CardPhysicsProps> = ({
     const limitedDeltaX = Math.max(-maxOffset, Math.min(maxOffset, deltaX));
     const limitedDeltaY = Math.max(-maxOffset, Math.min(maxOffset, deltaY));
     setDragOffset({ x: limitedDeltaX, y: limitedDeltaY });
+
+    // Show choice preview based on drag direction
+    if (showChoicePreview) {
+      if (limitedDeltaX < -50) {
+        setChoicePreview('left');
+      } else if (limitedDeltaX > 50) {
+        setChoicePreview('right');
+      } else {
+        setChoicePreview(null);
+      }
+    }
   }, [isDragging]);
 
   const handleMouseUp = useCallback((e: MouseEvent) => {
@@ -104,6 +118,7 @@ const CardPhysics: React.FC<CardPhysicsProps> = ({
     setDragOffset({ x: 0, y: 0 });
     // setRotation(0); // Disabled for now
     setScale(1);
+    setChoicePreview(null);
   }, [isDragging, onChoice, onDragEnd]);
 
   // Keyboard controls
@@ -149,13 +164,28 @@ const CardPhysics: React.FC<CardPhysicsProps> = ({
   };
 
   return (
-    <div
-      ref={cardRef}
-      style={cardStyle}
-      onMouseDown={handleMouseDown}
-      className="select-none"
-    >
-      {children}
+    <div className="relative">
+      <div
+        ref={cardRef}
+        style={cardStyle}
+        onMouseDown={handleMouseDown}
+        className="select-none"
+      >
+        {children}
+      </div>
+      
+      {/* Choice Preview Overlay */}
+      {showChoicePreview && choicePreview && (
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+          <div className={`px-6 py-3 rounded-lg font-bold text-lg ${
+            choicePreview === 'left' 
+              ? 'bg-red-500/80 text-white' 
+              : 'bg-green-500/80 text-white'
+          }`}>
+            {choicePreview === 'left' ? '← Left Choice' : 'Right Choice →'}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

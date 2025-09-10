@@ -64,6 +64,15 @@
     transform: scale(1.05);
     box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
   }
+  
+  .reigns-portrait.breathing {
+    animation: portraitBreathing 3s ease-in-out infinite;
+  }
+  
+  @keyframes portraitBreathing {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+  }
 }
 
 /* Resource bar styles */

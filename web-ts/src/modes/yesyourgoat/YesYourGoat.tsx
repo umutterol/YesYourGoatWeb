@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import ResourceBar from '../../components/ResourceBar/ResourceBar'
-import Card from '../../components/Card/Card'
+import ResourceAnimations from '../../components/ResourceBar/ResourceAnimations'
+import CardStack from '../../components/Card/CardStack'
 import JourneyTrack from '../../components/JourneyTrack/JourneyTrack'
 
 type Meters = { funds: number; reputation: number; readiness: number }
@@ -18,12 +19,14 @@ export default function YesYourGoat() {
   const [day, setDay] = useState(1)
   const [events, setEvents] = useState<EventCard[]>([])
   const [current, setCurrent] = useState<EventCard | null>(null)
+  const [nextCard, setNextCard] = useState<EventCard | null>(null)
   const [journeyCount, setJourneyCount] = useState(0)
   const [sawRival, setSawRival] = useState(false)
   const [victoryText, setVictoryText] = useState('')
   const [showSummary, setShowSummary] = useState(false)
   const [summaryMeters, setSummaryMeters] = useState<Meters | null>(null)
   const [summaryDay, setSummaryDay] = useState<number | null>(null)
+  const [previousMeters, setPreviousMeters] = useState<Meters | null>(null)
   const [debugLog, setDebugLog] = useState<{
     id: string; title: string; choice: string; pre: Meters; post: Meters; effects: Effects
   }[]>([])
@@ -217,6 +220,7 @@ export default function YesYourGoat() {
       setShowSummary(true)
       return
     }
+    setPreviousMeters(meters)
     setMeters(nextMeters)
 
     // track milestone consumption
@@ -229,6 +233,10 @@ export default function YesYourGoat() {
     const nxt = drawNext()
     if (nxt) setUsedEventIds(prev => [...prev, nxt.id])
     setCurrent(nxt)
+    
+    // Set next card for preview
+    const nextNxt = drawNext()
+    setNextCard(nextNxt)
   }
 
   return (
@@ -251,6 +259,16 @@ export default function YesYourGoat() {
           readiness={meters.readiness}
         />
 
+        {/* Resource Change Animations */}
+        <ResourceAnimations
+          funds={meters.funds}
+          reputation={meters.reputation}
+          readiness={meters.readiness}
+          previousFunds={previousMeters?.funds}
+          previousReputation={previousMeters?.reputation}
+          previousReadiness={previousMeters?.readiness}
+        />
+
         {/* Journey Track */}
         <JourneyTrack 
           milestones={milestones}
@@ -261,8 +279,9 @@ export default function YesYourGoat() {
         {/* Main Game Area */}
         <div className="flex justify-center">
           {current && (
-            <Card 
-              event={current}
+            <CardStack 
+              current={current}
+              next={nextCard}
               onChoice={decide}
             />
           )}

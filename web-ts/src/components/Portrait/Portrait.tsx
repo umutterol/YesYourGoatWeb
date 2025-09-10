@@ -17,7 +17,7 @@ const Portrait: React.FC<PortraitProps> = ({
 }) => {
   const { portraitSize } = usePlatformFeatures();
 
-  const portraitClasses = `reigns-portrait ${
+  const portraitClasses = `reigns-portrait breathing ${
     portraitSize === 'mobile' ? 'portrait-mobile' : 'portrait-desktop'
   } ${className}`;
 
