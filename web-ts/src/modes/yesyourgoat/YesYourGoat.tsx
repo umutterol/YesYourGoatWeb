@@ -1,4 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
+import ResourceBar from '../../components/ResourceBar/ResourceBar'
+import Card from '../../components/Card/Card'
+import JourneyTrack from '../../components/JourneyTrack/JourneyTrack'
+import InputHandler from '../../components/Input/InputHandler'
 
 type Meters = { funds: number; reputation: number; readiness: number }
 type Effects = Partial<Meters> & Record<string, number>
@@ -30,6 +34,9 @@ export default function YesYourGoat() {
   const collapseCount = Number(localStorage.getItem('yyg_collapse_count') || '0')
   const [usedMilestoneIds, setUsedMilestoneIds] = useState<string[]>([])
   const [usedEventIds, setUsedEventIds] = useState<string[]>([])
+  
+  // Platform features available for future use
+  // const platformFeatures = usePlatformFeatures()
 
   useEffect(() => {
     fetch(EVENTS_URL).then(r => r.json()).then((data: EventCard[]) => {
@@ -226,110 +233,116 @@ export default function YesYourGoat() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#2c1810] to-[#1a1a1a] text-[#f5f5dc] p-4 md:p-6">
-      <div className="flex items-center justify-between mb-3 max-w-[720px]">
-        <h1 className="text-2xl md:text-3xl font-bold">YesYourGoat — Collapse Run</h1>
-        <div className="text-xs md:text-sm px-2 py-1 rounded-full border border-[#daa520] bg-[#2c1810] text-[#f5f5dc]">
-          Deck: YesYourGoat ({events.length})
-        </div>
-      </div>
-      <div className="flex flex-wrap items-center gap-4 mb-3">
-        <div className="inline-flex items-center gap-2"><span>💰</span><span className="font-mono font-bold">{meters.funds}</span></div>
-        <div className="inline-flex items-center gap-2"><span>⭐</span><span className="font-mono font-bold">{meters.reputation}</span></div>
-        <div className="inline-flex items-center gap-2"><span>⚔️</span><span className="font-mono font-bold">{meters.readiness}</span></div>
-        <div className="inline-flex items-center gap-2"><span className="opacity-80">Day</span><span className="font-mono font-bold">{day}</span></div>
-        <div className="inline-flex items-center gap-2"><span className="opacity-80">Journey</span><span className="font-mono font-bold">{journeyCount}/{milestones.length}</span></div>
-      </div>
-      {/* Simple Journey Track */}
-      <div className="flex items-center gap-2 mb-4">
-        {milestones.map((_, i) => (
-          <div key={i} className="flex items-center gap-2">
-            <div className={`w-5 h-5 rounded-full border-2 ${i < journeyCount ? 'bg-amber-400 border-amber-200' : 'bg-[#654321] border-[#f5f5dc]'}`} />
-            {i < milestones.length - 1 && <div className="w-8 h-[2px] bg-[#654321]" />}
+    <div className="min-h-screen w-full bg-[var(--reigns-bg)] text-[var(--reigns-text)] p-4 md:p-6">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-3xl md:text-4xl font-bold text-[var(--reigns-text)]">
+            YesYourGoat — Collapse Run
+          </h1>
+          <div className="text-sm px-3 py-2 rounded-full border border-[var(--reigns-border)] bg-[var(--reigns-card)] text-[var(--reigns-text-secondary)]">
+            Deck: YesYourGoat ({events.length})
           </div>
-        ))}
-      </div>
-      {current && (
-        <div className="border-2 border-[#654321] rounded-lg p-4 md:p-6 bg-[#8b4513] max-w-[720px]">
-          {(current.speaker || current.portrait) && (
-            <div className="flex items-center gap-3 mb-2">
-              {current.portrait && (
-                <img
-                  src={current.portrait}
-                  alt={current.speaker || 'speaker'}
-                  className="w-10 h-10 rounded-full object-cover border border-[#daa520]"
-                />
-              )}
-              <div className="text-sm opacity-90">{current.speaker}</div>
+        </div>
+
+        {/* Resource Bar */}
+        <ResourceBar 
+          funds={meters.funds}
+          reputation={meters.reputation}
+          readiness={meters.readiness}
+        />
+
+        {/* Journey Track */}
+        <JourneyTrack 
+          milestones={milestones}
+          currentDay={day}
+          journeyCount={journeyCount}
+        />
+
+        {/* Main Game Area */}
+        <div className="flex justify-center">
+          <InputHandler onChoice={decide}>
+            {current && (
+              <Card 
+                event={current}
+                onChoice={decide}
+              />
+            )}
+          </InputHandler>
+        </div>
+
+        {/* Debug Panel */}
+        {debugLog.length > 0 && (
+          <div className="mt-8 max-w-4xl mx-auto">
+            <div className="text-xs bg-[var(--reigns-card)]/60 border border-[var(--reigns-border)] rounded-lg p-4">
+              <div className="font-bold mb-3 text-[var(--reigns-text)]">Debug Log (last {debugLog.length})</div>
+              <div className="space-y-2 max-h-48 overflow-y-auto">
+                {debugLog.map((d, i) => (
+                  <div key={i} className="flex flex-col p-2 bg-[var(--reigns-bg)]/50 rounded">
+                    <div className="opacity-80 text-[var(--reigns-text-secondary)]">
+                      {d.title} — {d.choice}
+                    </div>
+                    <div className="flex gap-4 text-xs">
+                      <div>pre: 💰{d.pre.funds} ⭐{d.pre.reputation} ⚔️{d.pre.readiness}</div>
+                      <div>post: 💰{d.post.funds} ⭐{d.post.reputation} ⚔️{d.post.readiness}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          )}
-          <div className="font-bold text-lg mb-2">{current.title}</div>
-          <div className="opacity-90 mb-3 leading-relaxed">{current.body}</div>
-          <div className="flex gap-3">
-            <button
-              onClick={() => decide('left')}
-              className="px-4 py-2 rounded-md bg-[#1a1a1a] hover:bg-[#2a2a2a] border border-[#daa520] text-[#f5f5dc] font-semibold transition"
-            >
-              {current.left?.label || 'Left'}
-            </button>
-            <button
-              onClick={() => decide('right')}
-              className="px-4 py-2 rounded-md bg-[#1a1a1a] hover:bg-[#2a2a2a] border border-[#daa520] text-[#f5f5dc] font-semibold transition"
-            >
-              {current.right?.label || 'Right'}
-            </button>
           </div>
-        </div>
-      )}
-      {/* Debug panel */}
-      {debugLog.length > 0 && (
-        <div className="mt-4 max-w-[720px] text-xs bg-[#1a1a1a]/60 border border-[#654321] rounded p-3">
-          <div className="font-bold mb-2">Debug Log (last {debugLog.length})</div>
-          <div className="space-y-1 max-h-48 overflow-y-auto">
-            {debugLog.map((d, i) => (
-              <div key={i} className="flex flex-col">
-                <div className="opacity-80">{d.title} — {d.choice}</div>
-                <div className="flex gap-4">
-                  <div>pre: 💰{d.pre.funds} ⭐{d.pre.reputation} ⚔️{d.pre.readiness}</div>
-                  <div>post: 💰{d.post.funds} ⭐{d.post.reputation} ⚔️{d.post.readiness}</div>
+        )}
+
+        {/* Victory Text */}
+        {!!victoryText && (
+          <div className="mt-6 text-center">
+            <div className="text-xl font-semibold text-[var(--reigns-accent)]">
+              {victoryText}
+            </div>
+          </div>
+        )}
+
+        {/* Collapse Summary Modal */}
+        {showSummary && (
+          <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+            <div className="bg-[var(--reigns-card)] text-[var(--reigns-text)] rounded-lg border-2 border-[var(--reigns-border)] p-8 w-[90%] max-w-md">
+              <div className="text-2xl font-bold mb-4 text-center">Run Collapsed</div>
+              <div className="opacity-90 mb-6 text-center">{victoryText}</div>
+              
+              <div className="text-sm mb-6 space-y-2">
+                <div className="flex justify-between">
+                  <span className="opacity-80">Day:</span> 
+                  <span className="font-mono font-bold">{summaryDay ?? day}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="opacity-80">Milestones reached:</span> 
+                  <span className="font-mono font-bold">{journeyCount}/{milestones.length}</span>
+                </div>
+                <div className="mt-4 flex justify-between">
+                  <div>💰 <span className="font-mono">{(summaryMeters ?? meters).funds}</span></div>
+                  <div>⭐ <span className="font-mono">{(summaryMeters ?? meters).reputation}</span></div>
+                  <div>⚔️ <span className="font-mono">{(summaryMeters ?? meters).readiness}</span></div>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      )}
-      {!!victoryText && (
-        <div className="mt-4 text-amber-400 font-semibold">{victoryText}</div>
-      )}
-
-      {/* Collapse Summary Modal */}
-      {showSummary && (
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-          <div className="bg-[#1a1a1a] text-[#f5f5dc] rounded-lg border-2 border-[#654321] p-6 w-[90%] max-w-md">
-            <div className="text-xl font-bold mb-2">Run Collapsed</div>
-            <div className="opacity-90 mb-4">{victoryText}</div>
-            <div className="text-sm mb-4">
-              <div><span className="opacity-80">Day:</span> <span className="font-mono font-bold">{summaryDay ?? day}</span></div>
-              <div><span className="opacity-80">Milestones reached:</span> <span className="font-mono font-bold">{journeyCount}/{milestones.length}</span></div>
-              <div className="mt-2 flex gap-4">
-                <div>💰 <span className="font-mono">{(summaryMeters ?? meters).funds}</span></div>
-                <div>⭐ <span className="font-mono">{(summaryMeters ?? meters).reputation}</span></div>
-                <div>⚔️ <span className="font-mono">{(summaryMeters ?? meters).readiness}</span></div>
+              
+              <div className="flex justify-end gap-3">
+                <button
+                  className="reigns-button"
+                  onClick={() => setShowSummary(false)}
+                >
+                  Close
+                </button>
+                <button
+                  className="reigns-button bg-[var(--reigns-accent)] border-[var(--reigns-accent)]"
+                  onClick={() => { setShowSummary(false); window.location.reload() }}
+                >
+                  New Run
+                </button>
               </div>
             </div>
-            <div className="flex justify-end gap-3">
-              <button
-                className="px-4 py-2 rounded-md border border-[#daa520] hover:bg-[#2a2a2a]"
-                onClick={() => setShowSummary(false)}
-              >Close</button>
-              <button
-                className="px-4 py-2 rounded-md border-2" style={{ borderColor: '#daa520', background: '#8b4513', color: '#f5f5dc' }}
-                onClick={() => { setShowSummary(false); window.location.reload() }}
-              >New Run</button>
-            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }

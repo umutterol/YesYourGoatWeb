@@ -1,3 +1,125 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* PC-optimized Reigns-inspired color palette */
+:root {
+  --reigns-bg: #1a1a1a;           /* Dark background */
+  --reigns-card: #2d2d2d;         /* Card background */
+  --reigns-text: #ffffff;         /* Primary text */
+  --reigns-text-secondary: #cccccc; /* Secondary text */
+  --reigns-accent: #ff6b35;       /* Orange accent */
+  --reigns-success: #4caf50;      /* Green for positive */
+  --reigns-danger: #f44336;       /* Red for negative */
+  --reigns-warning: #ff9800;      /* Yellow for neutral */
+  --reigns-border: #444444;       /* Subtle borders */
+}
+
+/* PC-optimized typography */
+@layer base {
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--reigns-bg);
+    color: var(--reigns-text);
+  }
+}
+
+/* Card system styles */
+@layer components {
+  .reigns-card {
+    @apply bg-[var(--reigns-card)] border-2 border-[var(--reigns-border)] rounded-lg;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-out;
+  }
+  
+  .reigns-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  }
+  
+  .reigns-button {
+    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-200;
+    background: var(--reigns-card);
+    border: 1px solid var(--reigns-border);
+    color: var(--reigns-text);
+  }
+  
+  .reigns-button:hover {
+    background: var(--reigns-accent);
+    border-color: var(--reigns-accent);
+    transform: translateY(-1px);
+  }
+  
+  .reigns-button:active {
+    transform: translateY(0);
+  }
+  
+  .reigns-portrait {
+    @apply rounded-full object-cover border-2;
+    border-color: var(--reigns-accent);
+    transition: all 0.3s ease-out;
+  }
+  
+  .reigns-portrait:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+  }
+}
+
+/* Resource bar styles */
+@layer components {
+  .resource-bar {
+    @apply h-20 w-full rounded-lg overflow-hidden;
+    background: var(--reigns-card);
+    border: 1px solid var(--reigns-border);
+  }
+  
+  .resource-fill {
+    @apply h-full transition-all duration-500 ease-out;
+  }
+  
+  .resource-fill.healthy {
+    background: linear-gradient(90deg, var(--reigns-success), #66bb6a);
+  }
+  
+  .resource-fill.warning {
+    background: linear-gradient(90deg, var(--reigns-warning), #ffb74d);
+  }
+  
+  .resource-fill.critical {
+    background: linear-gradient(90deg, var(--reigns-danger), #ef5350);
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+}
+
+/* Responsive breakpoints */
+@layer utilities {
+  .card-mobile {
+    @apply w-80 h-[480px];
+  }
+  
+  .card-tablet {
+    @apply w-96 h-[600px];
+  }
+  
+  .card-desktop {
+    @apply w-[480px] h-[720px];
+  }
+  
+  .card-large {
+    @apply w-[560px] h-[840px];
+  }
+  
+  .portrait-mobile {
+    @apply w-24 h-24;
+  }
+  
+  .portrait-desktop {
+    @apply w-32 h-32;
+  }
+}
