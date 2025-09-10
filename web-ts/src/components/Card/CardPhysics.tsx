@@ -49,8 +49,9 @@ const CardPhysics: React.FC<CardPhysicsProps> = ({
     const deltaY = e.clientY - centerY;
     
     // Calculate rotation based on horizontal movement (max 15 degrees)
+    // Use a more stable calculation to prevent glitching
     const maxRotation = 15;
-    const rotationAmount = Math.max(-maxRotation, Math.min(maxRotation, deltaX * 0.1));
+    const rotationAmount = Math.max(-maxRotation, Math.min(maxRotation, deltaX * 0.08));
     setRotation(rotationAmount);
     
     // Calculate scale based on drag distance (slight scale down)
@@ -59,8 +60,11 @@ const CardPhysics: React.FC<CardPhysicsProps> = ({
     const scaleAmount = Math.max(0.95, 1 - (distance / maxDistance) * 0.05);
     setScale(scaleAmount);
     
-    // Update drag offset for visual feedback
-    setDragOffset({ x: deltaX, y: deltaY });
+    // Update drag offset for visual feedback (limit to prevent extreme values)
+    const maxOffset = 300;
+    const limitedDeltaX = Math.max(-maxOffset, Math.min(maxOffset, deltaX));
+    const limitedDeltaY = Math.max(-maxOffset, Math.min(maxOffset, deltaY));
+    setDragOffset({ x: limitedDeltaX, y: limitedDeltaY });
   }, [isDragging]);
 
   const handleMouseUp = useCallback((e: MouseEvent) => {
@@ -73,8 +77,14 @@ const CardPhysics: React.FC<CardPhysicsProps> = ({
     document.body.style.cursor = 'default';
     
     // Calculate if we should trigger a choice
-    const deltaX = e.clientX - (startPos.current.x + (cardRef.current?.getBoundingClientRect().left || 0));
-    const deltaY = e.clientY - (startPos.current.y + (cardRef.current?.getBoundingClientRect().top || 0));
+    const rect = cardRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    const deltaX = e.clientX - centerX;
+    const deltaY = e.clientY - centerY;
     const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
     const dragDuration = Date.now() - dragStartTime.current;
     
@@ -97,6 +107,22 @@ const CardPhysics: React.FC<CardPhysicsProps> = ({
     setScale(1);
   }, [isDragging, onChoice, onDragEnd]);
 
+  // Keyboard controls
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    switch (e.key.toLowerCase()) {
+      case 'a':
+      case 'arrowleft':
+        e.preventDefault();
+        onChoice('left');
+        break;
+      case 'd':
+      case 'arrowright':
+        e.preventDefault();
+        onChoice('right');
+        break;
+    }
+  }, [onChoice]);
+
   // Add global mouse event listeners
   React.useEffect(() => {
     if (isDragging) {
@@ -109,6 +135,12 @@ const CardPhysics: React.FC<CardPhysicsProps> = ({
       };
     }
   }, [isDragging, handleMouseMove, handleMouseUp]);
+
+  // Add keyboard event listeners
+  React.useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [handleKeyDown]);
 
   const cardStyle: React.CSSProperties = {
     transform: `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${rotation}deg) scale(${scale})`,
