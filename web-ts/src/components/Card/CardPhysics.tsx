@@ -15,7 +15,7 @@ const CardPhysics: React.FC<CardPhysicsProps> = ({
 }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
-  const [rotation, setRotation] = useState(0);
+  // const [rotation, setRotation] = useState(0); // Disabled for now
   const [scale, setScale] = useState(1);
   const cardRef = useRef<HTMLDivElement>(null);
   const startPos = useRef({ x: 0, y: 0 });
@@ -48,11 +48,10 @@ const CardPhysics: React.FC<CardPhysicsProps> = ({
     const deltaX = e.clientX - centerX;
     const deltaY = e.clientY - centerY;
     
-    // Calculate rotation based on horizontal movement (max 15 degrees)
-    // Use a more stable calculation to prevent glitching
-    const maxRotation = 15;
-    const rotationAmount = Math.max(-maxRotation, Math.min(maxRotation, deltaX * 0.08));
-    setRotation(rotationAmount);
+    // Rotation disabled for now
+    // const maxRotation = 15;
+    // const rotationAmount = Math.max(-maxRotation, Math.min(maxRotation, deltaX * 0.08));
+    // setRotation(rotationAmount);
     
     // Calculate scale based on drag distance (slight scale down)
     const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
@@ -103,7 +102,7 @@ const CardPhysics: React.FC<CardPhysicsProps> = ({
     
     // Reset card position with animation
     setDragOffset({ x: 0, y: 0 });
-    setRotation(0);
+    // setRotation(0); // Disabled for now
     setScale(1);
   }, [isDragging, onChoice, onDragEnd]);
 
@@ -143,7 +142,7 @@ const CardPhysics: React.FC<CardPhysicsProps> = ({
   }, [handleKeyDown]);
 
   const cardStyle: React.CSSProperties = {
-    transform: `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${rotation}deg) scale(${scale})`,
+    transform: `translate(${dragOffset.x}px, ${dragOffset.y}px) scale(${scale})`,
     transition: isDragging ? 'none' : 'transform 0.3s ease-out',
     cursor: isDragging ? 'grabbing' : 'grab',
     transformOrigin: 'center center',
