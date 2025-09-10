@@ -38,8 +38,8 @@ const ResourceBar: React.FC<ResourceBarProps> = ({
   ];
 
   return (
-    <div className={`resource-bar ${cardSize === 'mobile' ? 'h-16' : 'h-20'} p-4 mb-6`}>
-      <div className="flex items-center justify-between h-full gap-4">
+    <div className={`resource-bar ${cardSize === 'mobile' ? 'h-16' : 'h-20'} p-6 mb-8`}>
+      <div className="flex items-center justify-between h-full gap-6">
         {resources.map(({ key, value, label }) => {
           const percentage = (value / maxValue) * 100;
           const status = getResourceStatus(value);
