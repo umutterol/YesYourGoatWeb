@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from 'react'
 import ResourceBar from '../../components/ResourceBar/ResourceBar'
 import Card from '../../components/Card/Card'
 import JourneyTrack from '../../components/JourneyTrack/JourneyTrack'
-import InputHandler from '../../components/Input/InputHandler'
 
 type Meters = { funds: number; reputation: number; readiness: number }
 type Effects = Partial<Meters> & Record<string, number>
@@ -261,14 +260,12 @@ export default function YesYourGoat() {
 
         {/* Main Game Area */}
         <div className="flex justify-center">
-          <InputHandler onChoice={decide}>
-            {current && (
-              <Card 
-                event={current}
-                onChoice={decide}
-              />
-            )}
-          </InputHandler>
+          {current && (
+            <Card 
+              event={current}
+              onChoice={decide}
+            />
+          )}
         </div>
 
         {/* Debug Panel */}
