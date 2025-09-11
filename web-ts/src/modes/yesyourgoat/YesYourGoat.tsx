@@ -213,7 +213,10 @@ export default function YesYourGoat() {
   }
 
   function drawNext(): EventCard | null {
-    if (!events.length) return null
+    if (!events.length) {
+      console.log('No events loaded')
+      return null
+    }
     
     // Check for narrative events first (highest priority for story progression)
     const availableNarrativeEvents = getAvailableNarrativeEvents(
@@ -343,6 +346,7 @@ export default function YesYourGoat() {
       // AGGRESSIVE anti-repetition: completely block events that appeared in last 5 events
       const recentEvents = usedEventIds.slice(-5)
       if (recentEvents.includes(ev.id)) {
+        console.log('Blocking recent event:', ev.id, 'recent:', recentEvents)
         return 0 // Completely block recently used events
       }
 
@@ -389,7 +393,15 @@ export default function YesYourGoat() {
 
       return w
     }
-    if (!pool.length) return null
+    if (!pool.length) {
+      console.log('No events available in pool', { 
+        totalEvents: events.length, 
+        usedEventIds: usedEventIds.length,
+        collapseCount,
+        unlocked: Array.from(unlocked)
+      })
+      return null
+    }
     const total = pool.reduce((a,e)=>a+bias(e),0)
     let r = Math.random()*total
     for (const ev of pool) {
@@ -640,6 +652,7 @@ export default function YesYourGoat() {
     const newDay = day + 1
     setDay(newDay)
     const nxt = drawNext()
+    console.log('Drawing next event:', { nxt, day: newDay, usedEventIds: usedEventIds.length, totalEvents: events.length })
     if (nxt) setUsedEventIds(prev => [...prev, nxt.id])
     setCurrent(nxt)
     
