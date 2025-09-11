@@ -13,6 +13,9 @@ import { getCurrentStoryBeat, getStoryBeatProgress, getStoryBeatColorTheme, getS
 import { getVisualProgression, getGuildHallDescription, getVisualEffectsCSS } from '../../utils/visualProgression'
 import { achievements, checkAchievement, getAchievementRarityColor, getAchievementCategoryIcon } from '../../utils/achievements'
 import type { Achievement } from '../../utils/achievements'
+import { getCurrentMetaNarrativePhase, getPhaseEventModifiers } from '../../utils/metaNarrativeProgression'
+import { getAvailableNarrativeEvents, getNarrativeEventChance } from '../../utils/narrativeEvents'
+import type { NarrativeEvent } from '../../utils/narrativeEvents'
 
 type Meters = { funds: number; reputation: number; readiness: number }
 type Effects = Partial<Meters> & Record<string, number>
@@ -40,20 +43,21 @@ function determineCollapseType(meters: Meters, cause: string): CollapseType {
   // Check for deck exhaustion
   if (cause === 'exhausted') return 'survivor'
   
-  // Check for high all meters (legend)
-  if (funds >= 8 && reputation >= 8 && readiness >= 8) return 'legend'
+  // Check for high all meters (legend) - all meters were high before collapse
+  if (funds >= 7 && reputation >= 7 && readiness >= 7) return 'legend'
   
-  // Check for martyr (high rep, low funds)
-  if (reputation >= 7 && funds <= 3) return 'martyr'
+  // Check for martyr (high rep, low funds) - reputation was high but funds were low
+  if (reputation >= 6 && funds <= 4) return 'martyr'
   
-  // Check for dreamer (high readiness, low rep)
-  if (readiness >= 7 && reputation <= 3) return 'dreamer'
+  // Check for dreamer (high readiness, low rep) - readiness was high but reputation was low
+  if (readiness >= 6 && reputation <= 4) return 'dreamer'
   
-  // Check for pragmatist (balanced)
+  // Check for pragmatist (balanced) - all meters were reasonably balanced
   const balance = Math.abs(funds - reputation) + Math.abs(funds - readiness) + Math.abs(reputation - readiness)
-  if (balance <= 4) return 'pragmatist'
+  if (balance <= 6) return 'pragmatist'
   
-  return 'unknown'
+  // Default to pragmatist for any other balanced collapse
+  return 'pragmatist'
 }
 
 function updateLegacyPoints(legacyPoints: LegacyPoints, collapseType: CollapseType): LegacyPoints {
@@ -123,6 +127,11 @@ export default function YesYourGoat() {
   const nextMilestone = milestones.find(m => day <= m) ?? null
   const collapseCount = Number(localStorage.getItem('yyg_collapse_count') || '0')
   const [usedMilestoneIds, setUsedMilestoneIds] = useState<string[]>([])
+
+  // Meta-narrative progression
+  const runCount = collapseCount + 1
+  const currentMetaPhase = getCurrentMetaNarrativePhase(legacyPoints, runCount)
+  const [narrativeEvent, setNarrativeEvent] = useState<NarrativeEvent | null>(null)
 
   // Story beat and visual progression
   const currentStoryBeat = getCurrentStoryBeat(day)
@@ -206,8 +215,43 @@ export default function YesYourGoat() {
   function drawNext(): EventCard | null {
     if (!events.length) return null
     
-    // Check for Game Master offers first (highest priority)
-    const gameMasterChance = calculateGameMasterChance(meters, legacyPoints, day)
+    // Check for narrative events first (highest priority for story progression)
+    const availableNarrativeEvents = getAvailableNarrativeEvents(
+      currentMetaPhase.phase,
+      legacyPoints,
+      runCount,
+      collapseHistory.map(c => c.collapseType)
+    )
+    
+    if (availableNarrativeEvents.length > 0) {
+      // Calculate narrative event chance based on phase modifiers
+      const phaseModifiers = getPhaseEventModifiers(currentMetaPhase)
+      const baseNarrativeChance = 0.15 * phaseModifiers.metaEvents
+      
+      if (Math.random() < baseNarrativeChance) {
+        // Weight events by rarity and phase
+        const weightedEvents = availableNarrativeEvents.map(event => ({
+          event,
+          weight: getNarrativeEventChance(event, currentMetaPhase.phase, 0.1)
+        }))
+        
+        const totalWeight = weightedEvents.reduce((sum, w) => sum + w.weight, 0)
+        if (totalWeight > 0) {
+          let random = Math.random() * totalWeight
+          for (const { event, weight } of weightedEvents) {
+            random -= weight
+            if (random <= 0) {
+              setNarrativeEvent(event)
+              return null // Will be handled by narrative event system
+            }
+          }
+        }
+      }
+    }
+    
+    // Check for Game Master offers second
+    const gameMasterChance = calculateGameMasterChance(meters, legacyPoints, day) * 
+      getPhaseEventModifiers(currentMetaPhase).gameMasterChance
     if (Math.random() < gameMasterChance) {
       const availableOffers = getAvailableGameMasterOffers(legacyPoints)
       const offer = drawGameMasterOffer(availableOffers)
@@ -217,8 +261,9 @@ export default function YesYourGoat() {
       }
     }
     
-    // Check for glitch events second
-    const glitchChance = calculateGlitchChance(meters, legacyPoints, day)
+    // Check for glitch events third
+    const glitchChance = calculateGlitchChance(meters, legacyPoints, day) * 
+      getPhaseEventModifiers(currentMetaPhase).glitchChance
     if (Math.random() < glitchChance) {
       const availableGlitchEvents = getAvailableGlitchEvents(meters, legacyPoints, day)
       const glitchEvent = drawGlitchEvent(availableGlitchEvents)
@@ -228,8 +273,9 @@ export default function YesYourGoat() {
       }
     }
     
-    // Check for chaos events third
-    const chaosChance = calculateChaosChance(meters, legacyPoints, day)
+    // Check for chaos events fourth
+    const chaosChance = calculateChaosChance(meters, legacyPoints, day) * 
+      getPhaseEventModifiers(currentMetaPhase).chaosChance
     if (Math.random() < chaosChance) {
       const availableChaosEvents = getAvailableChaosEvents(meters, legacyPoints, day)
       const chaosEvent = drawChaosEvent(availableChaosEvents)
@@ -356,7 +402,47 @@ export default function YesYourGoat() {
   function SawRivalMid() { return sawRival }
 
   function decide(side: 'left' | 'right') {
-    // Handle Game Master offers first
+    // Handle narrative events first (highest priority for story progression)
+    if (narrativeEvent) {
+      const choice = side === 'left' ? narrativeEvent.left : narrativeEvent.right
+      const preMeters: Meters = { ...meters }
+      const nextMeters: Meters = { ...meters }
+      
+      // Apply effects
+      Object.entries(choice.effects).forEach(([key, value]) => {
+        if (key in nextMeters) {
+          nextMeters[key as keyof Meters] = clamp(nextMeters[key as keyof Meters] + value)
+        }
+      })
+      
+      // Log the narrative event
+      setDebugLog(prev => [...prev, {
+        id: narrativeEvent.id,
+        title: narrativeEvent.title,
+        choice: choice.label,
+        pre: preMeters,
+        post: nextMeters,
+        effects: choice.effects
+      }])
+      
+      setPreviousMeters(meters)
+      setMeters(nextMeters)
+      setNarrativeEvent(null)
+      
+      // Continue to next event
+      const newDay = day + 1
+      setDay(newDay)
+      const nxt = drawNext()
+      if (nxt) setUsedEventIds(prev => [...prev, nxt.id])
+      setCurrent(nxt)
+      
+      // Set next card for preview
+      const nextNxt = drawNext()
+      setNextCard(nextNxt)
+      return
+    }
+    
+    // Handle Game Master offers second
     if (gameMasterOffer) {
       const choice = side === 'left' ? gameMasterOffer.left : gameMasterOffer.right
       const preMeters: Meters = { ...meters }
@@ -511,9 +597,18 @@ export default function YesYourGoat() {
       setSummaryMeters(nextMeters)
       setSummaryDay(day)
       // Determine collapse type and update legacy points
-      const collapseType = determineCollapseType(nextMeters, causeTag.replace('cause:', ''))
+      // Use the meters that caused the collapse, not the collapsed meters
+      const collapseType = determineCollapseType(meters, causeTag.replace('cause:', ''))
       const newLegacyPoints = updateLegacyPoints(legacyPoints, collapseType)
       setLegacyPoints(newLegacyPoints)
+      
+      // Debug logging
+      console.log('Collapse detected:', {
+        cause: causeTag.replace('cause:', ''),
+        meters: meters,
+        collapseType,
+        newLegacyPoints
+      })
       
       // Update collapse history
       setCollapseHistory(prev => [...prev, { collapseType, day }])
