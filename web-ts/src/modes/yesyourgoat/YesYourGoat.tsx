@@ -627,67 +627,7 @@ export default function YesYourGoat() {
           </div>
         )}
 
-        {/* Legacy Points Display */}
-        <div className="mt-4 max-w-4xl mx-auto">
-          <div className="bg-[var(--reigns-card)] border border-[var(--reigns-border)] rounded-lg p-4">
-            <h3 className="text-lg font-bold text-[var(--reigns-text)] mb-3 text-center">
-              Guild Legacy
-            </h3>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-red-400">{legacyPoints.martyr}</div>
-                <div className="text-sm text-[var(--reigns-text-secondary)]">Martyr</div>
-                <div className="text-xs text-[var(--reigns-text-secondary)]">High Rep, Low Funds</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-blue-400">{legacyPoints.pragmatist}</div>
-                <div className="text-sm text-[var(--reigns-text-secondary)]">Pragmatist</div>
-                <div className="text-xs text-[var(--reigns-text-secondary)]">Balanced Collapse</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-green-400">{legacyPoints.dreamer}</div>
-                <div className="text-sm text-[var(--reigns-text-secondary)]">Dreamer</div>
-                <div className="text-xs text-[var(--reigns-text-secondary)]">High Readiness, Low Rep</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-yellow-400">{legacyPoints.survivor}</div>
-                <div className="text-sm text-[var(--reigns-text-secondary)]">Survivor</div>
-                <div className="text-xs text-[var(--reigns-text-secondary)]">Deck Exhaustion</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-purple-400">{legacyPoints.legend}</div>
-                <div className="text-sm text-[var(--reigns-text-secondary)]">Legend</div>
-                <div className="text-xs text-[var(--reigns-text-secondary)]">High All Meters</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Achievements Display */}
-        {unlockedAchievements.length > 0 && (
-          <div className="mt-4 max-w-4xl mx-auto">
-            <div className="bg-[var(--reigns-card)] border border-[var(--reigns-border)] rounded-lg p-4">
-              <h3 className="text-lg font-bold text-[var(--reigns-text)] mb-3 text-center">
-                🏆 New Achievements Unlocked!
-              </h3>
-              <div className="space-y-2">
-                {unlockedAchievements.slice(-3).map((achievement) => (
-                  <div key={achievement.id} className="flex items-center gap-3 p-2 bg-[var(--reigns-bg)] rounded">
-                    <div className="text-2xl">{getAchievementCategoryIcon(achievement.category)}</div>
-                    <div className="flex-1">
-                      <div className={`font-bold ${getAchievementRarityColor(achievement.rarity)}`}>
-                        {achievement.name}
-                      </div>
-                      <div className="text-sm text-[var(--reigns-text-secondary)]">
-                        {achievement.description}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
+        {/* Legacy Points and Achievements - Hidden during gameplay, shown in summary */}
 
         {/* Main Game Area */}
         <div className="flex justify-center">
@@ -849,8 +789,8 @@ export default function YesYourGoat() {
 
         {/* Collapse Summary Modal */}
         {showSummary && (
-          <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-            <div className="bg-[var(--reigns-card)] text-[var(--reigns-text)] rounded-lg border-2 border-[var(--reigns-border)] p-8 w-[90%] max-w-md">
+          <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+            <div className="bg-[var(--reigns-card)] text-[var(--reigns-text)] rounded-lg border-2 border-[var(--reigns-border)] p-8 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
               <div className="text-2xl font-bold mb-4 text-center">Run Collapsed</div>
               <div className="opacity-90 mb-6 text-center">{victoryText}</div>
               
@@ -869,6 +809,64 @@ export default function YesYourGoat() {
                   <div>⚔️ <span className="font-mono">{(summaryMeters ?? meters).readiness}</span></div>
                 </div>
               </div>
+
+              {/* Guild Legacy Display */}
+              <div className="mb-6">
+                <h3 className="text-lg font-bold text-[var(--reigns-text)] mb-3 text-center">
+                  Guild Legacy
+                </h3>
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-red-400">{legacyPoints.martyr}</div>
+                    <div className="text-sm text-[var(--reigns-text-secondary)]">Martyr</div>
+                    <div className="text-xs text-[var(--reigns-text-secondary)]">High Rep, Low Funds</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-blue-400">{legacyPoints.pragmatist}</div>
+                    <div className="text-sm text-[var(--reigns-text-secondary)]">Pragmatist</div>
+                    <div className="text-xs text-[var(--reigns-text-secondary)]">Balanced Collapse</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-green-400">{legacyPoints.dreamer}</div>
+                    <div className="text-sm text-[var(--reigns-text-secondary)]">Dreamer</div>
+                    <div className="text-xs text-[var(--reigns-text-secondary)]">High Readiness, Low Rep</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-yellow-400">{legacyPoints.survivor}</div>
+                    <div className="text-sm text-[var(--reigns-text-secondary)]">Survivor</div>
+                    <div className="text-xs text-[var(--reigns-text-secondary)]">Deck Exhaustion</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-purple-400">{legacyPoints.legend}</div>
+                    <div className="text-sm text-[var(--reigns-text-secondary)]">Legend</div>
+                    <div className="text-xs text-[var(--reigns-text-secondary)]">High All Meters</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Achievements Display */}
+              {unlockedAchievements.length > 0 && (
+                <div className="mb-6">
+                  <h3 className="text-lg font-bold text-[var(--reigns-text)] mb-3 text-center">
+                    🏆 New Achievements Unlocked!
+                  </h3>
+                  <div className="space-y-2 max-h-40 overflow-y-auto">
+                    {unlockedAchievements.slice(-5).map((achievement) => (
+                      <div key={achievement.id} className="flex items-center gap-3 p-2 bg-[var(--reigns-bg)] rounded">
+                        <div className="text-2xl">{getAchievementCategoryIcon(achievement.category)}</div>
+                        <div className="flex-1">
+                          <div className={`font-bold ${getAchievementRarityColor(achievement.rarity)}`}>
+                            {achievement.name}
+                          </div>
+                          <div className="text-sm text-[var(--reigns-text-secondary)]">
+                            {achievement.description}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
               
               <div className="flex justify-end gap-3">
                 <button
