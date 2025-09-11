@@ -39,7 +39,7 @@ export const phase1Events: NarrativeEvent[] = [
     phase: 1,
     category: 'character',
     rarity: 'common',
-    requirements: { minRuns: 1, maxRuns: 2 },
+    requirements: { minRuns: 1, maxRuns: 1 },
     left: { label: "I'm honored.", effects: { reputation: 1 } },
     right: { label: "Tell me more.", effects: { readiness: 1 } }
   },
@@ -52,7 +52,7 @@ export const phase1Events: NarrativeEvent[] = [
     phase: 1,
     category: 'character',
     rarity: 'common',
-    requirements: { minRuns: 2, maxRuns: 4 },
+    requirements: { minRuns: 1, maxRuns: 2 },
     left: { label: "What happened to them?", effects: { reputation: 1 } },
     right: { label: "I'll do better.", effects: { readiness: 1 } }
   }
@@ -69,7 +69,7 @@ export const phase2Events: NarrativeEvent[] = [
     phase: 2,
     category: 'glitch',
     rarity: 'uncommon',
-    requirements: { minLegacyPoints: 5, minRuns: 3 },
+    requirements: { minLegacyPoints: 1, minRuns: 2 },
     left: { label: "What kind of dreams?", effects: { reputation: 1 } },
     right: { label: "Focus on the task.", effects: { readiness: 1 } }
   },
@@ -82,7 +82,7 @@ export const phase2Events: NarrativeEvent[] = [
     phase: 2,
     category: 'glitch',
     rarity: 'rare',
-    requirements: { minLegacyPoints: 8, minRuns: 4 },
+    requirements: { minLegacyPoints: 2, minRuns: 2 },
     left: { label: "You're right...", effects: { reputation: 1 } },
     right: { label: "Just a coincidence.", effects: { readiness: 1 } }
   },
@@ -95,7 +95,7 @@ export const phase2Events: NarrativeEvent[] = [
     phase: 2,
     category: 'meta',
     rarity: 'uncommon',
-    requirements: { minLegacyPoints: 6, minRuns: 3 },
+    requirements: { minLegacyPoints: 1, minRuns: 2 },
     left: { label: "Tell me more.", effects: { reputation: 1 } },
     right: { label: "You're mistaken.", effects: { readiness: 1 } }
   }
@@ -112,7 +112,7 @@ export const phase3Events: NarrativeEvent[] = [
     phase: 3,
     category: 'game_master',
     rarity: 'rare',
-    requirements: { minLegacyPoints: 15, minRuns: 6 },
+    requirements: { minLegacyPoints: 3, minRuns: 3 },
     left: { label: "Who are you?", effects: { reputation: 1 } },
     right: { label: "What do you want?", effects: { readiness: 1 } }
   },
@@ -125,7 +125,7 @@ export const phase3Events: NarrativeEvent[] = [
     phase: 3,
     category: 'meta',
     rarity: 'uncommon',
-    requirements: { minLegacyPoints: 12, minRuns: 5 },
+    requirements: { minLegacyPoints: 3, minRuns: 3 },
     left: { label: "You're not alone.", effects: { reputation: 1 } },
     right: { label: "Stay focused.", effects: { readiness: 1 } }
   },
@@ -138,7 +138,7 @@ export const phase3Events: NarrativeEvent[] = [
     phase: 3,
     category: 'meta',
     rarity: 'rare',
-    requirements: { minLegacyPoints: 18, minRuns: 7 },
+    requirements: { minLegacyPoints: 4, minRuns: 3 },
     left: { label: "What cycle?", effects: { reputation: 1 } },
     right: { label: "We can break it.", effects: { readiness: 1 } }
   }
@@ -155,7 +155,7 @@ export const phase4Events: NarrativeEvent[] = [
     phase: 4,
     category: 'game_master',
     rarity: 'legendary',
-    requirements: { minLegacyPoints: 30, minRuns: 10 },
+    requirements: { minLegacyPoints: 6, minRuns: 4 },
     left: { label: "That's impossible!", effects: { reputation: 1 } },
     right: { label: "I understand now.", effects: { readiness: 1 } }
   },
@@ -168,7 +168,7 @@ export const phase4Events: NarrativeEvent[] = [
     phase: 4,
     category: 'meta',
     rarity: 'legendary',
-    requirements: { minLegacyPoints: 25, minRuns: 8 },
+    requirements: { minLegacyPoints: 6, minRuns: 4 },
     left: { label: "What are we testing?", effects: { reputation: 1 } },
     right: { label: "It doesn't matter.", effects: { readiness: 1 } }
   },
@@ -181,7 +181,7 @@ export const phase4Events: NarrativeEvent[] = [
     phase: 4,
     category: 'meta',
     rarity: 'legendary',
-    requirements: { minLegacyPoints: 35, minRuns: 12 },
+    requirements: { minLegacyPoints: 7, minRuns: 4 },
     left: { label: "All of them me?", effects: { reputation: 1 } },
     right: { label: "The cycle continues.", effects: { readiness: 1 } }
   }

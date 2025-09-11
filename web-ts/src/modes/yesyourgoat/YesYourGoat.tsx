@@ -226,7 +226,7 @@ export default function YesYourGoat() {
     if (availableNarrativeEvents.length > 0) {
       // Calculate narrative event chance based on phase modifiers
       const phaseModifiers = getPhaseEventModifiers(currentMetaPhase)
-      const baseNarrativeChance = 0.15 * phaseModifiers.metaEvents
+      const baseNarrativeChance = 0.25 * phaseModifiers.metaEvents
       
       if (Math.random() < baseNarrativeChance) {
         // Weight events by rarity and phase

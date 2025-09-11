@@ -71,8 +71,8 @@ export const metaNarrativePhases: MetaNarrativePhase[] = [
     name: "Something's Wrong",
     description: "Strange things start happening. Events repeat. Characters say odd things.",
     trigger: {
-      minLegacyPoints: 5,
-      minRuns: 3
+      minLegacyPoints: 1,
+      minRuns: 2
     },
     visualStyle: {
       uiGlitches: true,
@@ -81,10 +81,10 @@ export const metaNarrativePhases: MetaNarrativePhase[] = [
       cosmicEffects: false
     },
     eventModifiers: {
-      glitchChance: 0.02,
+      glitchChance: 0.05,
       gameMasterChance: 0.0,
       chaosChance: 0.8,
-      metaEvents: 0.1
+      metaEvents: 0.2
     },
     storyElements: {
       glitchEvents: [
@@ -111,8 +111,8 @@ export const metaNarrativePhases: MetaNarrativePhase[] = [
     name: "The Simulation",
     description: "Mysterious Game Masters appear. Reality begins to crack.",
     trigger: {
-      minLegacyPoints: 15,
-      minRuns: 6
+      minLegacyPoints: 3,
+      minRuns: 3
     },
     visualStyle: {
       uiGlitches: true,
@@ -121,10 +121,10 @@ export const metaNarrativePhases: MetaNarrativePhase[] = [
       cosmicEffects: false
     },
     eventModifiers: {
-      glitchChance: 0.05,
-      gameMasterChance: 0.02,
+      glitchChance: 0.08,
+      gameMasterChance: 0.03,
       chaosChance: 1.2,
-      metaEvents: 0.3
+      metaEvents: 0.4
     },
     storyElements: {
       glitchEvents: [
@@ -160,8 +160,8 @@ export const metaNarrativePhases: MetaNarrativePhase[] = [
     name: "The Truth",
     description: "The full truth is revealed. You are an AI replica in a test.",
     trigger: {
-      minLegacyPoints: 30,
-      minRuns: 10
+      minLegacyPoints: 6,
+      minRuns: 4
     },
     visualStyle: {
       uiGlitches: true,
@@ -170,10 +170,10 @@ export const metaNarrativePhases: MetaNarrativePhase[] = [
       cosmicEffects: true
     },
     eventModifiers: {
-      glitchChance: 0.08,
-      gameMasterChance: 0.05,
+      glitchChance: 0.12,
+      gameMasterChance: 0.06,
       chaosChance: 1.5,
-      metaEvents: 0.5
+      metaEvents: 0.6
     },
     storyElements: {
       glitchEvents: [
