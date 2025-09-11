@@ -167,31 +167,31 @@ export function calculateChaosChance(
   legacyPoints: { martyr: number; pragmatist: number; dreamer: number; survivor: number; legend: number },
   day: number
 ): number {
-  let baseChance = 0.05; // 5% base chance
+  let baseChance = 0.005; // 0.5% base chance (much rarer)
   
-  // High stakes increase chaos chance
+  // High stakes increase chaos chance slightly
   const totalMeters = meters.funds + meters.reputation + meters.readiness;
   if (totalMeters >= 24) { // All meters high
-    baseChance += 0.1;
+    baseChance += 0.01;
   }
   
-  // Low stakes increase chaos chance
+  // Low stakes increase chaos chance slightly
   if (totalMeters <= 6) { // All meters low
-    baseChance += 0.1;
+    baseChance += 0.01;
   }
   
-  // Legacy milestones increase chaos chance
+  // Legacy milestones increase chaos chance slightly
   const totalLegacy = Object.values(legacyPoints).reduce((a, b) => a + b, 0);
   if (totalLegacy > 0) {
-    baseChance += Math.min(0.2, totalLegacy * 0.02);
+    baseChance += Math.min(0.02, totalLegacy * 0.002);
   }
   
-  // Later days increase chaos chance
-  if (day > 10) {
-    baseChance += 0.05;
+  // Later days increase chaos chance slightly
+  if (day > 20) {
+    baseChance += 0.005;
   }
   
-  return Math.min(0.3, baseChance); // Cap at 30%
+  return Math.min(0.05, baseChance); // Cap at 5% (much lower)
 }
 
 // Get chaos events that can trigger based on current state

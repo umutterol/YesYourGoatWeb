@@ -78,12 +78,12 @@ export function generateGlitchEvents(realWorldData: Partial<GlitchEvent['realWor
     rarity: 'common',
     effects: { funds: 0, reputation: 0, readiness: 0 },
     left: { 
-      label: 'Trust your instincts', 
-      effects: { funds: 1, reputation: 1, readiness: 1 } 
+      label: 'This feels familiar...', 
+      effects: { funds: 0, reputation: 0, readiness: 0 } 
     },
     right: { 
-      label: 'Ignore the feeling', 
-      effects: { funds: -1, reputation: -1, readiness: -1 } 
+      label: 'Just a coincidence', 
+      effects: { funds: 0, reputation: 0, readiness: 0 } 
     }
   });
   
@@ -97,12 +97,12 @@ export function generateGlitchEvents(realWorldData: Partial<GlitchEvent['realWor
     rarity: 'common',
     effects: { funds: 0, reputation: 0, readiness: 0 },
     left: { 
-      label: 'Investigate the report', 
-      effects: { funds: 1, reputation: 1, readiness: 1 } 
+      label: 'Something\'s not right...', 
+      effects: { funds: 0, reputation: 0, readiness: 0 } 
     },
     right: { 
-      label: 'Accept the report', 
-      effects: { funds: -1, reputation: -1, readiness: -1 } 
+      label: 'Must be a typo', 
+      effects: { funds: 0, reputation: 0, readiness: 0 } 
     }
   });
   
@@ -354,26 +354,26 @@ export function calculateGlitchChance(
   legacyPoints: { martyr: number; pragmatist: number; dreamer: number; survivor: number; legend: number },
   day: number
 ): number {
-  let baseChance = 0.05; // 5% base chance
+  let baseChance = 0.01; // 1% base chance (much rarer)
   
   // Legacy points increase glitch chance
   const totalLegacy = Object.values(legacyPoints).reduce((a, b) => a + b, 0);
   if (totalLegacy > 0) {
-    baseChance += Math.min(0.2, totalLegacy * 0.02);
+    baseChance += Math.min(0.05, totalLegacy * 0.005); // Much smaller increase
   }
   
-  // Later days increase glitch chance
-  if (day > 10) {
-    baseChance += 0.05;
+  // Later days increase glitch chance slightly
+  if (day > 15) {
+    baseChance += 0.01;
   }
   
-  // High or low meter extremes increase glitch chance
+  // High or low meter extremes increase glitch chance slightly
   const totalMeters = meters.funds + meters.reputation + meters.readiness;
   if (totalMeters >= 24 || totalMeters <= 6) {
-    baseChance += 0.1;
+    baseChance += 0.02;
   }
   
-  return Math.min(0.3, baseChance); // Cap at 30%
+  return Math.min(0.08, baseChance); // Cap at 8% (much lower)
 }
 
 // Get available glitch events

@@ -511,7 +511,7 @@ export default function YesYourGoat() {
       setSummaryMeters(nextMeters)
       setSummaryDay(day)
       // Determine collapse type and update legacy points
-      const collapseType = determineCollapseType(meters, causeTag.replace('cause:', ''))
+      const collapseType = determineCollapseType(nextMeters, causeTag.replace('cause:', ''))
       const newLegacyPoints = updateLegacyPoints(legacyPoints, collapseType)
       setLegacyPoints(newLegacyPoints)
       
@@ -608,22 +608,24 @@ export default function YesYourGoat() {
           </div>
         </div>
 
-        {/* Guild Hall Display */}
-        <div className="mt-4 max-w-4xl mx-auto">
-          <div className="bg-[var(--reigns-card)] border border-[var(--reigns-border)] rounded-lg p-4">
-            <h3 className="text-lg font-bold text-[var(--reigns-text)] mb-3 text-center">
-              Guild Hall
-            </h3>
-            <div className="text-center">
-              <div className={`text-2xl font-bold bg-gradient-to-r ${visualProgression.colorTheme} bg-clip-text text-transparent`}>
-                Level {visualProgression.guildHallLevel}
-              </div>
-              <div className="text-sm text-[var(--reigns-text-secondary)] mt-1">
-                {getGuildHallDescription(visualProgression.guildHallLevel)}
+        {/* Guild Hall Display - Hidden for now */}
+        {false && (
+          <div className="mt-4 max-w-4xl mx-auto">
+            <div className="bg-[var(--reigns-card)] border border-[var(--reigns-border)] rounded-lg p-4">
+              <h3 className="text-lg font-bold text-[var(--reigns-text)] mb-3 text-center">
+                Guild Hall
+              </h3>
+              <div className="text-center">
+                <div className={`text-2xl font-bold bg-gradient-to-r ${visualProgression.colorTheme} bg-clip-text text-transparent`}>
+                  Level {visualProgression.guildHallLevel}
+                </div>
+                <div className="text-sm text-[var(--reigns-text-secondary)] mt-1">
+                  {getGuildHallDescription(visualProgression.guildHallLevel)}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Legacy Points Display */}
         <div className="mt-4 max-w-4xl mx-auto">

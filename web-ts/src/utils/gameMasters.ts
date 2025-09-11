@@ -220,26 +220,26 @@ export function calculateGameMasterChance(
   // Game Masters only appear after Phase 1 (5+ legacy points)
   if (totalLegacy < 5) return 0;
   
-  let baseChance = 0.02; // 2% base chance
+  let baseChance = 0.001; // 0.1% base chance (very rare)
   
-  // Higher legacy points increase chance
-  if (totalLegacy >= 50) baseChance = 0.1; // Phase 4
-  else if (totalLegacy >= 20) baseChance = 0.08; // Phase 3
-  else if (totalLegacy >= 10) baseChance = 0.05; // Phase 2
-  else baseChance = 0.03; // Phase 1
+  // Higher legacy points increase chance slightly
+  if (totalLegacy >= 50) baseChance = 0.01; // Phase 4
+  else if (totalLegacy >= 20) baseChance = 0.005; // Phase 3
+  else if (totalLegacy >= 10) baseChance = 0.003; // Phase 2
+  else baseChance = 0.002; // Phase 1
   
-  // Desperate situations increase chance
+  // Desperate situations increase chance slightly
   const totalMeters = meters.funds + meters.reputation + meters.readiness;
   if (totalMeters <= 9) { // Very low meters
-    baseChance += 0.05;
+    baseChance += 0.005;
   }
   
-  // Later days increase chance
-  if (day > 15) {
-    baseChance += 0.02;
+  // Later days increase chance slightly
+  if (day > 25) {
+    baseChance += 0.002;
   }
   
-  return Math.min(0.15, baseChance); // Cap at 15%
+  return Math.min(0.02, baseChance); // Cap at 2% (much lower)
 }
 
 // Get available Game Master offers based on current phase
