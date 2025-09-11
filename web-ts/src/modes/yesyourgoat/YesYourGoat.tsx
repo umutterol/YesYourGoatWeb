@@ -5,6 +5,10 @@ import CardStack from '../../components/Card/CardStack'
 import JourneyTrack from '../../components/JourneyTrack/JourneyTrack'
 import { calculateChaosChance, getAvailableChaosEvents, drawChaosEvent } from '../../utils/chaosEvents'
 import type { ChaosEvent } from '../../utils/chaosEvents'
+import { getCurrentStoryBeat, getStoryBeatProgress, getStoryBeatColorTheme, getStoryBeatDescription } from '../../utils/storyBeats'
+import { getVisualProgression, getGuildHallDescription, getVisualEffectsCSS } from '../../utils/visualProgression'
+import { achievements, checkAchievement, getAchievementRarityColor, getAchievementCategoryIcon } from '../../utils/achievements'
+import type { Achievement } from '../../utils/achievements'
 
 type Meters = { funds: number; reputation: number; readiness: number }
 type Effects = Partial<Meters> & Record<string, number>
@@ -91,6 +95,11 @@ export default function YesYourGoat() {
   const [summaryMeters, setSummaryMeters] = useState<Meters | null>(null)
   const [summaryDay, setSummaryDay] = useState<number | null>(null)
   const [previousMeters, setPreviousMeters] = useState<Meters | null>(null)
+  const [unlockedAchievements, setUnlockedAchievements] = useState<Achievement[]>([])
+  const [maxSurvivedDays, setMaxSurvivedDays] = useState(0)
+  const [chaosEventsExperienced, setChaosEventsExperienced] = useState(0)
+  const [characterGrowth] = useState<Record<string, number>>({})
+  const [collapseHistory, setCollapseHistory] = useState<Array<{ collapseType: string; day: number }>>([])
   const [legacyPoints, setLegacyPoints] = useState<LegacyPoints>({
     martyr: 0,
     pragmatist: 0,
@@ -106,6 +115,11 @@ export default function YesYourGoat() {
   const nextMilestone = milestones.find(m => day <= m) ?? null
   const collapseCount = Number(localStorage.getItem('yyg_collapse_count') || '0')
   const [usedMilestoneIds, setUsedMilestoneIds] = useState<string[]>([])
+
+  // Story beat and visual progression
+  const currentStoryBeat = getCurrentStoryBeat(day)
+  const storyBeatProgress = getStoryBeatProgress(day)
+  const visualProgression = getVisualProgression(legacyPoints, currentStoryBeat, characterGrowth)
 
   // Load legacy points from localStorage
   useEffect(() => {
@@ -124,6 +138,35 @@ export default function YesYourGoat() {
   useEffect(() => {
     localStorage.setItem('yyg_legacy_points', JSON.stringify(legacyPoints))
   }, [legacyPoints])
+
+  // Check achievements
+  useEffect(() => {
+    const gameState = {
+      legacyPoints,
+      maxSurvivedDays: Math.max(maxSurvivedDays, day),
+      chaosEventsExperienced,
+      characterGrowth,
+      currentStoryBeat: currentStoryBeat.act,
+      collapseHistory
+    }
+
+    const newAchievements: Achievement[] = []
+    achievements.forEach(achievement => {
+      if (!achievement.unlocked && checkAchievement(achievement, gameState)) {
+        const unlockedAchievement = { ...achievement, unlocked: true, unlockedAt: Date.now() }
+        newAchievements.push(unlockedAchievement)
+      }
+    })
+
+    if (newAchievements.length > 0) {
+      setUnlockedAchievements(prev => [...prev, ...newAchievements])
+    }
+  }, [legacyPoints, day, chaosEventsExperienced, characterGrowth, currentStoryBeat.act, collapseHistory, maxSurvivedDays])
+
+  // Update max survived days
+  useEffect(() => {
+    setMaxSurvivedDays(prev => Math.max(prev, day))
+  }, [day])
   const [usedEventIds, setUsedEventIds] = useState<string[]>([])
   
   // Platform features available for future use
@@ -308,6 +351,9 @@ export default function YesYourGoat() {
       setMeters(nextMeters)
       setChaosEvent(null)
       
+      // Track chaos event
+      setChaosEventsExperienced(prev => prev + 1)
+      
       // Continue to next event
       const newDay = day + 1
       setDay(newDay)
@@ -355,6 +401,9 @@ export default function YesYourGoat() {
       const collapseType = determineCollapseType(meters, causeTag.replace('cause:', ''))
       const newLegacyPoints = updateLegacyPoints(legacyPoints, collapseType)
       setLegacyPoints(newLegacyPoints)
+      
+      // Update collapse history
+      setCollapseHistory(prev => [...prev, { collapseType, day }])
       
       // persistence: collapse_count and history
       const prev = Number(localStorage.getItem('yyg_collapse_count') || '0')
@@ -428,8 +477,43 @@ export default function YesYourGoat() {
           journeyCount={journeyCount}
         />
 
-        {/* Legacy Points Display */}
+        {/* Story Beat Display */}
         <div className="mt-6 max-w-4xl mx-auto">
+          <div className={`bg-gradient-to-r ${getStoryBeatColorTheme(currentStoryBeat)} border border-[var(--reigns-border)] rounded-lg p-4 ${getVisualEffectsCSS(visualProgression.effects)}`}>
+            <h3 className="text-lg font-bold text-white mb-2 text-center">
+              {currentStoryBeat.theme}
+            </h3>
+            <p className="text-sm text-white/80 text-center mb-3">
+              {getStoryBeatDescription(currentStoryBeat, day)}
+            </p>
+            <div className="w-full bg-white/20 rounded-full h-2">
+              <div 
+                className="bg-white rounded-full h-2 transition-all duration-500"
+                style={{ width: `${storyBeatProgress * 100}%` }}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Guild Hall Display */}
+        <div className="mt-4 max-w-4xl mx-auto">
+          <div className="bg-[var(--reigns-card)] border border-[var(--reigns-border)] rounded-lg p-4">
+            <h3 className="text-lg font-bold text-[var(--reigns-text)] mb-3 text-center">
+              Guild Hall
+            </h3>
+            <div className="text-center">
+              <div className={`text-2xl font-bold bg-gradient-to-r ${visualProgression.colorTheme} bg-clip-text text-transparent`}>
+                Level {visualProgression.guildHallLevel}
+              </div>
+              <div className="text-sm text-[var(--reigns-text-secondary)] mt-1">
+                {getGuildHallDescription(visualProgression.guildHallLevel)}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Legacy Points Display */}
+        <div className="mt-4 max-w-4xl mx-auto">
           <div className="bg-[var(--reigns-card)] border border-[var(--reigns-border)] rounded-lg p-4">
             <h3 className="text-lg font-bold text-[var(--reigns-text)] mb-3 text-center">
               Guild Legacy
@@ -463,6 +547,32 @@ export default function YesYourGoat() {
             </div>
           </div>
         </div>
+
+        {/* Achievements Display */}
+        {unlockedAchievements.length > 0 && (
+          <div className="mt-4 max-w-4xl mx-auto">
+            <div className="bg-[var(--reigns-card)] border border-[var(--reigns-border)] rounded-lg p-4">
+              <h3 className="text-lg font-bold text-[var(--reigns-text)] mb-3 text-center">
+                🏆 New Achievements Unlocked!
+              </h3>
+              <div className="space-y-2">
+                {unlockedAchievements.slice(-3).map((achievement) => (
+                  <div key={achievement.id} className="flex items-center gap-3 p-2 bg-[var(--reigns-bg)] rounded">
+                    <div className="text-2xl">{getAchievementCategoryIcon(achievement.category)}</div>
+                    <div className="flex-1">
+                      <div className={`font-bold ${getAchievementRarityColor(achievement.rarity)}`}>
+                        {achievement.name}
+                      </div>
+                      <div className="text-sm text-[var(--reigns-text-secondary)]">
+                        {achievement.description}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Main Game Area */}
         <div className="flex justify-center">
