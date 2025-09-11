@@ -5,6 +5,10 @@ import CardStack from '../../components/Card/CardStack'
 import JourneyTrack from '../../components/JourneyTrack/JourneyTrack'
 import { calculateChaosChance, getAvailableChaosEvents, drawChaosEvent } from '../../utils/chaosEvents'
 import type { ChaosEvent } from '../../utils/chaosEvents'
+import { calculateGlitchChance, getAvailableGlitchEvents, drawGlitchEvent } from '../../utils/glitchEvents'
+import type { GlitchEvent } from '../../utils/glitchEvents'
+import { calculateGameMasterChance, getAvailableGameMasterOffers, drawGameMasterOffer, applyGameMasterEffects } from '../../utils/gameMasters'
+import type { GameMasterOffer } from '../../utils/gameMasters'
 import { getCurrentStoryBeat, getStoryBeatProgress, getStoryBeatColorTheme, getStoryBeatDescription } from '../../utils/storyBeats'
 import { getVisualProgression, getGuildHallDescription, getVisualEffectsCSS } from '../../utils/visualProgression'
 import { achievements, checkAchievement, getAchievementRarityColor, getAchievementCategoryIcon } from '../../utils/achievements'
@@ -92,12 +96,16 @@ export default function YesYourGoat() {
   const [victoryText, setVictoryText] = useState('')
   const [showSummary, setShowSummary] = useState(false)
   const [chaosEvent, setChaosEvent] = useState<ChaosEvent | null>(null)
+  const [glitchEvent, setGlitchEvent] = useState<GlitchEvent | null>(null)
+  const [gameMasterOffer, setGameMasterOffer] = useState<GameMasterOffer | null>(null)
   const [summaryMeters, setSummaryMeters] = useState<Meters | null>(null)
   const [summaryDay, setSummaryDay] = useState<number | null>(null)
   const [previousMeters, setPreviousMeters] = useState<Meters | null>(null)
   const [unlockedAchievements, setUnlockedAchievements] = useState<Achievement[]>([])
   const [maxSurvivedDays, setMaxSurvivedDays] = useState(0)
   const [chaosEventsExperienced, setChaosEventsExperienced] = useState(0)
+  const [glitchEventsExperienced, setGlitchEventsExperienced] = useState(0)
+  const [gameMasterOffersReceived, setGameMasterOffersReceived] = useState(0)
   const [characterGrowth] = useState<Record<string, number>>({})
   const [collapseHistory, setCollapseHistory] = useState<Array<{ collapseType: string; day: number }>>([])
   const [legacyPoints, setLegacyPoints] = useState<LegacyPoints>({
@@ -145,6 +153,8 @@ export default function YesYourGoat() {
       legacyPoints,
       maxSurvivedDays: Math.max(maxSurvivedDays, day),
       chaosEventsExperienced,
+      glitchEventsExperienced,
+      gameMasterOffersReceived,
       characterGrowth,
       currentStoryBeat: currentStoryBeat.act,
       collapseHistory
@@ -161,7 +171,7 @@ export default function YesYourGoat() {
     if (newAchievements.length > 0) {
       setUnlockedAchievements(prev => [...prev, ...newAchievements])
     }
-  }, [legacyPoints, day, chaosEventsExperienced, characterGrowth, currentStoryBeat.act, collapseHistory, maxSurvivedDays])
+  }, [legacyPoints, day, chaosEventsExperienced, glitchEventsExperienced, gameMasterOffersReceived, characterGrowth, currentStoryBeat.act, collapseHistory, maxSurvivedDays])
 
   // Update max survived days
   useEffect(() => {
@@ -196,7 +206,29 @@ export default function YesYourGoat() {
   function drawNext(): EventCard | null {
     if (!events.length) return null
     
-    // Check for chaos events first
+    // Check for Game Master offers first (highest priority)
+    const gameMasterChance = calculateGameMasterChance(meters, legacyPoints, day)
+    if (Math.random() < gameMasterChance) {
+      const availableOffers = getAvailableGameMasterOffers(legacyPoints)
+      const offer = drawGameMasterOffer(availableOffers)
+      if (offer) {
+        setGameMasterOffer(offer)
+        return null // Will be handled by game master system
+      }
+    }
+    
+    // Check for glitch events second
+    const glitchChance = calculateGlitchChance(meters, legacyPoints, day)
+    if (Math.random() < glitchChance) {
+      const availableGlitchEvents = getAvailableGlitchEvents(meters, legacyPoints, day)
+      const glitchEvent = drawGlitchEvent(availableGlitchEvents)
+      if (glitchEvent) {
+        setGlitchEvent(glitchEvent)
+        return null // Will be handled by glitch event system
+      }
+    }
+    
+    // Check for chaos events third
     const chaosChance = calculateChaosChance(meters, legacyPoints, day)
     if (Math.random() < chaosChance) {
       const availableChaosEvents = getAvailableChaosEvents(meters, legacyPoints, day)
@@ -324,7 +356,88 @@ export default function YesYourGoat() {
   function SawRivalMid() { return sawRival }
 
   function decide(side: 'left' | 'right') {
-    // Handle chaos events
+    // Handle Game Master offers first
+    if (gameMasterOffer) {
+      const choice = side === 'left' ? gameMasterOffer.left : gameMasterOffer.right
+      const preMeters: Meters = { ...meters }
+      
+      // Apply both visible and hidden effects
+      const nextMeters = applyGameMasterEffects(meters, side, gameMasterOffer)
+      
+      // Log the game master offer
+      setDebugLog(prev => [...prev, {
+        id: gameMasterOffer.id,
+        title: gameMasterOffer.title,
+        choice: choice.label,
+        pre: preMeters,
+        post: nextMeters,
+        effects: choice.visibleEffects || {}
+      }])
+      
+      setPreviousMeters(meters)
+      setMeters(nextMeters)
+      setGameMasterOffer(null)
+      
+      // Track game master offer
+      setGameMasterOffersReceived(prev => prev + 1)
+      
+      // Continue to next event
+      const newDay = day + 1
+      setDay(newDay)
+      const nxt = drawNext()
+      if (nxt) setUsedEventIds(prev => [...prev, nxt.id])
+      setCurrent(nxt)
+      
+      // Set next card for preview
+      const nextNxt = drawNext()
+      setNextCard(nextNxt)
+      return
+    }
+    
+    // Handle glitch events second
+    if (glitchEvent) {
+      const choice = side === 'left' ? glitchEvent.left : glitchEvent.right
+      const preMeters: Meters = { ...meters }
+      const nextMeters: Meters = { ...meters }
+      
+      for (const [k, v] of Object.entries(choice.effects || {})) {
+        if (k in nextMeters && typeof v === 'number') {
+          // @ts-expect-error key narrowing
+          nextMeters[k] = clamp((nextMeters as any)[k] + v)
+        }
+      }
+      
+      // Log the glitch event
+      setDebugLog(prev => [...prev, {
+        id: glitchEvent.id,
+        title: glitchEvent.title,
+        choice: choice.label,
+        pre: preMeters,
+        post: nextMeters,
+        effects: choice.effects || {}
+      }])
+      
+      setPreviousMeters(meters)
+      setMeters(nextMeters)
+      setGlitchEvent(null)
+      
+      // Track glitch event
+      setGlitchEventsExperienced(prev => prev + 1)
+      
+      // Continue to next event
+      const newDay = day + 1
+      setDay(newDay)
+      const nxt = drawNext()
+      if (nxt) setUsedEventIds(prev => [...prev, nxt.id])
+      setCurrent(nxt)
+      
+      // Set next card for preview
+      const nextNxt = drawNext()
+      setNextCard(nextNxt)
+      return
+    }
+    
+    // Handle chaos events third
     if (chaosEvent) {
       const choice = side === 'left' ? chaosEvent.left : chaosEvent.right
       const preMeters: Meters = { ...meters }
@@ -576,7 +689,83 @@ export default function YesYourGoat() {
 
         {/* Main Game Area */}
         <div className="flex justify-center">
-          {chaosEvent ? (
+          {gameMasterOffer ? (
+            <div className="reigns-card card-desktop p-6 max-w-2xl mx-auto">
+              <div className="text-center mb-6">
+                <div className="text-3xl mb-2">👤</div>
+                <div className="text-sm text-purple-400 font-bold">MYSTERIOUS OFFER</div>
+              </div>
+              
+              {/* Portrait and Speaker */}
+              <div className="flex justify-center mb-6">
+                <div className="w-24 h-24 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                  {gameMasterOffer.speaker.charAt(0)}
+                </div>
+              </div>
+              
+              <h2 className="text-2xl font-bold text-center mb-4 text-[var(--reigns-text)]">
+                {gameMasterOffer.title}
+              </h2>
+              
+              <p className="text-lg text-center mb-8 text-[var(--reigns-text-secondary)] leading-relaxed">
+                {gameMasterOffer.body}
+              </p>
+              
+              {/* Choices */}
+              <div className="space-y-4">
+                <button
+                  onClick={() => decide('left')}
+                  className="w-full p-4 bg-red-500 hover:bg-red-600 text-white font-bold rounded-lg transition-colors"
+                >
+                  {gameMasterOffer.left.label}
+                </button>
+                <button
+                  onClick={() => decide('right')}
+                  className="w-full p-4 bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg transition-colors"
+                >
+                  {gameMasterOffer.right.label}
+                </button>
+              </div>
+            </div>
+          ) : glitchEvent ? (
+            <div className="reigns-card card-desktop p-6 max-w-2xl mx-auto">
+              <div className="text-center mb-6">
+                <div className="text-3xl mb-2">⚠️</div>
+                <div className="text-sm text-orange-400 font-bold">SYSTEM GLITCH</div>
+              </div>
+              
+              {/* Portrait and Speaker */}
+              <div className="flex justify-center mb-6">
+                <div className="w-24 h-24 bg-gradient-to-br from-orange-400 to-red-400 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                  {glitchEvent.speaker.charAt(0)}
+                </div>
+              </div>
+              
+              <h2 className="text-2xl font-bold text-center mb-4 text-[var(--reigns-text)]">
+                {glitchEvent.title}
+              </h2>
+              
+              <p className="text-lg text-center mb-8 text-[var(--reigns-text-secondary)] leading-relaxed">
+                {glitchEvent.body}
+              </p>
+              
+              {/* Choices */}
+              <div className="space-y-4">
+                <button
+                  onClick={() => decide('left')}
+                  className="w-full p-4 bg-red-500 hover:bg-red-600 text-white font-bold rounded-lg transition-colors"
+                >
+                  {glitchEvent.left.label}
+                </button>
+                <button
+                  onClick={() => decide('right')}
+                  className="w-full p-4 bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg transition-colors"
+                >
+                  {glitchEvent.right.label}
+                </button>
+              </div>
+            </div>
+          ) : chaosEvent ? (
             <div className="reigns-card card-desktop p-6 max-w-2xl mx-auto">
               <div className="text-center mb-6">
                 <div className="text-3xl mb-2">🌟</div>
