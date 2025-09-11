@@ -439,19 +439,19 @@
     "title": "Rival's Boast",
     "speaker": "Rival",
     "portrait": "/resources/portraits/dreadlord.png",
-    "body": "lol we're ahead. You wanna speedrun your wipe too?",
+    "body": "We're already ahead of your pathetic guild. Planning to fail as spectacularly as last time?",
     "tags": [
       "meta:rival"
     ],
     "left": {
-      "label": "Fight back.",
+      "label": "That's not true.",
       "effects": {
         "reputation": 1,
         "readiness": -1
       }
     },
     "right": {
-      "label": "Ignore the troll.",
+      "label": "Focus on our goals.",
       "effects": {
         "readiness": 1
       }
@@ -805,44 +805,44 @@
     }
   },
   {
-    "id": "rogue_stream_01",
-    "title": "Stream the Run",
+    "id": "rogue_publicity_01",
+    "title": "Guild Publicity",
     "speaker": "Rogue",
     "portrait": "/resources/portraits/rogue.png",
-    "body": "I could stream tonight's push. Might bring in some viewers and gold. Worth it?",
+    "body": "I could spread word about tonight's expedition. Might attract new members and coin. Worth it?",
     "tags": [
       "archetype:rogue"
     ],
     "left": {
-      "label": "Go for it.",
+      "label": "Spread the word.",
       "effects": {
         "reputation": 1
       }
     },
     "right": {
-      "label": "Focus on raiding.",
+      "label": "Keep it quiet.",
       "effects": {
         "readiness": 1
       }
     }
   },
   {
-    "id": "meta_pr_scandal_01",
-    "title": "PR Scandal",
-    "speaker": "Streamer",
-    "portrait": "/resources/portraits/dreadlord.png",
-    "body": "Clip's viral. We apologize or double down?",
+    "id": "meta_reputation_scandal_01",
+    "title": "Reputation Crisis",
+    "speaker": "Council Moderator",
+    "portrait": "/resources/portraits/paladin.png",
+    "body": "Word of your recent mishap has spread. Should we apologize publicly or stand by our actions?",
     "tags": [
       "meta:pr"
     ],
     "left": {
-      "label": "Apologize.",
+      "label": "Apologize publicly.",
       "effects": {
         "reputation": -1
       }
     },
     "right": {
-      "label": "Double down.",
+      "label": "Stand our ground.",
       "effects": {
         "reputation": -1
       }
@@ -872,22 +872,22 @@
     }
   },
   {
-    "id": "streamer_backlash_01",
-    "title": "Streamer Backlash",
-    "speaker": "Streamer",
+    "id": "guild_criticism_01",
+    "title": "Guild Criticism",
+    "speaker": "Rival",
     "portrait": "/resources/portraits/dreadlord.png",
-    "body": "Mid-tier streamer flaming our comp. Respond?",
+    "body": "Another guild leader is openly criticizing our strategy. Should we respond?",
     "tags": [
       "meta:pr"
     ],
     "left": {
-      "label": "Respond calmly.",
+      "label": "Defend ourselves.",
       "effects": {
         "reputation": -1
       }
     },
     "right": {
-      "label": "Start a feud.",
+      "label": "Start a rivalry.",
       "effects": {
         "reputation": -1
       }
@@ -1958,23 +1958,23 @@
     }
   },
   {
-    "id": "meta_stream_01",
-    "title": "Streaming Pressure",
-    "speaker": "Streamer",
-    "portrait": "/resources/portraits/dreadlord.png",
-    "body": "Chat wants more streams. Grind or go live?",
+    "id": "meta_publicity_01",
+    "title": "Publicity Pressure",
+    "speaker": "Council Moderator",
+    "portrait": "/resources/portraits/paladin.png",
+    "body": "The public wants more guild announcements. Focus on fame or training?",
     "tags": [
       "meta:pr"
     ],
     "left": {
-      "label": "Increase streams.",
+      "label": "Increase announcements.",
       "effects": {
         "reputation": 1,
         "readiness": -1
       }
     },
     "right": {
-      "label": "Focus on raiding.",
+      "label": "Focus on training.",
       "effects": {
         "readiness": 1,
         "reputation": -1
@@ -2006,16 +2006,16 @@
     }
   },
   {
-    "id": "meta_influencer_01",
-    "title": "Influencer Backlash",
-    "speaker": "Streamer",
+    "id": "meta_leader_backlash_01",
+    "title": "Leader Backlash",
+    "speaker": "Rival",
     "portrait": "/resources/portraits/dreadlord.png",
-    "body": "Popular streamer dragging us. Clap back?",
+    "body": "A popular guild leader is openly mocking us. Should we respond?",
     "tags": [
       "meta:pr"
     ],
     "left": {
-      "label": "Respond publicly.",
+      "label": "Defend our honor.",
       "effects": {
         "reputation": -1,
         "funds": -1
@@ -2034,7 +2034,7 @@
     "title": "Guild Drama",
     "speaker": "Officer",
     "portrait": "/resources/portraits/warden.png",
-    "body": "Drama spilled to TL. Public post or handle inside?",
+    "body": "Internal drama has become public knowledge. Address it openly or handle privately?",
     "tags": [
       "meta:pr"
     ],
