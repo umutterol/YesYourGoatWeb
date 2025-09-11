@@ -3,14 +3,77 @@ import ResourceBar from '../../components/ResourceBar/ResourceBar'
 import ResourceAnimations from '../../components/ResourceBar/ResourceAnimations'
 import CardStack from '../../components/Card/CardStack'
 import JourneyTrack from '../../components/JourneyTrack/JourneyTrack'
+import { calculateChaosChance, getAvailableChaosEvents, drawChaosEvent } from '../../utils/chaosEvents'
+import type { ChaosEvent } from '../../utils/chaosEvents'
 
 type Meters = { funds: number; reputation: number; readiness: number }
 type Effects = Partial<Meters> & Record<string, number>
 type Choice = { label: string; effects: Effects; nextStep?: string }
 type EventCard = { id: string; title: string; body: string; tags?: string[]; speaker?: string; portrait?: string; weights?: { base?: number }; left: Choice; right: Choice }
 
+// Legacy Points System
+type LegacyPoints = {
+  martyr: number;      // High rep, low funds collapses
+  pragmatist: number;  // Balanced collapses  
+  dreamer: number;     // High readiness, low rep collapses
+  survivor: number;    // Deck exhaustion collapses
+  legend: number;      // High all meters collapses
+}
+
+type CollapseType = 'martyr' | 'pragmatist' | 'dreamer' | 'survivor' | 'legend' | 'unknown'
+
 const CLAMP_MIN = 0, CLAMP_MAX = 10
 function clamp(v: number) { return Math.max(CLAMP_MIN, Math.min(CLAMP_MAX, v)) }
+
+// Legacy Points System Functions
+function determineCollapseType(meters: Meters, cause: string): CollapseType {
+  const { funds, reputation, readiness } = meters
+  
+  // Check for deck exhaustion
+  if (cause === 'exhausted') return 'survivor'
+  
+  // Check for high all meters (legend)
+  if (funds >= 8 && reputation >= 8 && readiness >= 8) return 'legend'
+  
+  // Check for martyr (high rep, low funds)
+  if (reputation >= 7 && funds <= 3) return 'martyr'
+  
+  // Check for dreamer (high readiness, low rep)
+  if (readiness >= 7 && reputation <= 3) return 'dreamer'
+  
+  // Check for pragmatist (balanced)
+  const balance = Math.abs(funds - reputation) + Math.abs(funds - readiness) + Math.abs(reputation - readiness)
+  if (balance <= 4) return 'pragmatist'
+  
+  return 'unknown'
+}
+
+function updateLegacyPoints(legacyPoints: LegacyPoints, collapseType: CollapseType): LegacyPoints {
+  const newPoints = { ...legacyPoints }
+  
+  switch (collapseType) {
+    case 'martyr':
+      newPoints.martyr += 1
+      break
+    case 'pragmatist':
+      newPoints.pragmatist += 1
+      break
+    case 'dreamer':
+      newPoints.dreamer += 1
+      break
+    case 'survivor':
+      newPoints.survivor += 1
+      break
+    case 'legend':
+      newPoints.legend += 1
+      break
+    case 'unknown':
+      // No points for unknown collapse types
+      break
+  }
+  
+  return newPoints
+}
 
 const EVENTS_URL = '/resources/events/yesyourgoat.events.json'
 
@@ -24,9 +87,17 @@ export default function YesYourGoat() {
   const [sawRival, setSawRival] = useState(false)
   const [victoryText, setVictoryText] = useState('')
   const [showSummary, setShowSummary] = useState(false)
+  const [chaosEvent, setChaosEvent] = useState<ChaosEvent | null>(null)
   const [summaryMeters, setSummaryMeters] = useState<Meters | null>(null)
   const [summaryDay, setSummaryDay] = useState<number | null>(null)
   const [previousMeters, setPreviousMeters] = useState<Meters | null>(null)
+  const [legacyPoints, setLegacyPoints] = useState<LegacyPoints>({
+    martyr: 0,
+    pragmatist: 0,
+    dreamer: 0,
+    survivor: 0,
+    legend: 0
+  })
   const [debugLog, setDebugLog] = useState<{
     id: string; title: string; choice: string; pre: Meters; post: Meters; effects: Effects
   }[]>([])
@@ -35,6 +106,24 @@ export default function YesYourGoat() {
   const nextMilestone = milestones.find(m => day <= m) ?? null
   const collapseCount = Number(localStorage.getItem('yyg_collapse_count') || '0')
   const [usedMilestoneIds, setUsedMilestoneIds] = useState<string[]>([])
+
+  // Load legacy points from localStorage
+  useEffect(() => {
+    const savedLegacy = localStorage.getItem('yyg_legacy_points')
+    if (savedLegacy) {
+      try {
+        const parsed = JSON.parse(savedLegacy)
+        setLegacyPoints(parsed)
+      } catch (e) {
+        console.warn('Failed to parse legacy points:', e)
+      }
+    }
+  }, [])
+
+  // Save legacy points to localStorage
+  useEffect(() => {
+    localStorage.setItem('yyg_legacy_points', JSON.stringify(legacyPoints))
+  }, [legacyPoints])
   const [usedEventIds, setUsedEventIds] = useState<string[]>([])
   
   // Platform features available for future use
@@ -63,6 +152,18 @@ export default function YesYourGoat() {
 
   function drawNext(): EventCard | null {
     if (!events.length) return null
+    
+    // Check for chaos events first
+    const chaosChance = calculateChaosChance(meters, legacyPoints, day)
+    if (Math.random() < chaosChance) {
+      const availableChaosEvents = getAvailableChaosEvents(meters, legacyPoints, day)
+      const chaosEvent = drawChaosEvent(availableChaosEvents)
+      if (chaosEvent) {
+        setChaosEvent(chaosEvent)
+        return null // Will be handled by chaos event system
+      }
+    }
+    
     // Collapse override handled at decide time
     // Inject milestone when threshold hits
     if (nextMilestone && day === nextMilestone) {
@@ -180,6 +281,46 @@ export default function YesYourGoat() {
   function SawRivalMid() { return sawRival }
 
   function decide(side: 'left' | 'right') {
+    // Handle chaos events
+    if (chaosEvent) {
+      const choice = side === 'left' ? chaosEvent.left : chaosEvent.right
+      const preMeters: Meters = { ...meters }
+      const nextMeters: Meters = { ...meters }
+      
+      for (const [k, v] of Object.entries(choice.effects || {})) {
+        if (k in nextMeters && typeof v === 'number') {
+          // @ts-expect-error key narrowing
+          nextMeters[k] = clamp((nextMeters as any)[k] + v)
+        }
+      }
+      
+      // Log the chaos event
+      setDebugLog(prev => [...prev, {
+        id: chaosEvent.id,
+        title: chaosEvent.title,
+        choice: choice.label,
+        pre: preMeters,
+        post: nextMeters,
+        effects: choice.effects || {}
+      }])
+      
+      setPreviousMeters(meters)
+      setMeters(nextMeters)
+      setChaosEvent(null)
+      
+      // Continue to next event
+      const newDay = day + 1
+      setDay(newDay)
+      const nxt = drawNext()
+      if (nxt) setUsedEventIds(prev => [...prev, nxt.id])
+      setCurrent(nxt)
+      
+      // Set next card for preview
+      const nextNxt = drawNext()
+      setNextCard(nextNxt)
+      return
+    }
+    
     if (!current) return
     const choice = side === 'left' ? current.left : current.right
     const preMeters: Meters = { ...meters }
@@ -210,12 +351,23 @@ export default function YesYourGoat() {
       setVictoryText(collapse)
       setSummaryMeters(nextMeters)
       setSummaryDay(day)
+      // Determine collapse type and update legacy points
+      const collapseType = determineCollapseType(meters, causeTag.replace('cause:', ''))
+      const newLegacyPoints = updateLegacyPoints(legacyPoints, collapseType)
+      setLegacyPoints(newLegacyPoints)
+      
       // persistence: collapse_count and history
       const prev = Number(localStorage.getItem('yyg_collapse_count') || '0')
       localStorage.setItem('yyg_collapse_count', String(prev + 1))
       const histRaw = localStorage.getItem('yyg_history')
       const hist = Array.isArray(JSON.parse(histRaw || '[]')) ? JSON.parse(histRaw || '[]') : []
-      hist.push({ day, cause: causeTag.replace('cause:',''), meters: nextMeters })
+      hist.push({ 
+        day, 
+        cause: causeTag.replace('cause:',''), 
+        meters: nextMeters,
+        collapseType,
+        legacyPoints: newLegacyPoints
+      })
       localStorage.setItem('yyg_history', JSON.stringify(hist))
       setShowSummary(true)
       return
@@ -276,9 +428,85 @@ export default function YesYourGoat() {
           journeyCount={journeyCount}
         />
 
+        {/* Legacy Points Display */}
+        <div className="mt-6 max-w-4xl mx-auto">
+          <div className="bg-[var(--reigns-card)] border border-[var(--reigns-border)] rounded-lg p-4">
+            <h3 className="text-lg font-bold text-[var(--reigns-text)] mb-3 text-center">
+              Guild Legacy
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-red-400">{legacyPoints.martyr}</div>
+                <div className="text-sm text-[var(--reigns-text-secondary)]">Martyr</div>
+                <div className="text-xs text-[var(--reigns-text-secondary)]">High Rep, Low Funds</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-blue-400">{legacyPoints.pragmatist}</div>
+                <div className="text-sm text-[var(--reigns-text-secondary)]">Pragmatist</div>
+                <div className="text-xs text-[var(--reigns-text-secondary)]">Balanced Collapse</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-green-400">{legacyPoints.dreamer}</div>
+                <div className="text-sm text-[var(--reigns-text-secondary)]">Dreamer</div>
+                <div className="text-xs text-[var(--reigns-text-secondary)]">High Readiness, Low Rep</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-yellow-400">{legacyPoints.survivor}</div>
+                <div className="text-sm text-[var(--reigns-text-secondary)]">Survivor</div>
+                <div className="text-xs text-[var(--reigns-text-secondary)]">Deck Exhaustion</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-purple-400">{legacyPoints.legend}</div>
+                <div className="text-sm text-[var(--reigns-text-secondary)]">Legend</div>
+                <div className="text-xs text-[var(--reigns-text-secondary)]">High All Meters</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Main Game Area */}
         <div className="flex justify-center">
-          {current && (
+          {chaosEvent ? (
+            <div className="reigns-card card-desktop p-6 max-w-2xl mx-auto">
+              <div className="text-center mb-6">
+                <div className="text-3xl mb-2">🌟</div>
+                <div className="text-sm text-yellow-400 font-bold">CHAOS EVENT</div>
+              </div>
+              
+              {/* Portrait and Speaker */}
+              <div className="flex justify-center mb-6">
+                <div className="w-24 h-24 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                  {chaosEvent.speaker.charAt(0)}
+                </div>
+              </div>
+
+              {/* Event Title */}
+              <div className="text-2xl font-bold text-center mb-6 text-[var(--reigns-text)]">
+                {chaosEvent.title}
+              </div>
+
+              {/* Event Body */}
+              <div className="text-lg leading-relaxed mb-8 text-[var(--reigns-text-secondary)] flex-1 px-2">
+                {chaosEvent.body}
+              </div>
+
+              {/* Choice Buttons */}
+              <div className="flex gap-4">
+                <button 
+                  onClick={() => decide('left')}
+                  className="reigns-button flex-1"
+                >
+                  {chaosEvent.left?.label || 'Left'}
+                </button>
+                <button 
+                  onClick={() => decide('right')}
+                  className="reigns-button flex-1"
+                >
+                  {chaosEvent.right?.label || 'Right'}
+                </button>
+              </div>
+            </div>
+          ) : current && (
             <CardStack 
               current={current}
               next={nextCard}
