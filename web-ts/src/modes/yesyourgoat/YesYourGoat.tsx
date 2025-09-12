@@ -873,6 +873,41 @@ export default function YesYourGoat() {
                 </button>
               </div>
             </div>
+          ) : narrativeEvent ? (
+            <div className="max-w-md mx-auto">
+              <div className="bg-[var(--reigns-card)] rounded-2xl p-6 shadow-lg border border-[var(--reigns-border)]">
+                <div className="flex items-center mb-4">
+                  <img 
+                    src={narrativeEvent.portrait} 
+                    alt={narrativeEvent.speaker}
+                    className="w-12 h-12 rounded-full mr-4"
+                    onError={(e) => {
+                      e.currentTarget.src = '/resources/portraits/paladin.png'
+                    }}
+                  />
+                  <div>
+                    <h3 className="text-lg font-semibold text-[var(--reigns-text)]">{narrativeEvent.speaker}</h3>
+                    <p className="text-sm text-[var(--reigns-text-secondary)]">Narrative Event</p>
+                  </div>
+                </div>
+                <h2 className="text-xl font-bold mb-4 text-[var(--reigns-text)]">{narrativeEvent.title}</h2>
+                <p className="text-[var(--reigns-text-secondary)] mb-6 leading-relaxed">{narrativeEvent.body}</p>
+                <div className="flex gap-4">
+                  <button
+                    onClick={() => decide('left')}
+                    className="flex-1 bg-[var(--reigns-accent)] text-white py-3 px-6 rounded-xl font-semibold hover:bg-[var(--reigns-accent-hover)] transition-colors"
+                  >
+                    {narrativeEvent.left?.label || 'Left'}
+                  </button>
+                  <button
+                    onClick={() => decide('right')}
+                    className="flex-1 bg-[var(--reigns-accent)] text-white py-3 px-6 rounded-xl font-semibold hover:bg-[var(--reigns-accent-hover)] transition-colors"
+                  >
+                    {narrativeEvent.right?.label || 'Right'}
+                  </button>
+                </div>
+              </div>
+            </div>
           ) : current && (
             <CardStack 
               current={current}
