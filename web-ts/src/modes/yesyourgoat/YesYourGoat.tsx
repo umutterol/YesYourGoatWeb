@@ -343,18 +343,18 @@ export default function YesYourGoat() {
       // Start with base weight from event data
       let w = ev.weights?.base || 1
 
-      // AGGRESSIVE anti-repetition: completely block events that appeared in last 5 events
-      const recentEvents = usedEventIds.slice(-5)
+      // Moderate anti-repetition: reduce weight for events that appeared in last 3 events
+      const recentEvents = usedEventIds.slice(-3)
       if (recentEvents.includes(ev.id)) {
-        console.log('Blocking recent event:', ev.id, 'recent:', recentEvents)
-        return 0 // Completely block recently used events
+        console.log('Reducing weight for recent event:', ev.id, 'recent:', recentEvents)
+        return 0.1 // Heavily reduce weight instead of blocking completely
       }
 
-      // Strong penalty for similar event types (same prefix) in recent history
+      // Moderate penalty for similar event types (same prefix) in recent history
       const eventPrefix = ev.id.split('_')[0]
       const similarRecentCount = recentEvents.filter(id => id.startsWith(eventPrefix)).length
       if (similarRecentCount > 0) {
-        w = Math.max(0.01, w * (0.1 ** similarRecentCount)) // Much stronger penalty
+        w = Math.max(0.1, w * (0.5 ** similarRecentCount)) // Moderate penalty
       }
 
       // Additional council cooldown at weight level
@@ -394,12 +394,30 @@ export default function YesYourGoat() {
       return w
     }
     if (!pool.length) {
-      console.log('No events available in pool', { 
+      console.log('No events available in pool, falling back to any unused event', { 
         totalEvents: events.length, 
         usedEventIds: usedEventIds.length,
         collapseCount,
         unlocked: Array.from(unlocked)
       })
+      
+      // Fallback: allow any non-intro/outro/collapse event that hasn't been used recently
+      const fallbackPool = events.filter(e => {
+        const tags = e.tags || []
+        if (tags.includes('run:intro') || tags.includes('run:outro') || tags.includes('meta:collapse')) return false
+        if (tags.includes('disabled')) return false
+        if (tags.some(t => t.startsWith('race:'))) return false
+        // Only exclude events used in the very last 2 events
+        const veryRecent = usedEventIds.slice(-2)
+        return !veryRecent.includes(e.id)
+      })
+      
+      if (fallbackPool.length > 0) {
+        console.log('Using fallback pool with', fallbackPool.length, 'events')
+        const randomIndex = Math.floor(Math.random() * fallbackPool.length)
+        return fallbackPool[randomIndex]
+      }
+      
       return null
     }
     const total = pool.reduce((a,e)=>a+bias(e),0)
