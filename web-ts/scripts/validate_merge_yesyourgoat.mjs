@@ -2,7 +2,14 @@ import { promises as fs } from 'fs'
 import path from 'path'
 
 const repoRoot = path.resolve(process.cwd())
-const packsDir = path.join(repoRoot, 'resources', 'events', 'packs', 'yesyourgoat')
+// Prefer top-level packs if present; fallback to local web-ts packs
+const topLevelPacks = path.join(repoRoot, '..', 'resources', 'events', 'packs', 'yesyourgoat')
+const localPacks = path.join(repoRoot, 'resources', 'events', 'packs', 'yesyourgoat')
+let packsDir = localPacks
+try {
+  const st = await fs.stat(topLevelPacks)
+  if (st.isDirectory()) packsDir = topLevelPacks
+} catch {}
 // Output to the web runtime path
 const outFile = path.join(repoRoot, 'web-ts', 'public', 'resources', 'events', 'yesyourgoat.events.json')
 
@@ -90,4 +97,3 @@ async function run() {
 }
 
 run().catch(e => fail(e?.message || String(e)))
-
