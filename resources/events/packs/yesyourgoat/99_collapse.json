@@ -1,0 +1,5 @@
+[
+  {"id": "collapse_funds_01", "title": "Bankrupt Guild", "body": "Treasury’s empty. Vendors won’t deal with us.", "tags": ["meta:collapse", "cause:funds"], "left": {"label": "Start over", "effects": {}}, "right": {"label": "Start over", "effects": {}}},
+  {"id": "collapse_reputation_01", "title": "Forgotten Name", "body": "No one picks up our calls anymore.", "tags": ["meta:collapse", "cause:reputation"], "left": {"label": "Start over", "effects": {}}, "right": {"label": "Start over", "effects": {}}},
+  {"id": "collapse_readiness_01", "title": "Unready Roster", "body": "We can’t field a team tonight.", "tags": ["meta:collapse", "cause:readiness"], "left": {"label": "Start over", "effects": {}}, "right": {"label": "Start over", "effects": {}}}
+]

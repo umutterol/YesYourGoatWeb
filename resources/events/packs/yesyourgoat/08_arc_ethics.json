@@ -1,0 +1,5 @@
+[
+  {"id": "arc_ethics_hook_01", "title": "Bank Error", "body": "An extra item appeared in the bank. Report or redistribute?", "tags": ["meta_economy","require:intro:treasurer","phase:2"], "left": {"label": "Report it", "effects": {"reputation": 1}}, "right": {"label": "Quiet split", "effects": {"funds": 1, "reputation": -1}}},
+  {"id": "arc_ethics_audit_02", "title": "Small Audit", "body": "We can reconcile the ledger this week. Do it?", "tags": ["meta_economy","require:seen:event:arc_ethics_hook_01","phase:2"], "left": {"label": "Do it", "effects": {"funds": -1, "reputation": 1}}, "right": {"label": "Skip it", "effects": {"reputation": -1}}},
+  {"id": "arc_ethics_trust_03", "title": "Trust Check", "body": "Members ask about transparency. Post a note?", "tags": ["community_pr","require:seen:event:arc_ethics_audit_02","phase:2"], "left": {"label": "Post note", "effects": {"funds": -1, "reputation": 1}}, "right": {"label": "No need", "effects": {"reputation": -1}}}
+]

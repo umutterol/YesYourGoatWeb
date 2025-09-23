@@ -3,7 +3,8 @@ import path from 'path'
 
 const repoRoot = path.resolve(process.cwd())
 const packsDir = path.join(repoRoot, 'resources', 'events', 'packs', 'yesyourgoat')
-const outFile = path.join(repoRoot, 'public', 'resources', 'events', 'yesyourgoat.events.json')
+// Output to the web runtime path
+const outFile = path.join(repoRoot, 'web-ts', 'public', 'resources', 'events', 'yesyourgoat.events.json')
 
 function fail(msg) {
   console.error(`[YYG Validate] ${msg}`)
@@ -89,5 +90,4 @@ async function run() {
 }
 
 run().catch(e => fail(e?.message || String(e)))
-
 

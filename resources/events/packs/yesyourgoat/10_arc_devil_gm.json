@@ -1,0 +1,5 @@
+[
+  {"id": "arc_devil_hook_01", "title": "A Helpful Offer", "body": "I can make next week easier. There’s a price.", "tags": ["meta:gamemaster","character:gamemaster","require:run>=7","phase:4"], "left": {"label": "No shortcuts", "effects": {"reputation": 1}}, "right": {"label": "What price?", "effects": {"readiness": 1, "reputation": -1}}},
+  {"id": "arc_devil_marker_02", "title": "Marker", "body": "A small mark on the ledger. Pay now or later?", "tags": ["meta:gamemaster","character:gamemaster","require:choice:arc_devil_hook_01:right","phase:4"], "left": {"label": "Pay now", "effects": {"funds": -2, "reputation": 1}}, "right": {"label": "Later", "effects": {"reputation": -1}}},
+  {"id": "arc_devil_memory_03", "title": "You’ve Done This", "body": "You’ve done this before. You will again.", "tags": ["meta:gamemaster","character:gamemaster","require:run>=9","phase:5"], "left": {"label": "Continue", "effects": {"reputation": -1}}, "right": {"label": "Continue", "effects": {"reputation": -1}}}
+]

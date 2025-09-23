@@ -187,15 +187,104 @@ export default function YesYourGoat() {
     setMaxSurvivedDays(prev => Math.max(prev, day))
   }, [day])
   const [usedEventIds, setUsedEventIds] = useState<string[]>([])
+  // ---- Intro/tutorial gating & simple unlocks (persist across runs) ----
+  type SeenState = { intro: Record<string, true>; tutorial: Record<string, true>; event: Record<string, true> }
+  type MetaSeen = { council?: boolean; rival?: boolean; logs?: boolean }
+  type ChainProgress = Record<string, number>
+  const SEEN_KEY = 'yyg_seen'
+  const CHOICE_KEY = 'yyg_choice'
+  const META_KEY = 'yyg_meta_seen'
+  const CHAIN_KEY = 'yyg_chain_progress'
+
+  const [seenState, setSeenState] = useState<SeenState>({ intro: {}, tutorial: {}, event: {} })
+  const [choiceState, setChoiceState] = useState<Record<string, 'left' | 'right'>>({})
+  const [metaSeen, setMetaSeen] = useState<MetaSeen>({})
+  const [chainProgress, setChainProgress] = useState<ChainProgress>({})
+
+  function loadPersisted() {
+    try { const s = JSON.parse(localStorage.getItem(SEEN_KEY) || '{}'); if (s) setSeenState({ intro: s.intro || {}, tutorial: s.tutorial || {}, event: s.event || {} }) } catch {}
+    try { const c = JSON.parse(localStorage.getItem(CHOICE_KEY) || '{}'); if (c) setChoiceState(c) } catch {}
+    try { const m = JSON.parse(localStorage.getItem(META_KEY) || '{}'); if (m) setMetaSeen(m) } catch {}
+    try { const cp = JSON.parse(localStorage.getItem(CHAIN_KEY) || '{}'); if (cp) setChainProgress(cp) } catch {}
+  }
+
+  function persistSeen(next: SeenState) { setSeenState(next); localStorage.setItem(SEEN_KEY, JSON.stringify(next)) }
+  function persistChoice(next: Record<string, 'left' | 'right'>) { setChoiceState(next); localStorage.setItem(CHOICE_KEY, JSON.stringify(next)) }
+  function persistMeta(next: MetaSeen) { setMetaSeen(next); localStorage.setItem(META_KEY, JSON.stringify(next)) }
+  function persistChain(next: ChainProgress) { setChainProgress(next); localStorage.setItem(CHAIN_KEY, JSON.stringify(next)) }
+
+  function tagsOf(e?: EventCard): string[] { return e?.tags || [] }
+  function getRoleTag(e: EventCard): string | null { const t = (e.tags || []).find(x => x.startsWith('character:')); return t ? t.split(':')[1] : null }
+  function parseChainTag(e: EventCard): { role: string; step: number } | null {
+    const t = (e.tags || []).find(x => x.startsWith('chain:'))
+    if (!t) return null
+    const parts = t.split(':')
+    if (parts.length >= 3) { const step = Number(parts[2]); if (Number.isFinite(step)) return { role: parts[1], step } }
+    return null
+  }
+
+  function eligibleByRequirements(ev: EventCard): boolean {
+    const tags = ev.tags || []
+    for (const t of tags) {
+      if (!t.startsWith('require:')) continue
+      const cond = t.slice('require:'.length)
+      if (cond.startsWith('run>=')) {
+        const n = Number(cond.split('>=')[1]); if ((collapseCount + 1) < n) return false
+      } else if (cond.startsWith('intro:')) {
+        const role = cond.replace('intro:', ''); if (!seenState.intro?.[role]) return false
+      } else if (cond.startsWith('seen:event:')) {
+        const id = cond.replace('seen:event:', ''); if (!seenState.event?.[id]) return false
+      } else if (cond.startsWith('choice:')) {
+        const [, id, side] = cond.split(':'); if ((choiceState as any)[id] !== side) return false
+      } else if (cond.startsWith('meter:')) {
+        const m = cond.match(/meter:(funds|reputation|readiness)(<=|>=)(\d+)/); if (m) {
+          const [, key, op, val] = m; const v = (meters as any)[key]; const n = Number(val)
+          if (op === '<=' && !(v <= n)) return false
+          if (op === '>=' && !(v >= n)) return false
+        }
+      } else if (cond.startsWith('meta:')) {
+        const k = cond.replace('meta:', '') as keyof MetaSeen; if (!metaSeen[k]) return false
+      } else if (cond.startsWith('chain:')) {
+        const m = cond.match(/^chain:([^>]+)>=([0-9]+)$/); if (m) { const have = chainProgress[m[1]] || 0; if (have < Number(m[2])) return false }
+      }
+    }
+    return true
+  }
+
+  function markPresented(ev: EventCard | null) {
+    if (!ev) return
+    const tags = ev.tags || []
+    const role = getRoleTag(ev)
+    const nextSeen: SeenState = { intro: { ...seenState.intro }, tutorial: { ...seenState.tutorial }, event: { ...seenState.event } }
+    nextSeen.event[ev.id] = true
+    if (tags.includes('meta:intro') && role) nextSeen.intro[role] = true
+    if (tags.includes('tutorial')) nextSeen.tutorial[ev.id] = true
+    persistSeen(nextSeen)
+
+    const nextMeta: MetaSeen = { ...metaSeen }
+    if (tags.includes('meta:council')) nextMeta.council = true
+    if (tags.includes('meta:rival')) nextMeta.rival = true
+    if (tags.includes('policy:logs')) nextMeta.logs = true
+    persistMeta(nextMeta)
+
+    const ch = parseChainTag(ev)
+    if (ch) {
+      const nextCP = { ...chainProgress }
+      nextCP[ch.role] = Math.max(nextCP[ch.role] || 0, ch.step)
+      persistChain(nextCP)
+    }
+  }
   
   // Platform features available for future use
   // const platformFeatures = usePlatformFeatures()
 
   useEffect(() => {
+    loadPersisted()
     fetch(EVENTS_URL).then(r => r.json()).then((data: EventCard[]) => {
       setEvents(data)
       const intro = data.find(e => (e.tags || []).includes('run:intro'))
       setCurrent(intro || null)
+      markPresented(intro || null)
     }).catch(err => console.error('YYG load error', err))
 
     // restore basic meta
@@ -328,6 +417,10 @@ export default function YesYourGoat() {
       if (tags.includes('disabled')) return false
       if (tags.some(t => t.startsWith('race:'))) return false
       if (usedEventIds.includes(e.id)) return false
+      // one-shot intros
+      if (tags.includes('meta:intro')) { const role = getRoleTag(e); if (role && seenState.intro?.[role]) return false }
+      // authoring-time gating
+      if (!eligibleByRequirements(e)) return false
       const at = tags.find(t => t.startsWith('archetype:'))
       if (!at) return true
       const id = at.split(':')[1]
@@ -465,6 +558,7 @@ export default function YesYourGoat() {
       const nxt = drawNext()
       if (nxt) setUsedEventIds(prev => [...prev, nxt.id])
       setCurrent(nxt)
+      markPresented(nxt)
       
       // Set next card for preview
       const nextNxt = drawNext()
@@ -503,6 +597,7 @@ export default function YesYourGoat() {
       const nxt = drawNext()
       if (nxt) setUsedEventIds(prev => [...prev, nxt.id])
       setCurrent(nxt)
+      markPresented(nxt)
       
       // Set next card for preview
       const nextNxt = drawNext()
@@ -546,6 +641,7 @@ export default function YesYourGoat() {
       const nxt = drawNext()
       if (nxt) setUsedEventIds(prev => [...prev, nxt.id])
       setCurrent(nxt)
+      markPresented(nxt)
       
       // Set next card for preview
       const nextNxt = drawNext()
@@ -661,6 +757,11 @@ export default function YesYourGoat() {
     }
     setPreviousMeters(meters)
     setMeters(nextMeters)
+    // Persist player's decision for unlock requirements
+    try {
+      const nextChoice = { ...choiceState, [current.id]: side }
+      persistChoice(nextChoice)
+    } catch {}
 
     // track milestone consumption
     if ((current.tags || []).includes('meta:dungeon_progress')) {
@@ -673,6 +774,7 @@ export default function YesYourGoat() {
     console.log('Drawing next event:', { nxt, day: newDay, usedEventIds: usedEventIds.length, totalEvents: events.length })
     if (nxt) setUsedEventIds(prev => [...prev, nxt.id])
     setCurrent(nxt)
+    markPresented(nxt)
     
     // Set next card for preview
     const nextNxt = drawNext()
@@ -1051,4 +1153,11 @@ export default function YesYourGoat() {
   )
 }
 
-
+    // Prefer unseen character/tutorial intros early in a run (slow onboarding)
+    if (day <= 8) {
+      const introPool = events.filter(e => (e.tags || []).includes('meta:intro'))
+        .filter(e => { const role = getRoleTag(e); return role ? !seenState.intro?.[role] : true })
+      if (introPool.length > 0) {
+        return introPool[Math.floor(Math.random() * introPool.length)]
+      }
+    }

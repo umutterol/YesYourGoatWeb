@@ -1,0 +1,5 @@
+[
+  {"id": "arc_economy_hook_01", "title": "Dues Talk", "body": "3% dues covers repairs and basics. Adjust policy?", "tags": ["meta_economy","require:intro:treasurer","phase:2"], "left": {"label": "Lower dues", "effects": {"funds": -1, "reputation": 1}}, "right": {"label": "Keep as is", "effects": {"funds": 1, "reputation": -1}}},
+  {"id": "arc_economy_sponsor_02", "title": "Sponsor Offer", "body": "A vendor offers discounts if we promote them. Take it?", "tags": ["meta_economy","require:seen:event:arc_economy_hook_01","phase:2"], "left": {"label": "Take deal", "effects": {"funds": 1, "reputation": -1}}, "right": {"label": "Decline", "effects": {"reputation": 1}}},
+  {"id": "arc_economy_post_03", "title": "PR Note", "body": "Explain dues and spending in a short post?", "tags": ["community_pr","require:intro:pr","require:seen:event:arc_economy_hook_01","phase:2"], "left": {"label": "Post it", "effects": {"funds": -1, "reputation": 1}}, "right": {"label": "Internal only", "effects": {"reputation": -1}}}
+]
