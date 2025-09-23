@@ -213,7 +213,6 @@ export default function YesYourGoat() {
   function persistMeta(next: MetaSeen) { setMetaSeen(next); localStorage.setItem(META_KEY, JSON.stringify(next)) }
   function persistChain(next: ChainProgress) { setChainProgress(next); localStorage.setItem(CHAIN_KEY, JSON.stringify(next)) }
 
-  function tagsOf(e?: EventCard): string[] { return e?.tags || [] }
   function getRoleTag(e: EventCard): string | null { const t = (e.tags || []).find(x => x.startsWith('character:')); return t ? t.split(':')[1] : null }
   function parseChainTag(e: EventCard): { role: string; step: number } | null {
     const t = (e.tags || []).find(x => x.startsWith('chain:'))
@@ -403,6 +402,16 @@ export default function YesYourGoat() {
     if (!SawRivalMid() && day >= 8) {
       const rival = events.find(e => (e.tags || []).includes('meta:rival'))
       if (rival) { setSawRival(true); return rival }
+    }
+    // Prefer unseen character/tutorial intros early in a fresh profile (slow onboarding)
+    if (day <= 8) {
+      const introPool = events
+        .filter(e => (e.tags || []).includes('meta:intro') && !usedEventIds.includes(e.id))
+        .filter(e => { const role = getRoleTag(e); return role ? !seenState.intro?.[role] : true })
+      if (introPool.length > 0) {
+        const idx = Math.floor(Math.random() * introPool.length)
+        return introPool[idx]
+      }
     }
     // Otherwise pick any archetype/meta non-intro/outro, filtered by unlocks
     const unlocked = new Set<string>(['general','witch','priest','rogue'])
@@ -1152,12 +1161,3 @@ export default function YesYourGoat() {
     </div>
   )
 }
-
-    // Prefer unseen character/tutorial intros early in a run (slow onboarding)
-    if (day <= 8) {
-      const introPool = events.filter(e => (e.tags || []).includes('meta:intro'))
-        .filter(e => { const role = getRoleTag(e); return role ? !seenState.intro?.[role] : true })
-      if (introPool.length > 0) {
-        return introPool[Math.floor(Math.random() * introPool.length)]
-      }
-    }
