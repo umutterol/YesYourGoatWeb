@@ -320,7 +320,22 @@ export default function YesYourGoat() {
       console.log('No events loaded')
       return null
     }
-    
+    // Priority: active chain steps first
+    const chainPool = events.filter(e => (e.tags || []).some(t => t.startsWith('chain:')))
+      .filter(e => !usedEventIds.includes(e.id))
+      .filter(e => eligibleByRequirements(e))
+    if (chainPool.length > 0) {
+      // Prefer next step for roles already in progress
+      const prioritized = chainPool.sort((a, b) => {
+        const ca = parseChainTag(a)
+        const cb = parseChainTag(b)
+        const ap = ca ? (chainProgress[ca.role] || 0) : 0
+        const bp = cb ? (chainProgress[cb.role] || 0) : 0
+        return bp - ap
+      })
+      return prioritized[0]
+    }
+
     // Check for narrative events first (highest priority for story progression)
     const availableNarrativeEvents = getAvailableNarrativeEvents(
       currentMetaPhase.phase,
