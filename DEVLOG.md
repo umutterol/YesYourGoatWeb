@@ -2,6 +2,12 @@ YesYourGoatWeb – Dev Log
 
 This document summarizes the changes and additions made so far to migrate the project to a web-focused setup and to deliver a working web prototype.
 
+## Recent Updates (Constitution v1.0.0)
+
+- Ratified project constitution for "Guilds of Arcana Terra" (two-choice format, meters −3..+3, portraits required, raid check every 3rd event, replay gates at runs 3/7/9, strict schema/tags, static delivery, validator+CI gates).
+- Stored at `.specify/memory/constitution.md`; updated plan template reference to this path.
+- Collaboration: PRs must pass validator/build and note affected phases/triggers; update `docs/run_blueprint.md` when adding arcs.
+
 ## Recent Updates (v0.25)
 
 ### Complete Event System Overhaul
