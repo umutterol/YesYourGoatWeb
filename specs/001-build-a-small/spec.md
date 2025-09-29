@@ -85,7 +85,14 @@ A casual player opens the game on mobile, is immediately placed as the Guild Mas
 - **FR-010**: The system MUST keep the ending fixed canon and not introduce new meters/systems without constitutional and validator updates.
 
 *Ambiguities explicitly marked:*
-- **FR-011**: The precise weighting and cooldown parameters for random_pool selection [NEEDS CLARIFICATION: provide weights/cooldown windows].
+- **FR-011**: Random pool selection MUST use soft cooldowns and decay weights to balance novelty and pacing:
+  - Base category weights: `random:logistics=1.0`, `random:economy=1.0`, `random:community=1.0` (equal by default).
+  - Per-event soft cooldown: recently drawn events get `cooldown=3` runs where weight=0; after cooldown, weight resumes at 0.5 and linearly returns to 1.0 by run +6.
+  - Repetition decay: events seen ≥2 times in the same run have weight=0 for the remainder of that run.
+  - Chain/priority override: if any chain step is eligible, skip random_pool entirely (priority wins).
+  - Low-meter routing override: if any meter ≤3, prefer the matching matrix over random_pool.
+  - Raid cadence protection: if an index is reserved for `raid_night_check` (every 5th–7th), do not fill with random_pool.
+  - Diversity bias: when multiple categories are tied, prefer the category not used in the last pick.
 - **FR-012**: Exact list of canonical speakers beyond those in run blueprint [NEEDS CLARIFICATION: add "Game Master" to allowed speakers or map to an existing role].
 
 ### Key Entities *(include if feature involves data)*
@@ -105,7 +112,7 @@ A casual player opens the game on mobile, is immediately placed as the Guild Mas
 - [x] All mandatory sections completed
 
 ### Requirement Completeness
-- [ ] No [NEEDS CLARIFICATION] markers remain
+- [ ] No [NEEDS CLARIFICATION] markers remain (FR-012 pending canonical speakers list)
 - [x] Requirements are testable and unambiguous  
 - [x] Success criteria are measurable
 - [x] Scope is clearly bounded
