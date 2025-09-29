@@ -93,7 +93,7 @@ A casual player opens the game on mobile, is immediately placed as the Guild Mas
   - Low-meter routing override: if any meter ≤3, prefer the matching matrix over random_pool.
   - Raid cadence protection: if an index is reserved for `raid_night_check` (every 5th–7th), do not fill with random_pool.
   - Diversity bias: when multiple categories are tied, prefer the category not used in the last pick.
-- **FR-012**: Exact list of canonical speakers beyond those in run blueprint [NEEDS CLARIFICATION: add "Game Master" to allowed speakers or map to an existing role].
+- **FR-012**: Canonical speakers MUST align with the validator allowlist, including “Game Master” for authored meta events.
 
 ### Key Entities *(include if feature involves data)*
 - **Event**: id (unique), title (≤50), body (≤120), speaker, portrait, tags (`phase`, `character:<role>`, optional `chain:<role>:<step>`, `require:*`, meta tags), effects (funds|reputation|readiness in −3..+3), optional `random_pool:*`.
@@ -112,7 +112,7 @@ A casual player opens the game on mobile, is immediately placed as the Guild Mas
 - [x] All mandatory sections completed
 
 ### Requirement Completeness
-- [ ] No [NEEDS CLARIFICATION] markers remain (FR-012 pending canonical speakers list)
+- [x] No [NEEDS CLARIFICATION] markers remain
 - [x] Requirements are testable and unambiguous  
 - [x] Success criteria are measurable
 - [x] Scope is clearly bounded
@@ -129,6 +129,6 @@ A casual player opens the game on mobile, is immediately placed as the Guild Mas
 - [x] User scenarios defined
 - [x] Requirements generated
 - [x] Entities identified
-- [ ] Review checklist passed
+- [x] Review checklist passed
 
 ---
