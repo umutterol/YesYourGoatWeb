@@ -187,6 +187,9 @@ export default function YesYourGoat() {
     setMaxSurvivedDays(prev => Math.max(prev, day))
   }, [day])
   const [usedEventIds, setUsedEventIds] = useState<string[]>([])
+  // Raid cadence tracking (every 5th–7th event)
+  const RAID_KEY = 'yyg_last_raid_index'
+  const [lastRaidIndex, setLastRaidIndex] = useState<number | null>(null)
   // ---- Intro/tutorial gating & simple unlocks (persist across runs) ----
   type SeenState = { intro: Record<string, true>; tutorial: Record<string, true>; event: Record<string, true> }
   type MetaSeen = { council?: boolean; rival?: boolean; logs?: boolean }
@@ -195,17 +198,20 @@ export default function YesYourGoat() {
   const CHOICE_KEY = 'yyg_choice'
   const META_KEY = 'yyg_meta_seen'
   const CHAIN_KEY = 'yyg_chain_progress'
+  const LAST_SEEN_MAP_KEY = 'yyg_event_last_seen_day'
 
   const [seenState, setSeenState] = useState<SeenState>({ intro: {}, tutorial: {}, event: {} })
   const [choiceState, setChoiceState] = useState<Record<string, 'left' | 'right'>>({})
   const [metaSeen, setMetaSeen] = useState<MetaSeen>({})
   const [chainProgress, setChainProgress] = useState<ChainProgress>({})
+  const [lastSeenDayMap, setLastSeenDayMap] = useState<Record<string, number>>({})
 
   function loadPersisted() {
     try { const s = JSON.parse(localStorage.getItem(SEEN_KEY) || '{}'); if (s) setSeenState({ intro: s.intro || {}, tutorial: s.tutorial || {}, event: s.event || {} }) } catch {}
     try { const c = JSON.parse(localStorage.getItem(CHOICE_KEY) || '{}'); if (c) setChoiceState(c) } catch {}
     try { const m = JSON.parse(localStorage.getItem(META_KEY) || '{}'); if (m) setMetaSeen(m) } catch {}
     try { const cp = JSON.parse(localStorage.getItem(CHAIN_KEY) || '{}'); if (cp) setChainProgress(cp) } catch {}
+    try { const lm = JSON.parse(localStorage.getItem(LAST_SEEN_MAP_KEY) || '{}'); if (lm) setLastSeenDayMap(lm) } catch {}
   }
 
   function persistSeen(next: SeenState) { setSeenState(next); localStorage.setItem(SEEN_KEY, JSON.stringify(next)) }
@@ -272,6 +278,12 @@ export default function YesYourGoat() {
       nextCP[ch.role] = Math.max(nextCP[ch.role] || 0, ch.step)
       persistChain(nextCP)
     }
+    // Track last seen day for cooldown/decay weighting
+    if (ev?.id) {
+      const nextLM = { ...lastSeenDayMap, [ev.id]: day }
+      setLastSeenDayMap(nextLM)
+      localStorage.setItem(LAST_SEEN_MAP_KEY, JSON.stringify(nextLM))
+    }
   }
   
   // Platform features available for future use
@@ -291,6 +303,9 @@ export default function YesYourGoat() {
     if (!Number.isNaN(cc)) {
       // no-op for now; kept for future UI
     }
+    // restore last raid index
+    const storedRaid = Number(localStorage.getItem(RAID_KEY) || '')
+    if (!Number.isNaN(storedRaid) && storedRaid > 0) setLastRaidIndex(storedRaid)
   }, [])
 
   function collapseIfAnyZero(m: Meters): string | null {
@@ -377,6 +392,22 @@ export default function YesYourGoat() {
     }
     
     // Collapse override handled at decide time
+    // Inject Raid Night check on a predictable cadence (every 5th–7th)
+    const sinceLastRaid = lastRaidIndex == null ? day - 1 : day - lastRaidIndex
+    if (sinceLastRaid >= 5) {
+      const mustInject = sinceLastRaid >= 7
+      const shouldInject = mustInject || Math.random() < 0.6 // prefer around 6th
+      if (shouldInject) {
+        const raidPool = events.filter(e => (e.tags || []).includes('raid_night_check'))
+        if (raidPool.length > 0) {
+          const raid = raidPool[Math.floor(Math.random() * raidPool.length)]
+          // persist reservation point
+          setLastRaidIndex(day)
+          localStorage.setItem(RAID_KEY, String(day))
+          return raid
+        }
+      }
+    }
     // Inject milestone when threshold hits
     if (nextMilestone && day === nextMilestone) {
       const milestoneCard = events.find(e => (e.tags || []).includes('meta:dungeon_progress') && !usedMilestoneIds.includes(e.id))
@@ -435,6 +466,18 @@ export default function YesYourGoat() {
       const id = at.split(':')[1]
       return unlocked.has(id)
     })
+    // Low-meter routing: prioritize events that touch low meters (≤3)
+    const lowMeters: Array<keyof Meters> = []
+    if (meters.funds <= 3) lowMeters.push('funds')
+    if (meters.reputation <= 3) lowMeters.push('reputation')
+    if (meters.readiness <= 3) lowMeters.push('readiness')
+    if (lowMeters.length > 0) {
+      const targeted = pool.filter(ev => {
+        const effs = [ev.left?.effects || {}, ev.right?.effects || {}]
+        return lowMeters.some(m => effs.some(eff => typeof eff[m] === 'number'))
+      })
+      if (targeted.length > 0) pool = targeted
+    }
     // Bias: use event weights, aggressive anti-repetition, and balance meter targeting with narrative phases
     const bias = (ev: EventCard) => {
       const effects = [ev.left?.effects || {}, ev.right?.effects || {}]
@@ -444,6 +487,14 @@ export default function YesYourGoat() {
 
       // Start with base weight from event data
       let w = ev.weights?.base || 1
+
+      // Per-event soft cooldown/decay based on last seen day
+      const last = lastSeenDayMap[ev.id]
+      if (typeof last === 'number') {
+        const delta = day - last
+        if (delta <= 3) return 0 // cooldown window
+        if (delta <= 6) w *= 0.5 // resume at 0.5 then back to 1.0
+      }
 
       // Moderate anti-repetition: reduce weight for events that appeared in last 3 events
       const recentEvents = usedEventIds.slice(-3)
