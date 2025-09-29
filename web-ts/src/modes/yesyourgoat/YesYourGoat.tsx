@@ -290,6 +290,22 @@ export default function YesYourGoat() {
   // const platformFeatures = usePlatformFeatures()
 
   useEffect(() => {
+    // Keyboard fallback: Left/Right arrows trigger choices
+    function onKey(e: KeyboardEvent) {
+      if (!current) return
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault()
+        decide('left')
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault()
+        decide('right')
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [current])
+
+  useEffect(() => {
     loadPersisted()
     fetch(EVENTS_URL).then(r => r.json()).then((data: EventCard[]) => {
       setEvents(data)
@@ -431,9 +447,10 @@ export default function YesYourGoat() {
         return milestoneCard
       }
     }
-    // Determine council cooldown from recent events (last 2)
-    const recent2 = usedEventIds.slice(-2)
-    const councilOnCooldown = recent2.some(id => (events.find(e => e.id === id)?.tags || []).includes('meta:council'))
+    // Determine council/rival cooldown from recent events (last 3)
+    const recent3 = usedEventIds.slice(-3)
+    const councilOnCooldown = recent3.some(id => (events.find(e => e.id === id)?.tags || []).includes('meta:council'))
+    const rivalOnCooldown = recent3.some(id => (events.find(e => e.id === id)?.tags || []).includes('meta:rival'))
 
     // Council cadence ~ every 5 (ease early pressure) respecting cooldown
     if (!councilOnCooldown && day % 5 === 0) {
@@ -444,9 +461,9 @@ export default function YesYourGoat() {
         return councilEvents[randomIndex]
       }
     }
-    // Ensure Rival at least once mid-run (~day 8)
-    if (!SawRivalMid() && day >= 8) {
-      const rival = events.find(e => (e.tags || []).includes('meta:rival'))
+    // Ensure Rival at least once mid-run (~day 8), respecting cooldown
+    if (!SawRivalMid() && day >= 8 && !rivalOnCooldown) {
+      const rival = events.find(e => (e.tags || []).includes('meta:rival') && !usedEventIds.includes(e.id))
       if (rival) { setSawRival(true); return rival }
     }
     // Prefer unseen character/tutorial intros early in a fresh profile (slow onboarding)

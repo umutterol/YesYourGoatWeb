@@ -58,6 +58,30 @@ const Card: React.FC<CardProps> = ({ event, onChoice, className = '' }) => {
           {event.body}
         </div>
 
+        {/* Meter Delta Preview (simple, non-binding) */}
+        {(event.left?.effects || event.right?.effects) && (
+          <div className="grid grid-cols-2 gap-2 text-sm text-[var(--reigns-text-secondary)] mb-4">
+            <div className="flex items-center justify-center gap-2">
+              <span>⬅️</span>
+              <span>
+                {['funds','reputation','readiness'].map((k) => {
+                  const v = (event.left.effects as any)[k]
+                  return typeof v === 'number' && v !== 0 ? `${k[0].toUpperCase()}: ${v>0?'+':''}${v} ` : ''
+                }).join(' ')}
+              </span>
+            </div>
+            <div className="flex items-center justify-center gap-2">
+              <span>➡️</span>
+              <span>
+                {['funds','reputation','readiness'].map((k) => {
+                  const v = (event.right.effects as any)[k]
+                  return typeof v === 'number' && v !== 0 ? `${k[0].toUpperCase()}: ${v>0?'+':''}${v} ` : ''
+                }).join(' ')}
+              </span>
+            </div>
+          </div>
+        )}
+
         {/* Choice Buttons */}
         <div className="flex gap-4">
           <button
