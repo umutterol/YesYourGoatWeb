@@ -2,6 +2,21 @@ YesYourGoatWeb – Dev Log
 
 This document summarizes the changes and additions made so far to migrate the project to a web-focused setup and to deliver a working web prototype.
 
+## Recent Updates (UI Rework — Reigns-like)
+
+- Rebuilt core interaction to mirror Reigns-like flow:
+  - Swipe/drag decisions with distance threshold (≥33% card width) to commit
+  - Live left/right meter delta previews in swipe overlay
+  - Touch and mouse support; keyboard Left/Right fallback
+- Selection loop updates (YesYourGoat mode):
+  - Chain steps prioritized; low‑meter routing; random_pool cooldown/decay
+  - Raid cadence injection every 5th–7th event with persistence
+  - Council/rival sensible cooldowns
+- UX/Perf:
+  - 44px targets; high contrast; portrait fallback avatar
+  - rAF-throttled drag updates for 60fps; no layout jank
+  - Bundle ~78KB gzipped JS (<300KB budget); zero console errors
+
 ## Recent Updates (Constitution v1.0.0)
 
 - Ratified project constitution for "Guilds of Arcana Terra" (two-choice format, meters −3..+3, portraits required, raid check every 3rd event, replay gates at runs 3/7/9, strict schema/tags, static delivery, validator+CI gates).
