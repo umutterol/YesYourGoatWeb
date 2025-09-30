@@ -6,6 +6,8 @@ interface CardPhysicsProps {
   onDragStart?: () => void;
   onDragEnd?: () => void;
   showChoicePreview?: boolean;
+  previewLeftText?: string;
+  previewRightText?: string;
 }
 
 const CardPhysics: React.FC<CardPhysicsProps> = ({ 
@@ -13,7 +15,9 @@ const CardPhysics: React.FC<CardPhysicsProps> = ({
   onChoice, 
   onDragStart,
   onDragEnd,
-  showChoicePreview = true
+  showChoicePreview = true,
+  previewLeftText,
+  previewRightText
 }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
@@ -41,15 +45,18 @@ const CardPhysics: React.FC<CardPhysicsProps> = ({
     document.body.style.cursor = 'grabbing';
   }, [onDragStart]);
 
-  const handleMouseMove = useCallback((e: MouseEvent) => {
+  const handleMouseMove = useCallback((e: MouseEvent | TouchEvent) => {
     if (!isDragging || !cardRef.current) return;
     
     const rect = cardRef.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
     
-    const deltaX = e.clientX - centerX;
-    const deltaY = e.clientY - centerY;
+    const clientX = (e as TouchEvent).touches ? (e as TouchEvent).touches[0].clientX : (e as MouseEvent).clientX;
+    const clientY = (e as TouchEvent).touches ? (e as TouchEvent).touches[0].clientY : (e as MouseEvent).clientY;
+    
+    const deltaX = clientX - centerX;
+    const deltaY = clientY - centerY;
     
     // Rotation disabled for now
     // const maxRotation = 15;
@@ -80,7 +87,7 @@ const CardPhysics: React.FC<CardPhysicsProps> = ({
     }
   }, [isDragging]);
 
-  const handleMouseUp = useCallback((e: MouseEvent) => {
+  const handleMouseUp = useCallback((e: MouseEvent | TouchEvent) => {
     if (!isDragging) return;
     
     setIsDragging(false);
@@ -94,24 +101,13 @@ const CardPhysics: React.FC<CardPhysicsProps> = ({
     if (!rect) return;
     
     const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
+    const clientX = (e as TouchEvent).changedTouches ? (e as TouchEvent).changedTouches[0].clientX : (e as MouseEvent).clientX;
+    const deltaX = clientX - centerX;
     
-    const deltaX = e.clientX - centerX;
-    const deltaY = e.clientY - centerY;
-    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-    const dragDuration = Date.now() - dragStartTime.current;
-    
-    // Trigger choice if dragged far enough or fast enough
-    const threshold = 100;
-    const velocityThreshold = 500; // pixels per second
-    const velocity = distance / (dragDuration / 1000); // pixels per second
-    
-    if (distance > threshold || (distance > 50 && velocity > velocityThreshold)) {
-      if (deltaX < -threshold / 2) {
-        onChoice('left');
-      } else if (deltaX > threshold / 2) {
-        onChoice('right');
-      }
+    // Commit based on distance threshold only (>=33% of card width)
+    const horizontalThreshold = rect.width * 0.33;
+    if (Math.abs(deltaX) >= horizontalThreshold) {
+      if (deltaX < 0) onChoice('left'); else onChoice('right');
     }
     
     // Reset card position with animation
@@ -140,12 +136,16 @@ const CardPhysics: React.FC<CardPhysicsProps> = ({
   // Add global mouse event listeners
   React.useEffect(() => {
     if (isDragging) {
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener('mousemove', handleMouseMove as any);
+      document.addEventListener('mouseup', handleMouseUp as any);
+      document.addEventListener('touchmove', handleMouseMove as any, { passive: false });
+      document.addEventListener('touchend', handleMouseUp as any);
       
       return () => {
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
+        document.removeEventListener('mousemove', handleMouseMove as any);
+        document.removeEventListener('mouseup', handleMouseUp as any);
+        document.removeEventListener('touchmove', handleMouseMove as any);
+        document.removeEventListener('touchend', handleMouseUp as any);
       };
     }
   }, [isDragging, handleMouseMove, handleMouseUp]);
@@ -169,6 +169,13 @@ const CardPhysics: React.FC<CardPhysicsProps> = ({
         ref={cardRef}
         style={cardStyle}
         onMouseDown={handleMouseDown}
+        onTouchStart={() => {
+          if (!cardRef.current) return;
+          setIsDragging(true);
+          onDragStart?.();
+          dragStartTime.current = Date.now();
+          // Touch cursor unaffected
+        }}
         className="select-none"
       >
         {children}
@@ -182,7 +189,9 @@ const CardPhysics: React.FC<CardPhysicsProps> = ({
               ? 'bg-red-500/80 text-white' 
               : 'bg-green-500/80 text-white'
           }`}>
-            {choicePreview === 'left' ? '← Left Choice' : 'Right Choice →'}
+            {choicePreview === 'left' 
+              ? (previewLeftText || '← Left Choice') 
+              : (previewRightText || 'Right Choice →')}
           </div>
         </div>
       )}
