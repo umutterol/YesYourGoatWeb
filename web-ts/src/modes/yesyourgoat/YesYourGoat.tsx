@@ -1,18 +1,13 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import ResourceBar from '../../components/ResourceBar/ResourceBar'
 import ResourceAnimations from '../../components/ResourceBar/ResourceAnimations'
 import CardStack from '../../components/Card/CardStack'
-import JourneyTrack from '../../components/JourneyTrack/JourneyTrack'
 import { calculateChaosChance, getAvailableChaosEvents, drawChaosEvent } from '../../utils/chaosEvents'
 import type { ChaosEvent } from '../../utils/chaosEvents'
 import { calculateGlitchChance, getAvailableGlitchEvents, drawGlitchEvent } from '../../utils/glitchEvents'
 import type { GlitchEvent } from '../../utils/glitchEvents'
 import { calculateGameMasterChance, getAvailableGameMasterOffers, drawGameMasterOffer, applyGameMasterEffects } from '../../utils/gameMasters'
 import type { GameMasterOffer } from '../../utils/gameMasters'
-import { getCurrentStoryBeat, getStoryBeatProgress, getStoryBeatColorTheme, getStoryBeatDescription } from '../../utils/storyBeats'
-import { getVisualProgression, getGuildHallDescription, getVisualEffectsCSS } from '../../utils/visualProgression'
-import { achievements, checkAchievement, getAchievementRarityColor, getAchievementCategoryIcon } from '../../utils/achievements'
-import type { Achievement } from '../../utils/achievements'
 import { getCurrentMetaNarrativePhase, getPhaseEventModifiers } from '../../utils/metaNarrativeProgression'
 import { getAvailableNarrativeEvents, getNarrativeEventChance } from '../../utils/narrativeEvents'
 import type { NarrativeEvent } from '../../utils/narrativeEvents'
@@ -95,7 +90,6 @@ export default function YesYourGoat() {
   const [events, setEvents] = useState<EventCard[]>([])
   const [current, setCurrent] = useState<EventCard | null>(null)
   const [nextCard, setNextCard] = useState<EventCard | null>(null)
-  const [journeyCount, setJourneyCount] = useState(0)
   const [sawRival, setSawRival] = useState(false)
   const [victoryText, setVictoryText] = useState('')
   const [showSummary, setShowSummary] = useState(false)
@@ -105,12 +99,6 @@ export default function YesYourGoat() {
   const [summaryMeters, setSummaryMeters] = useState<Meters | null>(null)
   const [summaryDay, setSummaryDay] = useState<number | null>(null)
   const [previousMeters, setPreviousMeters] = useState<Meters | null>(null)
-  const [unlockedAchievements, setUnlockedAchievements] = useState<Achievement[]>([])
-  const [maxSurvivedDays, setMaxSurvivedDays] = useState(0)
-  const [chaosEventsExperienced, setChaosEventsExperienced] = useState(0)
-  const [glitchEventsExperienced, setGlitchEventsExperienced] = useState(0)
-  const [gameMasterOffersReceived, setGameMasterOffersReceived] = useState(0)
-  const [characterGrowth] = useState<Record<string, number>>({})
   const [collapseHistory, setCollapseHistory] = useState<Array<{ collapseType: string; day: number }>>([])
   const [legacyPoints, setLegacyPoints] = useState<LegacyPoints>({
     martyr: 0,
@@ -119,24 +107,13 @@ export default function YesYourGoat() {
     survivor: 0,
     legend: 0
   })
-  const [debugLog, setDebugLog] = useState<{
-    id: string; title: string; choice: string; pre: Meters; post: Meters; effects: Effects
-  }[]>([])
 
-  const milestones = useMemo(() => [3, 6, 9, 12, 15, 18], [])
-  const nextMilestone = milestones.find(m => day <= m) ?? null
   const collapseCount = Number(localStorage.getItem('yyg_collapse_count') || '0')
-  const [usedMilestoneIds, setUsedMilestoneIds] = useState<string[]>([])
 
   // Meta-narrative progression
   const runCount = collapseCount + 1
   const currentMetaPhase = getCurrentMetaNarrativePhase(legacyPoints, runCount)
   const [narrativeEvent, setNarrativeEvent] = useState<NarrativeEvent | null>(null)
-
-  // Story beat and visual progression
-  const currentStoryBeat = getCurrentStoryBeat(day)
-  const storyBeatProgress = getStoryBeatProgress(day)
-  const visualProgression = getVisualProgression(legacyPoints, currentStoryBeat, characterGrowth)
 
   // Load legacy points from localStorage
   useEffect(() => {
@@ -156,36 +133,6 @@ export default function YesYourGoat() {
     localStorage.setItem('yyg_legacy_points', JSON.stringify(legacyPoints))
   }, [legacyPoints])
 
-  // Check achievements
-  useEffect(() => {
-    const gameState = {
-      legacyPoints,
-      maxSurvivedDays: Math.max(maxSurvivedDays, day),
-      chaosEventsExperienced,
-      glitchEventsExperienced,
-      gameMasterOffersReceived,
-      characterGrowth,
-      currentStoryBeat: currentStoryBeat.act,
-      collapseHistory
-    }
-
-    const newAchievements: Achievement[] = []
-    achievements.forEach(achievement => {
-      if (!achievement.unlocked && checkAchievement(achievement, gameState)) {
-        const unlockedAchievement = { ...achievement, unlocked: true, unlockedAt: Date.now() }
-        newAchievements.push(unlockedAchievement)
-      }
-    })
-
-    if (newAchievements.length > 0) {
-      setUnlockedAchievements(prev => [...prev, ...newAchievements])
-    }
-  }, [legacyPoints, day, chaosEventsExperienced, glitchEventsExperienced, gameMasterOffersReceived, characterGrowth, currentStoryBeat.act, collapseHistory, maxSurvivedDays])
-
-  // Update max survived days
-  useEffect(() => {
-    setMaxSurvivedDays(prev => Math.max(prev, day))
-  }, [day])
   const [usedEventIds, setUsedEventIds] = useState<string[]>([])
   // Raid cadence tracking (every 5th–7th event)
   const RAID_KEY = 'yyg_last_raid_index'
@@ -439,14 +386,6 @@ export default function YesYourGoat() {
         }
       }
     }
-    // Inject milestone when threshold hits
-    if (nextMilestone && day === nextMilestone) {
-      const milestoneCard = events.find(e => (e.tags || []).includes('meta:dungeon_progress') && !usedMilestoneIds.includes(e.id))
-      if (milestoneCard) {
-        setUsedMilestoneIds(prev => [...prev, milestoneCard.id])
-        return milestoneCard
-      }
-    }
     // Determine council/rival cooldown from recent events (last 3)
     const recent3 = usedEventIds.slice(-3)
     const councilOnCooldown = recent3.some(id => (events.find(e => e.id === id)?.tags || []).includes('meta:council'))
@@ -620,7 +559,6 @@ export default function YesYourGoat() {
     // Handle narrative events first (highest priority for story progression)
     if (narrativeEvent) {
       const choice = side === 'left' ? narrativeEvent.left : narrativeEvent.right
-      const preMeters: Meters = { ...meters }
       const nextMeters: Meters = { ...meters }
       
       // Apply effects
@@ -630,15 +568,7 @@ export default function YesYourGoat() {
         }
       })
       
-      // Log the narrative event
-      setDebugLog(prev => [...prev, {
-        id: narrativeEvent.id,
-        title: narrativeEvent.title,
-        choice: choice.label,
-        pre: preMeters,
-        post: nextMeters,
-        effects: choice.effects
-      }])
+      // Log the narrative event (removed debugLog)
       
       setPreviousMeters(meters)
       setMeters(nextMeters)
@@ -660,28 +590,14 @@ export default function YesYourGoat() {
     
     // Handle Game Master offers second
     if (gameMasterOffer) {
-      const choice = side === 'left' ? gameMasterOffer.left : gameMasterOffer.right
-      const preMeters: Meters = { ...meters }
-      
       // Apply both visible and hidden effects
       const nextMeters = applyGameMasterEffects(meters, side, gameMasterOffer)
       
-      // Log the game master offer
-      setDebugLog(prev => [...prev, {
-        id: gameMasterOffer.id,
-        title: gameMasterOffer.title,
-        choice: choice.label,
-        pre: preMeters,
-        post: nextMeters,
-        effects: choice.visibleEffects || {}
-      }])
+      // Log the game master offer (removed debugLog)
       
       setPreviousMeters(meters)
       setMeters(nextMeters)
       setGameMasterOffer(null)
-      
-      // Track game master offer
-      setGameMasterOffersReceived(prev => prev + 1)
       
       // Continue to next event
       const newDay = day + 1
@@ -700,7 +616,6 @@ export default function YesYourGoat() {
     // Handle glitch events second
     if (glitchEvent) {
       const choice = side === 'left' ? glitchEvent.left : glitchEvent.right
-      const preMeters: Meters = { ...meters }
       const nextMeters: Meters = { ...meters }
       
       for (const [k, v] of Object.entries(choice.effects || {})) {
@@ -710,22 +625,11 @@ export default function YesYourGoat() {
         }
       }
       
-      // Log the glitch event
-      setDebugLog(prev => [...prev, {
-        id: glitchEvent.id,
-        title: glitchEvent.title,
-        choice: choice.label,
-        pre: preMeters,
-        post: nextMeters,
-        effects: choice.effects || {}
-      }])
+      // Log the glitch event (removed debugLog)
       
       setPreviousMeters(meters)
       setMeters(nextMeters)
       setGlitchEvent(null)
-      
-      // Track glitch event
-      setGlitchEventsExperienced(prev => prev + 1)
       
       // Continue to next event
       const newDay = day + 1
@@ -744,7 +648,6 @@ export default function YesYourGoat() {
     // Handle chaos events third
     if (chaosEvent) {
       const choice = side === 'left' ? chaosEvent.left : chaosEvent.right
-      const preMeters: Meters = { ...meters }
       const nextMeters: Meters = { ...meters }
       
       for (const [k, v] of Object.entries(choice.effects || {})) {
@@ -754,22 +657,11 @@ export default function YesYourGoat() {
         }
       }
       
-      // Log the chaos event
-      setDebugLog(prev => [...prev, {
-        id: chaosEvent.id,
-        title: chaosEvent.title,
-        choice: choice.label,
-        pre: preMeters,
-        post: nextMeters,
-        effects: choice.effects || {}
-      }])
+      // Log the chaos event (removed debugLog)
       
       setPreviousMeters(meters)
       setMeters(nextMeters)
       setChaosEvent(null)
-      
-      // Track chaos event
-      setChaosEventsExperienced(prev => prev + 1)
       
       // Continue to next event
       const newDay = day + 1
@@ -786,7 +678,6 @@ export default function YesYourGoat() {
     
     if (!current) return
     const choice = side === 'left' ? current.left : current.right
-    const preMeters: Meters = { ...meters }
     const nextMeters: Meters = { ...meters }
     for (const [k, v] of Object.entries(choice.effects || {})) {
       if (k in nextMeters && typeof v === 'number') {
@@ -794,14 +685,7 @@ export default function YesYourGoat() {
         nextMeters[k] = clamp((nextMeters as any)[k] + v)
       }
     }
-    setDebugLog(prev => [{
-      id: current.id,
-      title: current.title,
-      choice: choice.label,
-      pre: preMeters,
-      post: nextMeters,
-      effects: choice.effects || {}
-    }, ...prev].slice(0, 20))
+    // debugLog removed
     const collapse = collapseIfAnyZero(nextMeters)
     if (collapse) {
       const causeTag = nextMeters.funds <= 0 ? 'cause:funds' : nextMeters.reputation <= 0 ? 'cause:reputation' : 'cause:readiness'
@@ -855,10 +739,7 @@ export default function YesYourGoat() {
       persistChoice(nextChoice)
     } catch {}
 
-    // track milestone consumption
-    if ((current.tags || []).includes('meta:dungeon_progress')) {
-      setJourneyCount(j => j + 1)
-    }
+    // milestone tracking removed
 
     const newDay = day + 1
     setDay(newDay)
@@ -874,24 +755,16 @@ export default function YesYourGoat() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-[var(--reigns-bg)] text-[var(--reigns-text)] p-4 md:p-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-3xl md:text-4xl font-bold text-[var(--reigns-text)]">
-            YesYourGoat — Collapse Run
-          </h1>
-          <div className="text-sm px-3 py-2 rounded-full border border-[var(--reigns-border)] bg-[var(--reigns-card)] text-[var(--reigns-text-secondary)]">
-            Deck: YesYourGoat ({events.length})
-          </div>
-        </div>
-
+    <div className="min-h-screen w-full bg-[var(--reigns-bg)] text-[var(--reigns-text)]">
+      <div className="max-w-md mx-auto flex flex-col h-screen">
         {/* Resource Bar */}
-        <ResourceBar 
-          funds={meters.funds}
-          reputation={meters.reputation}
-          readiness={meters.readiness}
-        />
+        <div className="p-4">
+          <ResourceBar 
+            funds={meters.funds}
+            reputation={meters.reputation}
+            readiness={meters.readiness}
+          />
+        </div>
 
         {/* Resource Change Animations */}
         <ResourceAnimations
@@ -903,54 +776,8 @@ export default function YesYourGoat() {
           previousReadiness={previousMeters?.readiness}
         />
 
-        {/* Journey Track */}
-        <JourneyTrack 
-          milestones={milestones}
-          currentDay={day}
-          journeyCount={journeyCount}
-        />
-
-        {/* Story Beat Display */}
-        <div className="mt-6 max-w-4xl mx-auto">
-          <div className={`bg-gradient-to-r ${getStoryBeatColorTheme(currentStoryBeat)} border border-[var(--reigns-border)] rounded-lg p-4 ${getVisualEffectsCSS(visualProgression.effects)}`}>
-            <h3 className="text-lg font-bold text-white mb-2 text-center">
-              {currentStoryBeat.theme}
-            </h3>
-            <p className="text-sm text-white/80 text-center mb-3">
-              {getStoryBeatDescription(currentStoryBeat, day)}
-            </p>
-            <div className="w-full bg-white/20 rounded-full h-2">
-              <div 
-                className="bg-white rounded-full h-2 transition-all duration-500"
-                style={{ width: `${storyBeatProgress * 100}%` }}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Guild Hall Display - Hidden for now */}
-        {false && (
-          <div className="mt-4 max-w-4xl mx-auto">
-            <div className="bg-[var(--reigns-card)] border border-[var(--reigns-border)] rounded-lg p-4">
-              <h3 className="text-lg font-bold text-[var(--reigns-text)] mb-3 text-center">
-                Guild Hall
-              </h3>
-              <div className="text-center">
-                <div className={`text-2xl font-bold bg-gradient-to-r ${visualProgression.colorTheme} bg-clip-text text-transparent`}>
-                  Level {visualProgression.guildHallLevel}
-                </div>
-                <div className="text-sm text-[var(--reigns-text-secondary)] mt-1">
-                  {getGuildHallDescription(visualProgression.guildHallLevel)}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Legacy Points and Achievements - Hidden during gameplay, shown in summary */}
-
         {/* Main Game Area */}
-        <div className="flex justify-center">
+        <div className="flex-1 flex items-center justify-center p-4">
           {gameMasterOffer ? (
             <div className="reigns-card card-desktop p-6 max-w-2xl mx-auto">
               <div className="text-center mb-6">
@@ -1111,37 +938,6 @@ export default function YesYourGoat() {
           )}
         </div>
 
-        {/* Debug Panel */}
-        {debugLog.length > 0 && (
-          <div className="mt-8 max-w-4xl mx-auto">
-            <div className="text-xs bg-[var(--reigns-card)]/60 border border-[var(--reigns-border)] rounded-lg p-4">
-              <div className="font-bold mb-3 text-[var(--reigns-text)]">Debug Log (last {debugLog.length})</div>
-              <div className="space-y-2 max-h-48 overflow-y-auto">
-                {debugLog.map((d, i) => (
-                  <div key={i} className="flex flex-col p-2 bg-[var(--reigns-bg)]/50 rounded">
-                    <div className="opacity-80 text-[var(--reigns-text-secondary)]">
-                      {d.title} — {d.choice}
-                    </div>
-                    <div className="flex gap-4 text-xs">
-                      <div>pre: 💰{d.pre.funds} ⭐{d.pre.reputation} ⚔️{d.pre.readiness}</div>
-                      <div>post: 💰{d.post.funds} ⭐{d.post.reputation} ⚔️{d.post.readiness}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Victory Text */}
-        {!!victoryText && (
-          <div className="mt-6 text-center">
-            <div className="text-xl font-semibold text-[var(--reigns-accent)]">
-              {victoryText}
-            </div>
-          </div>
-        )}
-
         {/* Collapse Summary Modal */}
         {showSummary && (
           <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
@@ -1154,10 +950,6 @@ export default function YesYourGoat() {
                   <span className="opacity-80">Day:</span> 
                   <span className="font-mono font-bold">{summaryDay ?? day}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="opacity-80">Milestones reached:</span> 
-                  <span className="font-mono font-bold">{journeyCount}/{milestones.length}</span>
-                </div>
                 <div className="mt-4 flex justify-between">
                   <div>💰 <span className="font-mono">{(summaryMeters ?? meters).funds}</span></div>
                   <div>⭐ <span className="font-mono">{(summaryMeters ?? meters).reputation}</span></div>
@@ -1165,64 +957,6 @@ export default function YesYourGoat() {
                 </div>
               </div>
 
-              {/* Guild Legacy Display */}
-              <div className="mb-6">
-                <h3 className="text-lg font-bold text-[var(--reigns-text)] mb-3 text-center">
-                  Guild Legacy
-                </h3>
-                <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-red-400">{legacyPoints.martyr}</div>
-                    <div className="text-sm text-[var(--reigns-text-secondary)]">Martyr</div>
-                    <div className="text-xs text-[var(--reigns-text-secondary)]">High Rep, Low Funds</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-400">{legacyPoints.pragmatist}</div>
-                    <div className="text-sm text-[var(--reigns-text-secondary)]">Pragmatist</div>
-                    <div className="text-xs text-[var(--reigns-text-secondary)]">Balanced Collapse</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-green-400">{legacyPoints.dreamer}</div>
-                    <div className="text-sm text-[var(--reigns-text-secondary)]">Dreamer</div>
-                    <div className="text-xs text-[var(--reigns-text-secondary)]">High Readiness, Low Rep</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-yellow-400">{legacyPoints.survivor}</div>
-                    <div className="text-sm text-[var(--reigns-text-secondary)]">Survivor</div>
-                    <div className="text-xs text-[var(--reigns-text-secondary)]">Deck Exhaustion</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-purple-400">{legacyPoints.legend}</div>
-                    <div className="text-sm text-[var(--reigns-text-secondary)]">Legend</div>
-                    <div className="text-xs text-[var(--reigns-text-secondary)]">High All Meters</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Achievements Display */}
-              {unlockedAchievements.length > 0 && (
-                <div className="mb-6">
-                  <h3 className="text-lg font-bold text-[var(--reigns-text)] mb-3 text-center">
-                    🏆 New Achievements Unlocked!
-                  </h3>
-                  <div className="space-y-2 max-h-40 overflow-y-auto">
-                    {unlockedAchievements.slice(-5).map((achievement) => (
-                      <div key={achievement.id} className="flex items-center gap-3 p-2 bg-[var(--reigns-bg)] rounded">
-                        <div className="text-2xl">{getAchievementCategoryIcon(achievement.category)}</div>
-                        <div className="flex-1">
-                          <div className={`font-bold ${getAchievementRarityColor(achievement.rarity)}`}>
-                            {achievement.name}
-                          </div>
-                          <div className="text-sm text-[var(--reigns-text-secondary)]">
-                            {achievement.description}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-              
               <div className="flex justify-end gap-3">
                 <button
                   className="reigns-button"
