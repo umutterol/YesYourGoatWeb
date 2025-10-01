@@ -183,6 +183,8 @@ export default function YesYourGoat() {
         const role = cond.replace('intro:', ''); if (!seenState.intro?.[role]) return false
       } else if (cond.startsWith('seen:event:')) {
         const id = cond.replace('seen:event:', ''); if (!seenState.event?.[id]) return false
+      } else if (cond.startsWith('not:seen:event:')) {
+        const id = cond.replace('not:seen:event:', ''); if (seenState.event?.[id]) return false
       } else if (cond.startsWith('choice:')) {
         const [, id, side] = cond.split(':'); if ((choiceState as any)[id] !== side) return false
       } else if (cond.startsWith('meter:')) {
@@ -425,6 +427,13 @@ export default function YesYourGoat() {
       if (tags.includes('disabled')) return false
       if (tags.some(t => t.startsWith('race:'))) return false
       if (usedEventIds.includes(e.id)) return false
+      // Honor explicit cooldown:N (skip if seen within N days)
+      const cdTag = tags.find(t => t.startsWith('cooldown:'))
+      if (cdTag) {
+        const n = Number(cdTag.split(':')[1])
+        const last = lastSeenDayMap[e.id]
+        if (Number.isFinite(n) && typeof last === 'number' && (day - last) < n) return false
+      }
       // one-shot intros
       if (tags.includes('meta:intro')) { const role = getRoleTag(e); if (role && seenState.intro?.[role]) return false }
       // authoring-time gating

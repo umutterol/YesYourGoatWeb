@@ -2,7 +2,7 @@
 
 **Canonical reference for writing events. Supersedes all prior authoring docs.**
 
-Aligned with Constitution v1.0.0 and informed by Reigns' proven patterns.
+Aligned with Constitution v1.0.0 and informed by Reigns' proven patterns. When in doubt, treat `docs/run_blueprint.md` as the source of truth for flow, phases, and chains.
 
 ---
 
@@ -60,7 +60,7 @@ Every event is exactly this JSON shape:
 - **Council Moderator:** bureaucratic, cold, quota-driven
 - **Treasurer:** penny-pinching, spreadsheet-obsessed
 - **Rival:** mocking, boastful, taunting
-- **Game Master:** cryptic, meta-aware, offers with hidden costs
+- **Game Master:** cryptic, meta-aware, offers with hidden costs (if validator warns, it’s still allowed; extend allowed list in validator as needed)
 
 ---
 
@@ -103,6 +103,10 @@ Every event is exactly this JSON shape:
 - `tutorial` — one-shot tutorial (never repeats)
 - `policy:logs` — marks a specific policy decision for cross-arc triggers
 
+### 4.1 Cooldowns & Negative Requires (Author Hints)
+- `cooldown:N` — authoring hint to avoid re-surfacing this card for the next N draws. The selector treats this as a soft cooldown (not a hard lock).
+- `require:not:seen:event:<id>` — use to model “!flag” style conditions. If not yet supported in code, invert logic using existing tags or request support.
+
 ---
 
 ## 5. Chaining & Multi-Step Arcs
@@ -125,6 +129,13 @@ Use `chain:<role>:<step>` tags for arcs:
 - Escalate tension/stakes with each step
 - Final step pays off or collapses the arc
 
+**Arc Anchors (Themes) — What to write toward:**
+- **Compliance Doctrine (Religious Tension analog):** exploit rumor → policy sweep → false accusation → logs vote → public thread → culture epilogue. Tension: rules vs people.
+- **Tier Campaign (War analog):** progression vs farm → extra hours → gate-boss outcome. Tension: glory vs burnout.
+- **Ledger Ethics (Moral analog):** bank error → small audit → trust post. Tension: honesty vs expedience.
+- **Economy & Charter (Tax/Trade analog):** dues talk → sponsor offer → PR explainer. Tension: solvency vs goodwill.
+- **Devil-as-GM (Strange/Meta):** offer → marker → memory. Tension: shortcuts vs debt.
+
 ---
 
 ## 6. Memory Variants (Choice Callbacks)
@@ -145,6 +156,11 @@ Events that react to prior choices:
 - Use `require:choice:<eventId>:left|right` to gate
 - Reference specific prior event IDs
 - Acknowledge the player's history in copy
+
+**Examples:**
+- `require:choice:dps_priority_01:left` → DPS threatens to sit (resentment); trade Readiness vs Reputation.
+- `require:choice:healer_budget_01:left` → Healer gratitude; small Reputation lift.
+- `require:choice:support_exp_rotation_01:right` → Support promises to clear trials with GM first.
 
 ---
 
@@ -172,6 +188,11 @@ Events that react to prior choices:
 - Optional: `cause:funds|reputation|readiness` to target specific meter
 - Shown when any meter hits 0
 
+**Resource Routing (Selector uses this matrix as guidance):**
+- Low Funds (≤3): prefer council/economy chain; otherwise random:economy.
+- Low Reputation (≤3): prefer PR/Compliance climax; otherwise random:community.
+- Low Readiness (≤3): prefer Tank logistics/raid checks; otherwise random:logistics.
+
 ---
 
 ## 8. Weights & Rarity (Reigns-inspired)
@@ -192,6 +213,10 @@ Add `weights` object to tune selection probability:
 
 Selection applies soft cooldowns and decay automatically (see constitution FR-011).
 
+**Author guidance:**
+- Use weights sparingly; most balancing is via gating + resource routing.
+- Wrongness/Devil cards should be low weight and heavily gated by run.
+
 ---
 
 ## 9. Phase Gates & Wrongness Escalation
@@ -204,6 +229,11 @@ Selection applies soft cooldowns and decay automatically (see constitution FR-01
 - Tag: `phase:2`, `require:run>=3`
 - Wrongness seeds: deja vu, memory glitches, repeated DMs
 - Escalated asks from Phase 1 roles
+
+**Glitch ladder examples:**
+- Subtle: identical reply timings (15s), repeated phrasing across roles, “pre‑existing” logs/receipts.
+- Noticeable: brief UI text flicker (one line), swapped choice labels for a frame.
+- Intrusive: Devil offer with a ledger “marker”; copy implies scheduled cycles.
 
 **Phase 3 (Runs 5–6):** Deeper arcs
 - Tag: `phase:3`, `require:run>=5`
@@ -261,6 +291,8 @@ Run `npm run build` in `web-ts/` (validator auto-runs). Check for:
 - [ ] Portrait path valid
 - [ ] `require:*` references existing event IDs or valid conditions
 - [ ] Reads like MMO guild satire (not generic fantasy)
+- [ ] Phase gates respected (e.g., wrongness run≥3, Devil run≥7, reveal run≥9)
+- [ ] Aligns with `docs/run_blueprint.md` (correct step/arc/trigger)
 
 ---
 
@@ -273,6 +305,11 @@ Run `npm run build` in `web-ts/` (validator auto-runs). Check for:
 5. **Playtest:** `npm run dev` → http://localhost:5173/
 6. **Iterate** based on flow/tone
 7. **Commit** when satisfied
+
+**Tips:**
+- Keep a single tension per card (e.g., fairness vs speed). Don’t stack three themes.
+- Favor tradeoffs over freebies; cost is character.
+- Portraits are required for character-facing events; choose appropriate role art.
 
 ---
 
@@ -287,4 +324,3 @@ Run `npm run build` in `web-ts/` (validator auto-runs). Check for:
 ---
 
 **End of Authoring Guide**
-

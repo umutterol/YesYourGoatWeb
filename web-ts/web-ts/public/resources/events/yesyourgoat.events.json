@@ -650,107 +650,153 @@
     }
   },
   {
-    "id": "healer_budget_01",
-    "title": "Essentials Fund",
-    "speaker": "Healer",
-    "portrait": "/resources/portraits/priestess.png",
-    "body": "Potions are adding up. Can the bank cover basics this week?",
+    "id": "bench_roulette_01",
+    "title": "Bench Roulette",
+    "speaker": "Tank",
+    "portrait": "/resources/portraits/mountainking.png",
+    "body": "They want a wheel to pick the bench. Fun, chaotic.",
     "tags": [
       "raid_logistics",
-      "require:intro:healer",
-      "chain:healer:1",
+      "require:intro:tank",
+      "phase:1",
+      "cooldown:6"
+    ],
+    "left": {
+      "label": "Spin the wheel",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    },
+    "right": {
+      "label": "Use logs",
+      "effects": {
+        "readiness": 1,
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "glitter_cones_01",
+    "title": "Glitter Cones",
+    "speaker": "Tank",
+    "portrait": "/resources/portraits/mountainking.png",
+    "body": "They made glitter cone diagrams. Adopt them?",
+    "tags": [
+      "raid_logistics",
+      "require:intro:tank",
       "phase:1"
     ],
     "left": {
-      "label": "Cover essentials",
+      "label": "Adopt cones",
       "effects": {
-        "funds": -2,
         "readiness": 1
       }
     },
     "right": {
-      "label": "Not this week",
-      "effects": {
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "dps_priority_01",
-    "title": "Shorter Fights",
-    "speaker": "Rogue",
-    "portrait": "/resources/portraits/rogue.png",
-    "body": "If damage upgrades go first this week, I can shorten fights. Your call?",
-    "tags": [
-      "player_drama",
-      "require:intro:dps",
-      "chain:dps:1",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Keep fair order",
+      "label": "Use text",
       "effects": {
         "reputation": 1
       }
-    },
-    "right": {
-      "label": "Damage first",
-      "effects": {
-        "readiness": 1,
-        "reputation": -1
-      }
     }
   },
   {
-    "id": "support_exp_rotation_01",
-    "title": "Trial Window",
-    "speaker": "Arcanist",
-    "portrait": "/resources/portraits/sorceress.png",
-    "body": "I’ve got a risky rotation worth a try. Off‑hours, or during raid?",
-    "tags": [
-      "player_drama",
-      "require:intro:support",
-      "chain:support:1",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Test off‑hours",
-      "effects": {
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Test in raid",
-      "effects": {
-        "readiness": 2,
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "tank_standards_01",
-    "title": "Minimums",
-    "speaker": "Tank",
-    "portrait": "/resources/portraits/mountainking.png",
-    "body": "Set roster minimums before raid? It’ll slow invites but save wipes.",
+    "id": "reset_bingo_01",
+    "title": "Reset Bingo",
+    "speaker": "Officer",
+    "portrait": "/resources/portraits/warden.png",
+    "body": "Call ‘bingo’ on funny resets. Sanction it?",
     "tags": [
       "raid_logistics",
-      "require:intro:tank",
-      "chain:tank:1",
+      "require:intro:officer",
+      "phase:1",
+      "cooldown:6"
+    ],
+    "left": {
+      "label": "Sanction it",
+      "effects": {
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Eyes on boss",
+      "effects": {
+        "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "emoji_calls_01",
+    "title": "Emoji Calls",
+    "speaker": "Councilor",
+    "portrait": "/resources/portraits/warden.png",
+    "body": "Cooldowns are emojis now. Enforce words, or keep chaos?",
+    "tags": [
+      "policy",
+      "require:intro:compliance",
       "phase:1"
     ],
     "left": {
-      "label": "Set minimums",
+      "label": "Words, please",
       "effects": {
         "readiness": 1,
         "reputation": -1
       }
     },
     "right": {
-      "label": "Stay flexible",
+      "label": "Let it ride",
       "effects": {
-        "reputation": 1,
-        "readiness": -1
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "prepot_sting_01",
+    "title": "Pre‑Pot Sting",
+    "speaker": "Councilor",
+    "portrait": "/resources/portraits/warden.png",
+    "body": "Three raiders pre‑potted on trash for screenshots. Policy?",
+    "tags": [
+      "policy",
+      "require:intro:compliance",
+      "phase:1",
+      "cooldown:6"
+    ],
+    "left": {
+      "label": "Count it",
+      "effects": {
+        "readiness": 1,
+        "reputation": -1
+      }
+    },
+    "right": {
+      "label": "Trash doesn’t count",
+      "effects": {
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "spreadsheet_subpoena_01",
+    "title": "Spreadsheet Subpoena",
+    "speaker": "Recruiter",
+    "portrait": "/resources/portraits/paladin.png",
+    "body": "Recruit posted a 12‑tab sheet titled ‘Why I’m Right’. Review it?",
+    "tags": [
+      "recruitment",
+      "require:intro:recruiter",
+      "phase:1"
+    ],
+    "left": {
+      "label": "Skim it",
+      "effects": {
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "No manifestos",
+      "effects": {
+        "reputation": 1
       }
     }
   },
@@ -825,6 +871,110 @@
     }
   },
   {
+    "id": "pr_tone_post_01",
+    "title": "Tone Post",
+    "speaker": "Bard",
+    "portrait": "/resources/portraits/darkranger.png",
+    "body": "A short ‘tone’ post could cool chatter. Want one?",
+    "tags": [
+      "community_pr",
+      "phase:1"
+    ],
+    "weights": {
+      "base": 1
+    },
+    "left": {
+      "label": "Post calmly",
+      "effects": {
+        "funds": -1,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Skip it",
+      "effects": {
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "parse_court_01",
+    "title": "Parse Court",
+    "speaker": "Bard",
+    "portrait": "/resources/portraits/darkranger.png",
+    "body": "They want a tribunal for loot drama. Sanction it?",
+    "tags": [
+      "community_pr",
+      "require:intro:pr",
+      "phase:1",
+      "cooldown:8"
+    ],
+    "left": {
+      "label": "Official court",
+      "effects": {
+        "reputation": 1,
+        "funds": -1
+      }
+    },
+    "right": {
+      "label": "No courts",
+      "effects": {
+        "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "petty_cash_jar_01",
+    "title": "Petty Cash Jar",
+    "speaker": "Treasurer",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "Request: a literal jar labeled ‘petty cash’. Approve?",
+    "tags": [
+      "meta_economy",
+      "require:intro:treasurer",
+      "phase:1"
+    ],
+    "left": {
+      "label": "Approve jar",
+      "effects": {
+        "funds": -1,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Digital only",
+      "effects": {
+        "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "lottery_tab_01",
+    "title": "Lottery Tab",
+    "speaker": "Treasurer",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "A ‘lottery’ tab appeared in the bank. Somebody’s idea of fun?",
+    "tags": [
+      "meta_economy",
+      "require:intro:treasurer",
+      "phase:1",
+      "cooldown:8"
+    ],
+    "left": {
+      "label": "Close it",
+      "effects": {
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Weekly draw",
+      "effects": {
+        "reputation": 1,
+        "funds": -1
+      }
+    }
+  },
+  {
     "id": "random_invite_midpull_01",
     "title": "Mid-Pull Ping",
     "speaker": "Officer",
@@ -846,6 +996,33 @@
       "effects": {
         "readiness": -1,
         "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "snack_buff_01",
+    "title": "Snack Buff",
+    "speaker": "Healer",
+    "portrait": "/resources/portraits/priestess.png",
+    "body": "Mid-pull snack breaks labeled ‘Totally Legal’. Allow?",
+    "tags": [
+      "random_pool",
+      "random:logistics",
+      "require:intro:healer",
+      "phase:1",
+      "cooldown:6"
+    ],
+    "left": {
+      "label": "No snacking",
+      "effects": {
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Snack meta",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
       }
     }
   },
@@ -1416,6 +1593,164 @@
     }
   },
   {
+    "id": "parse_patrol_01",
+    "title": "Parse Patrol",
+    "speaker": "Councilor",
+    "portrait": "/resources/portraits/warden.png",
+    "body": "Logs show a ‘personal best’ during boss RP. Ask how?",
+    "tags": [
+      "policy",
+      "require:intro:compliance",
+      "require:run>=3",
+      "phase:2",
+      "cooldown:6"
+    ],
+    "left": {
+      "label": "Ask politely",
+      "effects": {
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Quietly ignore",
+      "effects": {
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "safety_word_01",
+    "title": "Safety Word",
+    "speaker": "Councilor",
+    "portrait": "/resources/portraits/warden.png",
+    "body": "Set ‘PINEAPPLE’ as the universal wipe call?",
+    "tags": [
+      "policy",
+      "require:intro:compliance",
+      "require:run>=3",
+      "phase:2"
+    ],
+    "left": {
+      "label": "Pineapple it is",
+      "effects": {
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "No safe word",
+      "effects": {
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "trash_wr_02",
+    "title": "Trash WR",
+    "speaker": "Rogue",
+    "portrait": "/resources/portraits/rogue.png",
+    "body": "They’re chasing a trash world record. Permit the detour?",
+    "tags": [
+      "raid_logistics",
+      "require:intro:dps",
+      "require:run>=3",
+      "phase:2",
+      "cooldown:6"
+    ],
+    "left": {
+      "label": "No detours",
+      "effects": {
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Let them cook",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "composure_check_02",
+    "title": "Composure Check",
+    "speaker": "Healer",
+    "portrait": "/resources/portraits/priestess.png",
+    "body": "A 60s breathe-and-reset after wipes. Adds time, saves lives.",
+    "tags": [
+      "raid_logistics",
+      "require:intro:healer",
+      "require:run>=3",
+      "phase:2"
+    ],
+    "left": {
+      "label": "Take the minute",
+      "effects": {
+        "readiness": 1,
+        "funds": -1
+      }
+    },
+    "right": {
+      "label": "Push pace",
+      "effects": {
+        "reputation": -1,
+        "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "mystery_coupon_01",
+    "title": "Mystery Coupon",
+    "speaker": "Treasurer",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "Vendor emailed a 10% code ‘GUILDMOM’. Use it or avoid optics?",
+    "tags": [
+      "meta_economy",
+      "require:intro:treasurer",
+      "require:run>=3",
+      "phase:2"
+    ],
+    "left": {
+      "label": "Use code",
+      "effects": {
+        "funds": 1,
+        "reputation": -1
+      }
+    },
+    "right": {
+      "label": "Decline",
+      "effects": {
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "gear_amnesty_02",
+    "title": "Gear Amnesty",
+    "speaker": "Officer",
+    "portrait": "/resources/portraits/warden.png",
+    "body": "Amnesty day again? Pick a forgiving tone or skip it.",
+    "tags": [
+      "meta_economy",
+      "require:intro:officer",
+      "require:run>=3",
+      "phase:2",
+      "cooldown:8"
+    ],
+    "left": {
+      "label": "Run amnesty",
+      "effects": {
+        "funds": 1,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "No amnesty",
+      "effects": {
+        "reputation": -1
+      }
+    }
+  },
+  {
     "id": "compliance_hook_01",
     "title": "Exploit Rumor",
     "speaker": "Councilor",
@@ -1648,6 +1983,32 @@
     }
   },
   {
+    "id": "glam_night_03",
+    "title": "Glam Night",
+    "speaker": "Officer",
+    "portrait": "/resources/portraits/warden.png",
+    "body": "Progression glam dress code tonight? Morale up, focus maybe down.",
+    "tags": [
+      "raid_logistics",
+      "require:run>=5",
+      "phase:3",
+      "cooldown:6"
+    ],
+    "left": {
+      "label": "Glam approved",
+      "effects": {
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Uniforms only",
+      "effects": {
+        "readiness": 1,
+        "reputation": -1
+      }
+    }
+  },
+  {
     "id": "arc_ethics_hook_01",
     "title": "Bank Error",
     "speaker": "Treasurer",
@@ -1719,6 +2080,31 @@
       "label": "No need",
       "effects": {
         "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "sponsor_rename_03",
+    "title": "Naming Rights",
+    "speaker": "Treasurer",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "Brand wants to rename the raid ‘Paladin Energy Wing’. Accept?",
+    "tags": [
+      "meta_economy",
+      "require:run>=5",
+      "phase:3"
+    ],
+    "left": {
+      "label": "Take the bag",
+      "effects": {
+        "funds": 2,
+        "reputation": -2
+      }
+    },
+    "right": {
+      "label": "Keep our name",
+      "effects": {
+        "reputation": 1
       }
     }
   },
@@ -1796,6 +2182,31 @@
       "label": "Internal only",
       "effects": {
         "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "dues_vote_03",
+    "title": "Dues Vote",
+    "speaker": "Treasurer",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "Lock dues for a month at current rate?",
+    "tags": [
+      "meta_economy",
+      "require:run>=5",
+      "phase:3",
+      "cooldown:12"
+    ],
+    "left": {
+      "label": "Lock it",
+      "effects": {
+        "funds": 1
+      }
+    },
+    "right": {
+      "label": "Keep flexible",
+      "effects": {
+        "reputation": 1
       }
     }
   },
