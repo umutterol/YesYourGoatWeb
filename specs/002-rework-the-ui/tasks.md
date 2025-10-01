@@ -65,7 +65,7 @@ Task: "keyboard fallback test" [P]
 - [x] T017 Create `web-ts/src/components/Reigns/ReignsCard.tsx` (portrait, title, body, two choices) using current styles
 - [x] T018 Create `web-ts/src/components/Reigns/SwipeLayer.tsx` (33% commit + overlay previews) and compose with ReignsCard
 - [x] T019 Create `web-ts/src/components/Reigns/ReignsScreen.tsx` (ResourceBar + SwipeLayer + minimal container)
-- [ ] T020 Wire `web-ts/src/main.tsx` to render ReignsScreen only
+- [x] T020 Wire `web-ts/src/main.tsx` to render ReignsScreen only
 - [ ] T021 [P] Delete or archive unused UI components (chat, unused panels) and references
 - [ ] T022 [P] Update tests to target Reigns components (`__tests__/reigns_*.spec.tsx`)
 

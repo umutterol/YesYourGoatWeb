@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
-import ResourceBar from '../../components/ResourceBar/ResourceBar'
-import ResourceAnimations from '../../components/ResourceBar/ResourceAnimations'
-import CardStack from '../../components/Card/CardStack'
+import ReignsScreen from '../../components/Reigns/ReignsScreen'
 import { calculateChaosChance, getAvailableChaosEvents, drawChaosEvent } from '../../utils/chaosEvents'
 import type { ChaosEvent } from '../../utils/chaosEvents'
 import { calculateGlitchChance, getAvailableGlitchEvents, drawGlitchEvent } from '../../utils/glitchEvents'
@@ -89,7 +87,6 @@ export default function YesYourGoat() {
   const [day, setDay] = useState(1)
   const [events, setEvents] = useState<EventCard[]>([])
   const [current, setCurrent] = useState<EventCard | null>(null)
-  const [nextCard, setNextCard] = useState<EventCard | null>(null)
   const [sawRival, setSawRival] = useState(false)
   const [victoryText, setVictoryText] = useState('')
   const [showSummary, setShowSummary] = useState(false)
@@ -298,7 +295,7 @@ export default function YesYourGoat() {
       })
       return prioritized[0]
     }
-
+    
     // Check for narrative events first (highest priority for story progression)
     const availableNarrativeEvents = getAvailableNarrativeEvents(
       currentMetaPhase.phase,
@@ -581,10 +578,6 @@ export default function YesYourGoat() {
       if (nxt) setUsedEventIds(prev => [...prev, nxt.id])
       setCurrent(nxt)
       markPresented(nxt)
-      
-      // Set next card for preview
-      const nextNxt = drawNext()
-      setNextCard(nextNxt)
       return
     }
     
@@ -606,10 +599,6 @@ export default function YesYourGoat() {
       if (nxt) setUsedEventIds(prev => [...prev, nxt.id])
       setCurrent(nxt)
       markPresented(nxt)
-      
-      // Set next card for preview
-      const nextNxt = drawNext()
-      setNextCard(nextNxt)
       return
     }
     
@@ -638,10 +627,6 @@ export default function YesYourGoat() {
       if (nxt) setUsedEventIds(prev => [...prev, nxt.id])
       setCurrent(nxt)
       markPresented(nxt)
-      
-      // Set next card for preview
-      const nextNxt = drawNext()
-      setNextCard(nextNxt)
       return
     }
     
@@ -669,10 +654,6 @@ export default function YesYourGoat() {
       const nxt = drawNext()
       if (nxt) setUsedEventIds(prev => [...prev, nxt.id])
       setCurrent(nxt)
-      
-      // Set next card for preview
-      const nextNxt = drawNext()
-      setNextCard(nextNxt)
       return
     }
     
@@ -748,198 +729,49 @@ export default function YesYourGoat() {
     if (nxt) setUsedEventIds(prev => [...prev, nxt.id])
     setCurrent(nxt)
     markPresented(nxt)
-    
-    // Set next card for preview
-    const nextNxt = drawNext()
-    setNextCard(nextNxt)
   }
 
-  return (
-    <div className="min-h-screen w-full bg-[var(--reigns-bg)] text-[var(--reigns-text)]">
-      <div className="max-w-md mx-auto flex flex-col h-screen">
-        {/* Resource Bar */}
-        <div className="p-4">
-          <ResourceBar 
-            funds={meters.funds}
-            reputation={meters.reputation}
-            readiness={meters.readiness}
-          />
-        </div>
+  // Convert special events to regular EventCard format for ReignsScreen
+  const displayEvent: EventCard | null = 
+    gameMasterOffer ? {
+      id: gameMasterOffer.id,
+      title: gameMasterOffer.title,
+      body: gameMasterOffer.body,
+      speaker: gameMasterOffer.speaker,
+      portrait: '/resources/portraits/dreadlord.png',
+      left: { label: gameMasterOffer.left.label, effects: gameMasterOffer.left.visibleEffects || {} },
+      right: { label: gameMasterOffer.right.label, effects: gameMasterOffer.right.visibleEffects || {} }
+    } :
+    glitchEvent ? {
+      id: glitchEvent.id,
+      title: glitchEvent.title,
+      body: glitchEvent.body,
+      speaker: glitchEvent.speaker,
+      portrait: glitchEvent.portrait,
+      left: glitchEvent.left,
+      right: glitchEvent.right
+    } :
+    chaosEvent ? {
+      id: chaosEvent.id,
+      title: chaosEvent.title,
+      body: chaosEvent.body,
+      speaker: chaosEvent.speaker,
+      portrait: chaosEvent.portrait,
+      left: chaosEvent.left,
+      right: chaosEvent.right
+    } :
+    narrativeEvent ? {
+      id: narrativeEvent.id,
+      title: narrativeEvent.title,
+      body: narrativeEvent.body,
+      speaker: narrativeEvent.speaker,
+      portrait: narrativeEvent.portrait,
+      left: narrativeEvent.left,
+      right: narrativeEvent.right
+    } :
+    current;
 
-        {/* Resource Change Animations */}
-        <ResourceAnimations
-          funds={meters.funds}
-          reputation={meters.reputation}
-          readiness={meters.readiness}
-          previousFunds={previousMeters?.funds}
-          previousReputation={previousMeters?.reputation}
-          previousReadiness={previousMeters?.readiness}
-        />
-
-        {/* Main Game Area */}
-        <div className="flex-1 flex items-center justify-center p-4">
-          {gameMasterOffer ? (
-            <div className="reigns-card card-desktop p-6 max-w-2xl mx-auto">
-              <div className="text-center mb-6">
-                <div className="text-3xl mb-2">👤</div>
-                <div className="text-sm text-purple-400 font-bold">MYSTERIOUS OFFER</div>
-              </div>
-              
-              {/* Portrait and Speaker */}
-              <div className="flex justify-center mb-6">
-                <div className="w-24 h-24 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
-                  {gameMasterOffer.speaker.charAt(0)}
-                </div>
-              </div>
-              
-              <h2 className="text-2xl font-bold text-center mb-4 text-[var(--reigns-text)]">
-                {gameMasterOffer.title}
-              </h2>
-              
-              <p className="text-lg text-center mb-8 text-[var(--reigns-text-secondary)] leading-relaxed">
-                {gameMasterOffer.body}
-              </p>
-              
-              {/* Choices */}
-              <div className="space-y-4">
-                <button
-                  onClick={() => decide('left')}
-                  className="w-full p-4 bg-red-500 hover:bg-red-600 text-white font-bold rounded-lg transition-colors"
-                >
-                  {gameMasterOffer.left.label}
-                </button>
-                <button
-                  onClick={() => decide('right')}
-                  className="w-full p-4 bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg transition-colors"
-                >
-                  {gameMasterOffer.right.label}
-                </button>
-              </div>
-            </div>
-          ) : glitchEvent ? (
-            <div className="reigns-card card-desktop p-6 max-w-2xl mx-auto">
-              <div className="text-center mb-6">
-                <div className="text-3xl mb-2">⚠️</div>
-                <div className="text-sm text-orange-400 font-bold">SYSTEM GLITCH</div>
-              </div>
-              
-              {/* Portrait and Speaker */}
-              <div className="flex justify-center mb-6">
-                <div className="w-24 h-24 bg-gradient-to-br from-orange-400 to-red-400 rounded-full flex items-center justify-center text-white text-2xl font-bold">
-                  {glitchEvent.speaker.charAt(0)}
-                </div>
-              </div>
-              
-              <h2 className="text-2xl font-bold text-center mb-4 text-[var(--reigns-text)]">
-                {glitchEvent.title}
-              </h2>
-              
-              <p className="text-lg text-center mb-8 text-[var(--reigns-text-secondary)] leading-relaxed">
-                {glitchEvent.body}
-              </p>
-              
-              {/* Choices */}
-              <div className="space-y-4">
-                <button
-                  onClick={() => decide('left')}
-                  className="w-full p-4 bg-red-500 hover:bg-red-600 text-white font-bold rounded-lg transition-colors"
-                >
-                  {glitchEvent.left.label}
-                </button>
-                <button
-                  onClick={() => decide('right')}
-                  className="w-full p-4 bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg transition-colors"
-                >
-                  {glitchEvent.right.label}
-                </button>
-              </div>
-            </div>
-          ) : chaosEvent ? (
-            <div className="reigns-card card-desktop p-6 max-w-2xl mx-auto">
-              <div className="text-center mb-6">
-                <div className="text-3xl mb-2">🌟</div>
-                <div className="text-sm text-yellow-400 font-bold">CHAOS EVENT</div>
-              </div>
-              
-              {/* Portrait and Speaker */}
-              <div className="flex justify-center mb-6">
-                <div className="w-24 h-24 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center text-white text-2xl font-bold">
-                  {chaosEvent.speaker.charAt(0)}
-                </div>
-              </div>
-
-              {/* Event Title */}
-              <div className="text-2xl font-bold text-center mb-6 text-[var(--reigns-text)]">
-                {chaosEvent.title}
-              </div>
-
-              {/* Event Body */}
-              <div className="text-lg leading-relaxed mb-8 text-[var(--reigns-text-secondary)] flex-1 px-2">
-                {chaosEvent.body}
-              </div>
-
-              {/* Choice Buttons */}
-              <div className="flex gap-4">
-                <button 
-                  onClick={() => decide('left')}
-                  className="reigns-button flex-1"
-                >
-                  {chaosEvent.left?.label || 'Left'}
-                </button>
-                <button 
-                  onClick={() => decide('right')}
-                  className="reigns-button flex-1"
-                >
-                  {chaosEvent.right?.label || 'Right'}
-                </button>
-              </div>
-            </div>
-          ) : narrativeEvent ? (
-            <div className="max-w-md mx-auto">
-              <div className="bg-[var(--reigns-card)] rounded-2xl p-6 shadow-lg border border-[var(--reigns-border)]">
-                <div className="flex items-center mb-4">
-                  <img 
-                    src={narrativeEvent.portrait} 
-                    alt={narrativeEvent.speaker}
-                    className="w-12 h-12 rounded-full mr-4"
-                    onError={(e) => {
-                      e.currentTarget.src = '/resources/portraits/paladin.png'
-                    }}
-                  />
-                  <div>
-                    <h3 className="text-lg font-semibold text-[var(--reigns-text)]">{narrativeEvent.speaker}</h3>
-                    <p className="text-sm text-[var(--reigns-text-secondary)]">Narrative Event</p>
-                  </div>
-                </div>
-                <h2 className="text-xl font-bold mb-4 text-[var(--reigns-text)]">{narrativeEvent.title}</h2>
-                <p className="text-[var(--reigns-text-secondary)] mb-6 leading-relaxed">{narrativeEvent.body}</p>
-                <div className="flex gap-4">
-                  <button
-                    onClick={() => decide('left')}
-                    className="flex-1 bg-[var(--reigns-accent)] text-white py-3 px-6 rounded-xl font-semibold hover:bg-[var(--reigns-accent-hover)] transition-colors"
-                  >
-                    {narrativeEvent.left?.label || 'Left'}
-                  </button>
-                  <button
-                    onClick={() => decide('right')}
-                    className="flex-1 bg-[var(--reigns-accent)] text-white py-3 px-6 rounded-xl font-semibold hover:bg-[var(--reigns-accent-hover)] transition-colors"
-                  >
-                    {narrativeEvent.right?.label || 'Right'}
-                  </button>
-                </div>
-              </div>
-            </div>
-          ) : current && (
-            <CardStack 
-              current={current}
-              next={nextCard}
-              onChoice={decide}
-            />
-          )}
-        </div>
-
-        {/* Collapse Summary Modal */}
-        {showSummary && (
+  const summaryModal = showSummary ? (
           <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
             <div className="bg-[var(--reigns-card)] text-[var(--reigns-text)] rounded-lg border-2 border-[var(--reigns-border)] p-8 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
               <div className="text-2xl font-bold mb-4 text-center">Run Collapsed</div>
@@ -956,7 +788,7 @@ export default function YesYourGoat() {
                   <div>⚔️ <span className="font-mono">{(summaryMeters ?? meters).readiness}</span></div>
                 </div>
               </div>
-
+              
               <div className="flex justify-end gap-3">
                 <button
                   className="reigns-button"
@@ -973,8 +805,16 @@ export default function YesYourGoat() {
               </div>
             </div>
           </div>
-        )}
-      </div>
-    </div>
+  ) : null;
+
+  return (
+    <ReignsScreen
+      meters={meters}
+      previousMeters={previousMeters || undefined}
+      currentEvent={displayEvent}
+      onChoice={decide}
+      showSummary={showSummary}
+      summaryContent={summaryModal}
+    />
   )
 }
