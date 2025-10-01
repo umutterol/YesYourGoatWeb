@@ -1,0 +1,632 @@
+﻿=== ALL REIGNS EVENT RESPONSES (COMPLETE) ===
+Total Cards: 887
+
+--- CARD #22 ---
+Question: This is probably a case of lycanthropy. I don't deal with that.
+
+NO RESPONSE: <i><general> puts the monks in prison. They confessed under the torture that they were indeed werewolves.</i>
+========================================
+
+--- CARD #24 ---
+Question: A convent of nuns has started meowing like cats. It's spreading to the village.
+
+YES RESPONSE: <i>You send the army to stop the nun-meowing. The Church is embarrassed, but approves.</i>
+NO RESPONSE: <i>The nuns kept meowing for ages. In the end the Church declared them heretics and burnt down the convent.</i>
+========================================
+
+--- CARD #30 ---
+Question: A man claims the recent epidemic of dysentery was in God's plan to bring Love to the world.
+
+YES RESPONSE: <i>A man enters the throne room, pushing <monk> away.</i>
+NO RESPONSE: <i>A man enters the throne room, pushing <monk> away.</i>
+========================================
+
+--- CARD #34 ---
+Question: This is outrageous! This is contagious! This heretic needs to burn!
+
+YES RESPONSE: <i>Reluctantly, the executioner takes the Prophet away.</i>
+========================================
+
+--- CARD #38 ---
+Question: I will show the way of righteousness to your merchants. Behold!
+
+NO RESPONSE: <i><prophet> leaves, brooding, but with your money.</i>
+========================================
+
+--- CARD #39 ---
+Question: Sire... There's been a problem with...
+
+YES RESPONSE: <i><prophet> managed to enrage the cattle while preaching at the market. There are a lot of casualties.</i>
+NO RESPONSE: <i><prophet> managed to enrage the cattle while preaching at the market. There are a lot of casualties.</i>
+========================================
+
+--- CARD #40 ---
+Question: I want to visit our godless neighbours. Except if you need me here?
+
+NO RESPONSE: <i><prophet> managed to destabilize the neighbours' country, strengthening your own position.</i>
+========================================
+
+--- CARD #48 ---
+Question: May the Saints forgive your sins <i>(you feel someone behind your back)</i>.
+
+YES RESPONSE: <i>You're grasped from behind by an armed monk.</i>
+NO RESPONSE: <i>You manage to escape the trap, in extremis. The <priest> is sent to the executioner.</i>
+========================================
+
+--- CARD #50 ---
+Question: My Lord, could I talk to you in private? I know the priest will have to wait but this is a very important matter...
+
+YES RESPONSE: <i>The doctor enters a side room. He talks nervously about <nobleman>, who was ill the previous week.</i>
+========================================
+
+--- CARD #52 ---
+Question: This is not true!! Your doctor has a wicked soul. You should ask him about the hidden room...
+
+YES RESPONSE: <i>As you finish the sentence, <nobleman> falls to his knees, screaming</i> the Senator!
+========================================
+
+--- CARD #72 ---
+Question: The general?
+
+YES RESPONSE: <i><general> confessed he ordered the murders to impose his power in the Kingdom.</i>
+========================================
+
+--- CARD #77 ---
+Question: Please follow me my Lord, <i>(upset)</i> something terrible has happened.
+
+YES RESPONSE: <i>You follow <diplomat> outside the castle. But suddenly your body becomes limp and the world spins, spins so fast.</i>
+========================================
+
+--- CARD #79 ---
+Question: Good, now listen carefully. I am called the Senator and I...
+
+YES RESPONSE: <i>You hear a loud noise, someone pulls you up and shouts</i> RUN NOW
+NO RESPONSE: <i>You hear a loud noise, someone pulls you up and shouts</i> RUN NOW
+========================================
+
+--- CARD #89 ---
+Question: It is me, <lady>. Shussh, they're coming.
+
+YES RESPONSE: <i>You're lying behind a large tree stump. Men with torches pass by without noticing you.</i>
+NO RESPONSE: <i><lady> is dishevelled and panting. You hear people running by, but no one stops.</i>
+========================================
+
+--- CARD #114 ---
+Question: I give you life.
+
+YES RESPONSE: <i>The homunculus brings you to a strange machine full of wires and knobs, hidden under the palace of Lamascus.</i>
+NO RESPONSE: <i>The homunculus reveals the position of a strange machine full of wires and knobs, hidden under the palace of Lamascus.</i>
+========================================
+
+--- CARD #119 ---
+Question: This crusade has to stop. Take the treasure if you will, but remove your armies. You're going nowhere.
+
+YES RESPONSE: <i><foreign_princess> handed over the keys to Lamascus' treasure and whispered, looking straight at you:</i> Choke on it.
+========================================
+
+--- CARD #151 ---
+Question: Let me handle this. Most of the leaders have been through my school.
+
+YES RESPONSE: <i><nun> chastises the leaders of the mob vehemently, emphasizing their lack of manners. Strangely, it works.</i>
+========================================
+
+--- CARD #155 ---
+Question: A royal head is at stake! Are you happy with that throw?
+
+YES RESPONSE: <i><jester> slowly lifts the goblet, revealing two dice...</i>
+========================================
+
+--- CARD #187 ---
+Question: People are scared and now consider you responsible for the terrorist attacks. They want your head!
+
+NO RESPONSE: <i>The mob barely listened and started regrouping outside the castle.</i>
+========================================
+
+--- CARD #216 ---
+Question: An ambitious lizard is gathering the baronies to become a dragon and crush you.
+
+YES RESPONSE: <i>You keep the Eastern baronies in a state of turmoil and unorganized power.</i> 
+========================================
+
+--- CARD #217 ---
+Question: I can draw red ants to the bed of the Eastern baronies. Your call.
+
+YES RESPONSE: <i>You put the Eastern baronies in a state of turmoil and unorganized power.</i> 
+========================================
+
+--- CARD #246 ---
+Question: Tweet! <i>It seems the bird was carrying a message but it's not there anymore.</i>
+
+YES RESPONSE: <i>You find a torn paper with a partial message: "ARM...".</i>
+NO RESPONSE: <i>You find a lot of garbage, but no message.</i>
+========================================
+
+--- CARD #247 ---
+Question: This message must be important. Let me send some men to the borders.
+
+NO RESPONSE: <i>It was an important message.</i>
+========================================
+
+--- CARD #279 ---
+Question: Disappointing this hunt. We only found mushrooms, a brown one and a blue one.
+
+NO RESPONSE: <i>Nothing happens.</i>
+========================================
+
+--- CARD #300 ---
+Question: You're trying to trick me! I know the treasury is empty.
+
+YES RESPONSE: <i><jester> slowly lifts the goblet, revealing two dice...</i>
+========================================
+
+--- CARD #295 ---
+Question: Dice are rolling! I'm pretty sure I won. You don't want to raise the stakes while we still can?
+
+YES RESPONSE: <i><jester> slowly lifts the goblet, revealing two dice...</i>
+========================================
+
+--- CARD #297 ---
+Question: C'mon. I know you can do better.
+
+YES RESPONSE: <i><jester> slowly lifts the goblet, revealing two dice...</i>
+========================================
+
+--- CARD #299 ---
+Question: You have to bet the treasure!
+
+YES RESPONSE: <i><jester> slowly lifts the goblet, revealing two dice...</i>
+NO RESPONSE: <i><jester> slowly lifts the goblet, revealing two dice...</i>
+========================================
+
+--- CARD #309 ---
+Question: I have a gift for you in one of my hands.
+
+YES RESPONSE: <i><jester> gives you a dead bird. Then he runs away, shrieking.</i>
+NO RESPONSE: <i><jester> gives you a golden cross. Then he runs away, shrieking.</i>
+========================================
+
+--- CARD #323 ---
+Question: No wait, just hear me out for a while.
+
+NO RESPONSE: <i><jester> was executed shortly afterwards.</i>
+========================================
+
+--- CARD #339 ---
+Question: My Lord... Would you like to taste my cake?
+
+YES RESPONSE: <i>It was a very good cake.</i>
+========================================
+
+--- CARD #343 ---
+Question: I'm acquainted with a minstrel of great renown. Let's fill the air with dulcet tones!
+
+YES RESPONSE: <i>Perhaps this will raise the spirits of the Kingdom...</i>
+NO RESPONSE: <i>You decide the court's wealth is better spent on other matters.</i>
+========================================
+
+--- CARD #344 ---
+Question: My art is not to your liking, I can tell. I'm leaving for the kingdom of the West. They have better taste!
+
+YES RESPONSE: <i>You have the merchant sell the minstrel's works. There shan't be another note played.</i>
+========================================
+
+--- CARD #354 ---
+Question: My Lord! It it is with great enthusiasm and trepidation I present to you... my Magnum Opus!
+
+YES RESPONSE: <i>Money is a poor substitute, but you feel the minstrel has earned his fair share.</i>
+NO RESPONSE: <i>The minstrel has many fans, and managed to escape on the way to the executioner.</i>
+========================================
+
+--- CARD #355 ---
+Question: I am deeply sorry to have disturbed your musical expectations, My Lord. Me and my muse won't bother you again.
+
+YES RESPONSE: <i>The minstrel's mediocre songs are put to the test against your enemies...</i>
+========================================
+
+--- CARD #359 ---
+Question: We heard about a young princess being held against her will in Dark Rock castle.
+
+YES RESPONSE: <i>You ride to Dark Rock in full armour, proud, glorious and glittering.</i>
+========================================
+
+--- CARD #369 ---
+Question: Hum... <i>(whispering)</i> A young woman claims that her son is in fact your bastard. Should we make this problem disappear?
+
+YES RESPONSE: <i>You never hear from the woman again.</i>
+NO RESPONSE: <i>It quickly becomes apparent that the son is here to stay.</i>
+========================================
+
+--- CARD #383 ---
+Question: I'm going for a walk in the garden. Would you like to come my Lord?
+
+YES RESPONSE: <i><lady> brings you to the garden. She seems unsettled and nervous. She talks softly.</i>
+========================================
+
+--- CARD #384 ---
+Question: The Queen despises me, I'm sure! She talks behind my back and looks at me so strangely.
+
+YES RESPONSE: <i>You tell <lady> that you love her so profoundly it must be obvious to the Queen.</i>
+========================================
+
+--- CARD #385 ---
+Question: Oh my Lord. What can I say?
+
+NO RESPONSE: <i><lady> looks at you with incredulity, then leaves.</i>
+========================================
+
+--- CARD #390 ---
+Question: You're a worthless husband, a terrible king and a bad lover. I'm out of here.
+
+YES RESPONSE: <i>The Queen leaves with a part of your army and many curses.</i>
+NO RESPONSE: <i>The Queen leaves with a part of your army and many curses.</i>
+========================================
+
+--- CARD #398 ---
+Question: I'm pretty confident this concoction of leeches fed on maiden blood will cure your gout.
+
+YES RESPONSE: <i>You drink the potion. It makes you ill and delirious for days on end but doesn't cure the gout. You feel suddenly very old.</i>
+NO RESPONSE: <i>Good call.</i>
+========================================
+
+--- CARD #405 ---
+Question: I invited my young brother to join us for the Spring festival.
+
+NO RESPONSE: <i>It seems you don't have much say in the matter.</i>
+========================================
+
+--- CARD #423 ---
+Question: <nobleman> is at the head of a large horde of half-bandits. Should I send the army?
+
+NO RESPONSE: <i>After that decision, chaos ensued in the Eastern baronies, again.</i> 
+========================================
+
+--- CARD #424 ---
+Question: I surrender! Let me live and I will tell you where the bandits' treasure is.
+
+YES RESPONSE: <i>It was apparently a very small treasure.</i>
+========================================
+
+--- CARD #439 ---
+Question: Apparently this derangement was caused by rye grain poisoning. Should we burn our stocks?
+
+YES RESPONSE: <i>With your stock depleted, there's a reasonable chance your people will starve in the following years.</i>
+NO RESPONSE: <i>The poisoning spread and became difficult to control.</i>
+========================================
+
+--- CARD #446 ---
+Question: I visited one of the slave ships. It's... unbearable.
+
+NO RESPONSE: <i><merchant> leaves the court shortly afterwards and never comes back.</i>
+========================================
+
+--- CARD #459 ---
+Question: I don't feel too bad actually. I feel strong... and hungry!
+
+YES RESPONSE: <i>Shortly afterwards many sheep and some peasants disappear.</i>
+NO RESPONSE: <i>But a monk and a couple of soldiers disappear 'inexplicably' afterwards.</i>
+========================================
+
+--- CARD #496 ---
+Question: We can hire one of our useless students to do the writing, we have plenty.
+
+YES RESPONSE: <i>The book was an amazing success but <nobleman> takes time to pay your regal royalties.</i>
+NO RESPONSE: <i>You wrote your memoirs, but it was not a great success.</i>
+========================================
+
+--- CARD #497 ---
+Question: My Lord! Here are your royalties for your memoirs! All 5% of them.
+
+NO RESPONSE: <i><executioner> tortured <nobleman> and exceptionally, seemed to enjoy it.</i>
+========================================
+
+--- CARD #509 ---
+Question: Pronounce the holy word "Zgando" in the Eastern fashion.
+
+YES RESPONSE: <i>That was not the right answer.</i>
+========================================
+
+--- CARD #530 ---
+Question: Are you sure?
+
+YES RESPONSE: <i>The Queen leaves unexpectedly, with most of the court. You don't feel particularly happy about that.</i>
+========================================
+
+--- CARD #535 ---
+Question: ONE MINUTE.
+
+YES RESPONSE: <i><witch> waves her hands and suddenly your infirmity is gone.</i>
+NO RESPONSE: <i><witch> waves her hands and suddenly your infirmity is gone.</i>
+========================================
+
+--- CARD #537 ---
+Question: You found the Frozen Blood... I know you did.
+
+YES RESPONSE: <i>You put the ruby in the vase. It dissolves immediately and reveals...</i>
+========================================
+
+--- CARD #553 ---
+Question: Waufff! <i>(<dog> brings back a mysterious letter)</i>
+
+YES RESPONSE: <i>It says: Whatever you hear, the Senator is not your enemy. Signed: P.</i>
+========================================
+
+--- CARD #576 ---
+Question: I only talk to the King. If you're not the King, I'm going back to sleep.
+
+YES RESPONSE: <i>The spirit looks at you thoughtfully then disappears. You enter the throne room.</i>
+========================================
+
+--- CARD #771 ---
+Question: Just try to keep a balance between the four powers to keep your head on its shoulders.
+
+YES RESPONSE: <i>The spirit looks at you thoughtfully then disappears. You enter the courtroom.</i>
+NO RESPONSE: <i>The spirit looks at you thoughtfully then disappears. You enter the throne room.</i>
+========================================
+
+--- CARD #583 ---
+Question: That's an interesting thought. Maybe he does. Maybe we will find him eventually.
+
+YES RESPONSE: <i>The spirit slowly drifts away...</i>
+NO RESPONSE: <i>The spirit slowly drifts away...</i>
+========================================
+
+--- CARD #584 ---
+Question: That's an interesting lack of faith. I would love to be free though.
+
+YES RESPONSE: <i>The spirit slowly drifts away...</i>
+NO RESPONSE: <i>The spirit slowly drifts away...</i>
+========================================
+
+--- CARD #585 ---
+Question: The last visit of the Devil is approaching young King. Are we ready? Will we prevail?
+
+YES RESPONSE: <i>The spirit slowly drifts away...</i>
+NO RESPONSE: <i>The spirit slowly drifts away...</i>
+========================================
+
+--- CARD #586 ---
+Question: The Devil is coming one last time this century. It's our chance!
+
+YES RESPONSE: <i>The spirit slowly drifts away...</i>
+NO RESPONSE: <i>The spirit slowly drifts away...</i>
+========================================
+
+--- CARD #612 ---
+Question: <i>The walls are dark and sooty.</i>
+
+NO RESPONSE: <i>The room opens on a dark corridor full of corroded air. You hear a series of loud noises as if you were in the center of a giant machine.</i>
+========================================
+
+--- CARD #635 ---
+Question: <i>You have found a torch.</i>
+
+YES RESPONSE: <i>As you put your hand on the torch, it evaporates. 'Rubbish' you think, then you see that all the lights are now on in the dungeon.</i>
+========================================
+
+--- CARD #638 ---
+Question: <i>You feel fresh air and see some light behind the door, but it's closed.</i> 
+
+YES RESPONSE: <i>Your foot hurts.</i>
+========================================
+
+--- CARD #640 ---
+Question: <i>You have found the exit to the dungeon!</i>
+
+NO RESPONSE: <i>So true. It's quite a comfortable dungeon, and there's no one to bother you here.</i>
+========================================
+
+--- CARD #643 ---
+Question: <i>The same room, again!</i>
+
+YES RESPONSE: <i>You enter a cosy little room with a roaring fire and tea brewing. But suddenly...</i>
+========================================
+
+--- CARD #644 ---
+Question: You have strawberries!
+
+YES RESPONSE: <i>As the Skeleton says these words, you're instantly teleported to the caste.</i>
+NO RESPONSE: <i>As the Skeleton says these words, you're instantly teleported to the caste.</i>
+========================================
+
+--- CARD #645 ---
+Question: My mission is to bring back strawberries to the world. Don't worry, I will help you when you need me.
+
+YES RESPONSE: <i>The telekinetic Skeleton disappears.</i>
+NO RESPONSE: <i>The telekinetic Skeleton disappears.</i>
+========================================
+
+--- CARD #646 ---
+Question: Hello alive friend! I will pour the tea! Still no strawberries? 
+
+NO RESPONSE: <i>You have a nice chat with the Skeleton about politics and cats, then he brings you back to the exit of the dungeon.</i>
+========================================
+
+--- CARD #652 ---
+Question: Do you want some tea? Too bad we don't have any strawberries. They're perfect with tea.
+
+YES RESPONSE: <i><skeleton> pours you some tea explaining he was a dead Islander enchanted by a powerful mage to guard this dungeon.</i>
+NO RESPONSE: <i><skeleton> pours himself some tea explaining he was a dead Islander enchanted by a powerful mage to guard this dungeon.</i>
+========================================
+
+--- CARD #656 ---
+Question: Yes! Just because I happened to like them.
+
+YES RESPONSE: <i>You have a nice chat with the Skeleton about women and war, then he brings you back to the exit of the dungeon.</i>
+NO RESPONSE: <i>You have a nice chat with the Skeleton about science and cooking, then he brings you back to the exit of the dungeon.</i>
+========================================
+
+--- CARD #679 ---
+Question: Our engineers have designed a new weapon, would you like to see what it does?
+
+YES RESPONSE: <i>As you enter the test chamber, a group of soldiers attacks you.</i> Die, monster!
+========================================
+
+--- CARD #684 ---
+Question: I'm conducting experiments on blood coagulation. You can't detain me for that!
+
+YES RESPONSE: <i>Shortly after that, <witch> is burnt alive. That didn't stop the cows from producing blood.</i>
+========================================
+
+--- CARD #685 ---
+Question: It seems this cow business was an elaborate prank conducted by your son, the Prince.
+
+NO RESPONSE: <i><prince> was beheaded by the executioner shortly afterwards.</i>
+========================================
+
+--- CARD #699 ---
+Question: I'm looking for a simple way to test exotic new poisons. I can pay.
+
+YES RESPONSE: <i>It quickly appeared that hygiene was the doctor's last concern.</i>
+========================================
+
+--- CARD #760 ---
+Question: Son of a demon, look at me... <i>(he steals a sword from a guard and threatens you)</i>
+
+NO RESPONSE: <i><viking> is hacked to pieces by the guards while you run away.</i>
+========================================
+
+--- CARD #762 ---
+Question: My children... They are all dead.
+
+YES RESPONSE: <i><viking> stayed in the capital. He became a good mason, but never uttered a word after that day.</i>
+NO RESPONSE: <i>You put <viking> in prison. He never uttered a word after that day.</i>
+========================================
+
+--- CARD #778 ---
+Question: Here, quick, take my hand!
+
+YES RESPONSE: <i>You manage to grab the jester's hand, just before the trap closes.</i>
+========================================
+
+--- CARD #784 ---
+Question: If you could change your previous decision, would you do it?
+
+YES RESPONSE: Interesting <i>answered the homunculus, then he disappeared.</i>
+========================================
+
+--- CARD #800 ---
+Question: <i>The dog looks at you intently. Something red shines in his mouth.</i>
+
+YES RESPONSE: <i>The dog gives you a bright ruby.</i>
+NO RESPONSE: <i>The dog runs after you. You fall and he licks you lovingly. A lot of people see the whole scene.</i>
+========================================
+
+--- CARD #802 ---
+Question: The price of chicken is soaring. Noblemen are speculating! We should say that we will regulate the trade. 
+
+YES RESPONSE: <i>Your threats of regulating the price of the chicken had a very positive impact on the market. Of course, no regulation actually took place.</i>
+========================================
+
+--- CARD #806 ---
+Question: If you don't believe me, I will let you deal with him alone. Should I go?
+
+YES RESPONSE: <i>You had a long and unintelligible chat with <barbare> that ended up with good laughs. The following day the Eastern baronies tried to invade your country again.</i>
+========================================
+
+--- CARD #807 ---
+Question: Zgando agamane hirim Gabo! <i>(gentle laugh)</i>
+
+YES RESPONSE: <i>For some reason, this reaction charmed the barbarian.</i>
+========================================
+
+--- CARD #810 ---
+Question: He's offering his condolences for the death of your morale... or is it your horse? It could be...
+
+YES RESPONSE: <i>For some reason, this reaction charmed the barbarian.</i>
+========================================
+
+--- CARD #812 ---
+Question: He's looking for a bin to dispose of his spoiled dinner.
+
+YES RESPONSE: <i>For some reason, this reaction charmed the barbarian.</i>
+========================================
+
+--- CARD #815 ---
+Question: Progodu tyo damno. <i>(impenetrable look)</i>
+
+YES RESPONSE: <i>That was an insult. It didn't work very well.</i>
+========================================
+
+--- CARD #816 ---
+Question: He says "time is the hero's shield".
+
+YES RESPONSE: <i>For some reason, this reaction charmed the barbarian.</i>
+NO RESPONSE: <i><barbare> laughed, but it's a bit forced.</i>
+========================================
+
+--- CARD #818 ---
+Question: He says that the mouse is orange.
+
+YES RESPONSE: <i>For some reason, this reaction charmed the barbarian.</i>
+========================================
+
+--- CARD #821 ---
+Question: I'm not finished. Each time a new war occurs, <barbare> may come and visit you to help. Should I accept?
+
+YES RESPONSE: <i><diplomat> slapped <barbare> in the face, who laughed merrily. You spend the next week drinking before his departure.</i>
+========================================
+
+--- CARD #834 ---
+Question: I heard about a new place of bestial perdition down in the harbour. We should close it.
+
+YES RESPONSE: <priest> almost dragged you to the tavern. It's full of loud noises and strange smells.
+NO RESPONSE: <priest> almost dragged you to the tavern. It's full of loud noises and strange smells.
+========================================
+
+--- CARD #840 ---
+Question: There's been a robbery! The treasure has been attacked by a bold gang.
+
+NO RESPONSE: <i><nobleman> defended himself vehemently. In the end he told you about his accomplices and you found half the treasure.</i>
+========================================
+
+--- CARD #843 ---
+Question: A dragon? ha ha, you're kidding me. Dragons don't exist.
+
+YES RESPONSE: <i>Everyone pretended the dragon was an elephant. You finally managed to get rid of it by selling it to a nomadic circus.</i>
+NO RESPONSE: <i>The unmasked "elephant" destroyed a large part of the castle before escaping.</i>
+========================================
+
+--- CARD #851 ---
+Question: The Church is going through a schizm! You have to give more power to the priesthood or the backlash will be terrible.
+
+NO RESPONSE: <i>Both parts of the Church fought for a long time, for a result that was not really clear.</i>
+========================================
+
+--- CARD #854 ---
+Question: No need to be insulting.
+
+YES RESPONSE: Thank you kindly, <i>answered the dragon.</i>
+========================================
+
+--- CARD #858 ---
+Question: Yeah, try that, my sweet little white dove. Try that.
+
+YES RESPONSE: <i>Both birds look at you, finally noticing your presence.</i>
+NO RESPONSE: <i>Both birds look at you, finally noticing your presence.</i>
+========================================
+
+--- CARD #864 ---
+Question: <i>The message says: Islanders are preparing an invasion of the Kingdom.</i>
+
+YES RESPONSE: <i>The army was mobilized against an enemy that never materialized.</i>
+========================================
+
+--- CARD #869 ---
+Question: Follow me.
+
+YES RESPONSE: <i>You follow <foreign_princess> in a nameless sloop anchored in the port. For weeks and weeks you traveled, until you finally reach Lamascus. You enter the city by a hidden gate.</i>
+========================================
+
+--- CARD #883 ---
+Question: The scholars are convinced. It's a miracle. Do you want to recognize it?
+
+YES RESPONSE: <i>It backfired quickly. The jester, now a saint, managed to ridicule the Church by selling a lot of gruesome "miraculous visions".</i>
+========================================
+
+
+=== SUMMARY ===
+Cards WITH responses: 98
+Cards WITHOUT responses: 789
+Cards with YES responses: 79
+Cards with NO responses: 53
+Total cards: 887
