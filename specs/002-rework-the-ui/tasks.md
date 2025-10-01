@@ -63,7 +63,7 @@ Task: "keyboard fallback test" [P]
 ## Phase 3.6: Clean Reigns Shell (Destructive UI Simplification)
 - [x] T016 Remove legacy chrome (chat, extra panels) from `web-ts/src/modes/yesyourgoat/YesYourGoat.tsx` leaving only selection+decide API
 - [x] T017 Create `web-ts/src/components/Reigns/ReignsCard.tsx` (portrait, title, body, two choices) using current styles
-- [ ] T018 Create `web-ts/src/components/Reigns/SwipeLayer.tsx` (33% commit + overlay previews) and compose with ReignsCard
+- [x] T018 Create `web-ts/src/components/Reigns/SwipeLayer.tsx` (33% commit + overlay previews) and compose with ReignsCard
 - [ ] T019 Create `web-ts/src/components/Reigns/ReignsScreen.tsx` (ResourceBar + SwipeLayer + minimal container)
 - [ ] T020 Wire `web-ts/src/main.tsx` to render ReignsScreen only
 - [ ] T021 [P] Delete or archive unused UI components (chat, unused panels) and references
