@@ -24,8 +24,8 @@
 - Include exact file paths in descriptions
 
 ## Phase 3.1: Setup
-- [ ] T001 Ensure validator allowlist contains canonical speakers (incl. “Game Master”) in `web-ts/scripts/validate_merge_yesyourgoat.mjs`
-- [ ] T002 [P] Confirm prebuild pipeline writes deck to `web-ts/public/resources/events/yesyourgoat.events.json`
+- [x] T001 Ensure validator allowlist contains canonical speakers (incl. “Game Master”) in `web-ts/scripts/validate_merge_yesyourgoat.mjs`
+- [x] T002 [P] Confirm prebuild pipeline writes deck to `web-ts/public/resources/events/yesyourgoat.events.json`
 
 ## Phase 3.2: Tests First (TDD) ⚠️ MUST COMPLETE BEFORE 3.3
 - [ ] T003 [P] Unit test eligibleByRequirements (require:run, seen, choice, meter, meta) in `web-ts/src/utils/__tests__/selection.spec.ts`
@@ -35,11 +35,11 @@
 - [ ] T007 [P] Integration test selection order (chains → low‑meter → random_pool) in `web-ts/src/utils/__tests__/selection_order.spec.ts`
 
 ## Phase 3.3: Core Implementation (ONLY after tests are failing)
-- [ ] T008 Implement selection helpers `eligibleByRequirements`, `pickPriorityChain`, `pickByLowMeter`, `pickFromRandomPool` in `web-ts/src/utils/narrativeEvents.ts`
-- [ ] T009 Implement raid cadence reservation (every 5th–7th) in `web-ts/src/modes/yesyourgoat/YesYourGoat.tsx`
-- [ ] T010 Wire selection order in `web-ts/src/modes/yesyourgoat/YesYourGoat.tsx` (chains → low‑meter → random_pool; respect one‑shots)
-- [ ] T011 Implement random_pool cooldown/decay per FR‑011 in `web-ts/src/utils/narrativeEvents.ts`
-- [ ] T012 Persist `yyg_seen`, `yyg_choice`, `yyg_meta_seen`, `yyg_chain_progress` in `web-ts/src/modes/yesyourgoat/YesYourGoat.tsx`
+- [x] T008 Implement selection helpers `eligibleByRequirements`, `pickPriorityChain`, `pickByLowMeter`, `pickFromRandomPool` in `web-ts/src/utils/narrativeEvents.ts`
+- [x] T009 Implement raid cadence reservation (every 5th–7th) in `web-ts/src/modes/yesyourgoat/YesYourGoat.tsx`
+- [x] T010 Wire selection order in `web-ts/src/modes/yesyourgoat/YesYourGoat.tsx` (chains → low‑meter → random_pool; respect one‑shots)
+- [x] T011 Implement random_pool cooldown/decay per FR‑011 in `web-ts/src/utils/narrativeEvents.ts`
+- [x] T012 Persist `yyg_seen`, `yyg_choice`, `yyg_meta_seen`, `yyg_chain_progress` in `web-ts/src/modes/yesyourgoat/YesYourGoat.tsx`
 
 ## Phase 3.4: Integration
 - [ ] T013 Add clear meter delta UI feedback in `web-ts/src/components/Card/Card.tsx`

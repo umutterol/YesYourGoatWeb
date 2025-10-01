@@ -22,7 +22,7 @@ All player interactions are exactly two choices. Each choice must apply bounded 
 Every surfaced event must modify at least one meter or persistent memory. Pure flavor is disallowed. Intros/tutorials are one‑shots that, once seen, never reappear. Memory variants must be tied to prior choices and acknowledge the player’s history.
 
 ### III. Predictable Cadence, Replay Meta, and Portrait Identity
-- Inject `raid_night_check` every 3rd event in a run (authored outcome, not RNG combat).
+- Inject `raid_night_check` every 5th to 7th event in a run (authored outcome, not RNG combat).
 - Enforce sensible cooldowns for `meta:council` and `meta:rival` so they don’t appear back‑to‑back.
 - Portraits must identify speakers on character‑facing events; copy is DM/whisper tone (no external narrator).
 - Replay unlocks subtle wrongness (runs ≥3), Devil offers (runs ≥7), and the final reveal (runs ≥9) culminating in the truth: the player is AI #47 inside the “Arcana Terra” simulation.
@@ -53,7 +53,7 @@ Non‑Goals (explicitly out of scope):
 ## Workflow, Validation & Collaboration
 
 ### Selection & Gating Logic
-1) Inject `raid_night_check` every 3rd event.  
+1) Inject `raid_night_check` every 5th to 7th event.  
 2) Prioritize active `chain:*` steps when eligible.  
 3) Route by low meters before drawing from `random_pool`.  
 4) Always respect `require:*` gates and one‑shot intros/tutorials.  

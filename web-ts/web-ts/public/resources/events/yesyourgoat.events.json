@@ -12,7 +12,7 @@
       "phase:1"
     ],
     "left": {
-      "label": "Post a brief!",
+      "label": "Post a brief",
       "effects": {
         "reputation": 0
       }
