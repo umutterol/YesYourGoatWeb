@@ -28,11 +28,11 @@
 - [x] T002 [P] Confirm prebuild pipeline writes deck to `web-ts/public/resources/events/yesyourgoat.events.json`
 
 ## Phase 3.2: Tests First (TDD) ⚠️ MUST COMPLETE BEFORE 3.3
-- [ ] T003 [P] Unit test eligibleByRequirements (require:run, seen, choice, meter, meta) in `web-ts/src/utils/__tests__/selection.spec.ts`
-- [ ] T004 [P] Unit test one‑shot persistence for intros/tutorials in `web-ts/src/utils/__tests__/persistence.spec.ts`
-- [ ] T005 [P] Unit test raid cadence reservation (5th–7th index) in `web-ts/src/utils/__tests__/cadence.spec.ts`
-- [ ] T006 [P] Unit test random_pool cooldown/decay (FR‑011) in `web-ts/src/utils/__tests__/random_pool.spec.ts`
-- [ ] T007 [P] Integration test selection order (chains → low‑meter → random_pool) in `web-ts/src/utils/__tests__/selection_order.spec.ts`
+- [❌] T003 [P] Unit test eligibleByRequirements (require:run, seen, choice, meter, meta) in `web-ts/src/utils/__tests__/selection.spec.ts` — CANCELLED (superseded by 002)
+- [❌] T004 [P] Unit test one‑shot persistence for intros/tutorials in `web-ts/src/utils/__tests__/persistence.spec.ts` — CANCELLED (superseded by 002)
+- [❌] T005 [P] Unit test raid cadence reservation (5th–7th index) in `web-ts/src/utils/__tests__/cadence.spec.ts` — CANCELLED (superseded by 002)
+- [❌] T006 [P] Unit test random_pool cooldown/decay (FR‑011) in `web-ts/src/utils/__tests__/random_pool.spec.ts` — CANCELLED (superseded by 002)
+- [❌] T007 [P] Integration test selection order (chains → low‑meter → random_pool) in `web-ts/src/utils/__tests__/selection_order.spec.ts` — CANCELLED (superseded by 002)
 
 ## Phase 3.3: Core Implementation (ONLY after tests are failing)
 - [x] T008 Implement selection helpers `eligibleByRequirements`, `pickPriorityChain`, `pickByLowMeter`, `pickFromRandomPool` in `web-ts/src/utils/narrativeEvents.ts`
@@ -42,16 +42,16 @@
 - [x] T012 Persist `yyg_seen`, `yyg_choice`, `yyg_meta_seen`, `yyg_chain_progress` in `web-ts/src/modes/yesyourgoat/YesYourGoat.tsx`
 
 ## Phase 3.4: Integration
-- [ ] T013 Add clear meter delta UI feedback in `web-ts/src/components/Card/Card.tsx`
-- [ ] T014 Ensure keyboard Left/Right triggers choices in `web-ts/src/modes/yesyourgoat/YesYourGoat.tsx`
-- [ ] T015 Enforce portrait rendering and responsive sizing in `web-ts/src/components/Portrait/Portrait.tsx`
-- [ ] T016 Add council/rival sensible cooldowns in `web-ts/src/utils/narrativeEvents.ts`
+- [❌] T013 Add clear meter delta UI feedback in `web-ts/src/components/Card/Card.tsx` — CANCELLED (Card.tsx removed; implemented in SwipeLayer)
+- [x] T014 Ensure keyboard Left/Right triggers choices in `web-ts/src/modes/yesyourgoat/YesYourGoat.tsx`
+- [x] T015 Enforce portrait rendering and responsive sizing in `web-ts/src/components/Portrait/Portrait.tsx`
+- [x] T016 Add council/rival sensible cooldowns in `web-ts/src/utils/narrativeEvents.ts`
 
 ## Phase 3.5: Polish
-- [ ] T017 [P] Update `docs/run_blueprint.md` to mark implemented [NEW] beats as added
-- [ ] T018 [P] Performance check: bundle gzip <300KB; 60fps card drag; zero console errors
-- [ ] T019 [P] CI: Add step `node web-ts/scripts/validate_merge_yesyourgoat.mjs && cd web-ts && tsc -b && vite build`
-- [ ] T020 [P] Add failure rules (optional): phase≥2 require speaker; unresolved require:* → fail in CI config
+- [❌] T017 [P] Update `docs/run_blueprint.md` to mark implemented [NEW] beats as added — CANCELLED (deferred)
+- [x] T018 [P] Performance check: bundle gzip <300KB; 60fps card drag; zero console errors
+- [❌] T019 [P] CI: Add step `node web-ts/scripts/validate_merge_yesyourgoat.mjs && cd web-ts && tsc -b && vite build` — CANCELLED (deferred)
+- [❌] T020 [P] Add failure rules (optional): phase≥2 require speaker; unresolved require:* → fail in CI config — CANCELLED (deferred)
 
 ## Dependencies
 - Tests (T003–T007) before implementation (T008–T012)
