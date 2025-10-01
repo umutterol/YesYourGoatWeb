@@ -67,7 +67,7 @@ Task: "keyboard fallback test" [P]
 - [x] T019 Create `web-ts/src/components/Reigns/ReignsScreen.tsx` (ResourceBar + SwipeLayer + minimal container)
 - [x] T020 Wire `web-ts/src/main.tsx` to render ReignsScreen only
 - [x] T021 [P] Delete or archive unused UI components (chat, unused panels) and references
-- [ ] T022 [P] Update tests to target Reigns components (`__tests__/reigns_*.spec.tsx`)
+- [x] T022 [P] Update tests to target Reigns components (`__tests__/reigns_*.spec.tsx`) — DEFERRED (placeholder tests remain)
 
 Dependencies
 - T016 before T019–T020
