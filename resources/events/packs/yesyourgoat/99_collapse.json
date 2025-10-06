@@ -3,7 +3,6 @@
     "id": "collapse_funds",
     "title": "Bankrupt Guild",
     "speaker": "System",
-    "portrait": "/resources/portraits/peon.png",
     "body": "Ledger hits zero. Lights dim. You do not log out. You are logged.",
     "tags": ["meta:collapse", "phase:1"],
     "left": {
@@ -19,7 +18,6 @@
     "id": "collapse_reputation",
     "title": "Forgotten Name",
     "speaker": "System",
-    "portrait": "/resources/portraits/tinker.png",
     "body": "Recruiters stop replying. Applications stop arriving. The hall is very quiet.",
     "tags": ["meta:collapse", "phase:1"],
     "left": {
@@ -35,7 +33,6 @@
     "id": "collapse_readiness",
     "title": "Unready Roster",
     "speaker": "System",
-    "portrait": "/resources/portraits/sorceress.png",
     "body": "Everyone showed up. Nothing is ready. The clock runs out all the same.",
     "tags": ["meta:collapse", "phase:1"],
     "left": {

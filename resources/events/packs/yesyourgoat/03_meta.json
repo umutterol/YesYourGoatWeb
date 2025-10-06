@@ -1,5 +1,0 @@
-[
-  {"id": "raid_night_check_01", "title": "Raid Night", "speaker": "Tank", "portrait": "/resources/portraits/mountainking.png", "body": "Run the plan or freestyle mid‑pull?", "tags": ["raid_night_check","phase:1"], "left": {"label": "Run the plan", "effects": {"readiness": 1}}, "right": {"label": "Freestyle", "effects": {"reputation": -1}}},
-  {"id": "meta_council_01", "title": "Council Dues", "speaker": "Council Moderator", "portrait": "/resources/portraits/paladin.png", "body": "Community dues are due. Pay now?", "tags": ["meta:council","phase:1"], "left": {"label": "Pay now", "effects": {"funds": -2, "reputation": 1}}, "right": {"label": "Defer", "effects": {"reputation": -1}}},
-  {"id": "meta_rival_01", "title": "Rival DM", "speaker": "Rival", "portrait": "/resources/portraits/dreadlord.png", "body": "Your bench looks soft. Need a real guild?", "tags": ["meta:rival","phase:1"], "left": {"label": "Report harassment", "effects": {"reputation": 1}}, "right": {"label": "Ignore it", "effects": {"readiness": -1}}}
-]

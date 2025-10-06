@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface Choice {
   label: string;
   effects: Record<string, number>;
 }
 
+interface Speaker {
+  name: string;
+  portrait: string;
+  level: number;
+  role: string;
+  description: string;
+}
+
+interface SpeakerRoster {
+  speakers: Record<string, Speaker>;
+}
+
 interface ReignsCardProps {
   title: string;
   body: string;
   speaker?: string;
-  portrait?: string;
   left: Choice;
   right: Choice;
   onChoice: (side: 'left' | 'right') => void;
@@ -19,30 +30,43 @@ const ReignsCard: React.FC<ReignsCardProps> = ({
   title,
   body,
   speaker,
-  portrait,
   left,
   right,
   onChoice
 }) => {
+  const [roster, setRoster] = useState<SpeakerRoster | null>(null);
+
+  useEffect(() => {
+    fetch('/resources/roster.json')
+      .then(r => r.json())
+      .then(setRoster)
+      .catch(err => console.error('Failed to load speaker roster:', err));
+  }, []);
+
+  const speakerData = speaker && roster?.speakers[speaker];
+
   return (
     <div className="bg-[var(--reigns-card)] rounded-2xl shadow-2xl border-2 border-[var(--reigns-border)] p-8 max-w-md w-full">
       {/* Portrait and Speaker */}
-      {(speaker || portrait) && (
+      {speakerData && (
         <div className="flex flex-col items-center mb-6">
           <img
-            src={portrait || '/resources/portraits/paladin.png'}
-            alt={speaker || 'Speaker'}
+            src={speakerData.portrait}
+            alt={speakerData.name}
             className="w-24 h-24 rounded-full border-4 border-[var(--reigns-border)] mb-3"
             onError={(e) => {
               const target = e.currentTarget;
               target.src = '/resources/portraits/paladin.png';
             }}
           />
-          {speaker && (
+          <div className="text-center">
             <div className="text-sm font-semibold text-[var(--reigns-text-secondary)] uppercase tracking-wide">
-              {speaker}
+              {speakerData.name}
             </div>
-          )}
+            <div className="text-xs text-[var(--reigns-text-secondary)] opacity-75">
+              Level {speakerData.level} • {speakerData.role}
+            </div>
+          </div>
         </div>
       )}
 

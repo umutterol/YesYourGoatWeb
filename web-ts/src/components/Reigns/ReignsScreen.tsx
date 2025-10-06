@@ -14,7 +14,6 @@ interface EventCard {
   title: string;
   body: string;
   speaker?: string;
-  portrait?: string;
   left: Choice;
   right: Choice;
 }
@@ -69,7 +68,6 @@ const ReignsScreen: React.FC<ReignsScreenProps> = ({
               title={currentEvent.title}
               body={currentEvent.body}
               speaker={currentEvent.speaker}
-              portrait={currentEvent.portrait}
               left={currentEvent.left}
               right={currentEvent.right}
               onChoice={onChoice}

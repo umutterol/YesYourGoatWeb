@@ -525,3 +525,9 @@ Next Steps (Planned)
 - Meta-progression unlocks between playthroughs
 - Character backstories and relationship dynamics
 - Seasonal content and replayability features
+
+## 2025-10-01 — Event reset and fresh Phase 1 baseline
+- Purged mid/late-phase packs to reduce clutter and align with Reigns-style rework
+- Authored fresh Phase 1 baseline: intros (Tank/Healer/Treasurer/Moderator/Rival), asks, meta (raid/council/rival), and random_pool seeds
+- Ran validator/build: ok — merged 33 events to `web-ts/public/resources/events/yesyourgoat.events.json`
+- Commit: content(p1): fresh Phase 1 baseline events (intros, asks, meta, random pool); purge old packs; validate

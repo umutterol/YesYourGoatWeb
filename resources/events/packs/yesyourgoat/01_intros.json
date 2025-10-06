@@ -3,7 +3,6 @@
     "id": "run_intro_01",
     "title": "Welcome Brief",
     "speaker": "Council Moderator",
-    "portrait": "/resources/portraits/paladin.png",
     "body": "Funds keep lights on; reputation fills apps; readiness kills bosses. Short brief?",
     "tags": ["run:intro", "character:moderator", "tutorial", "phase:1"],
     "left": {
@@ -19,7 +18,6 @@
     "id": "intro_tank_01",
     "title": "Anchor Points",
     "speaker": "Tank",
-    "portrait": "/resources/portraits/mountainking.png",
     "body": "Call positions in guild chat, or keep comms to raid only?",
     "tags": ["meta:intro", "character:tank", "phase:1"],
     "left": {
@@ -35,7 +33,6 @@
     "id": "intro_healer_01",
     "title": "Potion Budget",
     "speaker": "Healer",
-    "portrait": "/resources/portraits/priestess.png",
     "body": "Do I get a small potion budget this week? It steadies wipes.",
     "tags": ["meta:intro", "character:healer", "phase:1"],
     "left": {
@@ -51,7 +48,6 @@
     "id": "intro_treasurer_01",
     "title": "Bank Rules",
     "speaker": "Treasurer",
-    "portrait": "/resources/portraits/archmage.png",
     "body": "Post simple bank rules now, or handle requests case by case?",
     "tags": ["meta:intro", "character:treasurer", "phase:1"],
     "left": {
@@ -67,7 +63,6 @@
     "id": "intro_rival_01",
     "title": "Snide Ping",
     "speaker": "Rival",
-    "portrait": "/resources/portraits/dreadlord.png",
     "body": "Heard you're recruiting tanks. Want a loaner... for a fee?",
     "tags": ["meta:intro", "character:rival", "phase:1"],
     "left": {

@@ -3,7 +3,6 @@
     "id": "run_intro_01",
     "title": "Welcome Brief",
     "speaker": "Council Moderator",
-    "portrait": "/resources/portraits/paladin.png",
     "body": "Funds keep lights on; reputation fills apps; readiness kills bosses. Short brief?",
     "tags": [
       "run:intro",
@@ -28,7 +27,6 @@
     "id": "intro_tank_01",
     "title": "Anchor Points",
     "speaker": "Tank",
-    "portrait": "/resources/portraits/mountainking.png",
     "body": "Call positions in guild chat, or keep comms to raid only?",
     "tags": [
       "meta:intro",
@@ -52,7 +50,6 @@
     "id": "intro_healer_01",
     "title": "Potion Budget",
     "speaker": "Healer",
-    "portrait": "/resources/portraits/priestess.png",
     "body": "Do I get a small potion budget this week? It steadies wipes.",
     "tags": [
       "meta:intro",
@@ -77,7 +74,6 @@
     "id": "intro_treasurer_01",
     "title": "Bank Rules",
     "speaker": "Treasurer",
-    "portrait": "/resources/portraits/archmage.png",
     "body": "Post simple bank rules now, or handle requests case by case?",
     "tags": [
       "meta:intro",
@@ -101,7 +97,6 @@
     "id": "intro_rival_01",
     "title": "Snide Ping",
     "speaker": "Rival",
-    "portrait": "/resources/portraits/dreadlord.png",
     "body": "Heard you're recruiting tanks. Want a loaner... for a fee?",
     "tags": [
       "meta:intro",
@@ -125,7 +120,6 @@
     "id": "ask_tank_minimums_01",
     "title": "Minimums",
     "speaker": "Tank",
-    "portrait": "/resources/portraits/demonhunter.png",
     "body": "Set roster minimums before raid? Slower invites, fewer wipes.",
     "tags": [
       "raid_logistics",
@@ -151,7 +145,6 @@
     "id": "ask_healer_supplies_01",
     "title": "Supplies",
     "speaker": "Healer",
-    "portrait": "/resources/portraits/farseer.png",
     "body": "Approve basic raid supplies out of bank?",
     "tags": [
       "raid_logistics",
@@ -176,7 +169,6 @@
     "id": "ask_treasurer_dues_01",
     "title": "Dues",
     "speaker": "Treasurer",
-    "portrait": "/resources/portraits/beastmaster.png",
     "body": "Collect small dues now or after first boss dies?",
     "tags": [
       "economy",
@@ -201,7 +193,6 @@
     "id": "raid_night_check_01",
     "title": "Raid Night",
     "speaker": "Tank",
-    "portrait": "/resources/portraits/chieftain.png",
     "body": "Run the plan or freestyle mid-pull?",
     "tags": [
       "raid_night_check",
@@ -224,7 +215,6 @@
     "id": "meta_council_01",
     "title": "Council Dues",
     "speaker": "Council Moderator",
-    "portrait": "/resources/portraits/blademaster.png",
     "body": "Community dues are due. Pay now?",
     "tags": [
       "meta:council",
@@ -248,7 +238,6 @@
     "id": "meta_rival_01",
     "title": "Rival DM",
     "speaker": "Rival",
-    "portrait": "/resources/portraits/deathknight.png",
     "body": "Your bench looks soft. Need a real guild?",
     "tags": [
       "meta:rival",
@@ -271,7 +260,6 @@
     "id": "random_invite_midpull_01",
     "title": "Mid-Pull Ping",
     "speaker": "Officer",
-    "portrait": "/resources/portraits/warden.png",
     "body": "Got a whisper for an invite mid-pull. Fill now or after?",
     "tags": [
       "random_pool",
@@ -296,7 +284,6 @@
     "id": "random_latency_spike_01",
     "title": "Spikes",
     "speaker": "Scout",
-    "portrait": "/resources/portraits/shadowhunter.png",
     "body": "Latency is spiking in the instance. Adjust?",
     "tags": [
       "random_pool",
@@ -321,7 +308,6 @@
     "id": "random_bank_short_01",
     "title": "Short Ledger",
     "speaker": "Treasurer",
-    "portrait": "/resources/portraits/bloodmage.png",
     "body": "Small deposit looks missing. Could be logging delay.",
     "tags": [
       "random_pool",
@@ -346,7 +332,6 @@
     "id": "collapse_funds",
     "title": "Bankrupt Guild",
     "speaker": "System",
-    "portrait": "/resources/portraits/peon.png",
     "body": "Ledger hits zero. Lights dim. You do not log out. You are logged.",
     "tags": [
       "meta:collapse",
@@ -369,7 +354,6 @@
     "id": "collapse_reputation",
     "title": "Forgotten Name",
     "speaker": "System",
-    "portrait": "/resources/portraits/tinker.png",
     "body": "Recruiters stop replying. Applications stop arriving. The hall is very quiet.",
     "tags": [
       "meta:collapse",
@@ -392,7 +376,6 @@
     "id": "collapse_readiness",
     "title": "Unready Roster",
     "speaker": "System",
-    "portrait": "/resources/portraits/sorceress.png",
     "body": "Everyone showed up. Nothing is ready. The clock runs out all the same.",
     "tags": [
       "meta:collapse",

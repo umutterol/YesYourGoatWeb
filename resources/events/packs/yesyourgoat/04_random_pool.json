@@ -1,5 +1,0 @@
-[
-  {"id": "random_invite_midpull_01", "title": "Mid-Pull Ping", "speaker": "Officer", "portrait": "/resources/portraits/warden.png", "body": "Got a whisper for an invite mid‑pull. Fill now or after?", "tags": ["random_pool","random:logistics","phase:1"], "left": {"label": "After this pull", "effects": {"readiness": 1}}, "right": {"label": "Invite now", "effects": {"readiness": -1, "reputation": 1}}},
-  {"id": "random_latency_spike_01", "title": "Spikes", "speaker": "Scout", "portrait": "/resources/portraits/shadowhunter.png", "body": "Latency is spiking in the instance. Adjust?", "tags": ["random_pool","random:server","phase:1"], "left": {"label": "Lower risk", "effects": {"readiness": 1, "reputation": -1}}, "right": {"label": "Push through", "effects": {"readiness": -1}}},
-  {"id": "random_bank_short_01", "title": "Short Ledger", "speaker": "Treasurer", "portrait": "/resources/portraits/archmage.png", "body": "Small deposit looks missing. Could be logging delay.", "tags": ["random_pool","random:economy","phase:1"], "left": {"label": "Cover tonight", "effects": {"funds": -1, "readiness": 1}}, "right": {"label": "Post a note", "effects": {"reputation": 1}}}
-]
