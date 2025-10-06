@@ -1,0 +1,279 @@
+[
+  {
+    "id": "collapse_funds",
+    "title": "Bankrupt Guild",
+    "speaker": "System",
+    "tags": ["meta:collapse", "phase:1"],
+    "body": "Ledger hits zero. Lights dim. You do not log out. You are logged.",
+    "tags": ["meta:collapse", "phase:1"],
+    "trigger": {
+      "meters": {
+        "funds": {
+          "lte": -3
+        }
+      }
+    },
+    "left": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    }
+  },
+  {
+    "id": "collapse_reputation",
+    "title": "Forgotten Name",
+    "speaker": "System",
+    "tags": ["meta:collapse", "phase:1"],
+    "body": "Recruiters stop replying. Applications stop arriving. The hall is very quiet.",
+    "trigger": {
+      "meters": {
+        "reputation": {
+          "lte": -3
+        }
+      }
+    },
+    "left": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    }
+  },
+  {
+    "id": "collapse_readiness",
+    "title": "Unready Roster",
+    "speaker": "System",
+    "tags": ["meta:collapse", "phase:1"],
+    "body": "Everyone showed up. Nothing is ready. The clock runs out all the same.",
+    "trigger": {
+      "meters": {
+        "readiness": {
+          "lte": -3
+        }
+      }
+    },
+    "left": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    }
+  },
+  {
+    "id": "collapse_dependency",
+    "title": "Support Withheld",
+    "speaker": "Game Master",
+    "tags": ["meta:collapse", "phase:1"],
+    "body": "Assistance is unavailable. Stand alone.",
+    "trigger": {
+      "flags": {
+        "dependency": {
+          "gte": 4
+        }
+      }
+    },
+    "left": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {}
+    }
+  },
+  {
+    "id": "collapse_scarcity",
+    "title": "Dry Canteen",
+    "speaker": "System",
+    "tags": ["meta:collapse", "phase:1"],
+    "body": "Supplies tapped out. No catastrophe. No celebration.",
+    "trigger": {
+      "flags": {
+        "scarcity": {
+          "gte": 3
+        }
+      }
+    },
+    "left": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {}
+    }
+  },
+  {
+    "id": "collapse_overfitted",
+    "title": "Counter-Meta",
+    "speaker": "System",
+    "tags": ["meta:collapse", "phase:1"],
+    "body": "They brought exactly what you cannot solve.",
+    "trigger": {
+      "flags": {
+        "overfit": {
+          "gte": 4
+        }
+      }
+    },
+    "left": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {}
+    }
+  },
+  {
+    "id": "collapse_attrition",
+    "title": "Slow Bleed",
+    "speaker": "System",
+    "tags": ["meta:collapse", "phase:1"],
+    "body": "Everyone standing; nothing left to give.",
+    "trigger": {
+      "flags": {
+        "attrition": {
+          "gte": 4
+        }
+      }
+    },
+    "left": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {}
+    }
+  },
+  {
+    "id": "collapse_stasis",
+    "title": "Timed Out",
+    "speaker": "System",
+    "tags": ["meta:collapse", "phase:1"],
+    "body": "Stable. Motionless. The run ends without an ending.",
+    "trigger": {
+      "flags": {
+        "stasis": {
+          "gte": 4
+        }
+      }
+    },
+    "left": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {}
+    }
+  },
+  {
+    "id": "collapse_friction",
+    "title": "Hairline → Crack",
+    "speaker": "System",
+    "tags": ["meta:collapse", "phase:1"],
+    "body": "One more swap, and it snaps.",
+    "trigger": {
+      "flags": {
+        "friction": {
+          "gte": 4
+        }
+      }
+    },
+    "left": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {}
+    }
+  },
+  {
+    "id": "collapse_loop_room",
+    "title": "The Room Again",
+    "speaker": "Attendant",
+    "tags": ["meta:collapse", "phase:1"],
+    "body": "Same couch. Same mug. Lights blink. Reset.",
+    "trigger": {
+      "flags": {
+        "loop_awareness": {
+          "gte": 1
+        }
+      }
+    },
+    "left": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,1025 @@
+[
+  {
+    "id": "rand_invite_midpull_v1",
+    "phase": 2,
+    "title": "Mid-Pull Whisper",
+    "speaker": "Recruit",
+    "body": "Invite mid-pull? I can be there in ten… nine.",
+    "left": {
+      "label": "Invite now.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        },
+        "meters": {
+          "readiness": -1
+        }
+      }
+    },
+    "right": {
+      "label": "After pull.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "tags": [
+      "timing"
+    ]
+  },
+  {
+    "id": "rand_invite_midpull_v2",
+    "phase": 2,
+    "conditions": {
+      "seen": [
+        "rand_invite_midpull_v1"
+      ]
+    },
+    "title": "Mid-Pull Whisper (Again)",
+    "speaker": "Recruit",
+    "body": "Invite mid-pull? I can be there in ten… eight.",
+    "left": {
+      "label": "Invite now.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        }
+      }
+    },
+    "right": {
+      "label": "After pull.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "tags": [
+      "timing",
+      "dejavu"
+    ]
+  },
+  {
+    "id": "rand_latency_spike",
+    "phase": 2,
+    "title": "Spikes",
+    "speaker": "Officer",
+    "body": "Latency is spiking inside the instance. Adjust?",
+    "left": {
+      "label": "Lower risk.",
+      "effects": {
+        "flags": {
+          "attrition": -1,
+          "stasis": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Push through.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        }
+      }
+    },
+    "tags": [
+      "tech"
+    ]
+  },
+  {
+    "id": "rand_bank_short",
+    "phase": 2,
+    "title": "Short Ledger",
+    "speaker": "Treasurer",
+    "body": "A small deposit looks missing. Could be a logging delay.",
+    "left": {
+      "label": "Cover tonight.",
+      "effects": {
+        "meters": {
+          "funds": -1
+        },
+        "legacy": {
+          "roster_bond": 1
+        },
+        "flags": {
+          "scarcity": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Post a note.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        },
+        "flags": {
+          "scarcity": 1
+        }
+      }
+    },
+    "tags": [
+      "economy"
+    ]
+  },
+  {
+    "id": "rand_role_swap",
+    "phase": 2,
+    "title": "Role Swap",
+    "speaker": "Mage",
+    "body": "I'm the tank tonight. Not the Mage… the tank.",
+    "left": {
+      "label": "Approve.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        }
+      }
+    },
+    "right": {
+      "label": "No, backline.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "tags": [
+      "roles",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_loot_label_offbyone",
+    "phase": 2,
+    "title": "Label Looks Off",
+    "speaker": "Loot Master",
+    "body": "We got the ‘Sword of Sword’. Looks correct… ish.",
+    "left": {
+      "label": "Distribute normally.",
+      "effects": {
+        "meters": {
+          "reputation": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Hold it.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "loot",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_repeat_quote",
+    "phase": 2,
+    "title": "He Said That",
+    "speaker": "Drama Queen",
+    "body": "“I soloed this with one hit point and a dream.” Again.",
+    "left": {
+      "label": "Clap.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Move on.",
+      "effects": {}
+    },
+    "tags": [
+      "dejavu",
+      "banter"
+    ]
+  },
+  {
+    "id": "rand_bench_presence",
+    "phase": 2,
+    "title": "Still Here",
+    "speaker": "Benched Rogue",
+    "body": "I've been here the whole time.",
+    "left": {
+      "label": "Nod.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Invite in.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        }
+      }
+    },
+    "tags": [
+      "bench",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_lobby_coffee",
+    "phase": 2,
+    "title": "Coffee in the Lounge",
+    "speaker": "Attendant",
+    "body": "Same mug as before. Fresh coffee.",
+    "left": {
+      "label": "Loiter.",
+      "effects": {
+        "flags": {
+          "loop_awareness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Back to work.",
+      "effects": {}
+    },
+    "tags": [
+      "lobby",
+      "foreshadow"
+    ]
+  },
+  {
+    "id": "rand_text_misspelling",
+    "phase": 2,
+    "title": "Small Typo",
+    "speaker": "Officer",
+    "body": "The guild’s reputaion is stable.",
+    "left": {
+      "label": "Fix the note.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Leave it.",
+      "effects": {}
+    },
+    "tags": [
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_policy_echo",
+    "phase": 2,
+    "title": "Policy Echo",
+    "speaker": "Loot Master",
+    "body": "This was distributed in accordance with policy. The policy was correct.",
+    "left": {
+      "label": "Acknowledge.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Ask which policy.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "loot",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_queue_priority_whisper",
+    "phase": 2,
+    "title": "Priority Whisper",
+    "speaker": "Unknown",
+    "body": "Your queue priority is noted.",
+    "left": {
+      "label": "Noted.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Who is this?",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "oddity",
+      "gm-foreshadow"
+    ]
+  },
+  {
+    "id": "rand_tooltip_shrug",
+    "phase": 2,
+    "title": "Shrug Tooltip",
+    "speaker": "Officer",
+    "body": "A tooltip just says: “It depends.”",
+    "left": {
+      "label": "Ignore.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Note it.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "oddity",
+      "ui"
+    ]
+  },
+  {
+    "id": "rand_daily_reset_twice",
+    "phase": 2,
+    "title": "Reset Again",
+    "speaker": "System",
+    "body": "Daily reset occurred. Then occurred.",
+    "left": {
+      "label": "Collect once.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Collect twice.",
+      "effects": {
+        "flags": {
+          "scarcity": -1
+        }
+      }
+    },
+    "tags": [
+      "system",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_duplicate_name",
+    "phase": 2,
+    "title": "Two Aliks",
+    "speaker": "Recruiter",
+    "body": "Two recruits have the same name. Different portraits. Same name.",
+    "left": {
+      "label": "Invite both.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Invite one.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "tags": [
+      "recruitment",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_boss_hint_conflict",
+    "phase": 2,
+    "title": "Conflicting Hints",
+    "speaker": "Scout",
+    "body": "One parchment says stack. Another says spread.",
+    "left": {
+      "label": "Stack.",
+      "effects": {
+        "flags": {
+          "overfit": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Spread.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        }
+      }
+    },
+    "tags": [
+      "prep",
+      "positioning"
+    ]
+  },
+  {
+    "id": "rand_calendar_drift",
+    "phase": 2,
+    "title": "Calendar Drift",
+    "speaker": "Officer",
+    "body": "Raid night is showing as today. It was also today yesterday.",
+    "left": {
+      "label": "Proceed anyway.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Announce later.",
+      "effects": {
+        "meters": {
+          "reputation": -1
+        }
+      }
+    },
+    "tags": [
+      "schedule",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_invites_bounce",
+    "phase": 2,
+    "title": "Bouncing Invites",
+    "speaker": "Recruit",
+    "body": "Invite lands, vanishes, lands again.",
+    "left": {
+      "label": "Retry.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Move on.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "tags": [
+      "recruitment",
+      "net"
+    ]
+  },
+  {
+    "id": "rand_banner_color_shift",
+    "phase": 2,
+    "title": "Color Shift",
+    "speaker": "Attendant",
+    "body": "Banner looks slightly off-color.",
+    "left": {
+      "label": "Adjust lights.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Leave it.",
+      "effects": {}
+    },
+    "tags": [
+      "lobby",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_ping_out_of_place",
+    "phase": 2,
+    "title": "Ping Out of Place",
+    "speaker": "Tank",
+    "body": "Someone pinged the wrong corner again.",
+    "left": {
+      "label": "Follow the ping.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Ignore it.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "tags": [
+      "positioning",
+      "banter"
+    ]
+  },
+  {
+    "id": "rand_loot_roll_near_ties",
+    "phase": 2,
+    "title": "Near Ties",
+    "speaker": "Loot Master",
+    "body": "Rolls keep landing one apart. Again.",
+    "left": {
+      "label": "Best match wins.",
+      "effects": {
+        "meters": {
+          "reputation": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Call a reroll.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        }
+      }
+    },
+    "tags": [
+      "loot"
+    ]
+  },
+  {
+    "id": "rand_enchant_mislabel",
+    "phase": 2,
+    "title": "Enchant Label",
+    "speaker": "Crafter",
+    "body": "Enchant reads: ‘+Something to Something’. Should work.",
+    "left": {
+      "label": "Apply it.",
+      "effects": {
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Hold craft.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "craft",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_training_dummy_feedback",
+    "phase": 2,
+    "title": "Dummy Feedback",
+    "speaker": "Theorycrafter",
+    "body": "Training dummy reports: satisfactory. No decimals.",
+    "left": {
+      "label": "Good enough.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Ask decimals.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "metrics"
+    ]
+  },
+  {
+    "id": "rand_voice_overlay_repeat",
+    "phase": 2,
+    "title": "Voice Overlay",
+    "speaker": "Officer",
+    "body": "Overlay shows the same caller twice.",
+    "left": {
+      "label": "Carry on.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Restart overlay.",
+      "effects": {}
+    },
+    "tags": [
+      "comms",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_map_icon_stutter",
+    "phase": 2,
+    "title": "Map Stutter",
+    "speaker": "Scout",
+    "body": "Waypoint flickers between two spots.",
+    "left": {
+      "label": "Chase the flicker.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Pick one.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "tags": [
+      "nav",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_readycheck_echo",
+    "phase": 2,
+    "title": "Ready Echo",
+    "speaker": "System",
+    "body": "Ready check reports: ready. Then: Ready.",
+    "left": {
+      "label": "Pull.",
+      "effects": {
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "One more check.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "tags": [
+      "prep",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_consumable_gloss",
+    "phase": 2,
+    "title": "Glossy Label",
+    "speaker": "Healer",
+    "body": "Label on this flask looks newly printed.",
+    "left": {
+      "label": "Use it.",
+      "effects": {
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Swap it.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "supplies"
+    ]
+  },
+  {
+    "id": "rand_bench_voice_heard",
+    "phase": 2,
+    "title": "Voice From Bench",
+    "speaker": "Benched Rogue",
+    "body": "You can hear me fine from here.",
+    "left": {
+      "label": "Invite anyway.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Stay benched.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "tags": [
+      "bench",
+      "comms"
+    ]
+  },
+  {
+    "id": "rand_training_reset_quick",
+    "phase": 2,
+    "title": "Quick Reset",
+    "speaker": "Officer",
+    "body": "Instance reset was quicker than usual.",
+    "left": {
+      "label": "Good.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Note it.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "system"
+    ]
+  },
+  {
+    "id": "rand_micro_typo_again",
+    "phase": 2,
+    "title": "Micro Typo",
+    "speaker": "Officer",
+    "body": "Roster ‘scedule’ updated.",
+    "left": {
+      "label": "Fix it.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Leave it.",
+      "effects": {}
+    },
+    "tags": [
+      "ui",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_two_entrance_markers",
+    "phase": 2,
+    "title": "Two Entrances",
+    "speaker": "Scout",
+    "body": "Map shows two entrances. The dungeon has one.",
+    "left": {
+      "label": "Left marker.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Right marker.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        }
+      }
+    },
+    "tags": [
+      "nav",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_policy_confirmation",
+    "phase": 2,
+    "title": "Confirmed Policy",
+    "speaker": "Loot Master",
+    "body": "Policy confirmed. It is correct.",
+    "left": {
+      "label": "Acknowledge.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Ask source.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "loot",
+      "oddity"
+    ]
+  },
+  {
+    "id": "arch_afk_promises_again",
+    "phase": 2,
+    "title": "After This Phase",
+    "speaker": "AFK Farmer",
+    "body": "Back in two minutes. After this phase. Exactly this phase.",
+    "left": {
+      "label": "Hold their spot.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Replace now.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        },
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "tags": [
+      "archetype",
+      "timing"
+    ]
+  },
+  {
+    "id": "arch_drama_repeat",
+    "phase": 2,
+    "title": "One Hit Point & A Dream",
+    "speaker": "Drama Queen",
+    "body": "I soloed this with one hit point and a dream.",
+    "left": {
+      "label": "Applaud.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Move on.",
+      "effects": {}
+    },
+    "tags": [
+      "archetype",
+      "dejavu"
+    ]
+  },
+  {
+    "id": "arch_drama_repeat_variant",
+    "phase": 2,
+    "conditions": {
+      "seen": [
+        "arch_drama_repeat"
+      ]
+    },
+    "title": "One Hit Point & A Hope",
+    "speaker": "Drama Queen",
+    "body": "I soloed this with one hit point and a hope.",
+    "left": {
+      "label": "Applaud.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Move on.",
+      "effects": {}
+    },
+    "tags": [
+      "archetype",
+      "dejavu"
+    ]
+  },
+  {
+    "id": "arch_theory_specs",
+    "phase": 2,
+    "title": "Performance Check",
+    "speaker": "Theorycrafter",
+    "body": "Our performance looks… very consistent. Extremely consistent.",
+    "left": {
+      "label": "Ask for detail.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Good to hear.",
+      "effects": {}
+    },
+    "tags": [
+      "archetype",
+      "metrics"
+    ]
+  },
+  {
+    "id": "arch_bench_popin",
+    "phase": 2,
+    "title": "Present",
+    "speaker": "Benched Rogue",
+    "body": "I’ve been present the whole time.",
+    "left": {
+      "label": "Invite to group.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Keep benched.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "tags": [
+      "archetype",
+      "bench"
+    ]
+  },
+  {
+    "id": "arch_role_claim",
+    "phase": 2,
+    "title": "New Role",
+    "speaker": "Mage",
+    "body": "I am the tank now.",
+    "left": {
+      "label": "Approve tonight.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        }
+      }
+    },
+    "right": {
+      "label": "No, your lane.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "tags": [
+      "archetype",
+      "roles"
+    ]
+  },
+  {
+    "id": "arch_echo_policy",
+    "phase": 2,
+    "title": "Policy Echo",
+    "speaker": "Loot Master",
+    "body": "Distributed according to policy. The policy was correct.",
+    "left": {
+      "label": "Acknowledge.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Which policy?",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "archetype",
+      "loot"
+    ]
+  },
+  {
+    "id": "arch_play_nice_or_not",
+    "phase": 2,
+    "title": "Smooth or Sharp",
+    "speaker": "Officer",
+    "body": "Do we smooth the edges or let them poke each other a little?",
+    "left": {
+      "label": "Smooth.",
+      "effects": {
+        "flags": {
+          "friction": -1,
+          "stasis": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Let it poke.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        }
+      }
+    },
+    "tags": [
+      "moderation",
+      "tone"
+    ]
+  }
+]

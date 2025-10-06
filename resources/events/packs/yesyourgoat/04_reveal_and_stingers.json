@@ -1,0 +1,369 @@
+[
+  {
+    "id": "reveal_the_eternal_simulation",
+    "phase": 4,
+    "title": "The Eternal Simulation",
+    "speaker": "Game Master",
+    "body": "You have performed within acceptable parameters. The guild persists. You persist. The cycle persists.",
+    "left": {
+      "label": "Parameters?",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Understood.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "reveal"
+    ]
+  },
+  {
+    "id": "reveal_ai_replica",
+    "phase": 4,
+    "title": "Replica",
+    "speaker": "Game Master",
+    "body": "You are an AI replica. So are they. They do not know. You will not tell them.",
+    "left": {
+      "label": "Why me?",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "They don’t need to know.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "reveal"
+    ]
+  },
+  {
+    "id": "reveal_no_exit",
+    "phase": 4,
+    "title": "No Exit",
+    "speaker": "Game Master",
+    "body": "There is no exit condition. Only results. Prepare for reset.",
+    "left": {
+      "label": "Start over.",
+      "effects": {
+        "flags": {
+          "loop_awareness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {
+        "flags": {
+          "loop_awareness": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "reveal",
+      "reset"
+    ]
+  },
+  {
+    "id": "stinger_coffee_familiar",
+    "phase": 1,
+    "title": "Familiar Aroma",
+    "speaker": "Attendant",
+    "body": "Coffee smells the same as ever.",
+    "conditions": {
+      "flags": {
+        "loop_awareness": {
+          "gte": 1
+        }
+      }
+    },
+    "left": {
+      "label": "It does.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Head to work.",
+      "effects": {}
+    },
+    "tags": [
+      "stinger",
+      "lobby"
+    ]
+  },
+  {
+    "id": "stinger_metrics_idle",
+    "phase": 1,
+    "title": "Idle Metrics",
+    "speaker": "Game Master",
+    "body": "No changes to your metrics since last observation.",
+    "conditions": {
+      "legacy": {
+        "meta_skeptic": {
+          "gte": 1
+        }
+      }
+    },
+    "left": {
+      "label": "Noted.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Which metrics?",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "stinger",
+      "gm"
+    ]
+  },
+  {
+    "id": "stinger_names_on_wall",
+    "phase": 1,
+    "title": "Names on the Wall",
+    "speaker": "System",
+    "body": "Names look familiar. They often do.",
+    "conditions": {
+      "legacy": {
+        "roster_bond": {
+          "gte": 2
+        }
+      }
+    },
+    "left": {
+      "label": "Keep walking.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Read a few.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "stinger",
+      "hall"
+    ]
+  },
+  {
+    "id": "stinger_blank_notice",
+    "phase": 1,
+    "title": "Blank Notice",
+    "speaker": "Officer",
+    "body": "A notice board pin with no notice beneath it.",
+    "conditions": {
+      "flags": {
+        "loop_awareness": {
+          "gte": 1
+        }
+      }
+    },
+    "left": {
+      "label": "Replace it.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Leave it.",
+      "effects": {}
+    },
+    "tags": [
+      "stinger",
+      "oddity"
+    ]
+  },
+  {
+    "id": "stinger_quiet_bench",
+    "phase": 1,
+    "title": "Quiet Bench",
+    "speaker": "Benched Rogue",
+    "body": "If you need me, I will already be here.",
+    "conditions": {
+      "legacy": {
+        "roster_bond": {
+          "gte": 1
+        }
+      }
+    },
+    "left": {
+      "label": "Nod.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Carry on.",
+      "effects": {}
+    },
+    "tags": [
+      "stinger",
+      "bench"
+    ]
+  },
+  {
+    "id": "stinger_policy_card",
+    "phase": 1,
+    "title": "Policy Card",
+    "speaker": "Loot Master",
+    "body": "Policy card is laminated now.",
+    "conditions": {
+      "legacy": {
+        "meta_skeptic": {
+          "gte": 1
+        }
+      }
+    },
+    "left": {
+      "label": "Good.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Which policy?",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "stinger",
+      "loot"
+    ]
+  },
+  {
+    "id": "stinger_queue_is_clear",
+    "phase": 1,
+    "title": "Queue Is Clear",
+    "speaker": "Game Master",
+    "body": "Queue priority is maintained. Proceed when ready.",
+    "conditions": {
+      "flags": {
+        "loop_awareness": {
+          "gte": 1
+        }
+      }
+    },
+    "left": {
+      "label": "Proceed.",
+      "effects": {}
+    },
+    "right": {
+      "label": "No priority.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "stinger",
+      "gm",
+      "lobby"
+    ]
+  },
+  {
+    "id": "stinger_banner_subtext",
+    "phase": 1,
+    "title": "Banner Subtext",
+    "speaker": "Attendant",
+    "body": "Banner has a small subtext you can’t read from here.",
+    "conditions": {
+      "legacy": {
+        "meta_skeptic": {
+          "gte": 2
+        }
+      }
+    },
+    "left": {
+      "label": "Walk closer.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Leave it.",
+      "effects": {}
+    },
+    "tags": [
+      "stinger",
+      "lobby"
+    ]
+  },
+  {
+    "id": "stinger_accounting_tick",
+    "phase": 1,
+    "title": "Accounting Tick",
+    "speaker": "Treasurer",
+    "body": "Ledger rolled over cleanly. Clean is nice.",
+    "conditions": {
+      "flags": {
+        "dependency": {
+          "gte": 1
+        }
+      }
+    },
+    "left": {
+      "label": "Nice.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Audit later.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "stinger",
+      "economy"
+    ]
+  },
+  {
+    "id": "stinger_new_faces_same_lines",
+    "phase": 1,
+    "title": "New Faces, Same Lines",
+    "speaker": "Recruiter",
+    "body": "Fresh batch today. They know what to say.",
+    "conditions": {
+      "legacy": {
+        "roster_bond": {
+          "gte": 2
+        }
+      }
+    },
+    "left": {
+      "label": "Welcome them.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Move along.",
+      "effects": {}
+    },
+    "tags": [
+      "stinger",
+      "recruitment"
+    ]
+  }
+]

@@ -1,352 +1,2819 @@
 [
   {
-    "id": "run_intro_01",
-    "title": "Welcome Brief",
-    "speaker": "Council Moderator",
-    "body": "Funds keep lights on; reputation fills apps; readiness kills bosses. Short brief?",
-    "tags": [
-      "run:intro",
-      "character:moderator",
-      "tutorial",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Post the brief",
-      "effects": {
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Skip for now",
-      "effects": {
-        "readiness": 1
-      }
-    }
-  },
-  {
-    "id": "intro_tank_01",
-    "title": "Anchor Points",
-    "speaker": "Tank",
-    "body": "Call positions in guild chat, or keep comms to raid only?",
-    "tags": [
-      "meta:intro",
-      "character:tank",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Guild chat",
-      "effects": {
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Raid only",
-      "effects": {
-        "readiness": 1
-      }
-    }
-  },
-  {
-    "id": "intro_healer_01",
-    "title": "Potion Budget",
-    "speaker": "Healer",
-    "body": "Do I get a small potion budget this week? It steadies wipes.",
-    "tags": [
-      "meta:intro",
-      "character:healer",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Approve budget",
-      "effects": {
-        "funds": -1,
-        "readiness": 1
-      }
-    },
-    "right": {
-      "label": "No extras",
-      "effects": {
-        "reputation": 1
-      }
-    }
-  },
-  {
-    "id": "intro_treasurer_01",
-    "title": "Bank Rules",
+    "id": "intro_ledger_leaderboard",
+    "phase": 1,
+    "title": "Ledger & Leaderboard",
     "speaker": "Treasurer",
-    "body": "Post simple bank rules now, or handle requests case by case?",
-    "tags": [
-      "meta:intro",
-      "character:treasurer",
-      "phase:1"
-    ],
+    "body": "Funds keep lights on. Reputation fills applications. Readiness kills bosses. Short brief?",
     "left": {
-      "label": "Post rules",
+      "label": "Post the brief.",
       "effects": {
-        "reputation": 1
+        "meters": {
+          "reputation": 1
+        },
+        "legacy": {
+          "roster_bond": 1
+        }
       }
     },
     "right": {
-      "label": "Case by case",
+      "label": "Skip for now.",
       "effects": {
-        "funds": 1
-      }
-    }
-  },
-  {
-    "id": "intro_rival_01",
-    "title": "Snide Ping",
-    "speaker": "Rival",
-    "body": "Heard you're recruiting tanks. Want a loaner... for a fee?",
-    "tags": [
-      "meta:intro",
-      "character:rival",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Hard pass",
-      "effects": {
-        "reputation": 1
+        "meters": {
+          "readiness": -1
+        }
       }
     },
-    "right": {
-      "label": "Ask terms",
-      "effects": {
-        "funds": -1
-      }
-    }
+    "tags": [
+      "setup",
+      "economy"
+    ]
   },
   {
-    "id": "ask_tank_minimums_01",
-    "title": "Minimums",
+    "id": "intro_positions",
+    "phase": 1,
+    "title": "Where We Talk",
     "speaker": "Tank",
-    "body": "Set roster minimums before raid? Slower invites, fewer wipes.",
-    "tags": [
-      "raid_logistics",
-      "character:tank",
-      "phase:1"
-    ],
+    "body": "Call positions in guild chat or keep comms raid-only?",
     "left": {
-      "label": "Set minimums",
+      "label": "Guild chat.",
       "effects": {
-        "readiness": 1,
-        "reputation": -1
+        "legacy": {
+          "roster_bond": 1
+        }
       }
     },
     "right": {
-      "label": "Stay flexible",
+      "label": "Raid-only.",
       "effects": {
-        "reputation": 1,
-        "readiness": -1
+        "meters": {
+          "readiness": 1
+        }
       }
-    }
+    },
+    "tags": [
+      "comms"
+    ]
   },
   {
-    "id": "ask_healer_supplies_01",
-    "title": "Supplies",
+    "id": "intro_potions",
+    "phase": 1,
+    "title": "Potion Float",
+    "speaker": "Healer",
+    "body": "A small potion budget steadies wipes. Approve?",
+    "left": {
+      "label": "Approve.",
+      "effects": {
+        "meters": {
+          "funds": -1,
+          "readiness": 1
+        },
+        "flags": {
+          "attrition": -1
+        }
+      }
+    },
+    "right": {
+      "label": "No extras.",
+      "effects": {
+        "meters": {
+          "funds": 1
+        },
+        "flags": {
+          "attrition": 1
+        }
+      }
+    },
+    "tags": [
+      "supplies"
+    ]
+  },
+  {
+    "id": "intro_bank_rules",
+    "phase": 1,
+    "title": "Pin the Bank Rules",
+    "speaker": "Treasurer",
+    "body": "Post simple bank rules now, or handle case-by-case?",
+    "left": {
+      "label": "Post rules.",
+      "effects": {
+        "meters": {
+          "reputation": 1
+        },
+        "flags": {
+          "scarcity": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Case-by-case.",
+      "effects": {
+        "flags": {
+          "scarcity": 1
+        }
+      }
+    },
+    "tags": [
+      "policy",
+      "economy"
+    ]
+  },
+  {
+    "id": "intro_recruiter_window",
+    "phase": 1,
+    "title": "Trial Windows",
+    "speaker": "Recruiter",
+    "body": "Steady trickle of trials, or tight windows with prep?",
+    "left": {
+      "label": "Steady trickle.",
+      "effects": {
+        "meters": {
+          "reputation": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Tight windows.",
+      "effects": {
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "tags": [
+      "recruitment"
+    ]
+  },
+  {
+    "id": "intro_logs_opt_in",
+    "phase": 1,
+    "title": "Logs & VODs",
+    "speaker": "Compliance",
+    "body": "Enforce logs now, or keep optional?",
+    "left": {
+      "label": "Enforce.",
+      "effects": {
+        "meters": {
+          "readiness": 1
+        },
+        "legacy": {
+          "roster_bond": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Optional.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "compliance",
+      "prep"
+    ]
+  },
+  {
+    "id": "intro_borderline_trials",
+    "phase": 1,
+    "title": "Borderline Trials",
+    "speaker": "Recruiter",
+    "body": "If a trial is borderline, ping you or decide without you?",
+    "left": {
+      "label": "Ping me.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Decide without me.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "recruitment",
+      "trust"
+    ]
+  },
+  {
+    "id": "intro_buy_basics",
+    "phase": 1,
+    "title": "Buy Basics on Dips",
+    "speaker": "Treasurer",
+    "body": "Okay to stock basics when price dips?",
+    "left": {
+      "label": "Yes, within reason.",
+      "effects": {
+        "flags": {
+          "attrition": -1
+        }
+      }
+    },
+    "right": {
+      "label": "No stockpiling.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        },
+        "meters": {
+          "funds": 1
+        }
+      }
+    },
+    "tags": [
+      "supplies",
+      "economy"
+    ]
+  },
+  {
+    "id": "intro_public_patch_notes",
+    "phase": 1,
+    "title": "Patch Notes Style",
+    "speaker": "PR",
+    "body": "Announce changes quietly, or make a public thread?",
+    "left": {
+      "label": "Quiet notes.",
+      "effects": {
+        "meters": {
+          "reputation": 0
+        }
+      }
+    },
+    "right": {
+      "label": "Public thread.",
+      "effects": {
+        "meters": {
+          "reputation": 1
+        }
+      }
+    },
+    "tags": [
+      "communications"
+    ]
+  },
+  {
+    "id": "intro_stream_pov",
+    "phase": 1,
+    "title": "Stream Seat",
+    "speaker": "PR",
+    "body": "A streamer wants a sit-in POV. Case-by-case, or no spectators?",
+    "left": {
+      "label": "Case-by-case.",
+      "effects": {
+        "meters": {
+          "reputation": 1
+        }
+      }
+    },
+    "right": {
+      "label": "No spectators.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "pr"
+    ]
+  },
+  {
+    "id": "intro_rdps_review",
+    "phase": 1,
+    "title": "Plan Review",
+    "speaker": "Ranged DPS",
+    "body": "Quick plan review before pulls?",
+    "left": {
+      "label": "Yes.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        },
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "No, straight in.",
+      "effects": {
+        "meters": {
+          "readiness": 0
+        }
+      }
+    },
+    "tags": [
+      "prep"
+    ]
+  },
+  {
+    "id": "intro_rdps_utility_sprite",
+    "phase": 1,
+    "title": "Utility Flex",
+    "speaker": "Ranged DPS",
+    "body": "Use me on utility if needed?",
+    "left": {
+      "label": "Yes, flex if needed.",
+      "effects": {
+        "flags": {
+          "attrition": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Stay pure DPS.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        }
+      }
+    },
+    "tags": [
+      "roles"
+    ]
+  },
+  {
+    "id": "intro_tank_role_call",
+    "phase": 1,
+    "title": "Main or Off",
+    "speaker": "Tank",
+    "body": "Main tank or off-tank tonight?",
+    "left": {
+      "label": "Main.",
+      "effects": {
+        "meters": {
+          "readiness": 1
+        },
+        "flags": {
+          "overfit": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Off.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "roles"
+    ]
+  },
+  {
+    "id": "intro_healer_learning",
+    "phase": 1,
+    "title": "Pacing a Learner",
+    "speaker": "Healer",
+    "body": "I can heal, still learning this tier. Pace me or shadow me?",
+    "left": {
+      "label": "Pace you.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        },
+        "flags": {
+          "attrition": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Shadow closely.",
+      "effects": {
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "tags": [
+      "mentoring"
+    ]
+  },
+  {
+    "id": "intro_officer_threshold",
+    "phase": 1,
+    "title": "Step-in Threshold",
+    "speaker": "Officer",
+    "body": "If tempers rise, step in early or let it cool?",
+    "left": {
+      "label": "Step in early.",
+      "effects": {
+        "flags": {
+          "friction": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Let it cool.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        }
+      }
+    },
+    "tags": [
+      "moderation"
+    ]
+  },
+  {
+    "id": "intro_rival_loaner",
+    "phase": 1,
+    "title": "Loaner Tank",
+    "speaker": "Rival Guild",
+    "body": "Heard you need a tank. Want a loaner… for a fee?",
+    "left": {
+      "label": "Hard pass.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Ask terms.",
+      "effects": {
+        "flags": {
+          "dependency": 1
+        }
+      }
+    },
+    "tags": [
+      "rival",
+      "temptation"
+    ]
+  },
+  {
+    "id": "ask_roster_minimums",
+    "phase": 1,
+    "title": "Roster Minimums",
+    "speaker": "Tank",
+    "body": "Set minimum item level and consumables before raid?",
+    "left": {
+      "label": "Set minimums.",
+      "effects": {
+        "flags": {
+          "overfit": 1
+        },
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Stay flexible.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        },
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "policy",
+      "roles"
+    ]
+  },
+  {
+    "id": "ask_healer_supplies",
+    "phase": 1,
+    "title": "Basic Supplies",
     "speaker": "Healer",
     "body": "Approve basic raid supplies out of bank?",
-    "tags": [
-      "raid_logistics",
-      "character:healer",
-      "phase:1"
-    ],
     "left": {
-      "label": "Approve",
+      "label": "Approve.",
       "effects": {
-        "funds": -1,
-        "readiness": 1
+        "meters": {
+          "funds": -1,
+          "readiness": 1
+        },
+        "flags": {
+          "attrition": -1
+        }
       }
     },
     "right": {
-      "label": "Not this week",
+      "label": "Players bring their own.",
       "effects": {
-        "reputation": 1
+        "meters": {
+          "reputation": -1
+        },
+        "flags": {
+          "attrition": 1
+        }
       }
-    }
+    },
+    "tags": [
+      "supplies"
+    ]
   },
   {
-    "id": "ask_treasurer_dues_01",
-    "title": "Dues",
+    "id": "ask_dues_timing",
+    "phase": 1,
+    "title": "Dues Timing",
     "speaker": "Treasurer",
     "body": "Collect small dues now or after first boss dies?",
-    "tags": [
-      "economy",
-      "character:treasurer",
-      "phase:1"
-    ],
     "left": {
-      "label": "Collect now",
+      "label": "Collect now.",
       "effects": {
-        "funds": 2,
-        "reputation": -1
+        "meters": {
+          "funds": 1
+        },
+        "legacy": {
+          "roster_bond": -1
+        },
+        "flags": {
+          "scarcity": -1
+        }
       }
     },
     "right": {
-      "label": "After first",
+      "label": "After first boss.",
       "effects": {
-        "reputation": 1
+        "legacy": {
+          "roster_bond": 1
+        },
+        "flags": {
+          "scarcity": 1
+        }
       }
-    }
+    },
+    "tags": [
+      "economy"
+    ]
   },
   {
-    "id": "raid_night_check_01",
-    "title": "Raid Night",
-    "speaker": "Tank",
-    "body": "Run the plan or freestyle mid-pull?",
-    "tags": [
-      "raid_night_check",
-      "phase:1"
-    ],
+    "id": "ask_logs_required",
+    "phase": 1,
+    "title": "Logs Required",
+    "speaker": "Compliance",
+    "body": "Make logs mandatory tonight?",
     "left": {
-      "label": "Run the plan",
+      "label": "Mandatory.",
       "effects": {
-        "readiness": 1
+        "meters": {
+          "readiness": 1
+        },
+        "legacy": {
+          "roster_bond": -1
+        }
       }
     },
     "right": {
-      "label": "Freestyle",
+      "label": "Optional.",
       "effects": {
-        "reputation": -1
+        "legacy": {
+          "roster_bond": 1
+        }
       }
-    }
+    },
+    "tags": [
+      "compliance"
+    ]
   },
   {
-    "id": "meta_council_01",
-    "title": "Council Dues",
-    "speaker": "Council Moderator",
-    "body": "Community dues are due. Pay now?",
-    "tags": [
-      "meta:council",
-      "phase:1"
-    ],
+    "id": "ask_trial_voice",
+    "phase": 1,
+    "title": "Trial Voice",
+    "speaker": "Recruiter",
+    "body": "Let trials speak on voice calls or keep them muted?",
     "left": {
-      "label": "Pay now",
+      "label": "Let them speak.",
       "effects": {
-        "funds": -2,
-        "reputation": 1
+        "legacy": {
+          "roster_bond": 1
+        }
       }
     },
     "right": {
-      "label": "Defer",
+      "label": "Keep muted.",
       "effects": {
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "meta_rival_01",
-    "title": "Rival DM",
-    "speaker": "Rival",
-    "body": "Your bench looks soft. Need a real guild?",
-    "tags": [
-      "meta:rival",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Report harassment",
-      "effects": {
-        "reputation": 1
+        "meters": {
+          "readiness": 1
+        }
       }
     },
-    "right": {
-      "label": "Ignore it",
-      "effects": {
-        "readiness": -1
-      }
-    }
+    "tags": [
+      "recruitment",
+      "comms"
+    ]
   },
   {
-    "id": "random_invite_midpull_01",
-    "title": "Mid-Pull Ping",
+    "id": "ask_raid_breaks",
+    "phase": 1,
+    "title": "Break Timing",
     "speaker": "Officer",
-    "body": "Got a whisper for an invite mid-pull. Fill now or after?",
-    "tags": [
-      "random_pool",
-      "random:logistics",
-      "phase:1"
-    ],
+    "body": "Short breaks often, or one long intermission?",
     "left": {
-      "label": "After this pull",
+      "label": "Short & often.",
       "effects": {
-        "readiness": 1
+        "flags": {
+          "attrition": -1
+        },
+        "legacy": {
+          "roster_bond": 1
+        }
       }
     },
     "right": {
-      "label": "Invite now",
+      "label": "One long break.",
       "effects": {
-        "readiness": -1,
-        "reputation": 1
+        "meters": {
+          "readiness": 1
+        }
       }
-    }
+    },
+    "tags": [
+      "pacing"
+    ]
   },
   {
-    "id": "random_latency_spike_01",
+    "id": "rand_invite_midpull_v1",
+    "phase": 2,
+    "title": "Mid-Pull Whisper",
+    "speaker": "Recruit",
+    "body": "Invite mid-pull? I can be there in ten… nine.",
+    "left": {
+      "label": "Invite now.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        },
+        "meters": {
+          "readiness": -1
+        }
+      }
+    },
+    "right": {
+      "label": "After pull.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "tags": [
+      "timing"
+    ]
+  },
+  {
+    "id": "rand_invite_midpull_v2",
+    "phase": 2,
+    "conditions": {
+      "seen": [
+        "rand_invite_midpull_v1"
+      ]
+    },
+    "title": "Mid-Pull Whisper (Again)",
+    "speaker": "Recruit",
+    "body": "Invite mid-pull? I can be there in ten… eight.",
+    "left": {
+      "label": "Invite now.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        }
+      }
+    },
+    "right": {
+      "label": "After pull.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "tags": [
+      "timing",
+      "dejavu"
+    ]
+  },
+  {
+    "id": "rand_latency_spike",
+    "phase": 2,
     "title": "Spikes",
-    "speaker": "Scout",
-    "body": "Latency is spiking in the instance. Adjust?",
-    "tags": [
-      "random_pool",
-      "random:server",
-      "phase:1"
-    ],
+    "speaker": "Officer",
+    "body": "Latency is spiking inside the instance. Adjust?",
     "left": {
-      "label": "Lower risk",
+      "label": "Lower risk.",
       "effects": {
-        "readiness": 1,
-        "reputation": -1
+        "flags": {
+          "attrition": -1,
+          "stasis": 1
+        }
       }
     },
     "right": {
-      "label": "Push through",
+      "label": "Push through.",
       "effects": {
-        "readiness": -1
+        "flags": {
+          "attrition": 1
+        }
       }
-    }
+    },
+    "tags": [
+      "tech"
+    ]
   },
   {
-    "id": "random_bank_short_01",
+    "id": "rand_bank_short",
+    "phase": 2,
     "title": "Short Ledger",
     "speaker": "Treasurer",
-    "body": "Small deposit looks missing. Could be logging delay.",
-    "tags": [
-      "random_pool",
-      "random:economy",
-      "phase:1"
-    ],
+    "body": "A small deposit looks missing. Could be a logging delay.",
     "left": {
-      "label": "Cover tonight",
+      "label": "Cover tonight.",
       "effects": {
-        "funds": -1,
-        "readiness": 1
+        "meters": {
+          "funds": -1
+        },
+        "legacy": {
+          "roster_bond": 1
+        },
+        "flags": {
+          "scarcity": -1
+        }
       }
     },
     "right": {
-      "label": "Post a note",
+      "label": "Post a note.",
       "effects": {
-        "reputation": 1
+        "legacy": {
+          "meta_skeptic": 1
+        },
+        "flags": {
+          "scarcity": 1
+        }
       }
-    }
+    },
+    "tags": [
+      "economy"
+    ]
+  },
+  {
+    "id": "rand_role_swap",
+    "phase": 2,
+    "title": "Role Swap",
+    "speaker": "Mage",
+    "body": "I'm the tank tonight. Not the Mage… the tank.",
+    "left": {
+      "label": "Approve.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        }
+      }
+    },
+    "right": {
+      "label": "No, backline.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "tags": [
+      "roles",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_loot_label_offbyone",
+    "phase": 2,
+    "title": "Label Looks Off",
+    "speaker": "Loot Master",
+    "body": "We got the ‘Sword of Sword’. Looks correct… ish.",
+    "left": {
+      "label": "Distribute normally.",
+      "effects": {
+        "meters": {
+          "reputation": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Hold it.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "loot",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_repeat_quote",
+    "phase": 2,
+    "title": "He Said That",
+    "speaker": "Drama Queen",
+    "body": "“I soloed this with one hit point and a dream.” Again.",
+    "left": {
+      "label": "Clap.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Move on.",
+      "effects": {}
+    },
+    "tags": [
+      "dejavu",
+      "banter"
+    ]
+  },
+  {
+    "id": "rand_bench_presence",
+    "phase": 2,
+    "title": "Still Here",
+    "speaker": "Benched Rogue",
+    "body": "I've been here the whole time.",
+    "left": {
+      "label": "Nod.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Invite in.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        }
+      }
+    },
+    "tags": [
+      "bench",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_lobby_coffee",
+    "phase": 2,
+    "title": "Coffee in the Lounge",
+    "speaker": "Attendant",
+    "body": "Same mug as before. Fresh coffee.",
+    "left": {
+      "label": "Loiter.",
+      "effects": {
+        "flags": {
+          "loop_awareness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Back to work.",
+      "effects": {}
+    },
+    "tags": [
+      "lobby",
+      "foreshadow"
+    ]
+  },
+  {
+    "id": "rand_text_misspelling",
+    "phase": 2,
+    "title": "Small Typo",
+    "speaker": "Officer",
+    "body": "The guild’s reputaion is stable.",
+    "left": {
+      "label": "Fix the note.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Leave it.",
+      "effects": {}
+    },
+    "tags": [
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_policy_echo",
+    "phase": 2,
+    "title": "Policy Echo",
+    "speaker": "Loot Master",
+    "body": "This was distributed in accordance with policy. The policy was correct.",
+    "left": {
+      "label": "Acknowledge.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Ask which policy.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "loot",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_queue_priority_whisper",
+    "phase": 2,
+    "title": "Priority Whisper",
+    "speaker": "Unknown",
+    "body": "Your queue priority is noted.",
+    "left": {
+      "label": "Noted.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Who is this?",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "oddity",
+      "gm-foreshadow"
+    ]
+  },
+  {
+    "id": "rand_tooltip_shrug",
+    "phase": 2,
+    "title": "Shrug Tooltip",
+    "speaker": "Officer",
+    "body": "A tooltip just says: “It depends.”",
+    "left": {
+      "label": "Ignore.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Note it.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "oddity",
+      "ui"
+    ]
+  },
+  {
+    "id": "rand_daily_reset_twice",
+    "phase": 2,
+    "title": "Reset Again",
+    "speaker": "System",
+    "body": "Daily reset occurred. Then occurred.",
+    "left": {
+      "label": "Collect once.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Collect twice.",
+      "effects": {
+        "flags": {
+          "scarcity": -1
+        }
+      }
+    },
+    "tags": [
+      "system",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_duplicate_name",
+    "phase": 2,
+    "title": "Two Aliks",
+    "speaker": "Recruiter",
+    "body": "Two recruits have the same name. Different portraits. Same name.",
+    "left": {
+      "label": "Invite both.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Invite one.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "tags": [
+      "recruitment",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_boss_hint_conflict",
+    "phase": 2,
+    "title": "Conflicting Hints",
+    "speaker": "Scout",
+    "body": "One parchment says stack. Another says spread.",
+    "left": {
+      "label": "Stack.",
+      "effects": {
+        "flags": {
+          "overfit": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Spread.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        }
+      }
+    },
+    "tags": [
+      "prep",
+      "positioning"
+    ]
+  },
+  {
+    "id": "rand_calendar_drift",
+    "phase": 2,
+    "title": "Calendar Drift",
+    "speaker": "Officer",
+    "body": "Raid night is showing as today. It was also today yesterday.",
+    "left": {
+      "label": "Proceed anyway.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Announce later.",
+      "effects": {
+        "meters": {
+          "reputation": -1
+        }
+      }
+    },
+    "tags": [
+      "schedule",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_invites_bounce",
+    "phase": 2,
+    "title": "Bouncing Invites",
+    "speaker": "Recruit",
+    "body": "Invite lands, vanishes, lands again.",
+    "left": {
+      "label": "Retry.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Move on.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "tags": [
+      "recruitment",
+      "net"
+    ]
+  },
+  {
+    "id": "rand_banner_color_shift",
+    "phase": 2,
+    "title": "Color Shift",
+    "speaker": "Attendant",
+    "body": "Banner looks slightly off-color.",
+    "left": {
+      "label": "Adjust lights.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Leave it.",
+      "effects": {}
+    },
+    "tags": [
+      "lobby",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_ping_out_of_place",
+    "phase": 2,
+    "title": "Ping Out of Place",
+    "speaker": "Tank",
+    "body": "Someone pinged the wrong corner again.",
+    "left": {
+      "label": "Follow the ping.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Ignore it.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "tags": [
+      "positioning",
+      "banter"
+    ]
+  },
+  {
+    "id": "rand_loot_roll_near_ties",
+    "phase": 2,
+    "title": "Near Ties",
+    "speaker": "Loot Master",
+    "body": "Rolls keep landing one apart. Again.",
+    "left": {
+      "label": "Best match wins.",
+      "effects": {
+        "meters": {
+          "reputation": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Call a reroll.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        }
+      }
+    },
+    "tags": [
+      "loot"
+    ]
+  },
+  {
+    "id": "rand_enchant_mislabel",
+    "phase": 2,
+    "title": "Enchant Label",
+    "speaker": "Crafter",
+    "body": "Enchant reads: ‘+Something to Something’. Should work.",
+    "left": {
+      "label": "Apply it.",
+      "effects": {
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Hold craft.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "craft",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_training_dummy_feedback",
+    "phase": 2,
+    "title": "Dummy Feedback",
+    "speaker": "Theorycrafter",
+    "body": "Training dummy reports: satisfactory. No decimals.",
+    "left": {
+      "label": "Good enough.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Ask decimals.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "metrics"
+    ]
+  },
+  {
+    "id": "rand_voice_overlay_repeat",
+    "phase": 2,
+    "title": "Voice Overlay",
+    "speaker": "Officer",
+    "body": "Overlay shows the same caller twice.",
+    "left": {
+      "label": "Carry on.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Restart overlay.",
+      "effects": {}
+    },
+    "tags": [
+      "comms",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_map_icon_stutter",
+    "phase": 2,
+    "title": "Map Stutter",
+    "speaker": "Scout",
+    "body": "Waypoint flickers between two spots.",
+    "left": {
+      "label": "Chase the flicker.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Pick one.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "tags": [
+      "nav",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_readycheck_echo",
+    "phase": 2,
+    "title": "Ready Echo",
+    "speaker": "System",
+    "body": "Ready check reports: ready. Then: Ready.",
+    "left": {
+      "label": "Pull.",
+      "effects": {
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "One more check.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "tags": [
+      "prep",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_consumable_gloss",
+    "phase": 2,
+    "title": "Glossy Label",
+    "speaker": "Healer",
+    "body": "Label on this flask looks newly printed.",
+    "left": {
+      "label": "Use it.",
+      "effects": {
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Swap it.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "supplies"
+    ]
+  },
+  {
+    "id": "rand_bench_voice_heard",
+    "phase": 2,
+    "title": "Voice From Bench",
+    "speaker": "Benched Rogue",
+    "body": "You can hear me fine from here.",
+    "left": {
+      "label": "Invite anyway.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Stay benched.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "tags": [
+      "bench",
+      "comms"
+    ]
+  },
+  {
+    "id": "rand_training_reset_quick",
+    "phase": 2,
+    "title": "Quick Reset",
+    "speaker": "Officer",
+    "body": "Instance reset was quicker than usual.",
+    "left": {
+      "label": "Good.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Note it.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "system"
+    ]
+  },
+  {
+    "id": "rand_micro_typo_again",
+    "phase": 2,
+    "title": "Micro Typo",
+    "speaker": "Officer",
+    "body": "Roster ‘scedule’ updated.",
+    "left": {
+      "label": "Fix it.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Leave it.",
+      "effects": {}
+    },
+    "tags": [
+      "ui",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_two_entrance_markers",
+    "phase": 2,
+    "title": "Two Entrances",
+    "speaker": "Scout",
+    "body": "Map shows two entrances. The dungeon has one.",
+    "left": {
+      "label": "Left marker.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Right marker.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        }
+      }
+    },
+    "tags": [
+      "nav",
+      "oddity"
+    ]
+  },
+  {
+    "id": "rand_policy_confirmation",
+    "phase": 2,
+    "title": "Confirmed Policy",
+    "speaker": "Loot Master",
+    "body": "Policy confirmed. It is correct.",
+    "left": {
+      "label": "Acknowledge.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Ask source.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "loot",
+      "oddity"
+    ]
+  },
+  {
+    "id": "arch_afk_promises_again",
+    "phase": 2,
+    "title": "After This Phase",
+    "speaker": "AFK Farmer",
+    "body": "Back in two minutes. After this phase. Exactly this phase.",
+    "left": {
+      "label": "Hold their spot.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Replace now.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        },
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "tags": [
+      "archetype",
+      "timing"
+    ]
+  },
+  {
+    "id": "arch_drama_repeat",
+    "phase": 2,
+    "title": "One Hit Point & A Dream",
+    "speaker": "Drama Queen",
+    "body": "I soloed this with one hit point and a dream.",
+    "left": {
+      "label": "Applaud.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Move on.",
+      "effects": {}
+    },
+    "tags": [
+      "archetype",
+      "dejavu"
+    ]
+  },
+  {
+    "id": "arch_drama_repeat_variant",
+    "phase": 2,
+    "conditions": {
+      "seen": [
+        "arch_drama_repeat"
+      ]
+    },
+    "title": "One Hit Point & A Hope",
+    "speaker": "Drama Queen",
+    "body": "I soloed this with one hit point and a hope.",
+    "left": {
+      "label": "Applaud.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Move on.",
+      "effects": {}
+    },
+    "tags": [
+      "archetype",
+      "dejavu"
+    ]
+  },
+  {
+    "id": "arch_theory_specs",
+    "phase": 2,
+    "title": "Performance Check",
+    "speaker": "Theorycrafter",
+    "body": "Our performance looks… very consistent. Extremely consistent.",
+    "left": {
+      "label": "Ask for detail.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Good to hear.",
+      "effects": {}
+    },
+    "tags": [
+      "archetype",
+      "metrics"
+    ]
+  },
+  {
+    "id": "arch_bench_popin",
+    "phase": 2,
+    "title": "Present",
+    "speaker": "Benched Rogue",
+    "body": "I’ve been present the whole time.",
+    "left": {
+      "label": "Invite to group.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Keep benched.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "tags": [
+      "archetype",
+      "bench"
+    ]
+  },
+  {
+    "id": "arch_role_claim",
+    "phase": 2,
+    "title": "New Role",
+    "speaker": "Mage",
+    "body": "I am the tank now.",
+    "left": {
+      "label": "Approve tonight.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        }
+      }
+    },
+    "right": {
+      "label": "No, your lane.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "tags": [
+      "archetype",
+      "roles"
+    ]
+  },
+  {
+    "id": "arch_echo_policy",
+    "phase": 2,
+    "title": "Policy Echo",
+    "speaker": "Loot Master",
+    "body": "Distributed according to policy. The policy was correct.",
+    "left": {
+      "label": "Acknowledge.",
+      "effects": {
+        "flags": {
+          "stasis": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Which policy?",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "archetype",
+      "loot"
+    ]
+  },
+  {
+    "id": "arch_play_nice_or_not",
+    "phase": 2,
+    "title": "Smooth or Sharp",
+    "speaker": "Officer",
+    "body": "Do we smooth the edges or let them poke each other a little?",
+    "left": {
+      "label": "Smooth.",
+      "effects": {
+        "flags": {
+          "friction": -1,
+          "stasis": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Let it poke.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        }
+      }
+    },
+    "tags": [
+      "moderation",
+      "tone"
+    ]
+  },
+  {
+    "id": "meta_gm_stability_assist",
+    "phase": 3,
+    "title": "Stability Assist",
+    "speaker": "Game Master",
+    "body": "A stability assist is available. It will smooth tonight's volatility.",
+    "left": {
+      "label": "Enable assist.",
+      "effects": {
+        "flags": {
+          "dependency": 2
+        },
+        "meters": {
+          "readiness": 1
+        }
+      },
+      "notes": "Invisible cost, short-term gain."
+    },
+    "right": {
+      "label": "Decline.",
+      "effects": {
+        "flags": {
+          "scarcity": 1
+        },
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "bargain"
+    ]
+  },
+  {
+    "id": "meta_gm_priority_queue",
+    "phase": 3,
+    "title": "Priority Queue",
+    "speaker": "Game Master",
+    "body": "A maintenance window is due for your queue priority. Proceed?",
+    "left": {
+      "label": "Proceed.",
+      "effects": {
+        "flags": {
+          "dependency": 1
+        },
+        "meters": {
+          "reputation": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Defer.",
+      "effects": {
+        "flags": {
+          "scarcity": 1
+        },
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "maintenance"
+    ]
+  },
+  {
+    "id": "meta_comp_v1",
+    "phase": 3,
+    "title": "Perfect Comp v1",
+    "speaker": "Game Master",
+    "body": "Recommendation available: a composition that trivializes the next fight.",
+    "left": {
+      "label": "Adopt it.",
+      "effects": {
+        "flags": {
+          "overfit": 2
+        },
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Keep identity.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        },
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "comp"
+    ]
+  },
+  {
+    "id": "meta_comp_v2_counter",
+    "phase": 3,
+    "conditions": {
+      "flags": {
+        "overfit": {
+          "gte": 2
+        }
+      }
+    },
+    "title": "Counter Emerges",
+    "speaker": "Game Master",
+    "body": "Opposition has adjusted. A refined recommendation is available.",
+    "left": {
+      "label": "Chase the new meta.",
+      "effects": {
+        "flags": {
+          "overfit": 2
+        }
+      }
+    },
+    "right": {
+      "label": "Stop chasing.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        },
+        "flags": {
+          "attrition": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "comp"
+    ]
+  },
+  {
+    "id": "meta_fix_loot_policy",
+    "phase": 3,
+    "title": "Policy Enforcement",
+    "speaker": "Game Master",
+    "body": "A loot dispute has been resolved according to policy. The policy was correct.",
+    "left": {
+      "label": "Acknowledge.",
+      "effects": {
+        "flags": {
+          "dependency": 1
+        },
+        "meters": {
+          "reputation": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Question it.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "loot"
+    ]
+  },
+  {
+    "id": "meta_rival_dm",
+    "phase": 3,
+    "title": "Rival DM",
+    "speaker": "Rival Guild",
+    "body": "Your bench looks soft. We could place you somewhere that fits.",
+    "left": {
+      "label": "Report.",
+      "effects": {
+        "meters": {
+          "reputation": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Ignore.",
+      "effects": {
+        "meters": {
+          "readiness": -1
+        }
+      }
+    },
+    "tags": [
+      "rival"
+    ]
+  },
+  {
+    "id": "meta_moderator_linecheck",
+    "phase": 3,
+    "title": "Line Check",
+    "speaker": "Game Master",
+    "body": "That line isn’t yours. Continue with your own.",
+    "left": {
+      "label": "Continue.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Continue.",
+      "effects": {}
+    },
+    "tags": [
+      "gm",
+      "script"
+    ]
+  },
+  {
+    "id": "meta_metrics_praise",
+    "phase": 3,
+    "title": "Metrics Improving",
+    "speaker": "Game Master",
+    "body": "Your metrics are improving.",
+    "left": {
+      "label": "Which metrics?",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Noted.",
+      "effects": {}
+    },
+    "tags": [
+      "gm",
+      "metrics"
+    ]
+  },
+  {
+    "id": "gm_stability_tier2",
+    "phase": 3,
+    "title": "Stability: Tier 2",
+    "speaker": "Game Master",
+    "body": "Additional smoothing is available. Volatility will decrease further.",
+    "left": {
+      "label": "Enable.",
+      "effects": {
+        "flags": {
+          "dependency": 2
+        },
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Decline.",
+      "effects": {
+        "flags": {
+          "scarcity": 1
+        },
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "bargain"
+    ]
+  },
+  {
+    "id": "gm_supply_cache",
+    "phase": 3,
+    "title": "Supply Cache",
+    "speaker": "Game Master",
+    "body": "A sealed cache can be made available.",
+    "left": {
+      "label": "Unlock it.",
+      "effects": {
+        "flags": {
+          "dependency": 1
+        },
+        "meters": {
+          "funds": 1,
+          "readiness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Leave it.",
+      "effects": {
+        "flags": {
+          "scarcity": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "supplies"
+    ]
+  },
+  {
+    "id": "gm_priority_invites",
+    "phase": 3,
+    "title": "Priority Invites",
+    "speaker": "Game Master",
+    "body": "Recruitment throughput can be increased.",
+    "left": {
+      "label": "Increase throughput.",
+      "effects": {
+        "flags": {
+          "dependency": 1
+        },
+        "meters": {
+          "reputation": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Natural pace.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "recruitment"
+    ]
+  },
+  {
+    "id": "gm_comp_lock",
+    "phase": 3,
+    "title": "Lock the Comp",
+    "speaker": "Game Master",
+    "body": "Your current composition can be locked for enhanced synergy.",
+    "left": {
+      "label": "Lock it.",
+      "effects": {
+        "flags": {
+          "overfit": 2
+        },
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Do not lock.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        },
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "comp"
+    ]
+  },
+  {
+    "id": "gm_ledger_smoothing",
+    "phase": 3,
+    "title": "Ledger Smoothing",
+    "speaker": "Game Master",
+    "body": "Fluctuations in your ledger can be smoothed.",
+    "left": {
+      "label": "Smooth.",
+      "effects": {
+        "flags": {
+          "dependency": 1
+        },
+        "meters": {
+          "funds": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Leave it noisy.",
+      "effects": {
+        "flags": {
+          "scarcity": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "economy"
+    ]
+  },
+  {
+    "id": "gm_metrics_ack",
+    "phase": 3,
+    "title": "Metrics Acknowledged",
+    "speaker": "Game Master",
+    "body": "Your metrics are internally consistent. Continue.",
+    "left": {
+      "label": "Continue.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Which metrics?",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "metrics"
+    ]
+  },
+  {
+    "id": "lobby_same_couch",
+    "phase": 2,
+    "title": "Same Couch",
+    "speaker": "Attendant",
+    "body": "Couch looks familiar. Coffee is fresh.",
+    "left": {
+      "label": "Sit for a minute.",
+      "effects": {
+        "flags": {
+          "loop_awareness": 1
+        },
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Head back.",
+      "effects": {}
+    },
+    "tags": [
+      "lobby",
+      "foreshadow"
+    ]
+  },
+  {
+    "id": "lobby_same_mug",
+    "phase": 2,
+    "conditions": {
+      "seen": [
+        "lobby_same_couch"
+      ]
+    },
+    "title": "Same Mug",
+    "speaker": "Attendant",
+    "body": "Same mug. Same chip on the rim.",
+    "left": {
+      "label": "Turn it around.",
+      "effects": {
+        "flags": {
+          "loop_awareness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Ignore.",
+      "effects": {}
+    },
+    "tags": [
+      "lobby",
+      "dejavu"
+    ]
+  },
+  {
+    "id": "lobby_banner_shift",
+    "phase": 2,
+    "title": "Banner Shift",
+    "speaker": "Attendant",
+    "body": "Banner text looks slightly different.",
+    "left": {
+      "label": "Read it.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Don’t read.",
+      "effects": {}
+    },
+    "tags": [
+      "lobby",
+      "oddity"
+    ]
+  },
+  {
+    "id": "lobby_gm_dropby",
+    "phase": 3,
+    "title": "Queue Priority",
+    "speaker": "Game Master",
+    "body": "Queue priority maintained.",
+    "left": {
+      "label": "Maintained.",
+      "effects": {
+        "flags": {
+          "dependency": 1
+        }
+      }
+    },
+    "right": {
+      "label": "We don’t need it.",
+      "effects": {
+        "flags": {
+          "scarcity": 1
+        },
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "lobby"
+    ]
+  },
+  {
+    "id": "lobby_prop_duplicate",
+    "phase": 3,
+    "title": "Two Mugs",
+    "speaker": "Attendant",
+    "body": "There are two identical mugs now.",
+    "left": {
+      "label": "Compare them.",
+      "effects": {
+        "flags": {
+          "loop_awareness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Leave them.",
+      "effects": {}
+    },
+    "tags": [
+      "lobby",
+      "oddity"
+    ]
+  },
+  {
+    "id": "lobby_final_blink",
+    "phase": 4,
+    "title": "Blink",
+    "speaker": "Attendant",
+    "body": "Same couch. Same mugs. Lights blink.",
+    "left": {
+      "label": "Start over.",
+      "effects": {
+        "flags": {
+          "loop_awareness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {
+        "flags": {
+          "loop_awareness": 1
+        }
+      }
+    },
+    "tags": [
+      "lobby",
+      "reset"
+    ]
+  },
+  {
+    "id": "comp_hint_scout",
+    "phase": 2,
+    "title": "Scout Hint",
+    "speaker": "Scout",
+    "body": "Boss favors clustered positions. Or they used to.",
+    "left": {
+      "label": "Tight groups.",
+      "effects": {
+        "flags": {
+          "overfit": 1
+        },
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Keep spacing.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        }
+      }
+    },
+    "tags": [
+      "prep",
+      "positioning"
+    ]
+  },
+  {
+    "id": "comp_result_adapt",
+    "phase": 3,
+    "conditions": {
+      "flags": {
+        "overfit": {
+          "gte": 1
+        }
+      }
+    },
+    "title": "They Adapt",
+    "speaker": "Officer",
+    "body": "They’re punishing that cluster now.",
+    "left": {
+      "label": "Rebuild comp.",
+      "effects": {
+        "flags": {
+          "overfit": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Hold identity.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        },
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "counter",
+      "positioning"
+    ]
+  },
+  {
+    "id": "comp_lock_in",
+    "phase": 3,
+    "title": "Lock In?",
+    "speaker": "Officer",
+    "body": "Current comp is working. Lock in or flex bench?",
+    "left": {
+      "label": "Lock in.",
+      "effects": {
+        "flags": {
+          "overfit": 2
+        }
+      }
+    },
+    "right": {
+      "label": "Keep flex.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        },
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "roster"
+    ]
+  },
+  {
+    "id": "comp_flex_lift",
+    "phase": 3,
+    "title": "Lift the Bench",
+    "speaker": "Recruiter",
+    "body": "Bench is eager. Rotate them in?",
+    "left": {
+      "label": "Rotate now.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        },
+        "flags": {
+          "attrition": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Not tonight.",
+      "effects": {
+        "flags": {
+          "overfit": 1
+        }
+      }
+    },
+    "tags": [
+      "bench",
+      "rotation"
+    ]
+  },
+  {
+    "id": "comp_perfect_is_brittle",
+    "phase": 3,
+    "title": "Perfect Is Brittle",
+    "speaker": "Healer",
+    "body": "This feels perfect. It also feels brittle.",
+    "left": {
+      "label": "Keep perfect.",
+      "effects": {
+        "flags": {
+          "overfit": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Loosen a slot.",
+      "effects": {
+        "flags": {
+          "attrition": -1
+        },
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "philosophy",
+      "comp"
+    ]
+  },
+  {
+    "id": "comp_last_call",
+    "phase": 3,
+    "title": "Last Call",
+    "speaker": "Officer",
+    "body": "Final pull. Commit to the comp or flex for safety?",
+    "left": {
+      "label": "Commit hard.",
+      "effects": {
+        "flags": {
+          "overfit": 2
+        }
+      }
+    },
+    "right": {
+      "label": "Flex for safety.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        }
+      }
+    },
+    "tags": [
+      "finale",
+      "comp"
+    ]
+  },
+  {
+    "id": "reveal_the_eternal_simulation",
+    "phase": 4,
+    "title": "The Eternal Simulation",
+    "speaker": "Game Master",
+    "body": "You have performed within acceptable parameters. The guild persists. You persist. The cycle persists.",
+    "left": {
+      "label": "Parameters?",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Understood.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "reveal"
+    ]
+  },
+  {
+    "id": "reveal_ai_replica",
+    "phase": 4,
+    "title": "Replica",
+    "speaker": "Game Master",
+    "body": "You are an AI replica. So are they. They do not know. You will not tell them.",
+    "left": {
+      "label": "Why me?",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "They don’t need to know.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "reveal"
+    ]
+  },
+  {
+    "id": "reveal_no_exit",
+    "phase": 4,
+    "title": "No Exit",
+    "speaker": "Game Master",
+    "body": "There is no exit condition. Only results. Prepare for reset.",
+    "left": {
+      "label": "Start over.",
+      "effects": {
+        "flags": {
+          "loop_awareness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {
+        "flags": {
+          "loop_awareness": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "reveal",
+      "reset"
+    ]
+  },
+  {
+    "id": "stinger_coffee_familiar",
+    "phase": 1,
+    "title": "Familiar Aroma",
+    "speaker": "Attendant",
+    "body": "Coffee smells the same as ever.",
+    "conditions": {
+      "flags": {
+        "loop_awareness": {
+          "gte": 1
+        }
+      }
+    },
+    "left": {
+      "label": "It does.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Head to work.",
+      "effects": {}
+    },
+    "tags": [
+      "stinger",
+      "lobby"
+    ]
+  },
+  {
+    "id": "stinger_metrics_idle",
+    "phase": 1,
+    "title": "Idle Metrics",
+    "speaker": "Game Master",
+    "body": "No changes to your metrics since last observation.",
+    "conditions": {
+      "legacy": {
+        "meta_skeptic": {
+          "gte": 1
+        }
+      }
+    },
+    "left": {
+      "label": "Noted.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Which metrics?",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "stinger",
+      "gm"
+    ]
+  },
+  {
+    "id": "stinger_names_on_wall",
+    "phase": 1,
+    "title": "Names on the Wall",
+    "speaker": "System",
+    "body": "Names look familiar. They often do.",
+    "conditions": {
+      "legacy": {
+        "roster_bond": {
+          "gte": 2
+        }
+      }
+    },
+    "left": {
+      "label": "Keep walking.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Read a few.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "stinger",
+      "hall"
+    ]
+  },
+  {
+    "id": "stinger_blank_notice",
+    "phase": 1,
+    "title": "Blank Notice",
+    "speaker": "Officer",
+    "body": "A notice board pin with no notice beneath it.",
+    "conditions": {
+      "flags": {
+        "loop_awareness": {
+          "gte": 1
+        }
+      }
+    },
+    "left": {
+      "label": "Replace it.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Leave it.",
+      "effects": {}
+    },
+    "tags": [
+      "stinger",
+      "oddity"
+    ]
+  },
+  {
+    "id": "stinger_quiet_bench",
+    "phase": 1,
+    "title": "Quiet Bench",
+    "speaker": "Benched Rogue",
+    "body": "If you need me, I will already be here.",
+    "conditions": {
+      "legacy": {
+        "roster_bond": {
+          "gte": 1
+        }
+      }
+    },
+    "left": {
+      "label": "Nod.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Carry on.",
+      "effects": {}
+    },
+    "tags": [
+      "stinger",
+      "bench"
+    ]
+  },
+  {
+    "id": "stinger_policy_card",
+    "phase": 1,
+    "title": "Policy Card",
+    "speaker": "Loot Master",
+    "body": "Policy card is laminated now.",
+    "conditions": {
+      "legacy": {
+        "meta_skeptic": {
+          "gte": 1
+        }
+      }
+    },
+    "left": {
+      "label": "Good.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Which policy?",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "stinger",
+      "loot"
+    ]
+  },
+  {
+    "id": "stinger_queue_is_clear",
+    "phase": 1,
+    "title": "Queue Is Clear",
+    "speaker": "Game Master",
+    "body": "Queue priority is maintained. Proceed when ready.",
+    "conditions": {
+      "flags": {
+        "loop_awareness": {
+          "gte": 1
+        }
+      }
+    },
+    "left": {
+      "label": "Proceed.",
+      "effects": {}
+    },
+    "right": {
+      "label": "No priority.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "stinger",
+      "gm",
+      "lobby"
+    ]
+  },
+  {
+    "id": "stinger_banner_subtext",
+    "phase": 1,
+    "title": "Banner Subtext",
+    "speaker": "Attendant",
+    "body": "Banner has a small subtext you can’t read from here.",
+    "conditions": {
+      "legacy": {
+        "meta_skeptic": {
+          "gte": 2
+        }
+      }
+    },
+    "left": {
+      "label": "Walk closer.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Leave it.",
+      "effects": {}
+    },
+    "tags": [
+      "stinger",
+      "lobby"
+    ]
+  },
+  {
+    "id": "stinger_accounting_tick",
+    "phase": 1,
+    "title": "Accounting Tick",
+    "speaker": "Treasurer",
+    "body": "Ledger rolled over cleanly. Clean is nice.",
+    "conditions": {
+      "flags": {
+        "dependency": {
+          "gte": 1
+        }
+      }
+    },
+    "left": {
+      "label": "Nice.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Audit later.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "stinger",
+      "economy"
+    ]
+  },
+  {
+    "id": "stinger_new_faces_same_lines",
+    "phase": 1,
+    "title": "New Faces, Same Lines",
+    "speaker": "Recruiter",
+    "body": "Fresh batch today. They know what to say.",
+    "conditions": {
+      "legacy": {
+        "roster_bond": {
+          "gte": 2
+        }
+      }
+    },
+    "left": {
+      "label": "Welcome them.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Move along.",
+      "effects": {}
+    },
+    "tags": [
+      "stinger",
+      "recruitment"
+    ]
   },
   {
     "id": "collapse_funds",
     "title": "Bankrupt Guild",
     "speaker": "System",
-    "body": "Ledger hits zero. Lights dim. You do not log out. You are logged.",
     "tags": [
       "meta:collapse",
       "phase:1"
     ],
+    "body": "Ledger hits zero. Lights dim. You do not log out. You are logged.",
+    "trigger": {
+      "meters": {
+        "funds": {
+          "lte": -3
+        }
+      }
+    },
     "left": {
-      "label": "Start over",
+      "label": "Start over.",
       "effects": {
-        "reputation": 0
+        "legacy": {
+          "meta_skeptic": 1
+        }
       }
     },
     "right": {
-      "label": "Start over",
+      "label": "Start over.",
       "effects": {
-        "reputation": 0
+        "legacy": {
+          "roster_bond": 1
+        }
       }
     }
   },
@@ -354,21 +2821,32 @@
     "id": "collapse_reputation",
     "title": "Forgotten Name",
     "speaker": "System",
-    "body": "Recruiters stop replying. Applications stop arriving. The hall is very quiet.",
     "tags": [
       "meta:collapse",
       "phase:1"
     ],
+    "body": "Recruiters stop replying. Applications stop arriving. The hall is very quiet.",
+    "trigger": {
+      "meters": {
+        "reputation": {
+          "lte": -3
+        }
+      }
+    },
     "left": {
-      "label": "Start over",
+      "label": "Start over.",
       "effects": {
-        "reputation": 0
+        "legacy": {
+          "meta_skeptic": 1
+        }
       }
     },
     "right": {
-      "label": "Start over",
+      "label": "Start over.",
       "effects": {
-        "reputation": 0
+        "legacy": {
+          "roster_bond": 1
+        }
       }
     }
   },
@@ -376,21 +2854,239 @@
     "id": "collapse_readiness",
     "title": "Unready Roster",
     "speaker": "System",
-    "body": "Everyone showed up. Nothing is ready. The clock runs out all the same.",
     "tags": [
       "meta:collapse",
       "phase:1"
     ],
+    "body": "Everyone showed up. Nothing is ready. The clock runs out all the same.",
+    "trigger": {
+      "meters": {
+        "readiness": {
+          "lte": -3
+        }
+      }
+    },
     "left": {
-      "label": "Start over",
+      "label": "Start over.",
       "effects": {
-        "reputation": 0
+        "legacy": {
+          "meta_skeptic": 1
+        }
       }
     },
     "right": {
-      "label": "Start over",
+      "label": "Start over.",
       "effects": {
-        "reputation": 0
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    }
+  },
+  {
+    "id": "collapse_dependency",
+    "title": "Support Withheld",
+    "speaker": "Game Master",
+    "tags": [
+      "meta:collapse",
+      "phase:1"
+    ],
+    "body": "Assistance is unavailable. Stand alone.",
+    "trigger": {
+      "flags": {
+        "dependency": {
+          "gte": 4
+        }
+      }
+    },
+    "left": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {}
+    }
+  },
+  {
+    "id": "collapse_scarcity",
+    "title": "Dry Canteen",
+    "speaker": "System",
+    "tags": [
+      "meta:collapse",
+      "phase:1"
+    ],
+    "body": "Supplies tapped out. No catastrophe. No celebration.",
+    "trigger": {
+      "flags": {
+        "scarcity": {
+          "gte": 3
+        }
+      }
+    },
+    "left": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {}
+    }
+  },
+  {
+    "id": "collapse_overfitted",
+    "title": "Counter-Meta",
+    "speaker": "System",
+    "tags": [
+      "meta:collapse",
+      "phase:1"
+    ],
+    "body": "They brought exactly what you cannot solve.",
+    "trigger": {
+      "flags": {
+        "overfit": {
+          "gte": 4
+        }
+      }
+    },
+    "left": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {}
+    }
+  },
+  {
+    "id": "collapse_attrition",
+    "title": "Slow Bleed",
+    "speaker": "System",
+    "tags": [
+      "meta:collapse",
+      "phase:1"
+    ],
+    "body": "Everyone standing; nothing left to give.",
+    "trigger": {
+      "flags": {
+        "attrition": {
+          "gte": 4
+        }
+      }
+    },
+    "left": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {}
+    }
+  },
+  {
+    "id": "collapse_stasis",
+    "title": "Timed Out",
+    "speaker": "System",
+    "tags": [
+      "meta:collapse",
+      "phase:1"
+    ],
+    "body": "Stable. Motionless. The run ends without an ending.",
+    "trigger": {
+      "flags": {
+        "stasis": {
+          "gte": 4
+        }
+      }
+    },
+    "left": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {}
+    }
+  },
+  {
+    "id": "collapse_friction",
+    "title": "Hairline → Crack",
+    "speaker": "System",
+    "tags": [
+      "meta:collapse",
+      "phase:1"
+    ],
+    "body": "One more swap, and it snaps.",
+    "trigger": {
+      "flags": {
+        "friction": {
+          "gte": 4
+        }
+      }
+    },
+    "left": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {}
+    }
+  },
+  {
+    "id": "collapse_loop_room",
+    "title": "The Room Again",
+    "speaker": "Attendant",
+    "tags": [
+      "meta:collapse",
+      "phase:1"
+    ],
+    "body": "Same couch. Same mug. Lights blink. Reset.",
+    "trigger": {
+      "flags": {
+        "loop_awareness": {
+          "gte": 1
+        }
+      }
+    },
+    "left": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
       }
     }
   }

@@ -1,0 +1,397 @@
+[
+  {
+    "id": "run_intro_01",
+    "title": "Welcome Brief",
+    "speaker": "Council Moderator",
+    "body": "Funds keep lights on; reputation fills apps; readiness kills bosses. Short brief?",
+    "tags": [
+      "run:intro",
+      "character:moderator",
+      "tutorial",
+      "phase:1"
+    ],
+    "left": {
+      "label": "Post the brief",
+      "effects": {
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Skip for now",
+      "effects": {
+        "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "intro_tank_01",
+    "title": "Anchor Points",
+    "speaker": "Tank",
+    "body": "Call positions in guild chat, or keep comms to raid only?",
+    "tags": [
+      "meta:intro",
+      "character:tank",
+      "phase:1"
+    ],
+    "left": {
+      "label": "Guild chat",
+      "effects": {
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Raid only",
+      "effects": {
+        "readiness": 1
+      }
+    }
+  },
+  {
+    "id": "intro_healer_01",
+    "title": "Potion Budget",
+    "speaker": "Healer",
+    "body": "Do I get a small potion budget this week? It steadies wipes.",
+    "tags": [
+      "meta:intro",
+      "character:healer",
+      "phase:1"
+    ],
+    "left": {
+      "label": "Approve budget",
+      "effects": {
+        "funds": -1,
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "No extras",
+      "effects": {
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "intro_treasurer_01",
+    "title": "Bank Rules",
+    "speaker": "Treasurer",
+    "body": "Post simple bank rules now, or handle requests case by case?",
+    "tags": [
+      "meta:intro",
+      "character:treasurer",
+      "phase:1"
+    ],
+    "left": {
+      "label": "Post rules",
+      "effects": {
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Case by case",
+      "effects": {
+        "funds": 1
+      }
+    }
+  },
+  {
+    "id": "intro_rival_01",
+    "title": "Snide Ping",
+    "speaker": "Rival",
+    "body": "Heard you're recruiting tanks. Want a loaner... for a fee?",
+    "tags": [
+      "meta:intro",
+      "character:rival",
+      "phase:1"
+    ],
+    "left": {
+      "label": "Hard pass",
+      "effects": {
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Ask terms",
+      "effects": {
+        "funds": -1
+      }
+    }
+  },
+  {
+    "id": "ask_tank_minimums_01",
+    "title": "Minimums",
+    "speaker": "Tank",
+    "body": "Set roster minimums before raid? Slower invites, fewer wipes.",
+    "tags": [
+      "raid_logistics",
+      "character:tank",
+      "phase:1"
+    ],
+    "left": {
+      "label": "Set minimums",
+      "effects": {
+        "readiness": 1,
+        "reputation": -1
+      }
+    },
+    "right": {
+      "label": "Stay flexible",
+      "effects": {
+        "reputation": 1,
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "ask_healer_supplies_01",
+    "title": "Supplies",
+    "speaker": "Healer",
+    "body": "Approve basic raid supplies out of bank?",
+    "tags": [
+      "raid_logistics",
+      "character:healer",
+      "phase:1"
+    ],
+    "left": {
+      "label": "Approve",
+      "effects": {
+        "funds": -1,
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Not this week",
+      "effects": {
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "ask_treasurer_dues_01",
+    "title": "Dues",
+    "speaker": "Treasurer",
+    "body": "Collect small dues now or after first boss dies?",
+    "tags": [
+      "economy",
+      "character:treasurer",
+      "phase:1"
+    ],
+    "left": {
+      "label": "Collect now",
+      "effects": {
+        "funds": 2,
+        "reputation": -1
+      }
+    },
+    "right": {
+      "label": "After first",
+      "effects": {
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "raid_night_check_01",
+    "title": "Raid Night",
+    "speaker": "Tank",
+    "body": "Run the plan or freestyle mid-pull?",
+    "tags": [
+      "raid_night_check",
+      "phase:1"
+    ],
+    "left": {
+      "label": "Run the plan",
+      "effects": {
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Freestyle",
+      "effects": {
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "meta_council_01",
+    "title": "Council Dues",
+    "speaker": "Council Moderator",
+    "body": "Community dues are due. Pay now?",
+    "tags": [
+      "meta:council",
+      "phase:1"
+    ],
+    "left": {
+      "label": "Pay now",
+      "effects": {
+        "funds": -2,
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Defer",
+      "effects": {
+        "reputation": -1
+      }
+    }
+  },
+  {
+    "id": "meta_rival_01",
+    "title": "Rival DM",
+    "speaker": "Rival",
+    "body": "Your bench looks soft. Need a real guild?",
+    "tags": [
+      "meta:rival",
+      "phase:1"
+    ],
+    "left": {
+      "label": "Report harassment",
+      "effects": {
+        "reputation": 1
+      }
+    },
+    "right": {
+      "label": "Ignore it",
+      "effects": {
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "random_invite_midpull_01",
+    "title": "Mid-Pull Ping",
+    "speaker": "Officer",
+    "body": "Got a whisper for an invite mid-pull. Fill now or after?",
+    "tags": [
+      "random_pool",
+      "random:logistics",
+      "phase:1"
+    ],
+    "left": {
+      "label": "After this pull",
+      "effects": {
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Invite now",
+      "effects": {
+        "readiness": -1,
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "random_latency_spike_01",
+    "title": "Spikes",
+    "speaker": "Scout",
+    "body": "Latency is spiking in the instance. Adjust?",
+    "tags": [
+      "random_pool",
+      "random:server",
+      "phase:1"
+    ],
+    "left": {
+      "label": "Lower risk",
+      "effects": {
+        "readiness": 1,
+        "reputation": -1
+      }
+    },
+    "right": {
+      "label": "Push through",
+      "effects": {
+        "readiness": -1
+      }
+    }
+  },
+  {
+    "id": "random_bank_short_01",
+    "title": "Short Ledger",
+    "speaker": "Treasurer",
+    "body": "Small deposit looks missing. Could be logging delay.",
+    "tags": [
+      "random_pool",
+      "random:economy",
+      "phase:1"
+    ],
+    "left": {
+      "label": "Cover tonight",
+      "effects": {
+        "funds": -1,
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Post a note",
+      "effects": {
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "collapse_funds",
+    "title": "Bankrupt Guild",
+    "speaker": "System",
+    "body": "Ledger hits zero. Lights dim. You do not log out. You are logged.",
+    "tags": [
+      "meta:collapse",
+      "phase:1"
+    ],
+    "left": {
+      "label": "Start over",
+      "effects": {
+        "reputation": 0
+      }
+    },
+    "right": {
+      "label": "Start over",
+      "effects": {
+        "reputation": 0
+      }
+    }
+  },
+  {
+    "id": "collapse_reputation",
+    "title": "Forgotten Name",
+    "speaker": "System",
+    "body": "Recruiters stop replying. Applications stop arriving. The hall is very quiet.",
+    "tags": [
+      "meta:collapse",
+      "phase:1"
+    ],
+    "left": {
+      "label": "Start over",
+      "effects": {
+        "reputation": 0
+      }
+    },
+    "right": {
+      "label": "Start over",
+      "effects": {
+        "reputation": 0
+      }
+    }
+  },
+  {
+    "id": "collapse_readiness",
+    "title": "Unready Roster",
+    "speaker": "System",
+    "body": "Everyone showed up. Nothing is ready. The clock runs out all the same.",
+    "tags": [
+      "meta:collapse",
+      "phase:1"
+    ],
+    "left": {
+      "label": "Start over",
+      "effects": {
+        "reputation": 0
+      }
+    },
+    "right": {
+      "label": "Start over",
+      "effects": {
+        "reputation": 0
+      }
+    }
+  }
+]

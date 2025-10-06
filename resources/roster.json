@@ -55,6 +55,111 @@
       "level": 1,
       "role": "System Message",
       "description": "Automated notifications"
+    },
+    "Recruiter": {
+      "name": "Recruiter",
+      "portrait": "/portraits/beastmaster.png",
+      "level": 79,
+      "role": "Beast Master",
+      "description": "Finds and evaluates new talent"
+    },
+    "Compliance": {
+      "name": "Compliance",
+      "portrait": "/portraits/warden.png",
+      "level": 83,
+      "role": "Protection Paladin",
+      "description": "Enforces guild policies and rules"
+    },
+    "PR": {
+      "name": "PR",
+      "portrait": "/portraits/darkranger.png",
+      "level": 81,
+      "role": "Dark Ranger",
+      "description": "Manages public relations and communications"
+    },
+    "Ranged DPS": {
+      "name": "Ranged DPS",
+      "portrait": "/portraits/shadowhunter.png",
+      "level": 80,
+      "role": "Survival Hunter",
+      "description": "Long-range damage specialist"
+    },
+    "Rival Guild": {
+      "name": "Rival Guild",
+      "portrait": "/portraits/dreadlord.png",
+      "level": 88,
+      "role": "Unholy Death Knight",
+      "description": "Competitive guild leader"
+    },
+    "Recruit": {
+      "name": "Recruit",
+      "portrait": "/portraits/peon.png",
+      "level": 1,
+      "role": "Recruit",
+      "description": "New guild member candidate"
+    },
+    "Mage": {
+      "name": "Mage",
+      "portrait": "/portraits/sorceress.png",
+      "level": 77,
+      "role": "Arcane Mage",
+      "description": "Master of arcane magic"
+    },
+    "Loot Master": {
+      "name": "Loot Master",
+      "portrait": "/portraits/archmage.png",
+      "level": 82,
+      "role": "Arcane Mage",
+      "description": "Manages loot distribution"
+    },
+    "Drama Queen": {
+      "name": "Drama Queen",
+      "portrait": "/portraits/priestess.png",
+      "level": 75,
+      "role": "Holy Priest",
+      "description": "Creates and escalates drama"
+    },
+    "Benched Rogue": {
+      "name": "Benched Rogue",
+      "portrait": "/portraits/rogue.png",
+      "level": 76,
+      "role": "Assassination Rogue",
+      "description": "Backup DPS waiting for rotation"
+    },
+    "Attendant": {
+      "name": "Attendant",
+      "portrait": "/portraits/peon.png",
+      "level": 1,
+      "role": "Attendant",
+      "description": "Guild hall maintenance staff"
+    },
+    "Unknown": {
+      "name": "Unknown",
+      "portrait": "/portraits/peon.png",
+      "level": 1,
+      "role": "Unknown",
+      "description": "Mysterious figure"
+    },
+    "Crafter": {
+      "name": "Crafter",
+      "portrait": "/portraits/tinker.png",
+      "level": 78,
+      "role": "Engineer",
+      "description": "Creates and enchants items"
+    },
+    "Theorycrafter": {
+      "name": "Theorycrafter",
+      "portrait": "/portraits/archmage.png",
+      "level": 85,
+      "role": "Arcane Mage",
+      "description": "Analyzes performance and optimization"
+    },
+    "AFK Farmer": {
+      "name": "AFK Farmer",
+      "portrait": "/portraits/peon.png",
+      "level": 1,
+      "role": "Farmer",
+      "description": "Frequently away from keyboard"
     }
   }
 }

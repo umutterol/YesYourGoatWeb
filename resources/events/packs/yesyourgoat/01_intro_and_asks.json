@@ -1,0 +1,638 @@
+[
+  {
+    "id": "intro_ledger_leaderboard",
+    "phase": 1,
+    "title": "Ledger & Leaderboard",
+    "speaker": "Treasurer",
+    "body": "Funds keep lights on. Reputation fills applications. Readiness kills bosses. Short brief?",
+    "left": {
+      "label": "Post the brief.",
+      "effects": {
+        "meters": {
+          "reputation": 1
+        },
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Skip for now.",
+      "effects": {
+        "meters": {
+          "readiness": -1
+        }
+      }
+    },
+    "tags": [
+      "setup",
+      "economy"
+    ]
+  },
+  {
+    "id": "intro_positions",
+    "phase": 1,
+    "title": "Where We Talk",
+    "speaker": "Tank",
+    "body": "Call positions in guild chat or keep comms raid-only?",
+    "left": {
+      "label": "Guild chat.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Raid-only.",
+      "effects": {
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "tags": [
+      "comms"
+    ]
+  },
+  {
+    "id": "intro_potions",
+    "phase": 1,
+    "title": "Potion Float",
+    "speaker": "Healer",
+    "body": "A small potion budget steadies wipes. Approve?",
+    "left": {
+      "label": "Approve.",
+      "effects": {
+        "meters": {
+          "funds": -1,
+          "readiness": 1
+        },
+        "flags": {
+          "attrition": -1
+        }
+      }
+    },
+    "right": {
+      "label": "No extras.",
+      "effects": {
+        "meters": {
+          "funds": 1
+        },
+        "flags": {
+          "attrition": 1
+        }
+      }
+    },
+    "tags": [
+      "supplies"
+    ]
+  },
+  {
+    "id": "intro_bank_rules",
+    "phase": 1,
+    "title": "Pin the Bank Rules",
+    "speaker": "Treasurer",
+    "body": "Post simple bank rules now, or handle case-by-case?",
+    "left": {
+      "label": "Post rules.",
+      "effects": {
+        "meters": {
+          "reputation": 1
+        },
+        "flags": {
+          "scarcity": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Case-by-case.",
+      "effects": {
+        "flags": {
+          "scarcity": 1
+        }
+      }
+    },
+    "tags": [
+      "policy",
+      "economy"
+    ]
+  },
+  {
+    "id": "intro_recruiter_window",
+    "phase": 1,
+    "title": "Trial Windows",
+    "speaker": "Recruiter",
+    "body": "Steady trickle of trials, or tight windows with prep?",
+    "left": {
+      "label": "Steady trickle.",
+      "effects": {
+        "meters": {
+          "reputation": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Tight windows.",
+      "effects": {
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "tags": [
+      "recruitment"
+    ]
+  },
+  {
+    "id": "intro_logs_opt_in",
+    "phase": 1,
+    "title": "Logs & VODs",
+    "speaker": "Compliance",
+    "body": "Enforce logs now, or keep optional?",
+    "left": {
+      "label": "Enforce.",
+      "effects": {
+        "meters": {
+          "readiness": 1
+        },
+        "legacy": {
+          "roster_bond": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Optional.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "compliance",
+      "prep"
+    ]
+  },
+  {
+    "id": "intro_borderline_trials",
+    "phase": 1,
+    "title": "Borderline Trials",
+    "speaker": "Recruiter",
+    "body": "If a trial is borderline, ping you or decide without you?",
+    "left": {
+      "label": "Ping me.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Decide without me.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "recruitment",
+      "trust"
+    ]
+  },
+  {
+    "id": "intro_buy_basics",
+    "phase": 1,
+    "title": "Buy Basics on Dips",
+    "speaker": "Treasurer",
+    "body": "Okay to stock basics when price dips?",
+    "left": {
+      "label": "Yes, within reason.",
+      "effects": {
+        "flags": {
+          "attrition": -1
+        }
+      }
+    },
+    "right": {
+      "label": "No stockpiling.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        },
+        "meters": {
+          "funds": 1
+        }
+      }
+    },
+    "tags": [
+      "supplies",
+      "economy"
+    ]
+  },
+  {
+    "id": "intro_public_patch_notes",
+    "phase": 1,
+    "title": "Patch Notes Style",
+    "speaker": "PR",
+    "body": "Announce changes quietly, or make a public thread?",
+    "left": {
+      "label": "Quiet notes.",
+      "effects": {
+        "meters": {
+          "reputation": 0
+        }
+      }
+    },
+    "right": {
+      "label": "Public thread.",
+      "effects": {
+        "meters": {
+          "reputation": 1
+        }
+      }
+    },
+    "tags": [
+      "communications"
+    ]
+  },
+  {
+    "id": "intro_stream_pov",
+    "phase": 1,
+    "title": "Stream Seat",
+    "speaker": "PR",
+    "body": "A streamer wants a sit-in POV. Case-by-case, or no spectators?",
+    "left": {
+      "label": "Case-by-case.",
+      "effects": {
+        "meters": {
+          "reputation": 1
+        }
+      }
+    },
+    "right": {
+      "label": "No spectators.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "pr"
+    ]
+  },
+  {
+    "id": "intro_rdps_review",
+    "phase": 1,
+    "title": "Plan Review",
+    "speaker": "Ranged DPS",
+    "body": "Quick plan review before pulls?",
+    "left": {
+      "label": "Yes.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        },
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "No, straight in.",
+      "effects": {
+        "meters": {
+          "readiness": 0
+        }
+      }
+    },
+    "tags": [
+      "prep"
+    ]
+  },
+  {
+    "id": "intro_rdps_utility_sprite",
+    "phase": 1,
+    "title": "Utility Flex",
+    "speaker": "Ranged DPS",
+    "body": "Use me on utility if needed?",
+    "left": {
+      "label": "Yes, flex if needed.",
+      "effects": {
+        "flags": {
+          "attrition": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Stay pure DPS.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        }
+      }
+    },
+    "tags": [
+      "roles"
+    ]
+  },
+  {
+    "id": "intro_tank_role_call",
+    "phase": 1,
+    "title": "Main or Off",
+    "speaker": "Tank",
+    "body": "Main tank or off-tank tonight?",
+    "left": {
+      "label": "Main.",
+      "effects": {
+        "meters": {
+          "readiness": 1
+        },
+        "flags": {
+          "overfit": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Off.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "roles"
+    ]
+  },
+  {
+    "id": "intro_healer_learning",
+    "phase": 1,
+    "title": "Pacing a Learner",
+    "speaker": "Healer",
+    "body": "I can heal, still learning this tier. Pace me or shadow me?",
+    "left": {
+      "label": "Pace you.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        },
+        "flags": {
+          "attrition": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Shadow closely.",
+      "effects": {
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "tags": [
+      "mentoring"
+    ]
+  },
+  {
+    "id": "intro_officer_threshold",
+    "phase": 1,
+    "title": "Step-in Threshold",
+    "speaker": "Officer",
+    "body": "If tempers rise, step in early or let it cool?",
+    "left": {
+      "label": "Step in early.",
+      "effects": {
+        "flags": {
+          "friction": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Let it cool.",
+      "effects": {
+        "flags": {
+          "friction": 1
+        }
+      }
+    },
+    "tags": [
+      "moderation"
+    ]
+  },
+  {
+    "id": "intro_rival_loaner",
+    "phase": 1,
+    "title": "Loaner Tank",
+    "speaker": "Rival Guild",
+    "body": "Heard you need a tank. Want a loaner… for a fee?",
+    "left": {
+      "label": "Hard pass.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Ask terms.",
+      "effects": {
+        "flags": {
+          "dependency": 1
+        }
+      }
+    },
+    "tags": [
+      "rival",
+      "temptation"
+    ]
+  },
+  {
+    "id": "ask_roster_minimums",
+    "phase": 1,
+    "title": "Roster Minimums",
+    "speaker": "Tank",
+    "body": "Set minimum item level and consumables before raid?",
+    "left": {
+      "label": "Set minimums.",
+      "effects": {
+        "flags": {
+          "overfit": 1
+        },
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Stay flexible.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        },
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "policy",
+      "roles"
+    ]
+  },
+  {
+    "id": "ask_healer_supplies",
+    "phase": 1,
+    "title": "Basic Supplies",
+    "speaker": "Healer",
+    "body": "Approve basic raid supplies out of bank?",
+    "left": {
+      "label": "Approve.",
+      "effects": {
+        "meters": {
+          "funds": -1,
+          "readiness": 1
+        },
+        "flags": {
+          "attrition": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Players bring their own.",
+      "effects": {
+        "meters": {
+          "reputation": -1
+        },
+        "flags": {
+          "attrition": 1
+        }
+      }
+    },
+    "tags": [
+      "supplies"
+    ]
+  },
+  {
+    "id": "ask_dues_timing",
+    "phase": 1,
+    "title": "Dues Timing",
+    "speaker": "Treasurer",
+    "body": "Collect small dues now or after first boss dies?",
+    "left": {
+      "label": "Collect now.",
+      "effects": {
+        "meters": {
+          "funds": 1
+        },
+        "legacy": {
+          "roster_bond": -1
+        },
+        "flags": {
+          "scarcity": -1
+        }
+      }
+    },
+    "right": {
+      "label": "After first boss.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        },
+        "flags": {
+          "scarcity": 1
+        }
+      }
+    },
+    "tags": [
+      "economy"
+    ]
+  },
+  {
+    "id": "ask_logs_required",
+    "phase": 1,
+    "title": "Logs Required",
+    "speaker": "Compliance",
+    "body": "Make logs mandatory tonight?",
+    "left": {
+      "label": "Mandatory.",
+      "effects": {
+        "meters": {
+          "readiness": 1
+        },
+        "legacy": {
+          "roster_bond": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Optional.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "compliance"
+    ]
+  },
+  {
+    "id": "ask_trial_voice",
+    "phase": 1,
+    "title": "Trial Voice",
+    "speaker": "Recruiter",
+    "body": "Let trials speak on voice calls or keep them muted?",
+    "left": {
+      "label": "Let them speak.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Keep muted.",
+      "effects": {
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "tags": [
+      "recruitment",
+      "comms"
+    ]
+  },
+  {
+    "id": "ask_raid_breaks",
+    "phase": 1,
+    "title": "Break Timing",
+    "speaker": "Officer",
+    "body": "Short breaks often, or one long intermission?",
+    "left": {
+      "label": "Short & often.",
+      "effects": {
+        "flags": {
+          "attrition": -1
+        },
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "right": {
+      "label": "One long break.",
+      "effects": {
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "tags": [
+      "pacing"
+    ]
+  }
+]

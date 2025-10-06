@@ -1,0 +1,761 @@
+[
+  {
+    "id": "meta_gm_stability_assist",
+    "phase": 3,
+    "title": "Stability Assist",
+    "speaker": "Game Master",
+    "body": "A stability assist is available. It will smooth tonight's volatility.",
+    "left": {
+      "label": "Enable assist.",
+      "effects": {
+        "flags": {
+          "dependency": 2
+        },
+        "meters": {
+          "readiness": 1
+        }
+      },
+      "notes": "Invisible cost, short-term gain."
+    },
+    "right": {
+      "label": "Decline.",
+      "effects": {
+        "flags": {
+          "scarcity": 1
+        },
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "bargain"
+    ]
+  },
+  {
+    "id": "meta_gm_priority_queue",
+    "phase": 3,
+    "title": "Priority Queue",
+    "speaker": "Game Master",
+    "body": "A maintenance window is due for your queue priority. Proceed?",
+    "left": {
+      "label": "Proceed.",
+      "effects": {
+        "flags": {
+          "dependency": 1
+        },
+        "meters": {
+          "reputation": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Defer.",
+      "effects": {
+        "flags": {
+          "scarcity": 1
+        },
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "maintenance"
+    ]
+  },
+  {
+    "id": "meta_comp_v1",
+    "phase": 3,
+    "title": "Perfect Comp v1",
+    "speaker": "Game Master",
+    "body": "Recommendation available: a composition that trivializes the next fight.",
+    "left": {
+      "label": "Adopt it.",
+      "effects": {
+        "flags": {
+          "overfit": 2
+        },
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Keep identity.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        },
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "comp"
+    ]
+  },
+  {
+    "id": "meta_comp_v2_counter",
+    "phase": 3,
+    "conditions": {
+      "flags": {
+        "overfit": {
+          "gte": 2
+        }
+      }
+    },
+    "title": "Counter Emerges",
+    "speaker": "Game Master",
+    "body": "Opposition has adjusted. A refined recommendation is available.",
+    "left": {
+      "label": "Chase the new meta.",
+      "effects": {
+        "flags": {
+          "overfit": 2
+        }
+      }
+    },
+    "right": {
+      "label": "Stop chasing.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        },
+        "flags": {
+          "attrition": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "comp"
+    ]
+  },
+  {
+    "id": "meta_fix_loot_policy",
+    "phase": 3,
+    "title": "Policy Enforcement",
+    "speaker": "Game Master",
+    "body": "A loot dispute has been resolved according to policy. The policy was correct.",
+    "left": {
+      "label": "Acknowledge.",
+      "effects": {
+        "flags": {
+          "dependency": 1
+        },
+        "meters": {
+          "reputation": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Question it.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "loot"
+    ]
+  },
+  {
+    "id": "meta_rival_dm",
+    "phase": 3,
+    "title": "Rival DM",
+    "speaker": "Rival Guild",
+    "body": "Your bench looks soft. We could place you somewhere that fits.",
+    "left": {
+      "label": "Report.",
+      "effects": {
+        "meters": {
+          "reputation": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Ignore.",
+      "effects": {
+        "meters": {
+          "readiness": -1
+        }
+      }
+    },
+    "tags": [
+      "rival"
+    ]
+  },
+  {
+    "id": "meta_moderator_linecheck",
+    "phase": 3,
+    "title": "Line Check",
+    "speaker": "Game Master",
+    "body": "That line isn’t yours. Continue with your own.",
+    "left": {
+      "label": "Continue.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Continue.",
+      "effects": {}
+    },
+    "tags": [
+      "gm",
+      "script"
+    ]
+  },
+  {
+    "id": "meta_metrics_praise",
+    "phase": 3,
+    "title": "Metrics Improving",
+    "speaker": "Game Master",
+    "body": "Your metrics are improving.",
+    "left": {
+      "label": "Which metrics?",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Noted.",
+      "effects": {}
+    },
+    "tags": [
+      "gm",
+      "metrics"
+    ]
+  },
+  {
+    "id": "gm_stability_tier2",
+    "phase": 3,
+    "title": "Stability: Tier 2",
+    "speaker": "Game Master",
+    "body": "Additional smoothing is available. Volatility will decrease further.",
+    "left": {
+      "label": "Enable.",
+      "effects": {
+        "flags": {
+          "dependency": 2
+        },
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Decline.",
+      "effects": {
+        "flags": {
+          "scarcity": 1
+        },
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "bargain"
+    ]
+  },
+  {
+    "id": "gm_supply_cache",
+    "phase": 3,
+    "title": "Supply Cache",
+    "speaker": "Game Master",
+    "body": "A sealed cache can be made available.",
+    "left": {
+      "label": "Unlock it.",
+      "effects": {
+        "flags": {
+          "dependency": 1
+        },
+        "meters": {
+          "funds": 1,
+          "readiness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Leave it.",
+      "effects": {
+        "flags": {
+          "scarcity": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "supplies"
+    ]
+  },
+  {
+    "id": "gm_priority_invites",
+    "phase": 3,
+    "title": "Priority Invites",
+    "speaker": "Game Master",
+    "body": "Recruitment throughput can be increased.",
+    "left": {
+      "label": "Increase throughput.",
+      "effects": {
+        "flags": {
+          "dependency": 1
+        },
+        "meters": {
+          "reputation": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Natural pace.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "recruitment"
+    ]
+  },
+  {
+    "id": "gm_comp_lock",
+    "phase": 3,
+    "title": "Lock the Comp",
+    "speaker": "Game Master",
+    "body": "Your current composition can be locked for enhanced synergy.",
+    "left": {
+      "label": "Lock it.",
+      "effects": {
+        "flags": {
+          "overfit": 2
+        },
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Do not lock.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        },
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "comp"
+    ]
+  },
+  {
+    "id": "gm_ledger_smoothing",
+    "phase": 3,
+    "title": "Ledger Smoothing",
+    "speaker": "Game Master",
+    "body": "Fluctuations in your ledger can be smoothed.",
+    "left": {
+      "label": "Smooth.",
+      "effects": {
+        "flags": {
+          "dependency": 1
+        },
+        "meters": {
+          "funds": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Leave it noisy.",
+      "effects": {
+        "flags": {
+          "scarcity": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "economy"
+    ]
+  },
+  {
+    "id": "gm_metrics_ack",
+    "phase": 3,
+    "title": "Metrics Acknowledged",
+    "speaker": "Game Master",
+    "body": "Your metrics are internally consistent. Continue.",
+    "left": {
+      "label": "Continue.",
+      "effects": {}
+    },
+    "right": {
+      "label": "Which metrics?",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "metrics"
+    ]
+  },
+  {
+    "id": "lobby_same_couch",
+    "phase": 2,
+    "title": "Same Couch",
+    "speaker": "Attendant",
+    "body": "Couch looks familiar. Coffee is fresh.",
+    "left": {
+      "label": "Sit for a minute.",
+      "effects": {
+        "flags": {
+          "loop_awareness": 1
+        },
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Head back.",
+      "effects": {}
+    },
+    "tags": [
+      "lobby",
+      "foreshadow"
+    ]
+  },
+  {
+    "id": "lobby_same_mug",
+    "phase": 2,
+    "conditions": {
+      "seen": [
+        "lobby_same_couch"
+      ]
+    },
+    "title": "Same Mug",
+    "speaker": "Attendant",
+    "body": "Same mug. Same chip on the rim.",
+    "left": {
+      "label": "Turn it around.",
+      "effects": {
+        "flags": {
+          "loop_awareness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Ignore.",
+      "effects": {}
+    },
+    "tags": [
+      "lobby",
+      "dejavu"
+    ]
+  },
+  {
+    "id": "lobby_banner_shift",
+    "phase": 2,
+    "title": "Banner Shift",
+    "speaker": "Attendant",
+    "body": "Banner text looks slightly different.",
+    "left": {
+      "label": "Read it.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Don’t read.",
+      "effects": {}
+    },
+    "tags": [
+      "lobby",
+      "oddity"
+    ]
+  },
+  {
+    "id": "lobby_gm_dropby",
+    "phase": 3,
+    "title": "Queue Priority",
+    "speaker": "Game Master",
+    "body": "Queue priority maintained.",
+    "left": {
+      "label": "Maintained.",
+      "effects": {
+        "flags": {
+          "dependency": 1
+        }
+      }
+    },
+    "right": {
+      "label": "We don’t need it.",
+      "effects": {
+        "flags": {
+          "scarcity": 1
+        },
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "gm",
+      "lobby"
+    ]
+  },
+  {
+    "id": "lobby_prop_duplicate",
+    "phase": 3,
+    "title": "Two Mugs",
+    "speaker": "Attendant",
+    "body": "There are two identical mugs now.",
+    "left": {
+      "label": "Compare them.",
+      "effects": {
+        "flags": {
+          "loop_awareness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Leave them.",
+      "effects": {}
+    },
+    "tags": [
+      "lobby",
+      "oddity"
+    ]
+  },
+  {
+    "id": "lobby_final_blink",
+    "phase": 4,
+    "title": "Blink",
+    "speaker": "Attendant",
+    "body": "Same couch. Same mugs. Lights blink.",
+    "left": {
+      "label": "Start over.",
+      "effects": {
+        "flags": {
+          "loop_awareness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {
+        "flags": {
+          "loop_awareness": 1
+        }
+      }
+    },
+    "tags": [
+      "lobby",
+      "reset"
+    ]
+  },
+  {
+    "id": "comp_hint_scout",
+    "phase": 2,
+    "title": "Scout Hint",
+    "speaker": "Scout",
+    "body": "Boss favors clustered positions. Or they used to.",
+    "left": {
+      "label": "Tight groups.",
+      "effects": {
+        "flags": {
+          "overfit": 1
+        },
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Keep spacing.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        }
+      }
+    },
+    "tags": [
+      "prep",
+      "positioning"
+    ]
+  },
+  {
+    "id": "comp_result_adapt",
+    "phase": 3,
+    "conditions": {
+      "flags": {
+        "overfit": {
+          "gte": 1
+        }
+      }
+    },
+    "title": "They Adapt",
+    "speaker": "Officer",
+    "body": "They’re punishing that cluster now.",
+    "left": {
+      "label": "Rebuild comp.",
+      "effects": {
+        "flags": {
+          "overfit": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Hold identity.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        },
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "counter",
+      "positioning"
+    ]
+  },
+  {
+    "id": "comp_lock_in",
+    "phase": 3,
+    "title": "Lock In?",
+    "speaker": "Officer",
+    "body": "Current comp is working. Lock in or flex bench?",
+    "left": {
+      "label": "Lock in.",
+      "effects": {
+        "flags": {
+          "overfit": 2
+        }
+      }
+    },
+    "right": {
+      "label": "Keep flex.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        },
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "roster"
+    ]
+  },
+  {
+    "id": "comp_flex_lift",
+    "phase": 3,
+    "title": "Lift the Bench",
+    "speaker": "Recruiter",
+    "body": "Bench is eager. Rotate them in?",
+    "left": {
+      "label": "Rotate now.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        },
+        "flags": {
+          "attrition": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Not tonight.",
+      "effects": {
+        "flags": {
+          "overfit": 1
+        }
+      }
+    },
+    "tags": [
+      "bench",
+      "rotation"
+    ]
+  },
+  {
+    "id": "comp_perfect_is_brittle",
+    "phase": 3,
+    "title": "Perfect Is Brittle",
+    "speaker": "Healer",
+    "body": "This feels perfect. It also feels brittle.",
+    "left": {
+      "label": "Keep perfect.",
+      "effects": {
+        "flags": {
+          "overfit": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Loosen a slot.",
+      "effects": {
+        "flags": {
+          "attrition": -1
+        },
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "philosophy",
+      "comp"
+    ]
+  },
+  {
+    "id": "comp_last_call",
+    "phase": 3,
+    "title": "Last Call",
+    "speaker": "Officer",
+    "body": "Final pull. Commit to the comp or flex for safety?",
+    "left": {
+      "label": "Commit hard.",
+      "effects": {
+        "flags": {
+          "overfit": 2
+        }
+      }
+    },
+    "right": {
+      "label": "Flex for safety.",
+      "effects": {
+        "flags": {
+          "attrition": 1
+        }
+      }
+    },
+    "tags": [
+      "finale",
+      "comp"
+    ]
+  }
+]
