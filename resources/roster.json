@@ -2,56 +2,56 @@
   "speakers": {
     "Tank": {
       "name": "Tank",
-      "portrait": "/resources/portraits/mountainking.png",
+      "portrait": "/portraits/mountainking.png",
       "level": 85,
       "role": "Protection Warrior",
       "description": "Steadfast guardian of the raid"
     },
     "Healer": {
       "name": "Healer", 
-      "portrait": "/resources/portraits/priestess.png",
+      "portrait": "/portraits/priestess.png",
       "level": 82,
       "role": "Holy Priest",
       "description": "Keeper of life and mana"
     },
     "Treasurer": {
       "name": "Treasurer",
-      "portrait": "/resources/portraits/archmage.png", 
+      "portrait": "/portraits/archmage.png", 
       "level": 78,
       "role": "Arcane Mage",
       "description": "Master of coin and calculations"
     },
     "Council Moderator": {
       "name": "Council Moderator",
-      "portrait": "/resources/portraits/paladin.png",
+      "portrait": "/portraits/paladin.png",
       "level": 90,
       "role": "Retribution Paladin", 
       "description": "Voice of authority and order"
     },
     "Rival": {
       "name": "Rival",
-      "portrait": "/resources/portraits/dreadlord.png",
+      "portrait": "/portraits/dreadlord.png",
       "level": 88,
       "role": "Unholy Death Knight",
       "description": "Competitive guild leader"
     },
     "Officer": {
       "name": "Officer",
-      "portrait": "/resources/portraits/warden.png",
+      "portrait": "/portraits/warden.png",
       "level": 84,
       "role": "Protection Paladin",
       "description": "Enforcer of guild discipline"
     },
     "Scout": {
       "name": "Scout", 
-      "portrait": "/resources/portraits/shadowhunter.png",
+      "portrait": "/portraits/shadowhunter.png",
       "level": 80,
       "role": "Survival Hunter",
       "description": "Eyes and ears of the guild"
     },
     "System": {
       "name": "System",
-      "portrait": "/resources/portraits/peon.png",
+      "portrait": "/portraits/peon.png",
       "level": 1,
       "role": "System Message",
       "description": "Automated notifications"

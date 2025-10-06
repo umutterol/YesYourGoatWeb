@@ -48,24 +48,26 @@ const ReignsCard: React.FC<ReignsCardProps> = ({
   return (
     <div className="bg-[var(--reigns-card)] rounded-2xl shadow-2xl border-2 border-[var(--reigns-border)] p-8 max-w-md w-full">
       {/* Portrait and Speaker */}
-      {speakerData && (
+      {speaker && (
         <div className="flex flex-col items-center mb-6">
           <img
-            src={speakerData.portrait}
-            alt={speakerData.name}
+            src={speakerData ? speakerData.portrait : '/portraits/paladin.png'}
+            alt={speakerData ? speakerData.name : speaker}
             className="w-24 h-24 rounded-full border-4 border-[var(--reigns-border)] mb-3"
             onError={(e) => {
               const target = e.currentTarget;
-              target.src = '/resources/portraits/paladin.png';
+              target.src = '/portraits/paladin.png';
             }}
           />
           <div className="text-center">
             <div className="text-sm font-semibold text-[var(--reigns-text-secondary)] uppercase tracking-wide">
-              {speakerData.name}
+              {speakerData ? speakerData.name : speaker}
             </div>
-            <div className="text-xs text-[var(--reigns-text-secondary)] opacity-75">
-              Level {speakerData.level} • {speakerData.role}
-            </div>
+            {speakerData && (
+              <div className="text-xs text-[var(--reigns-text-secondary)] opacity-75">
+                Level {speakerData.level} • {speakerData.role}
+              </div>
+            )}
           </div>
         </div>
       )}
