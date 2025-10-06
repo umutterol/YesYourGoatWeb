@@ -45,7 +45,7 @@ function validateEvent(ev) {
     }
     // speakers allowlist - expanded for new events
     const allowedSpeakers = new Set([
-      'Council Moderator','Treasurer','Councilor','Tank','Officer','Healer','Priest','Rogue','Bard','Mage','Arcanist','Lifebinder','Recruiter','Streamer','Dev Liaison','Scout','Rival','Game Master','System','Compliance','PR','Ranged DPS','Rival Guild','Recruit','Loot Master','Drama Queen','Benched Rogue','Attendant','Unknown','Crafter','Theorycrafter','AFK Farmer'
+      'Council Moderator','Treasurer','Councilor','Tank','Officer','Healer','Priest','Rogue','Bard','Mage','Arcanist','Lifebinder','Recruiter','Streamer','Dev Liaison','Scout','Rival','Game Master','System','Compliance','PR','Ranged DPS','Rival Guild','Recruit','Loot Master','Drama Queen','Benched Rogue','Attendant','Unknown','Crafter','Theorycrafter','AFK Farmer','Old Guild Master'
     ])
     if (ev.speaker && !allowedSpeakers.has(ev.speaker)) {
       console.warn(`[YYG Validate] warn — Event ${ev.id} speaker '${ev.speaker}' not in canonical roster`) 
