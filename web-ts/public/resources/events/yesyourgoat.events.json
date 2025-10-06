@@ -1,8 +1,10 @@
 [
   {
     "id": "run_intro_01",
-    "title": "A New Guild Master",
-    "body": "Congratulations. You’re Guild Master of Eternal Vigil. Start with a quick rundown?",
+    "title": "Welcome Brief",
+    "speaker": "Council Moderator",
+    "portrait": "/resources/portraits/paladin.png",
+    "body": "Funds keep lights on; reputation fills apps; readiness kills bosses. Short brief?",
     "tags": [
       "run:intro",
       "character:moderator",
@@ -10,671 +12,124 @@
       "phase:1"
     ],
     "left": {
-      "label": "Post a brief",
+      "label": "Post the brief",
       "effects": {
-        "reputation": 0
+        "reputation": 1
       }
     },
     "right": {
-      "label": "Skip for now!",
+      "label": "Skip for now",
       "effects": {
-        "funds": 0
-      }
-    }
-  },
-  {
-    "id": "meta_moderator_intro_01",
-    "title": "Quick Brief",
-    "body": "Gold keeps lights on; reputation draws applicants; readiness is who shows and executes. Want a short rundown?",
-    "tags": [
-      "meta:intro",
-      "character:moderator",
-      "tutorial",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Give the rundown",
-      "effects": {
-        "reputation": 0
-      }
-    },
-    "right": {
-      "label": "Skip it",
-      "effects": {
-        "funds": 0
-      }
-    }
-  },
-  {
-    "id": "intro_tank_00",
-    "title": "Before Pulls",
-    "body": "Tanking tonight. Anything you want me watching for?",
-    "tags": [
-      "meta:intro",
-      "character:tank",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Positioning and comms",
-      "effects": {
-        "reputation": 0
-      }
-    },
-    "right": {
-      "label": "Handle it your way",
-      "effects": {
-        "readiness": 0
+        "readiness": 1
       }
     }
   },
   {
     "id": "intro_tank_01",
-    "title": "Quiet Fixes",
-    "body": "If someone struggles on basics, ping you first or handle it directly?",
+    "title": "Anchor Points",
+    "speaker": "Tank",
+    "portrait": "/resources/portraits/mountainking.png",
+    "body": "Call positions in guild chat, or keep comms to raid only?",
     "tags": [
       "meta:intro",
       "character:tank",
       "phase:1"
     ],
     "left": {
-      "label": "Ping me first",
+      "label": "Guild chat",
       "effects": {
-        "reputation": 0
+        "reputation": 1
       }
     },
     "right": {
-      "label": "Handle directly",
+      "label": "Raid only",
       "effects": {
-        "funds": 0
-      }
-    }
-  },
-  {
-    "id": "intro_healer_00",
-    "title": "Cooldown Signals",
-    "body": "I’m on heals. Prefer I call cooldowns in guild chat, or DM you?",
-    "tags": [
-      "meta:intro",
-      "character:healer",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Call in chat",
-      "effects": {
-        "readiness": 0
-      }
-    },
-    "right": {
-      "label": "DM me",
-      "effects": {
-        "reputation": 0
+        "readiness": 1
       }
     }
   },
   {
     "id": "intro_healer_01",
-    "title": "Ask Early",
-    "body": "If it gets messy, I’ll ask for help. Okay to do that in guild chat?",
+    "title": "Potion Budget",
+    "speaker": "Healer",
+    "portrait": "/resources/portraits/priestess.png",
+    "body": "Do I get a small potion budget this week? It steadies wipes.",
     "tags": [
       "meta:intro",
       "character:healer",
       "phase:1"
     ],
     "left": {
-      "label": "Yes, say it",
+      "label": "Approve budget",
       "effects": {
-        "reputation": 0
+        "funds": -1,
+        "readiness": 1
       }
     },
     "right": {
-      "label": "DM first",
+      "label": "No extras",
       "effects": {
-        "readiness": 0
-      }
-    }
-  },
-  {
-    "id": "intro_dps_00",
-    "title": "Risk Policy",
-    "body": "I’m on DPS. Play safe by default, or push when it looks clean?",
-    "tags": [
-      "meta:intro",
-      "character:dps",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Play safe",
-      "effects": {
-        "reputation": 0
-      }
-    },
-    "right": {
-      "label": "Push when clean",
-      "effects": {
-        "readiness": 0
-      }
-    }
-  },
-  {
-    "id": "intro_dps_01",
-    "title": "Loot Clarity",
-    "body": "Loot rules help me focus. Posting them, or deciding case by case?",
-    "tags": [
-      "meta:intro",
-      "character:dps",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Post rules",
-      "effects": {
-        "reputation": 0
-      }
-    },
-    "right": {
-      "label": "Case by case",
-      "effects": {
-        "readiness": 0
-      }
-    }
-  },
-  {
-    "id": "intro_support_00",
-    "title": "Builds",
-    "body": "I test builds off‑hours. For raid, stick to the safe setup?",
-    "tags": [
-      "meta:intro",
-      "character:support",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Stick to safe",
-      "effects": {
-        "reputation": 0
-      }
-    },
-    "right": {
-      "label": "One test allowed",
-      "effects": {
-        "readiness": 0
-      }
-    }
-  },
-  {
-    "id": "intro_support_01",
-    "title": "Run It By You",
-    "body": "If I have something small to try, run it by you first?",
-    "tags": [
-      "meta:intro",
-      "character:support",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Yes, DM me",
-      "effects": {
-        "reputation": 0
-      }
-    },
-    "right": {
-      "label": "If minor, go ahead",
-      "effects": {
-        "funds": 0
-      }
-    }
-  },
-  {
-    "id": "lore_etiquette_01",
-    "title": "Checklist",
-    "body": "Ready checks beat guessing. Want me to post a short checklist?",
-    "tags": [
-      "meta:lore",
-      "tutorial",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Post it",
-      "effects": {
-        "readiness": 0
-      }
-    },
-    "right": {
-      "label": "I’ll handle",
-      "effects": {
-        "reputation": 0
-      }
-    }
-  },
-  {
-    "id": "intro_recruiter_00",
-    "title": "Trial Pace",
-    "body": "I run trials. Keep a steady flow, or focus on windows?",
-    "tags": [
-      "meta:intro",
-      "character:recruiter",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Steady flow",
-      "effects": {
-        "readiness": 0
-      }
-    },
-    "right": {
-      "label": "Focused windows",
-      "effects": {
-        "reputation": 0
-      }
-    }
-  },
-  {
-    "id": "intro_recruiter_01",
-    "title": "Borderline Calls",
-    "body": "If a trial is borderline, ping you or decide?",
-    "tags": [
-      "meta:intro",
-      "character:recruiter",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Ping me",
-      "effects": {
-        "reputation": 0
-      }
-    },
-    "right": {
-      "label": "Decide yourself",
-      "effects": {
-        "readiness": 0
-      }
-    }
-  },
-  {
-    "id": "intro_treasurer_00",
-    "title": "Bank Policy",
-    "body": "I handle the bank. Anything off-limits without a ping?",
-    "tags": [
-      "meta:intro",
-      "character:treasurer",
-      "phase:1"
-    ],
-    "left": {
-      "label": "No vanity buys",
-      "effects": {
-        "funds": 0
-      }
-    },
-    "right": {
-      "label": "Ask before bulk",
-      "effects": {
-        "reputation": 0
+        "reputation": 1
       }
     }
   },
   {
     "id": "intro_treasurer_01",
-    "title": "Stock Basics",
-    "body": "Discounts pop up. Okay to stock basics when the price is right?",
+    "title": "Bank Rules",
+    "speaker": "Treasurer",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "Post simple bank rules now, or handle requests case by case?",
     "tags": [
       "meta:intro",
       "character:treasurer",
       "phase:1"
     ],
     "left": {
-      "label": "Yes, stock basics",
+      "label": "Post rules",
       "effects": {
-        "readiness": 0
+        "reputation": 1
       }
     },
     "right": {
-      "label": "Ask first",
-      "effects": {
-        "reputation": 0
-      }
-    }
-  },
-  {
-    "id": "intro_pr_00",
-    "title": "Announcements",
-    "body": "I handle posts. Prefer quiet updates or public threads?",
-    "tags": [
-      "meta:intro",
-      "character:pr",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Quiet updates",
-      "effects": {
-        "reputation": 0
-      }
-    },
-    "right": {
-      "label": "Public threads",
-      "effects": {
-        "reputation": 0
-      }
-    }
-  },
-  {
-    "id": "intro_pr_01",
-    "title": "Stream Seats",
-    "body": "A streamer asked to sit in for a POV. Case by case, or no?",
-    "tags": [
-      "meta:intro",
-      "character:pr",
-      "phase:1"
-    ],
-    "left": {
       "label": "Case by case",
       "effects": {
-        "reputation": 0
-      }
-    },
-    "right": {
-      "label": "No stream seats",
-      "effects": {
-        "reputation": 0
+        "funds": 1
       }
     }
   },
   {
-    "id": "intro_compliance_00",
-    "title": "Logs Policy",
-    "body": "Do you want logs and VODs enforced, or optional for now?",
+    "id": "intro_rival_01",
+    "title": "Snide Ping",
+    "speaker": "Rival",
+    "portrait": "/resources/portraits/dreadlord.png",
+    "body": "Heard you're recruiting tanks. Want a loaner... for a fee?",
     "tags": [
       "meta:intro",
-      "character:compliance",
+      "character:rival",
       "phase:1"
     ],
     "left": {
-      "label": "Enforce logs",
-      "effects": {
-        "readiness": 0
-      }
-    },
-    "right": {
-      "label": "Optional for now",
-      "effects": {
-        "reputation": 0
-      }
-    }
-  },
-  {
-    "id": "intro_compliance_01",
-    "title": "Reports",
-    "body": "When reports come in, handle quietly or post outcomes?",
-    "tags": [
-      "meta:intro",
-      "character:compliance",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Handle quietly",
-      "effects": {
-        "reputation": 0
-      }
-    },
-    "right": {
-      "label": "Post outcomes",
-      "effects": {
-        "reputation": 0
-      }
-    }
-  },
-  {
-    "id": "intro_rdps_00",
-    "title": "Prep Plan",
-    "body": "I’ll post my plan. Want a quick review before pulls?",
-    "tags": [
-      "meta:intro",
-      "character:rdps",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Send it",
-      "effects": {
-        "readiness": 0
-      }
-    },
-    "right": {
-      "label": "Trust your prep",
-      "effects": {
-        "reputation": 0
-      }
-    }
-  },
-  {
-    "id": "intro_rdps_01",
-    "title": "Utility Flex",
-    "body": "I can flex to utility if needed. Use me that way?",
-    "tags": [
-      "meta:intro",
-      "character:rdps",
-      "phase:1"
-    ],
-    "left": {
-      "label": "As needed",
-      "effects": {
-        "readiness": 0
-      }
-    },
-    "right": {
-      "label": "Stay on damage",
-      "effects": {
-        "readiness": 0
-      }
-    }
-  },
-  {
-    "id": "intro_tank2_00",
-    "title": "First Time",
-    "body": "First time here. Anything I should read?",
-    "tags": [
-      "meta:intro",
-      "character:tank2",
-      "phase:1"
-    ],
-    "left": {
-      "label": "I’ll send notes",
-      "effects": {
-        "reputation": 0
-      }
-    },
-    "right": {
-      "label": "Learn on pulls",
-      "effects": {
-        "readiness": 0
-      }
-    }
-  },
-  {
-    "id": "intro_tank2_01",
-    "title": "Tonight’s Role",
-    "body": "Do you want me main or off-tank tonight?",
-    "tags": [
-      "meta:intro",
-      "character:tank2",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Off-tank",
-      "effects": {
-        "readiness": 0
-      }
-    },
-    "right": {
-      "label": "Main",
-      "effects": {
-        "reputation": 0
-      }
-    }
-  },
-  {
-    "id": "intro_healer_bad_00",
-    "title": "Learning",
-    "body": "I can heal. I’m still learning this tier.",
-    "tags": [
-      "meta:intro",
-      "character:healer_bad",
-      "phase:1"
-    ],
-    "left": {
-      "label": "We’ll pace you",
-      "effects": {
-        "reputation": 0
-      }
-    },
-    "right": {
-      "label": "Shadow a run",
-      "effects": {
-        "readiness": 0
-      }
-    }
-  },
-  {
-    "id": "intro_healer_bad_01",
-    "title": "Expectations",
-    "body": "If I struggle, want me to speak up or keep quiet?",
-    "tags": [
-      "meta:intro",
-      "character:healer_bad",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Speak up",
-      "effects": {
-        "reputation": 0
-      }
-    },
-    "right": {
-      "label": "DM first",
-      "effects": {
-        "readiness": 0
-      }
-    }
-  },
-  {
-    "id": "intro_officer_00",
-    "title": "Policy Changes",
-    "body": "Policy changes—announce early, or adjust quietly?",
-    "tags": [
-      "meta:intro",
-      "character:officer",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Announce early",
-      "effects": {
-        "reputation": 0
-      }
-    },
-    "right": {
-      "label": "Adjust quietly",
-      "effects": {
-        "funds": 0
-      }
-    }
-  },
-  {
-    "id": "intro_officer_01",
-    "title": "Mediation",
-    "body": "If tempers rise, step in early or let it cool?",
-    "tags": [
-      "meta:intro",
-      "character:officer",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Step in early",
-      "effects": {
-        "reputation": 0
-      }
-    },
-    "right": {
-      "label": "Let it cool",
-      "effects": {
-        "readiness": 0
-      }
-    }
-  },
-  {
-    "id": "healer_budget_01",
-    "title": "Essentials Fund",
-    "body": "Potions are adding up. Can the bank cover basics this week?",
-    "tags": [
-      "raid_logistics",
-      "require:intro:healer",
-      "chain:healer:1",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Cover essentials",
-      "effects": {
-        "funds": -2,
-        "readiness": 1
-      }
-    },
-    "right": {
-      "label": "Not this week",
-      "effects": {
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "dps_priority_01",
-    "title": "Shorter Fights",
-    "body": "If damage upgrades go first this week, I can shorten fights. Your call?",
-    "tags": [
-      "player_drama",
-      "require:intro:dps",
-      "chain:dps:1",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Keep fair order",
+      "label": "Hard pass",
       "effects": {
         "reputation": 1
       }
     },
     "right": {
-      "label": "Damage first",
+      "label": "Ask terms",
       "effects": {
-        "readiness": 1,
-        "reputation": -1
+        "funds": -1
       }
     }
   },
   {
-    "id": "support_exp_rotation_01",
-    "title": "Trial Window",
-    "body": "I’ve got a risky rotation worth a try. Off‑hours, or during raid?",
-    "tags": [
-      "player_drama",
-      "require:intro:support",
-      "chain:support:1",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Test off‑hours",
-      "effects": {
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Test in raid",
-      "effects": {
-        "readiness": 2,
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "tank_standards_01",
+    "id": "ask_tank_minimums_01",
     "title": "Minimums",
-    "body": "Set roster minimums before raid? It’ll slow invites but save wipes.",
+    "speaker": "Tank",
+    "portrait": "/resources/portraits/demonhunter.png",
+    "body": "Set roster minimums before raid? Slower invites, fewer wipes.",
     "tags": [
       "raid_logistics",
-      "require:intro:tank",
-      "chain:tank:1",
+      "character:tank",
       "phase:1"
     ],
     "left": {
@@ -693,9 +148,61 @@
     }
   },
   {
+    "id": "ask_healer_supplies_01",
+    "title": "Supplies",
+    "speaker": "Healer",
+    "portrait": "/resources/portraits/farseer.png",
+    "body": "Approve basic raid supplies out of bank?",
+    "tags": [
+      "raid_logistics",
+      "character:healer",
+      "phase:1"
+    ],
+    "left": {
+      "label": "Approve",
+      "effects": {
+        "funds": -1,
+        "readiness": 1
+      }
+    },
+    "right": {
+      "label": "Not this week",
+      "effects": {
+        "reputation": 1
+      }
+    }
+  },
+  {
+    "id": "ask_treasurer_dues_01",
+    "title": "Dues",
+    "speaker": "Treasurer",
+    "portrait": "/resources/portraits/beastmaster.png",
+    "body": "Collect small dues now or after first boss dies?",
+    "tags": [
+      "economy",
+      "character:treasurer",
+      "phase:1"
+    ],
+    "left": {
+      "label": "Collect now",
+      "effects": {
+        "funds": 2,
+        "reputation": -1
+      }
+    },
+    "right": {
+      "label": "After first",
+      "effects": {
+        "reputation": 1
+      }
+    }
+  },
+  {
     "id": "raid_night_check_01",
     "title": "Raid Night",
-    "body": "Run the plan, or try a new strat live?",
+    "speaker": "Tank",
+    "portrait": "/resources/portraits/chieftain.png",
+    "body": "Run the plan or freestyle mid-pull?",
     "tags": [
       "raid_night_check",
       "phase:1"
@@ -707,7 +214,7 @@
       }
     },
     "right": {
-      "label": "Try something new",
+      "label": "Freestyle",
       "effects": {
         "reputation": -1
       }
@@ -715,21 +222,23 @@
   },
   {
     "id": "meta_council_01",
-    "title": "Council Fee",
-    "body": "Community fees are due. Pay now?",
+    "title": "Council Dues",
+    "speaker": "Council Moderator",
+    "portrait": "/resources/portraits/blademaster.png",
+    "body": "Community dues are due. Pay now?",
     "tags": [
       "meta:council",
       "phase:1"
     ],
     "left": {
-      "label": "Pay the fee",
+      "label": "Pay now",
       "effects": {
         "funds": -2,
         "reputation": 1
       }
     },
     "right": {
-      "label": "Defer politely",
+      "label": "Defer",
       "effects": {
         "reputation": -1
       }
@@ -738,13 +247,15 @@
   {
     "id": "meta_rival_01",
     "title": "Rival DM",
-    "body": "Heard your healer’s broke. Need a home?",
+    "speaker": "Rival",
+    "portrait": "/resources/portraits/deathknight.png",
+    "body": "Your bench looks soft. Need a real guild?",
     "tags": [
       "meta:rival",
       "phase:1"
     ],
     "left": {
-      "label": "Report it",
+      "label": "Report harassment",
       "effects": {
         "reputation": 1
       }
@@ -759,7 +270,9 @@
   {
     "id": "random_invite_midpull_01",
     "title": "Mid-Pull Ping",
-    "body": "Got a whisper for an invite mid‑pull. Fill now or after?",
+    "speaker": "Officer",
+    "portrait": "/resources/portraits/warden.png",
+    "body": "Got a whisper for an invite mid-pull. Fill now or after?",
     "tags": [
       "random_pool",
       "random:logistics",
@@ -780,99 +293,10 @@
     }
   },
   {
-    "id": "random_maintenance_extend_01",
-    "title": "Extended Maintenance",
-    "body": "Servers extended by an hour. Adjust plan?",
-    "tags": [
-      "random_pool",
-      "random:server",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Delay start",
-      "effects": {
-        "reputation": -1
-      }
-    },
-    "right": {
-      "label": "Prep review",
-      "effects": {
-        "readiness": 1
-      }
-    }
-  },
-  {
-    "id": "random_bank_short_01",
-    "title": "Short Ledger",
-    "body": "Small deposit looks missing. Could be logging delay.",
-    "tags": [
-      "random_pool",
-      "random:economy",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Cover tonight",
-      "effects": {
-        "funds": -1,
-        "readiness": 1
-      }
-    },
-    "right": {
-      "label": "Post a note",
-      "effects": {
-        "reputation": 1
-      }
-    }
-  },
-  {
-    "id": "random_worldchat_rumor_01",
-    "title": "Bench Rumor",
-    "body": "World chat is speculating about our bench. Respond?",
-    "tags": [
-      "random_pool",
-      "random:community",
-      "phase:1"
-    ],
-    "left": {
-      "label": "Post policy",
-      "effects": {
-        "funds": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Ignore it",
-      "effects": {
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "random_trial_plusone_01",
-    "title": "+1 Request",
-    "body": "Trial asks to bring a friend. Make room?",
-    "tags": [
-      "random_pool",
-      "random:recruitment",
-      "phase:1"
-    ],
-    "left": {
-      "label": "One slot",
-      "effects": {
-        "readiness": 1,
-        "reputation": -1
-      }
-    },
-    "right": {
-      "label": "Standards first",
-      "effects": {
-        "reputation": 1
-      }
-    }
-  },
-  {
     "id": "random_latency_spike_01",
     "title": "Spikes",
+    "speaker": "Scout",
+    "portrait": "/resources/portraits/shadowhunter.png",
     "body": "Latency is spiking in the instance. Adjust?",
     "tags": [
       "random_pool",
@@ -894,1161 +318,97 @@
     }
   },
   {
-    "id": "healer_repeat_dm_03",
-    "title": "Same Question",
-    "body": "Quick check on consumables—same as last week?",
+    "id": "random_bank_short_01",
+    "title": "Short Ledger",
+    "speaker": "Treasurer",
+    "portrait": "/resources/portraits/bloodmage.png",
+    "body": "Small deposit looks missing. Could be logging delay.",
     "tags": [
-      "raid_logistics",
-      "require:intro:healer",
-      "require:run>=3",
-      "phase:2",
-      "horror:subtle"
+      "random_pool",
+      "random:economy",
+      "phase:1"
     ],
     "left": {
-      "label": "Same policy",
-      "effects": {
-        "reputation": -1
-      }
-    },
-    "right": {
-      "label": "Review after",
-      "effects": {
-        "funds": 0
-      }
-    }
-  },
-  {
-    "id": "tank_mismatch_03",
-    "title": "Cleared?",
-    "body": "My notes say we cleared Monday. Did we?",
-    "tags": [
-      "raid_logistics",
-      "require:intro:tank",
-      "require:run>=3",
-      "phase:2",
-      "horror:subtle"
-    ],
-    "left": {
-      "label": "We didn’t—prep",
-      "effects": {
-        "reputation": -1
-      }
-    },
-    "right": {
-      "label": "We’ll get it now",
-      "effects": {
-        "readiness": 1
-      }
-    }
-  },
-  {
-    "id": "rdps_log_preexists_03",
-    "title": "Pre-Log",
-    "body": "Log shows a parse for tonight already.",
-    "tags": [
-      "player_drama",
-      "require:intro:rdps",
-      "require:run>=3",
-      "phase:2",
-      "horror:subtle"
-    ],
-    "left": {
-      "label": "Ignore and prep",
-      "effects": {
-        "readiness": 1
-      }
-    },
-    "right": {
-      "label": "Flag it",
-      "effects": {
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "treasurer_receipt_glitch_03",
-    "title": "Tomorrow’s Receipt",
-    "body": "A receipt appeared with tomorrow’s date.",
-    "tags": [
-      "meta_economy",
-      "require:intro:treasurer",
-      "require:run>=3",
-      "phase:2",
-      "horror:subtle"
-    ],
-    "left": {
-      "label": "Note it",
-      "effects": {
-        "reputation": -1
-      }
-    },
-    "right": {
-      "label": "Hold purchases",
-      "effects": {
-        "funds": 0
-      }
-    }
-  },
-  {
-    "id": "compliance_report_glitch_03",
-    "title": "Report Out of Time",
-    "body": "A report references a wipe we haven’t had.",
-    "tags": [
-      "policy",
-      "require:intro:compliance",
-      "require:run>=3",
-      "phase:2",
-      "horror:subtle"
-    ],
-    "left": {
-      "label": "Record it",
-      "effects": {
-        "reputation": -1
-      }
-    },
-    "right": {
-      "label": "Escalate",
-      "effects": {
-        "funds": 0
-      }
-    }
-  },
-  {
-    "id": "dps_parse_pressure_02",
-    "title": "Target or Sit",
-    "body": "If I can’t hit my target, I’ll sit. Want me to push anyway?",
-    "tags": [
-      "player_drama",
-      "require:intro:dps",
-      "require:seen:event:dps_priority_01",
-      "require:run>=3",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Play the plan",
-      "effects": {
-        "readiness": 1
-      }
-    },
-    "right": {
-      "label": "Sit if needed",
-      "effects": {
-        "reputation": 1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "support_trial_window_02",
-    "title": "Last Pull Only",
-    "body": "Clean test build ready. Slot it for the last pull?",
-    "tags": [
-      "player_drama",
-      "require:intro:support",
-      "require:seen:event:support_exp_rotation_01",
-      "require:run>=3",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Last pull only",
-      "effects": {
-        "readiness": 1
-      }
-    },
-    "right": {
-      "label": "Keep stable",
-      "effects": {
-        "reputation": 1
-      }
-    }
-  },
-  {
-    "id": "tank_bench_02",
-    "title": "Bench Tonight?",
-    "body": "Two folks are struggling on basics. Bench them for tonight?",
-    "tags": [
-      "raid_logistics",
-      "require:intro:tank",
-      "require:run>=3",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Bench for now",
-      "effects": {
-        "readiness": 1,
-        "reputation": -1
-      }
-    },
-    "right": {
-      "label": "Keep them in",
-      "effects": {
-        "reputation": 1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "officer_mediation_01",
-    "title": "Clash",
-    "body": "Two members are at each other. Step in?",
-    "tags": [
-      "policy",
-      "require:intro:officer",
-      "require:run>=3",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Step in privately",
-      "effects": {
-        "reputation": 1,
-        "funds": -1
-      }
-    },
-    "right": {
-      "label": "Let it cool",
-      "effects": {
-        "readiness": 0
-      }
-    }
-  },
-  {
-    "id": "pr_rumor_response_02",
-    "title": "Bench Rumor",
-    "body": "Rumor’s spreading about our benching. Address it?",
-    "tags": [
-      "community_pr",
-      "require:intro:pr",
-      "require:run>=3",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Address calmly",
-      "effects": {
-        "funds": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Ignore it",
-      "effects": {
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "compliance_logs_rule_01",
-    "title": "After-Wipe Rule",
-    "body": "Set a rule: post logs after wipes. Enforce it?",
-    "tags": [
-      "policy",
-      "policy:logs",
-      "require:intro:compliance",
-      "require:run>=3",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Enforce it",
-      "effects": {
-        "readiness": 1,
-        "reputation": -1
-      }
-    },
-    "right": {
-      "label": "Keep informal",
-      "effects": {
-        "reputation": 1
-      }
-    }
-  },
-  {
-    "id": "recruiter_fill_gap_01",
-    "title": "Short on Heals",
-    "body": "We’re light Monday. Post an ad now?",
-    "tags": [
-      "recruitment",
-      "require:intro:recruiter",
-      "require:run>=3",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Post it",
-      "effects": {
-        "funds": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Cover with alts",
-      "effects": {
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "treasurer_bulk_buy_01",
-    "title": "Bulk Discount",
-    "body": "Potions are discounted today. Approve a stock-up?",
-    "tags": [
-      "meta_economy",
-      "require:intro:treasurer",
-      "require:run>=3",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Approve bulk",
-      "effects": {
-        "funds": -2,
-        "readiness": 1
-      }
-    },
-    "right": {
-      "label": "Pass for now",
-      "effects": {
-        "reputation": 0
-      }
-    }
-  },
-  {
-    "id": "rdps_utility_shift_01",
-    "title": "Utility Slot",
-    "body": "I can handle utility if needed. Reassign from damage?",
-    "tags": [
-      "raid_logistics",
-      "require:intro:rdps",
-      "require:run>=3",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Shift to utility",
-      "effects": {
-        "readiness": 1
-      }
-    },
-    "right": {
-      "label": "Stay on damage",
-      "effects": {
-        "readiness": 0
-      }
-    }
-  },
-  {
-    "id": "tank2_role_ask_01",
-    "title": "Role Tonight",
-    "body": "Do you want me main or off-tank tonight?",
-    "tags": [
-      "raid_logistics",
-      "require:intro:tank2",
-      "require:run>=3",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Off-tank",
-      "effects": {
-        "readiness": 1
-      }
-    },
-    "right": {
-      "label": "Main",
-      "effects": {
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "healer_bad_slot_01",
-    "title": "Trial Slot",
-    "body": "Can I get a slot tonight?",
-    "tags": [
-      "player_drama",
-      "require:intro:healer_bad",
-      "require:run>=3",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Trial slot",
-      "effects": {
-        "readiness": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Not tonight",
-      "effects": {
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "pr_streamer_request_01",
-    "title": "POV Request",
-    "body": "Streamer DM’d for a POV seat. Allow?",
-    "tags": [
-      "community_pr",
-      "require:intro:pr",
-      "require:run>=3",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Allow it",
-      "effects": {
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Decline politely",
-      "effects": {
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "compliance_hook_01",
-    "title": "Exploit Rumor",
-    "body": "Clip is circulating. Investigate or let it pass?",
-    "tags": [
-      "policy",
-      "require:intro:compliance",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Investigate",
-      "effects": {
-        "readiness": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Let it pass",
-      "effects": {
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "compliance_sweep_02",
-    "title": "Policy Sweep",
-    "body": "Light audit across the roster. Announce it?",
-    "tags": [
-      "policy",
-      "require:intro:compliance",
-      "require:seen:event:compliance_hook_01",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Announce kindly",
-      "effects": {
-        "reputation": 1,
-        "funds": -1
-      }
-    },
-    "right": {
-      "label": "Do it quietly",
-      "effects": {
-        "reputation": -1,
-        "readiness": 1
-      }
-    }
-  },
-  {
-    "id": "compliance_false_accuse_03",
-    "title": "False Accusation",
-    "body": "A DPS is named in whispers. How do we proceed?",
-    "tags": [
-      "policy",
-      "require:seen:event:compliance_sweep_02",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Talk first",
-      "effects": {
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Suspend review",
-      "effects": {
-        "readiness": -1,
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "compliance_vote_04",
-    "title": "Logs Vote",
-    "body": "Set ‘logs after wipe’ as policy, or keep it optional?",
-    "tags": [
-      "policy",
-      "policy:logs",
-      "require:intro:compliance",
-      "require:seen:event:compliance_hook_01",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Enforce logs",
-      "effects": {
-        "readiness": 1,
-        "reputation": -1
-      }
-    },
-    "right": {
-      "label": "Optional for now",
-      "effects": {
-        "reputation": 1
-      }
-    }
-  },
-  {
-    "id": "compliance_climax_05",
-    "title": "Public Thread",
-    "body": "A long post accuses us of favoritism. Respond?",
-    "tags": [
-      "community_pr",
-      "require:intro:pr",
-      "require:seen:event:compliance_sweep_02",
-      "require:seen:event:compliance_vote_04",
-      "require:run>=5",
-      "phase:3"
-    ],
-    "left": {
-      "label": "Post policy",
-      "effects": {
-        "funds": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Lock and move on",
-      "effects": {
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "compliance_epilogue_06",
-    "title": "Culture Note",
-    "body": "Short note about process and fairness for members?",
-    "tags": [
-      "community_pr",
-      "require:seen:event:compliance_climax_05",
-      "phase:3"
-    ],
-    "left": {
-      "label": "Post it",
-      "effects": {
-        "funds": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Skip it",
-      "effects": {
-        "reputation": 0
-      }
-    }
-  },
-  {
-    "id": "arc_campaign_hook_01",
-    "title": "Campaign Focus",
-    "body": "Open tier. Focus on progression or farm this week?",
-    "tags": [
-      "raid_logistics",
-      "require:intro:tank",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Progression focus",
-      "effects": {
-        "readiness": 1,
-        "reputation": -1
-      }
-    },
-    "right": {
-      "label": "Farm focus",
-      "effects": {
-        "funds": 1
-      }
-    }
-  },
-  {
-    "id": "arc_campaign_hours_02",
-    "title": "Extra Hours",
-    "body": "Leads ask for an extra hour per night. Approve?",
-    "tags": [
-      "raid_logistics",
-      "require:seen:event:arc_campaign_hook_01",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Approve",
+      "label": "Cover tonight",
       "effects": {
         "funds": -1,
         "readiness": 1
       }
     },
     "right": {
-      "label": "Keep schedule",
+      "label": "Post a note",
       "effects": {
         "reputation": 1
       }
     }
   },
   {
-    "id": "arc_campaign_outcome_03",
-    "title": "Mid-Tier Check",
-    "body": "We can push a hard boss or bank a clean week. Which?",
-    "tags": [
-      "raid_night_check",
-      "require:seen:event:arc_campaign_hours_02",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Push hard",
-      "effects": {
-        "readiness": 1,
-        "reputation": -1
-      }
-    },
-    "right": {
-      "label": "Bank clean",
-      "effects": {
-        "reputation": 1
-      }
-    }
-  },
-  {
-    "id": "arc_ethics_hook_01",
-    "title": "Bank Error",
-    "body": "An extra item appeared in the bank. Report or redistribute?",
-    "tags": [
-      "meta_economy",
-      "require:intro:treasurer",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Report it",
-      "effects": {
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Quiet split",
-      "effects": {
-        "funds": 1,
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "arc_ethics_audit_02",
-    "title": "Small Audit",
-    "body": "We can reconcile the ledger this week. Do it?",
-    "tags": [
-      "meta_economy",
-      "require:seen:event:arc_ethics_hook_01",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Do it",
-      "effects": {
-        "funds": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Skip it",
-      "effects": {
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "arc_ethics_trust_03",
-    "title": "Trust Check",
-    "body": "Members ask about transparency. Post a note?",
-    "tags": [
-      "community_pr",
-      "require:seen:event:arc_ethics_audit_02",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Post note",
-      "effects": {
-        "funds": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "No need",
-      "effects": {
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "arc_economy_hook_01",
-    "title": "Dues Talk",
-    "body": "3% dues covers repairs and basics. Adjust policy?",
-    "tags": [
-      "meta_economy",
-      "require:intro:treasurer",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Lower dues",
-      "effects": {
-        "funds": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Keep as is",
-      "effects": {
-        "funds": 1,
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "arc_economy_sponsor_02",
-    "title": "Sponsor Offer",
-    "body": "A vendor offers discounts if we promote them. Take it?",
-    "tags": [
-      "meta_economy",
-      "require:seen:event:arc_economy_hook_01",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Take deal",
-      "effects": {
-        "funds": 1,
-        "reputation": -1
-      }
-    },
-    "right": {
-      "label": "Decline",
-      "effects": {
-        "reputation": 1
-      }
-    }
-  },
-  {
-    "id": "arc_economy_post_03",
-    "title": "PR Note",
-    "body": "Explain dues and spending in a short post?",
-    "tags": [
-      "community_pr",
-      "require:intro:pr",
-      "require:seen:event:arc_economy_hook_01",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Post it",
-      "effects": {
-        "funds": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Internal only",
-      "effects": {
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "arc_devil_hook_01",
-    "title": "A Helpful Offer",
-    "body": "I can make next week easier. There’s a price.",
-    "tags": [
-      "meta:gamemaster",
-      "character:gamemaster",
-      "require:run>=7",
-      "phase:4"
-    ],
-    "left": {
-      "label": "No shortcuts",
-      "effects": {
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "What price?",
-      "effects": {
-        "readiness": 1,
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "arc_devil_marker_02",
-    "title": "Marker",
-    "body": "A small mark on the ledger. Pay now or later?",
-    "tags": [
-      "meta:gamemaster",
-      "character:gamemaster",
-      "require:choice:arc_devil_hook_01:right",
-      "phase:4"
-    ],
-    "left": {
-      "label": "Pay now",
-      "effects": {
-        "funds": -2,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Later",
-      "effects": {
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "arc_devil_memory_03",
-    "title": "You’ve Done This",
-    "body": "You’ve done this before. You will again.",
-    "tags": [
-      "meta:gamemaster",
-      "character:gamemaster",
-      "require:run>=9",
-      "phase:5"
-    ],
-    "left": {
-      "label": "Continue",
-      "effects": {
-        "reputation": -1
-      }
-    },
-    "right": {
-      "label": "Continue",
-      "effects": {
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "healer_gratitude_01",
-    "title": "Thanks For Covering",
-    "body": "Basics helped. I can keep pace this week.",
-    "tags": [
-      "raid_logistics",
-      "require:choice:healer_budget_01:left",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Glad it helped",
-      "effects": {
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Revisit soon",
-      "effects": {
-        "funds": 0
-      }
-    }
-  },
-  {
-    "id": "healer_self_fund_01",
-    "title": "I’ll Cover It",
-    "body": "I’ll self-fund this week. Revisit next run?",
-    "tags": [
-      "raid_logistics",
-      "require:choice:healer_budget_01:right",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Revisit policy",
-      "effects": {
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Appreciated",
-      "effects": {
-        "readiness": 0
-      }
-    }
-  },
-  {
-    "id": "dps_resentment_01",
-    "title": "Still Fair?",
-    "body": "If I’m passed again, I’ll sit. Your call?",
-    "tags": [
-      "player_drama",
-      "require:choice:dps_priority_01:left",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Play the plan",
-      "effects": {
-        "readiness": 1
-      }
-    },
-    "right": {
-      "label": "Bench if needed",
-      "effects": {
-        "reputation": 1,
-        "readiness": -1
-      }
-    }
-  },
-  {
-    "id": "dps_priority_delivered_01",
-    "title": "Did It Help?",
-    "body": "Priority helped. Keep it another week?",
-    "tags": [
-      "player_drama",
-      "require:choice:dps_priority_01:right",
-      "phase:2"
-    ],
-    "left": {
-      "label": "One more week",
-      "effects": {
-        "readiness": 1,
-        "reputation": -1
-      }
-    },
-    "right": {
-      "label": "Back to fair",
-      "effects": {
-        "reputation": 1
-      }
-    }
-  },
-  {
-    "id": "support_trust_01",
-    "title": "I’ll Clear It",
-    "body": "I’ll ping you before any trial. One slot tonight?",
-    "tags": [
-      "player_drama",
-      "require:choice:support_exp_rotation_01:right",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Last pull only",
-      "effects": {
-        "readiness": 1
-      }
-    },
-    "right": {
-      "label": "Keep stable",
-      "effects": {
-        "reputation": 1
-      }
-    }
-  },
-  {
-    "id": "support_lab_result_01",
-    "title": "Lab Result",
-    "body": "Off-hours test looks solid. Schedule later?",
-    "tags": [
-      "player_drama",
-      "require:choice:support_exp_rotation_01:left",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Schedule next week",
-      "effects": {
-        "readiness": 1
-      }
-    },
-    "right": {
-      "label": "Keep testing",
-      "effects": {
-        "reputation": 0
-      }
-    }
-  },
-  {
-    "id": "tank_coop_01",
-    "title": "Quiet Coaching",
-    "body": "I’ll DM two folks before bench. Good?",
-    "tags": [
-      "raid_logistics",
-      "require:choice:tank_standards_01:left",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Yes—coach first",
-      "effects": {
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Bench anyway",
-      "effects": {
-        "readiness": 1,
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "pr_thread_echo_01",
-    "title": "Thread Echo",
-    "body": "New post references our locked thread. Address it?",
-    "tags": [
-      "community_pr",
-      "require:choice:compliance_climax_05:right",
-      "phase:3"
-    ],
-    "left": {
-      "label": "Post calmly",
-      "effects": {
-        "funds": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Ignore it",
-      "effects": {
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "devil_marker_early_01",
-    "title": "Marker, From Before",
-    "body": "We still have that small debt.",
-    "tags": [
-      "meta:gamemaster",
-      "character:gamemaster",
-      "require:choice:arc_ethics_hook_01:right",
-      "require:run>=7",
-      "phase:4"
-    ],
-    "left": {
-      "label": "Pay funds",
-      "effects": {
-        "funds": -2
-      }
-    },
-    "right": {
-      "label": "Later",
-      "effects": {
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "campaign_logs_effect_01",
-    "title": "Cleaner Pulls",
-    "body": "Logs rule trimmed slop. Push harder?",
-    "tags": [
-      "raid_logistics",
-      "require:choice:compliance_vote_04:left",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Push",
-      "effects": {
-        "readiness": 1,
-        "reputation": -1
-      }
-    },
-    "right": {
-      "label": "Hold steady",
-      "effects": {
-        "reputation": 1
-      }
-    }
-  },
-  {
-    "id": "economy_pr_follow_01",
-    "title": "Dues Explainer",
-    "body": "Lower dues caused questions. Post note?",
-    "tags": [
-      "community_pr",
-      "require:intro:pr",
-      "require:choice:arc_economy_hook_01:left",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Post it",
-      "effects": {
-        "funds": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Internal only",
-      "effects": {
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "rival_after_priority_01",
-    "title": "Rival’s Take",
-    "body": "Rival says we play favorites. Respond?",
-    "tags": [
-      "meta:rival",
-      "require:choice:dps_priority_01:right",
-      "phase:2"
-    ],
-    "left": {
-      "label": "Calm note",
-      "effects": {
-        "funds": -1,
-        "reputation": 1
-      }
-    },
-    "right": {
-      "label": "Ignore",
-      "effects": {
-        "reputation": -1
-      }
-    }
-  },
-  {
-    "id": "collapse_funds_01",
+    "id": "collapse_funds",
     "title": "Bankrupt Guild",
-    "body": "Treasury’s empty. Vendors won’t deal with us.",
+    "speaker": "System",
+    "portrait": "/resources/portraits/peon.png",
+    "body": "Ledger hits zero. Lights dim. You do not log out. You are logged.",
     "tags": [
       "meta:collapse",
-      "cause:funds"
+      "phase:1"
     ],
     "left": {
       "label": "Start over",
-      "effects": {}
+      "effects": {
+        "reputation": 0
+      }
     },
     "right": {
       "label": "Start over",
-      "effects": {}
+      "effects": {
+        "reputation": 0
+      }
     }
   },
   {
-    "id": "collapse_reputation_01",
+    "id": "collapse_reputation",
     "title": "Forgotten Name",
-    "body": "No one picks up our calls anymore.",
+    "speaker": "System",
+    "portrait": "/resources/portraits/tinker.png",
+    "body": "Recruiters stop replying. Applications stop arriving. The hall is very quiet.",
     "tags": [
       "meta:collapse",
-      "cause:reputation"
+      "phase:1"
     ],
     "left": {
       "label": "Start over",
-      "effects": {}
+      "effects": {
+        "reputation": 0
+      }
     },
     "right": {
       "label": "Start over",
-      "effects": {}
+      "effects": {
+        "reputation": 0
+      }
     }
   },
   {
-    "id": "collapse_readiness_01",
+    "id": "collapse_readiness",
     "title": "Unready Roster",
-    "body": "We can’t field a team tonight.",
+    "speaker": "System",
+    "portrait": "/resources/portraits/sorceress.png",
+    "body": "Everyone showed up. Nothing is ready. The clock runs out all the same.",
     "tags": [
       "meta:collapse",
-      "cause:readiness"
+      "phase:1"
     ],
     "left": {
       "label": "Start over",
-      "effects": {}
+      "effects": {
+        "reputation": 0
+      }
     },
     "right": {
       "label": "Start over",
-      "effects": {}
+      "effects": {
+        "reputation": 0
+      }
     }
   }
 ]
