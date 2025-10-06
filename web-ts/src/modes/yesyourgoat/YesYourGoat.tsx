@@ -80,7 +80,7 @@ function updateLegacyPoints(legacyPoints: LegacyPoints, collapseType: CollapseTy
   return newPoints
 }
 
-const EVENTS_URL = '/events/packs/yesyourgoat/merged.events.json'
+const EVENTS_URL = '/events/packs/yesyourgoat/tutorial_and_characters.json'
 
 export default function YesYourGoat() {
   const [meters, setMeters] = useState<Meters>({ funds: 5, reputation: 5, readiness: 5 })

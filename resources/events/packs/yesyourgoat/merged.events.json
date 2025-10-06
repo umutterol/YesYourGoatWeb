@@ -3089,5 +3089,599 @@
         }
       }
     }
+  },
+  {
+    "id": "intro_old_guildmaster",
+    "phase": 1,
+    "title": "The Old Guild Master",
+    "speaker": "Old Guild Master",
+    "body": "So you're the new guild master? I've been waiting for someone to take over this mess.",
+    "left": {
+      "label": "I'm ready.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "right": {
+      "label": "What mess?",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "run:intro",
+      "tutorial"
+    ]
+  },
+  {
+    "id": "intro_three_meters",
+    "phase": 1,
+    "title": "Three Things Matter",
+    "speaker": "Old Guild Master",
+    "body": "Three things keep a guild alive: Funds, Reputation, and Readiness. Keep them balanced.",
+    "left": {
+      "label": "I understand.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "right": {
+      "label": "That's it?",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "tutorial",
+      "setup"
+    ]
+  },
+  {
+    "id": "intro_choices_matter",
+    "phase": 1,
+    "title": "Every Choice Counts",
+    "speaker": "Old Guild Master",
+    "body": "Every decision changes these three things. Some choices help one meter but hurt another. No perfect answers.",
+    "left": {
+      "label": "I'll be careful.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Sounds stressful.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "tutorial",
+      "setup"
+    ]
+  },
+  {
+    "id": "intro_old_guildmaster_final",
+    "phase": 1,
+    "title": "The Cycle Continues",
+    "speaker": "Old Guild Master",
+    "body": "I've seen many guild masters come and go. When you fail, another takes your place. The cycle never ends.",
+    "left": {
+      "label": "Thank you.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "right": {
+      "label": "I won't fail.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "tags": [
+      "tutorial",
+      "setup"
+    ]
+  },
+  {
+    "id": "recruiter_first_meeting",
+    "phase": 1,
+    "title": "New Recruiter",
+    "speaker": "Recruiter",
+    "body": "I'm your new recruiter. We need to establish our recruitment standards. Strict requirements or open doors?",
+    "left": {
+      "label": "Strict standards.",
+      "effects": {
+        "meters": {
+          "readiness": 1,
+          "reputation": -1
+        },
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Open doors.",
+      "effects": {
+        "meters": {
+          "reputation": 1,
+          "readiness": -1
+        }
+      }
+    },
+    "tags": [
+      "character:intro",
+      "recruitment"
+    ]
+  },
+  {
+    "id": "tank_raid_prep",
+    "phase": 1,
+    "title": "Raid Preparation",
+    "speaker": "Tank",
+    "body": "We need better gear for the upcoming raid. Should we farm dungeons or buy from the auction house?",
+    "left": {
+      "label": "Farm dungeons.",
+      "effects": {
+        "meters": {
+          "readiness": 1,
+          "funds": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Buy gear.",
+      "effects": {
+        "meters": {
+          "funds": -2,
+          "readiness": 1
+        }
+      }
+    },
+    "tags": [
+      "character:intro",
+      "preparation"
+    ]
+  },
+  {
+    "id": "drama_queen_first",
+    "phase": 1,
+    "title": "Drama in Guild Chat",
+    "speaker": "Drama Queen",
+    "body": "Someone called me a 'casual' in guild chat! This is outrageous! We need to enforce respect!",
+    "left": {
+      "label": "Enforce respect.",
+      "effects": {
+        "meters": {
+          "reputation": 1
+        },
+        "legacy": {
+          "roster_bond": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Let it slide.",
+      "effects": {
+        "meters": {
+          "reputation": -1
+        },
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "character:intro",
+      "drama"
+    ]
+  },
+  {
+    "id": "rival_guild_challenge",
+    "phase": 1,
+    "title": "Rival Guild Challenge",
+    "speaker": "Rival Guild",
+    "body": "We challenge you to a raid competition! First guild to clear the new dungeon wins bragging rights.",
+    "left": {
+      "label": "Accept challenge.",
+      "effects": {
+        "meters": {
+          "reputation": 1,
+          "readiness": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Decline politely.",
+      "effects": {
+        "meters": {
+          "reputation": -1,
+          "funds": 1
+        }
+      }
+    },
+    "tags": [
+      "character:intro",
+      "competition"
+    ]
+  },
+  {
+    "id": "recruiter_followup",
+    "phase": 1,
+    "title": "Recruitment Results",
+    "speaker": "Recruiter",
+    "body": "Our recruitment drive is working! But we're getting too many DPS and not enough healers. Adjust our focus?",
+    "left": {
+      "label": "Focus on healers.",
+      "effects": {
+        "meters": {
+          "readiness": 1,
+          "reputation": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Keep it balanced.",
+      "effects": {
+        "meters": {
+          "reputation": 1
+        }
+      }
+    },
+    "tags": [
+      "character:followup",
+      "recruitment"
+    ]
+  },
+  {
+    "id": "tank_raid_failure",
+    "phase": 1,
+    "title": "Raid Wipe",
+    "speaker": "Tank",
+    "body": "We wiped on the final boss again. The healer says I'm taking too much damage. Should we change strategy?",
+    "left": {
+      "label": "Change strategy.",
+      "effects": {
+        "meters": {
+          "readiness": 1,
+          "funds": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Blame the healer.",
+      "effects": {
+        "meters": {
+          "reputation": -1
+        },
+        "legacy": {
+          "roster_bond": -1
+        }
+      }
+    },
+    "tags": [
+      "character:followup",
+      "raid"
+    ]
+  },
+  {
+    "id": "drama_queen_escalation",
+    "phase": 1,
+    "title": "Drama Escalates",
+    "speaker": "Drama Queen",
+    "body": "Now they're saying I'm 'toxic'! I demand an apology or I'm leaving the guild!",
+    "left": {
+      "label": "Demand apology.",
+      "effects": {
+        "meters": {
+          "reputation": -1
+        },
+        "legacy": {
+          "roster_bond": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Let them leave.",
+      "effects": {
+        "meters": {
+          "readiness": 1
+        }
+      }
+    },
+    "tags": [
+      "character:followup",
+      "drama"
+    ]
+  },
+  {
+    "id": "rival_guild_victory",
+    "phase": 1,
+    "title": "Rival Victory",
+    "speaker": "Rival Guild",
+    "body": "We cleared it first! Your guild is weak. Want to merge with us? We'll take your best players.",
+    "left": {
+      "label": "Consider merger.",
+      "effects": {
+        "meters": {
+          "reputation": -2,
+          "funds": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Stay independent.",
+      "effects": {
+        "meters": {
+          "reputation": 1,
+          "funds": -1
+        }
+      }
+    },
+    "tags": [
+      "character:followup",
+      "competition"
+    ]
+  },
+  {
+    "id": "recruiter_desperation",
+    "phase": 1,
+    "title": "Recruitment Crisis",
+    "speaker": "Recruiter",
+    "body": "Our best players are leaving for the rival guild! We need to offer better incentives. Raid loot priority?",
+    "left": {
+      "label": "Offer loot priority.",
+      "effects": {
+        "meters": {
+          "reputation": 1,
+          "readiness": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Stay fair.",
+      "effects": {
+        "meters": {
+          "reputation": -1,
+          "readiness": 1
+        }
+      }
+    },
+    "tags": [
+      "character:crisis",
+      "recruitment"
+    ]
+  },
+  {
+    "id": "tank_final_stand",
+    "phase": 1,
+    "title": "Final Raid Attempt",
+    "speaker": "Tank",
+    "body": "This is our last chance. The guild is falling apart. Should we go all-in on consumables and buffs?",
+    "left": {
+      "label": "Go all-in.",
+      "effects": {
+        "meters": {
+          "funds": -2,
+          "readiness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Save resources.",
+      "effects": {
+        "meters": {
+          "funds": 1,
+          "readiness": -1
+        }
+      }
+    },
+    "tags": [
+      "character:crisis",
+      "raid"
+    ]
+  },
+  {
+    "id": "drama_queen_final",
+    "phase": 1,
+    "title": "Final Drama",
+    "speaker": "Drama Queen",
+    "body": "I'm taking half the guild with me! We're starting our own guild where we'll be appreciated!",
+    "left": {
+      "label": "Let them go.",
+      "effects": {
+        "meters": {
+          "reputation": -2,
+          "readiness": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Beg them to stay.",
+      "effects": {
+        "meters": {
+          "reputation": -1,
+          "funds": -1
+        }
+      }
+    },
+    "tags": [
+      "character:crisis",
+      "drama"
+    ]
+  },
+  {
+    "id": "rival_guild_merger",
+    "phase": 1,
+    "title": "Merger Ultimatum",
+    "speaker": "Rival Guild",
+    "body": "Your guild is dead. Join us or die alone. We'll take your remaining members and your bank.",
+    "left": {
+      "label": "Accept merger.",
+      "effects": {
+        "meters": {
+          "reputation": -3,
+          "funds": -2
+        }
+      }
+    },
+    "right": {
+      "label": "Fight to the end.",
+      "effects": {
+        "meters": {
+          "reputation": 1,
+          "funds": -1
+        }
+      }
+    },
+    "tags": [
+      "character:crisis",
+      "competition"
+    ]
+  },
+  {
+    "id": "guild_collapse_funds",
+    "phase": 1,
+    "title": "Guild Bankrupt",
+    "speaker": "System",
+    "body": "The guild bank is empty. Members are leaving. The guild hall is being repossessed.",
+    "left": {
+      "label": "Accept defeat.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "meta:collapse",
+      "phase:1"
+    ],
+    "trigger": {
+      "meters": {
+        "funds": {
+          "lte": 0
+        }
+      }
+    }
+  },
+  {
+    "id": "guild_collapse_reputation",
+    "phase": 1,
+    "title": "Guild Forgotten",
+    "speaker": "System",
+    "body": "No one remembers your guild name. Recruiters ignore your applications. The guild is dead.",
+    "left": {
+      "label": "Accept defeat.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "meta:collapse",
+      "phase:1"
+    ],
+    "trigger": {
+      "meters": {
+        "reputation": {
+          "lte": 0
+        }
+      }
+    }
+  },
+  {
+    "id": "guild_collapse_readiness",
+    "phase": 1,
+    "title": "Guild Unready",
+    "speaker": "System",
+    "body": "No one shows up for raids. The guild is a ghost town. Leadership has failed.",
+    "left": {
+      "label": "Accept defeat.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "meta:collapse",
+      "phase:1"
+    ],
+    "trigger": {
+      "meters": {
+        "readiness": {
+          "lte": 0
+        }
+      }
+    }
+  },
+  {
+    "id": "post_collapse_scene",
+    "phase": 1,
+    "title": "The Cycle Continues",
+    "speaker": "Old Guild Master",
+    "body": "Another guild master falls. Another cycle begins. The simulation continues. You are AI #47.",
+    "left": {
+      "label": "I understand.",
+      "effects": {
+        "legacy": {
+          "meta_skeptic": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Start over.",
+      "effects": {
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "meta:collapse",
+      "phase:1"
+    ]
   }
 ]
