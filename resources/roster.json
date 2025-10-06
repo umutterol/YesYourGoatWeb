@@ -160,6 +160,13 @@
       "level": 1,
       "role": "Farmer",
       "description": "Frequently away from keyboard"
+    },
+    "Old Guild Master": {
+      "name": "Old Guild Master",
+      "portrait": "/portraits/mountainking.png",
+      "level": 100,
+      "role": "Retired Guild Master",
+      "description": "Wise former leader who has seen it all"
     }
   }
 }

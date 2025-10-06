@@ -423,6 +423,26 @@ export default function YesYourGoat() {
       }
     }
     
+    // Handle character-driven narrative progression (days 5-15)
+    if (day <= 15) {
+      const characterEvents = events
+        .filter(e => {
+          const tags = e.tags || []
+          return (tags.includes('character:intro') || tags.includes('character:followup') || tags.includes('character:crisis')) && !usedEventIds.includes(e.id)
+        })
+        .sort((a, b) => {
+          // Prioritize character progression: intro -> followup -> crisis
+          const aTags = a.tags || []
+          const bTags = b.tags || []
+          const aPriority = aTags.includes('character:crisis') ? 3 : aTags.includes('character:followup') ? 2 : 1
+          const bPriority = bTags.includes('character:crisis') ? 3 : bTags.includes('character:followup') ? 2 : 1
+          return aPriority - bPriority
+        })
+      if (characterEvents.length > 0) {
+        return characterEvents[0]
+      }
+    }
+    
     // Prefer unseen character/tutorial intros early in a fresh profile (slow onboarding)
     if (day <= 8) {
       const introPool = events
@@ -442,6 +462,7 @@ export default function YesYourGoat() {
       const tags = e.tags || []
       if (tags.includes('run:intro') || tags.includes('run:outro')) return false
       if (tags.includes('tutorial')) return false // Tutorial events are handled separately
+      if (tags.includes('character:intro') || tags.includes('character:followup') || tags.includes('character:crisis')) return false // Character events are handled separately
       if (tags.includes('meta:dungeon_progress')) return false
       if (tags.includes('meta:collapse')) return false
       if (tags.includes('disabled')) return false
