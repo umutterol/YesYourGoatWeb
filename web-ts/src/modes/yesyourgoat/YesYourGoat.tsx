@@ -404,6 +404,25 @@ export default function YesYourGoat() {
       const rival = events.find(e => (e.tags || []).includes('meta:rival') && !usedEventIds.includes(e.id))
       if (rival) { setSawRival(true); return rival }
     }
+    // Handle tutorial sequence first (days 1-4)
+    if (day <= 4) {
+      const tutorialEvents = events
+        .filter(e => (e.tags || []).includes('tutorial') && !usedEventIds.includes(e.id))
+        .sort((a, b) => {
+          // Ensure tutorial events appear in the correct order
+          const order = ['intro_old_guildmaster', 'intro_three_meters', 'intro_choices_matter', 'intro_old_guildmaster_final']
+          const aIndex = order.indexOf(a.id)
+          const bIndex = order.indexOf(b.id)
+          if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex
+          if (aIndex !== -1) return -1
+          if (bIndex !== -1) return 1
+          return 0
+        })
+      if (tutorialEvents.length > 0) {
+        return tutorialEvents[0]
+      }
+    }
+    
     // Prefer unseen character/tutorial intros early in a fresh profile (slow onboarding)
     if (day <= 8) {
       const introPool = events
@@ -422,6 +441,7 @@ export default function YesYourGoat() {
     let pool = events.filter(e => {
       const tags = e.tags || []
       if (tags.includes('run:intro') || tags.includes('run:outro')) return false
+      if (tags.includes('tutorial')) return false // Tutorial events are handled separately
       if (tags.includes('meta:dungeon_progress')) return false
       if (tags.includes('meta:collapse')) return false
       if (tags.includes('disabled')) return false
