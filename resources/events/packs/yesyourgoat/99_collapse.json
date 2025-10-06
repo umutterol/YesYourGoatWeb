@@ -19,7 +19,7 @@
     "id": "collapse_reputation",
     "title": "Forgotten Name",
     "speaker": "System",
-    "portrait": "/resources/portraits/peon.png",
+    "portrait": "/resources/portraits/tinker.png",
     "body": "Recruiters stop replying. Applications stop arriving. The hall is very quiet.",
     "tags": ["meta:collapse", "phase:1"],
     "left": {
@@ -35,7 +35,7 @@
     "id": "collapse_readiness",
     "title": "Unready Roster",
     "speaker": "System",
-    "portrait": "/resources/portraits/peon.png",
+    "portrait": "/resources/portraits/sorceress.png",
     "body": "Everyone showed up. Nothing is ready. The clock runs out all the same.",
     "tags": ["meta:collapse", "phase:1"],
     "left": {

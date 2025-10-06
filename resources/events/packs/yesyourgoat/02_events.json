@@ -3,7 +3,7 @@
     "id": "ask_tank_minimums_01",
     "title": "Minimums",
     "speaker": "Tank",
-    "portrait": "/resources/portraits/mountainking.png",
+    "portrait": "/resources/portraits/demonhunter.png",
     "body": "Set roster minimums before raid? Slower invites, fewer wipes.",
     "tags": ["raid_logistics", "character:tank", "phase:1"],
     "left": {
@@ -19,7 +19,7 @@
     "id": "ask_healer_supplies_01",
     "title": "Supplies",
     "speaker": "Healer",
-    "portrait": "/resources/portraits/priestess.png",
+    "portrait": "/resources/portraits/farseer.png",
     "body": "Approve basic raid supplies out of bank?",
     "tags": ["raid_logistics", "character:healer", "phase:1"],
     "left": {
@@ -35,7 +35,7 @@
     "id": "ask_treasurer_dues_01",
     "title": "Dues",
     "speaker": "Treasurer",
-    "portrait": "/resources/portraits/archmage.png",
+    "portrait": "/resources/portraits/beastmaster.png",
     "body": "Collect small dues now or after first boss dies?",
     "tags": ["economy", "character:treasurer", "phase:1"],
     "left": {
@@ -51,7 +51,7 @@
     "id": "raid_night_check_01",
     "title": "Raid Night",
     "speaker": "Tank",
-    "portrait": "/resources/portraits/mountainking.png",
+    "portrait": "/resources/portraits/chieftain.png",
     "body": "Run the plan or freestyle mid-pull?",
     "tags": ["raid_night_check", "phase:1"],
     "left": {
@@ -67,7 +67,7 @@
     "id": "meta_council_01",
     "title": "Council Dues",
     "speaker": "Council Moderator",
-    "portrait": "/resources/portraits/paladin.png",
+    "portrait": "/resources/portraits/blademaster.png",
     "body": "Community dues are due. Pay now?",
     "tags": ["meta:council", "phase:1"],
     "left": {
@@ -83,7 +83,7 @@
     "id": "meta_rival_01",
     "title": "Rival DM",
     "speaker": "Rival",
-    "portrait": "/resources/portraits/dreadlord.png",
+    "portrait": "/resources/portraits/deathknight.png",
     "body": "Your bench looks soft. Need a real guild?",
     "tags": ["meta:rival", "phase:1"],
     "left": {
@@ -131,7 +131,7 @@
     "id": "random_bank_short_01",
     "title": "Short Ledger",
     "speaker": "Treasurer",
-    "portrait": "/resources/portraits/archmage.png",
+    "portrait": "/resources/portraits/bloodmage.png",
     "body": "Small deposit looks missing. Could be logging delay.",
     "tags": ["random_pool", "random:economy", "phase:1"],
     "left": {
