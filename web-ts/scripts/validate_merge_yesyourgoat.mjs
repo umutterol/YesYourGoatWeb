@@ -10,8 +10,8 @@ try {
   const st = await fs.stat(topLevelPacks)
   if (st.isDirectory()) packsDir = topLevelPacks
 } catch {}
-// Output to the web runtime path
-const outFile = path.join(repoRoot, 'public', 'resources', 'events', 'yesyourgoat.events.json')
+// Output to the top-level resources path
+const outFile = path.join(repoRoot, '..', 'resources', 'events', 'packs', 'yesyourgoat', 'merged.events.json')
 
 function fail(msg) {
   console.error(`[YYG Validate] ${msg}`)
@@ -68,7 +68,7 @@ async function run() {
   let files = []
   try {
     const entries = await fs.readdir(packsDir)
-    files = entries.filter(f => f.endsWith('.json')).map(f => path.join(packsDir, f))
+    files = entries.filter(f => f.endsWith('.json') && !f.includes('merged')).map(f => path.join(packsDir, f))
   } catch (e) {
     fail(`Packs dir missing: ${packsDir}`)
   }

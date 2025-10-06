@@ -37,7 +37,7 @@ const ReignsCard: React.FC<ReignsCardProps> = ({
   const [roster, setRoster] = useState<SpeakerRoster | null>(null);
 
   useEffect(() => {
-    fetch('/resources/roster.json')
+    fetch('/../resources/roster.json')
       .then(r => r.json())
       .then(setRoster)
       .catch(err => console.error('Failed to load speaker roster:', err));
