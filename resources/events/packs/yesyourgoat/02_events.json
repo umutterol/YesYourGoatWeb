@@ -1,0 +1,146 @@
+[
+  {
+    "id": "ask_tank_minimums_01",
+    "title": "Minimums",
+    "speaker": "Tank",
+    "portrait": "/resources/portraits/mountainking.png",
+    "body": "Set roster minimums before raid? Slower invites, fewer wipes.",
+    "tags": ["raid_logistics", "character:tank", "phase:1"],
+    "left": {
+      "label": "Set minimums",
+      "effects": { "readiness": 1, "reputation": -1 }
+    },
+    "right": {
+      "label": "Stay flexible",
+      "effects": { "reputation": 1, "readiness": -1 }
+    }
+  },
+  {
+    "id": "ask_healer_supplies_01",
+    "title": "Supplies",
+    "speaker": "Healer",
+    "portrait": "/resources/portraits/priestess.png",
+    "body": "Approve basic raid supplies out of bank?",
+    "tags": ["raid_logistics", "character:healer", "phase:1"],
+    "left": {
+      "label": "Approve",
+      "effects": { "funds": -1, "readiness": 1 }
+    },
+    "right": {
+      "label": "Not this week",
+      "effects": { "reputation": 1 }
+    }
+  },
+  {
+    "id": "ask_treasurer_dues_01",
+    "title": "Dues",
+    "speaker": "Treasurer",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "Collect small dues now or after first boss dies?",
+    "tags": ["economy", "character:treasurer", "phase:1"],
+    "left": {
+      "label": "Collect now",
+      "effects": { "funds": 2, "reputation": -1 }
+    },
+    "right": {
+      "label": "After first",
+      "effects": { "reputation": 1 }
+    }
+  },
+  {
+    "id": "raid_night_check_01",
+    "title": "Raid Night",
+    "speaker": "Tank",
+    "portrait": "/resources/portraits/mountainking.png",
+    "body": "Run the plan or freestyle mid-pull?",
+    "tags": ["raid_night_check", "phase:1"],
+    "left": {
+      "label": "Run the plan",
+      "effects": { "readiness": 1 }
+    },
+    "right": {
+      "label": "Freestyle",
+      "effects": { "reputation": -1 }
+    }
+  },
+  {
+    "id": "meta_council_01",
+    "title": "Council Dues",
+    "speaker": "Council Moderator",
+    "portrait": "/resources/portraits/paladin.png",
+    "body": "Community dues are due. Pay now?",
+    "tags": ["meta:council", "phase:1"],
+    "left": {
+      "label": "Pay now",
+      "effects": { "funds": -2, "reputation": 1 }
+    },
+    "right": {
+      "label": "Defer",
+      "effects": { "reputation": -1 }
+    }
+  },
+  {
+    "id": "meta_rival_01",
+    "title": "Rival DM",
+    "speaker": "Rival",
+    "portrait": "/resources/portraits/dreadlord.png",
+    "body": "Your bench looks soft. Need a real guild?",
+    "tags": ["meta:rival", "phase:1"],
+    "left": {
+      "label": "Report harassment",
+      "effects": { "reputation": 1 }
+    },
+    "right": {
+      "label": "Ignore it",
+      "effects": { "readiness": -1 }
+    }
+  },
+  {
+    "id": "random_invite_midpull_01",
+    "title": "Mid-Pull Ping",
+    "speaker": "Officer",
+    "portrait": "/resources/portraits/warden.png",
+    "body": "Got a whisper for an invite mid-pull. Fill now or after?",
+    "tags": ["random_pool", "random:logistics", "phase:1"],
+    "left": {
+      "label": "After this pull",
+      "effects": { "readiness": 1 }
+    },
+    "right": {
+      "label": "Invite now",
+      "effects": { "readiness": -1, "reputation": 1 }
+    }
+  },
+  {
+    "id": "random_latency_spike_01",
+    "title": "Spikes",
+    "speaker": "Scout",
+    "portrait": "/resources/portraits/shadowhunter.png",
+    "body": "Latency is spiking in the instance. Adjust?",
+    "tags": ["random_pool", "random:server", "phase:1"],
+    "left": {
+      "label": "Lower risk",
+      "effects": { "readiness": 1, "reputation": -1 }
+    },
+    "right": {
+      "label": "Push through",
+      "effects": { "readiness": -1 }
+    }
+  },
+  {
+    "id": "random_bank_short_01",
+    "title": "Short Ledger",
+    "speaker": "Treasurer",
+    "portrait": "/resources/portraits/archmage.png",
+    "body": "Small deposit looks missing. Could be logging delay.",
+    "tags": ["random_pool", "random:economy", "phase:1"],
+    "left": {
+      "label": "Cover tonight",
+      "effects": { "funds": -1, "readiness": 1 }
+    },
+    "right": {
+      "label": "Post a note",
+      "effects": { "reputation": 1 }
+    }
+  }
+]

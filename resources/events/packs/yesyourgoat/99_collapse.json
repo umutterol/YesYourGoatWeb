@@ -1,5 +1,50 @@
 [
-  {"id": "collapse_funds_01", "title": "Bankrupt Guild", "body": "Treasury’s empty. Vendors won’t deal with us.", "tags": ["meta:collapse", "cause:funds"], "left": {"label": "Start over", "effects": {}}, "right": {"label": "Start over", "effects": {}}},
-  {"id": "collapse_reputation_01", "title": "Forgotten Name", "body": "No one picks up our calls anymore.", "tags": ["meta:collapse", "cause:reputation"], "left": {"label": "Start over", "effects": {}}, "right": {"label": "Start over", "effects": {}}},
-  {"id": "collapse_readiness_01", "title": "Unready Roster", "body": "We can’t field a team tonight.", "tags": ["meta:collapse", "cause:readiness"], "left": {"label": "Start over", "effects": {}}, "right": {"label": "Start over", "effects": {}}}
+  {
+    "id": "collapse_funds",
+    "title": "Bankrupt Guild",
+    "speaker": "System",
+    "portrait": "/resources/portraits/peon.png",
+    "body": "Ledger hits zero. Lights dim. You do not log out. You are logged.",
+    "tags": ["meta:collapse", "phase:1"],
+    "left": {
+      "label": "Start over",
+      "effects": { "reputation": 0 }
+    },
+    "right": {
+      "label": "Start over",
+      "effects": { "reputation": 0 }
+    }
+  },
+  {
+    "id": "collapse_reputation",
+    "title": "Forgotten Name",
+    "speaker": "System",
+    "portrait": "/resources/portraits/peon.png",
+    "body": "Recruiters stop replying. Applications stop arriving. The hall is very quiet.",
+    "tags": ["meta:collapse", "phase:1"],
+    "left": {
+      "label": "Start over",
+      "effects": { "reputation": 0 }
+    },
+    "right": {
+      "label": "Start over",
+      "effects": { "reputation": 0 }
+    }
+  },
+  {
+    "id": "collapse_readiness",
+    "title": "Unready Roster",
+    "speaker": "System",
+    "portrait": "/resources/portraits/peon.png",
+    "body": "Everyone showed up. Nothing is ready. The clock runs out all the same.",
+    "tags": ["meta:collapse", "phase:1"],
+    "left": {
+      "label": "Start over",
+      "effects": { "reputation": 0 }
+    },
+    "right": {
+      "label": "Start over",
+      "effects": { "reputation": 0 }
+    }
+  }
 ]
