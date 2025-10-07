@@ -3652,6 +3652,99 @@
     ]
   },
   {
+    "id": "tank_strange_behavior",
+    "phase": 1,
+    "title": "Tank Acting Weird",
+    "speaker": "Tank",
+    "body": "Privyet comrades! I mean... hello. My account is fine. Nothing suspicious. Trust me, da?",
+    "left": {
+      "label": "Change password now.",
+      "effects": {
+        "meters": {
+          "funds": -1,
+          "readiness": 1
+        },
+        "legacy": {
+          "roster_bond": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Probably just tired.",
+      "effects": {
+        "meters": {
+          "reputation": -1
+        }
+      }
+    },
+    "tags": [
+      "character:intro",
+      "suspicious"
+    ]
+  },
+  {
+    "id": "tank_link_spam",
+    "phase": 1,
+    "title": "Suspicious Link",
+    "speaker": "Tank",
+    "body": "Click this link for free epic loot, tovarisch! Is legitimate, I swear on babushka!",
+    "left": {
+      "label": "Kick from Discord.",
+      "effects": {
+        "meters": {
+          "readiness": -2,
+          "reputation": 1
+        },
+        "legacy": {
+          "roster_bond": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Just ignore it.",
+      "effects": {
+        "meters": {
+          "reputation": -1,
+          "funds": -1
+        }
+      }
+    },
+    "tags": [
+      "character:followup",
+      "security_breach"
+    ]
+  },
+  {
+    "id": "tank_full_takeover",
+    "phase": 1,
+    "title": "Complete Takeover",
+    "speaker": "Tank",
+    "body": "Внимание! Your guild is now property of Mother Russia! Send all gold to my account or face consequences!",
+    "left": {
+      "label": "Emergency lockdown!",
+      "effects": {
+        "meters": {
+          "funds": -2,
+          "reputation": -1,
+          "readiness": -2
+        }
+      }
+    },
+    "right": {
+      "label": "Negotiate recovery.",
+      "effects": {
+        "meters": {
+          "funds": -3,
+          "reputation": 1
+        }
+      }
+    },
+    "tags": [
+      "character:crisis",
+      "cyberattack"
+    ]
+  },
+  {
     "id": "guild_collapse_funds",
     "phase": 1,
     "title": "Guild Bankrupt",
