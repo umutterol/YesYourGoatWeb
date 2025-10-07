@@ -1,60 +1,11 @@
 {
   "speakers": {
-    "Tank": {
-      "name": "Tank",
+    "Old Guild Master": {
+      "name": "Old Guild Master",
       "portrait": "/portraits/mountainking.png",
-      "level": 85,
-      "role": "Protection Warrior",
-      "description": "Steadfast guardian of the raid"
-    },
-    "Healer": {
-      "name": "Healer", 
-      "portrait": "/portraits/priestess.png",
-      "level": 82,
-      "role": "Holy Priest",
-      "description": "Keeper of life and mana"
-    },
-    "Treasurer": {
-      "name": "Treasurer",
-      "portrait": "/portraits/archmage.png", 
-      "level": 78,
-      "role": "Arcane Mage",
-      "description": "Master of coin and calculations"
-    },
-    "Council Moderator": {
-      "name": "Council Moderator",
-      "portrait": "/portraits/paladin.png",
-      "level": 90,
-      "role": "Retribution Paladin", 
-      "description": "Voice of authority and order"
-    },
-    "Rival": {
-      "name": "Rival",
-      "portrait": "/portraits/dreadlord.png",
-      "level": 88,
-      "role": "Unholy Death Knight",
-      "description": "Competitive guild leader"
-    },
-    "Officer": {
-      "name": "Officer",
-      "portrait": "/portraits/warden.png",
-      "level": 84,
-      "role": "Protection Paladin",
-      "description": "Enforcer of guild discipline"
-    },
-    "Scout": {
-      "name": "Scout", 
-      "portrait": "/portraits/shadowhunter.png",
-      "level": 80,
-      "role": "Survival Hunter",
-      "description": "Eyes and ears of the guild"
-    },
-    "System": {
-      "name": "System",
-      "portrait": "/portraits/peon.png",
-      "level": 1,
-      "role": "System Message",
-      "description": "Automated notifications"
+      "level": 100,
+      "role": "Retired Guild Master",
+      "description": "Wise former leader who has seen it all"
     },
     "Recruiter": {
       "name": "Recruiter",
@@ -63,54 +14,12 @@
       "role": "Beast Master",
       "description": "Finds and evaluates new talent"
     },
-    "Compliance": {
-      "name": "Compliance",
-      "portrait": "/portraits/warden.png",
-      "level": 83,
-      "role": "Protection Paladin",
-      "description": "Enforces guild policies and rules"
-    },
-    "PR": {
-      "name": "PR",
-      "portrait": "/portraits/darkranger.png",
-      "level": 81,
-      "role": "Dark Ranger",
-      "description": "Manages public relations and communications"
-    },
-    "Ranged DPS": {
-      "name": "Ranged DPS",
-      "portrait": "/portraits/shadowhunter.png",
-      "level": 80,
-      "role": "Survival Hunter",
-      "description": "Long-range damage specialist"
-    },
-    "Rival Guild": {
-      "name": "Rival Guild",
-      "portrait": "/portraits/dreadlord.png",
-      "level": 88,
-      "role": "Unholy Death Knight",
-      "description": "Competitive guild leader"
-    },
-    "Recruit": {
-      "name": "Recruit",
-      "portrait": "/portraits/peon.png",
-      "level": 1,
-      "role": "Recruit",
-      "description": "New guild member candidate"
-    },
-    "Mage": {
-      "name": "Mage",
-      "portrait": "/portraits/sorceress.png",
-      "level": 77,
-      "role": "Arcane Mage",
-      "description": "Master of arcane magic"
-    },
-    "Loot Master": {
-      "name": "Loot Master",
-      "portrait": "/portraits/archmage.png",
-      "level": 82,
-      "role": "Arcane Mage",
-      "description": "Manages loot distribution"
+    "Tank": {
+      "name": "Tank",
+      "portrait": "/portraits/mountainking.png",
+      "level": 85,
+      "role": "Protection Warrior",
+      "description": "Steadfast guardian of the raid"
     },
     "Drama Queen": {
       "name": "Drama Queen",
@@ -119,54 +28,19 @@
       "role": "Holy Priest",
       "description": "Creates and escalates drama"
     },
-    "Benched Rogue": {
-      "name": "Benched Rogue",
-      "portrait": "/portraits/rogue.png",
-      "level": 76,
-      "role": "Assassination Rogue",
-      "description": "Backup DPS waiting for rotation"
+    "Rival Guild": {
+      "name": "Rival Guild",
+      "portrait": "/portraits/dreadlord.png",
+      "level": 88,
+      "role": "Unholy Death Knight",
+      "description": "Competitive guild leader"
     },
-    "Attendant": {
-      "name": "Attendant",
+    "System": {
+      "name": "System",
       "portrait": "/portraits/peon.png",
       "level": 1,
-      "role": "Attendant",
-      "description": "Guild hall maintenance staff"
-    },
-    "Unknown": {
-      "name": "Unknown",
-      "portrait": "/portraits/peon.png",
-      "level": 1,
-      "role": "Unknown",
-      "description": "Mysterious figure"
-    },
-    "Crafter": {
-      "name": "Crafter",
-      "portrait": "/portraits/tinker.png",
-      "level": 78,
-      "role": "Engineer",
-      "description": "Creates and enchants items"
-    },
-    "Theorycrafter": {
-      "name": "Theorycrafter",
-      "portrait": "/portraits/archmage.png",
-      "level": 85,
-      "role": "Arcane Mage",
-      "description": "Analyzes performance and optimization"
-    },
-    "AFK Farmer": {
-      "name": "AFK Farmer",
-      "portrait": "/portraits/peon.png",
-      "level": 1,
-      "role": "Farmer",
-      "description": "Frequently away from keyboard"
-    },
-    "Old Guild Master": {
-      "name": "Old Guild Master",
-      "portrait": "/portraits/mountainking.png",
-      "level": 100,
-      "role": "Retired Guild Master",
-      "description": "Wise former leader who has seen it all"
+      "role": "System Message",
+      "description": "Automated notifications"
     }
   }
 }
