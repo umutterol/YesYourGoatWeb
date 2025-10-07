@@ -465,6 +465,102 @@
     ]
   },
   {
+    "id": "leeroy_first_meeting",
+    "phase": 1,
+    "title": "Eager DPS",
+    "speaker": "Leeroy",
+    "body": "I'm ready! Just point me at the boss and I'll charge in! Planning is for cowards!",
+    "left": {
+      "label": "Explain tactics first.",
+      "effects": {
+        "meters": {
+          "readiness": 1
+        },
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Let enthusiasm win.",
+      "effects": {
+        "meters": {
+          "reputation": 1,
+          "readiness": -1
+        }
+      }
+    },
+    "tags": [
+      "character:intro",
+      "reckless"
+    ]
+  },
+  {
+    "id": "leeroy_early_pull",
+    "phase": 1,
+    "title": "The Early Pull",
+    "speaker": "Leeroy",
+    "body": "I accidentally pulled the boss while you were explaining. At least I have chicken!",
+    "left": {
+      "label": "Wipe and restart.",
+      "effects": {
+        "meters": {
+          "funds": -1,
+          "readiness": -1
+        },
+        "legacy": {
+          "roster_bond": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Try to salvage it.",
+      "effects": {
+        "meters": {
+          "reputation": -1,
+          "readiness": 1
+        }
+      }
+    },
+    "tags": [
+      "character:followup",
+      "chaos"
+    ]
+  },
+  {
+    "id": "leeroy_full_jenkins",
+    "phase": 1,
+    "title": "LEEROY JENKINS!",
+    "speaker": "Leeroy",
+    "body": "Time's up! Let's do this! LEEEEROY JENKINS! *charges into entire dungeon*",
+    "left": {
+      "label": "Follow him in!",
+      "effects": {
+        "meters": {
+          "funds": -2,
+          "reputation": -2,
+          "readiness": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Let him die alone.",
+      "effects": {
+        "meters": {
+          "reputation": -1,
+          "readiness": 1
+        },
+        "legacy": {
+          "roster_bond": -1
+        }
+      }
+    },
+    "tags": [
+      "character:crisis",
+      "legendary_disaster"
+    ]
+  },
+  {
     "id": "guild_collapse_funds",
     "phase": 1,
     "title": "Guild Bankrupt",

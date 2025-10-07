@@ -41,6 +41,13 @@
       "level": 1,
       "role": "System Message",
       "description": "Automated notifications"
+    },
+    "Leeroy": {
+      "name": "Leeroy",
+      "portrait": "/portraits/paladin.png",
+      "level": 60,
+      "role": "Reckless Paladin",
+      "description": "At least I have chicken"
     }
   }
 }
