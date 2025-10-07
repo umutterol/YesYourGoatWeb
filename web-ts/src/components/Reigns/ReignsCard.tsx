@@ -47,53 +47,49 @@ const ReignsCard: React.FC<ReignsCardProps> = ({
 
   return (
     <div className="bg-[var(--reigns-card)] rounded-2xl shadow-2xl border-2 border-[var(--reigns-border)] p-8 max-w-md w-full">
-      {/* Portrait and Speaker */}
+      {/* Portrait - Rectangle 300x300 */}
       {speaker && (
         <div className="flex flex-col items-center mb-6">
           <img
             src={speakerData ? speakerData.portrait : '/portraits/paladin.png'}
             alt={speakerData ? speakerData.name : speaker}
-            className="w-24 h-24 rounded-full border-4 border-[var(--reigns-border)] mb-3"
+            className="w-[300px] h-[300px] object-cover border-4 border-[var(--reigns-border)] mb-4"
             onError={(e) => {
               const target = e.currentTarget;
               target.src = '/portraits/paladin.png';
             }}
           />
+          {/* Character Name */}
           <div className="text-center">
-            <div className="text-sm font-semibold text-[var(--reigns-text-secondary)] uppercase tracking-wide">
+            <div className="text-lg font-bold text-[var(--reigns-text)] uppercase tracking-wide">
               {speakerData ? speakerData.name : speaker}
             </div>
-            {speakerData && (
-              <div className="text-xs text-[var(--reigns-text-secondary)] opacity-75">
-                Level {speakerData.level} • {speakerData.role}
-              </div>
-            )}
           </div>
         </div>
       )}
 
-      {/* Title */}
-      <h2 className="text-2xl font-bold text-center mb-4 text-[var(--reigns-text)] leading-tight">
-        {title}
-      </h2>
+      {/* Event Text (Title + Body) */}
+      <div className="mb-8">
+        <h2 className="text-xl font-bold text-center mb-3 text-[var(--reigns-text)] leading-tight">
+          {title}
+        </h2>
+        <p className="text-base text-center text-[var(--reigns-text-secondary)] leading-relaxed">
+          {body}
+        </p>
+      </div>
 
-      {/* Body */}
-      <p className="text-lg text-center mb-8 text-[var(--reigns-text-secondary)] leading-relaxed min-h-[4rem]">
-        {body}
-      </p>
-
-      {/* Choices */}
+      {/* Buttons - Both Same Color */}
       <div className="flex gap-4">
         <button
           onClick={() => onChoice('left')}
-          className="flex-1 py-4 px-6 rounded-xl font-bold text-white bg-[var(--reigns-danger)] hover:bg-[var(--reigns-danger)]/80 border-2 border-[var(--reigns-danger)] transition-all duration-200 hover:scale-105 active:scale-95 min-h-[44px]"
+          className="flex-1 py-4 px-6 rounded-xl font-bold text-white bg-[var(--reigns-border)] hover:bg-[var(--reigns-border)]/80 border-2 border-[var(--reigns-border)] transition-all duration-200 hover:scale-105 active:scale-95 min-h-[44px]"
         >
           {left.label}
         </button>
         
         <button
           onClick={() => onChoice('right')}
-          className="flex-1 py-4 px-6 rounded-xl font-bold text-white bg-[var(--reigns-success)] hover:bg-[var(--reigns-success)]/80 border-2 border-[var(--reigns-success)] transition-all duration-200 hover:scale-105 active:scale-95 min-h-[44px]"
+          className="flex-1 py-4 px-6 rounded-xl font-bold text-white bg-[var(--reigns-border)] hover:bg-[var(--reigns-border)]/80 border-2 border-[var(--reigns-border)] transition-all duration-200 hover:scale-105 active:scale-95 min-h-[44px]"
         >
           {right.label}
         </button>
