@@ -479,7 +479,8 @@
         "legacy": {
           "roster_bond": 1
         }
-      }
+      },
+      "nextStep": "leeroy_early_pull"
     },
     "right": {
       "label": "Let enthusiasm win.",
@@ -488,10 +489,11 @@
           "reputation": 1,
           "readiness": -1
         }
-      }
+      },
+      "nextStep": "leeroy_early_pull"
     },
     "tags": [
-      "character:intro",
+      "chain:leeroy:1",
       "reckless"
     ]
   },
@@ -511,7 +513,8 @@
         "legacy": {
           "roster_bond": -1
         }
-      }
+      },
+      "nextStep": "leeroy_full_jenkins"
     },
     "right": {
       "label": "Try to salvage it.",
@@ -520,10 +523,11 @@
           "reputation": -1,
           "readiness": 1
         }
-      }
+      },
+      "nextStep": "leeroy_full_jenkins"
     },
     "tags": [
-      "character:followup",
+      "chain:leeroy:2",
       "chaos"
     ]
   },
@@ -556,7 +560,7 @@
       }
     },
     "tags": [
-      "character:crisis",
+      "chain:leeroy:3",
       "legendary_disaster"
     ]
   },
