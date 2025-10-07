@@ -48,6 +48,20 @@
       "level": 60,
       "role": "Reckless Paladin",
       "description": "At least I have chicken"
+    },
+    "Healer": {
+      "name": "Healer",
+      "portrait": "/portraits/driad.png",
+      "level": 82,
+      "role": "Holy Priest",
+      "description": "Keeper of life and sanity"
+    },
+    "Ranged DPS": {
+      "name": "Ranged DPS",
+      "portrait": "/portraits/shadowhunter.png",
+      "level": 80,
+      "role": "Hunter",
+      "description": "Stands in fire for max DPS"
     }
   }
 }

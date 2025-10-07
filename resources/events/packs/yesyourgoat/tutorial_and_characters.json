@@ -654,6 +654,104 @@
     ]
   },
   {
+    "id": "healer_frustration",
+    "phase": 1,
+    "title": "Standing In Fire",
+    "speaker": "Healer",
+    "body": "I can't keep healing through this! DPS keep standing in the fire like it's a warm bath!",
+    "left": {
+      "label": "Call out the DPS.",
+      "effects": {
+        "meters": {
+          "readiness": 1,
+          "reputation": -1
+        },
+        "legacy": {
+          "roster_bond": -1
+        }
+      }
+    },
+    "right": {
+      "label": "Support the healer.",
+      "effects": {
+        "meters": {
+          "reputation": 1
+        },
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "tags": [
+      "character:intro",
+      "conflict"
+    ]
+  },
+  {
+    "id": "dps_defense",
+    "phase": 1,
+    "title": "DPS Arguments",
+    "speaker": "Ranged DPS",
+    "body": "It's literally your job to heal! I'm focused on my rotation. If I move, we lose DPS!",
+    "left": {
+      "label": "Side with healer.",
+      "effects": {
+        "meters": {
+          "readiness": -1,
+          "reputation": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Side with DPS.",
+      "effects": {
+        "meters": {
+          "readiness": 1,
+          "reputation": -1
+        },
+        "legacy": {
+          "roster_bond": -1
+        }
+      }
+    },
+    "tags": [
+      "character:followup",
+      "conflict"
+    ]
+  },
+  {
+    "id": "healer_rage_quit",
+    "phase": 1,
+    "title": "Healer Meltdown",
+    "speaker": "Healer",
+    "body": "That's IT! I'm done! You can all die in your precious fire! Find another healer!",
+    "left": {
+      "label": "Beg them to stay.",
+      "effects": {
+        "meters": {
+          "funds": -2,
+          "readiness": -1
+        },
+        "legacy": {
+          "roster_bond": 1
+        }
+      }
+    },
+    "right": {
+      "label": "Let them leave.",
+      "effects": {
+        "meters": {
+          "reputation": -2,
+          "readiness": -2
+        }
+      }
+    },
+    "tags": [
+      "character:crisis",
+      "ragequit"
+    ]
+  },
+  {
     "id": "guild_collapse_funds",
     "phase": 1,
     "title": "Guild Bankrupt",
