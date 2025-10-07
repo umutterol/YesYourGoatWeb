@@ -11,7 +11,8 @@
         "legacy": {
           "roster_bond": 1
         }
-      }
+      },
+      "nextStep": "intro_three_meters"
     },
     "right": {
       "label": "What mess?",
@@ -19,11 +20,12 @@
         "legacy": {
           "meta_skeptic": 1
         }
-      }
+      },
+      "nextStep": "intro_three_meters"
     },
     "tags": [
       "run:intro",
-      "tutorial"
+      "chain:tutorial:1"
     ]
   },
   {
@@ -38,7 +40,8 @@
         "legacy": {
           "roster_bond": 1
         }
-      }
+      },
+      "nextStep": "intro_choices_matter"
     },
     "right": {
       "label": "That's it?",
@@ -46,11 +49,11 @@
         "legacy": {
           "meta_skeptic": 1
         }
-      }
+      },
+      "nextStep": "intro_choices_matter"
     },
     "tags": [
-      "tutorial",
-      "setup"
+      "chain:tutorial:2"
     ]
   },
   {
@@ -65,7 +68,8 @@
         "legacy": {
           "roster_bond": 1
         }
-      }
+      },
+      "nextStep": "intro_old_guildmaster_final"
     },
     "right": {
       "label": "Sounds stressful.",
@@ -73,11 +77,11 @@
         "legacy": {
           "meta_skeptic": 1
         }
-      }
+      },
+      "nextStep": "intro_old_guildmaster_final"
     },
     "tags": [
-      "tutorial",
-      "setup"
+      "chain:tutorial:3"
     ]
   },
   {
@@ -103,8 +107,7 @@
       }
     },
     "tags": [
-      "tutorial",
-      "setup"
+      "chain:tutorial:4"
     ]
   },
   {
