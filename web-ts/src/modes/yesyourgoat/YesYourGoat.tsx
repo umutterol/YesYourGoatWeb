@@ -710,10 +710,26 @@ export default function YesYourGoat() {
     if (!current) return
     const choice = side === 'left' ? current.left : current.right
     const nextMeters: Meters = { ...meters }
-    for (const [k, v] of Object.entries(choice.effects || {})) {
-      if (k in nextMeters && typeof v === 'number') {
-        // @ts-expect-error key narrowing
-        nextMeters[k] = clamp((nextMeters as any)[k] + v)
+    
+    // Handle both old and new effect schemas
+    const effects = choice.effects || {}
+    
+    // Check if using new nested schema (has 'meters' property)
+    if (effects.meters && typeof effects.meters === 'object') {
+      // New schema: effects.meters.funds, effects.meters.reputation, etc.
+      for (const [k, v] of Object.entries(effects.meters)) {
+        if (k in nextMeters && typeof v === 'number') {
+          // @ts-expect-error key narrowing
+          nextMeters[k] = clamp((nextMeters as any)[k] + v)
+        }
+      }
+    } else {
+      // Old schema: effects.funds, effects.reputation, etc.
+      for (const [k, v] of Object.entries(effects)) {
+        if (k in nextMeters && typeof v === 'number') {
+          // @ts-expect-error key narrowing
+          nextMeters[k] = clamp((nextMeters as any)[k] + v)
+        }
       }
     }
     // debugLog removed
