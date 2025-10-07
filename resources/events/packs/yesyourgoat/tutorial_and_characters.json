@@ -482,8 +482,7 @@
         "legacy": {
           "roster_bond": 1
         }
-      },
-      "nextStep": "leeroy_early_pull"
+      }
     },
     "right": {
       "label": "Let enthusiasm win.",
@@ -492,13 +491,20 @@
           "reputation": 1,
           "readiness": -1
         }
-      },
-      "nextStep": "leeroy_early_pull"
+      }
     },
     "tags": [
       "chain:leeroy:1",
+      "character:intro",
       "reckless"
-    ]
+    ],
+    "conditions": {
+      "chainProgress": {
+        "leeroy": {
+          "eq": 0
+        }
+      }
+    }
   },
   {
     "id": "leeroy_early_pull",
@@ -516,8 +522,7 @@
         "legacy": {
           "roster_bond": -1
         }
-      },
-      "nextStep": "leeroy_full_jenkins"
+      }
     },
     "right": {
       "label": "Try to salvage it.",
@@ -526,13 +531,20 @@
           "reputation": -1,
           "readiness": 1
         }
-      },
-      "nextStep": "leeroy_full_jenkins"
+      }
     },
     "tags": [
       "chain:leeroy:2",
+      "character:followup",
       "chaos"
-    ]
+    ],
+    "conditions": {
+      "chainProgress": {
+        "leeroy": {
+          "gte": 1
+        }
+      }
+    }
   },
   {
     "id": "leeroy_full_jenkins",
@@ -564,8 +576,16 @@
     },
     "tags": [
       "chain:leeroy:3",
+      "character:crisis",
       "legendary_disaster"
-    ]
+    ],
+    "conditions": {
+      "chainProgress": {
+        "leeroy": {
+          "gte": 2
+        }
+      }
+    }
   },
   {
     "id": "tank_strange_behavior",

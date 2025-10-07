@@ -2,7 +2,7 @@
   "speakers": {
     "Old Guild Master": {
       "name": "Old Guild Master",
-      "portrait": "/portraits/mountainking.png",
+      "portrait": "/portraits/acolyte.png",
       "level": 100,
       "role": "Retired Guild Master",
       "description": "Wise former leader who has seen it all"

@@ -143,12 +143,16 @@ export default function YesYourGoat() {
   const META_KEY = 'yyg_meta_seen'
   const CHAIN_KEY = 'yyg_chain_progress'
   const LAST_SEEN_MAP_KEY = 'yyg_event_last_seen_day'
+  const TUTORIAL_COMPLETED_KEY = 'yyg_tutorial_completed'
+  const STORYLINES_THIS_RUN_KEY = 'yyg_storylines_this_run'
 
   const [seenState, setSeenState] = useState<SeenState>({ intro: {}, tutorial: {}, event: {} })
   const [choiceState, setChoiceState] = useState<Record<string, 'left' | 'right'>>({})
   const [metaSeen, setMetaSeen] = useState<MetaSeen>({})
   const [chainProgress, setChainProgress] = useState<ChainProgress>({})
   const [lastSeenDayMap, setLastSeenDayMap] = useState<Record<string, number>>({})
+  const [tutorialCompleted, setTutorialCompleted] = useState(false)
+  const [storylinesThisRun, setStorylinesThisRun] = useState<Set<string>>(new Set())
 
   function loadPersisted() {
     try { const s = JSON.parse(localStorage.getItem(SEEN_KEY) || '{}'); if (s) setSeenState({ intro: s.intro || {}, tutorial: s.tutorial || {}, event: s.event || {} }) } catch {}
@@ -156,6 +160,8 @@ export default function YesYourGoat() {
     try { const m = JSON.parse(localStorage.getItem(META_KEY) || '{}'); if (m) setMetaSeen(m) } catch {}
     try { const cp = JSON.parse(localStorage.getItem(CHAIN_KEY) || '{}'); if (cp) setChainProgress(cp) } catch {}
     try { const lm = JSON.parse(localStorage.getItem(LAST_SEEN_MAP_KEY) || '{}'); if (lm) setLastSeenDayMap(lm) } catch {}
+    try { const tc = localStorage.getItem(TUTORIAL_COMPLETED_KEY); if (tc === 'true') setTutorialCompleted(true) } catch {}
+    // storylinesThisRun is cleared on each run start, not loaded
   }
 
   function persistSeen(next: SeenState) { setSeenState(next); localStorage.setItem(SEEN_KEY, JSON.stringify(next)) }
@@ -174,6 +180,41 @@ export default function YesYourGoat() {
 
   function eligibleByRequirements(ev: EventCard): boolean {
     const tags = ev.tags || []
+    
+    // Check new-style conditions object
+    if ((ev as any).conditions) {
+      const conditions = (ev as any).conditions
+      
+      // Check chainProgress conditions
+      if (conditions.chainProgress) {
+        for (const [storyline, requirement] of Object.entries(conditions.chainProgress)) {
+          const req = requirement as any
+          const progress = chainProgress[storyline] || 0
+          if (req.eq !== undefined && progress !== req.eq) return false
+          if (req.gte !== undefined && progress < req.gte) return false
+          if (req.lte !== undefined && progress > req.lte) return false
+        }
+      }
+      
+      // Check seen conditions
+      if (conditions.seen && Array.isArray(conditions.seen)) {
+        for (const eventId of conditions.seen) {
+          if (!seenState.event?.[eventId]) return false
+        }
+      }
+      
+      // Check flags conditions
+      if (conditions.flags) {
+        // For now, just pass - flags aren't fully implemented yet
+      }
+      
+      // Check legacy conditions
+      if (conditions.legacy) {
+        // For now, just pass - legacy isn't fully implemented yet
+      }
+    }
+    
+    // Check old-style tag-based requirements
     for (const t of tags) {
       if (!t.startsWith('require:')) continue
       const cond = t.slice('require:'.length)
@@ -404,10 +445,10 @@ export default function YesYourGoat() {
       const rival = events.find(e => (e.tags || []).includes('meta:rival') && !usedEventIds.includes(e.id))
       if (rival) { setSawRival(true); return rival }
     }
-    // Handle tutorial sequence first (days 1-4)
-    if (day <= 4) {
+    // Handle tutorial sequence first (days 1-4) - but only if not completed before
+    if (day <= 4 && !tutorialCompleted) {
       const tutorialEvents = events
-        .filter(e => (e.tags || []).includes('tutorial') && !usedEventIds.includes(e.id))
+        .filter(e => (e.tags || []).includes('chain:tutorial:') && !usedEventIds.includes(e.id))
         .sort((a, b) => {
           // Ensure tutorial events appear in the correct order
           const order = ['intro_old_guildmaster', 'intro_three_meters', 'intro_choices_matter', 'intro_old_guildmaster_final']
@@ -421,6 +462,14 @@ export default function YesYourGoat() {
       if (tutorialEvents.length > 0) {
         return tutorialEvents[0]
       }
+      // If we've seen all 4 tutorial events, mark tutorial as completed
+      if (seenState.event['intro_old_guildmaster'] && 
+          seenState.event['intro_three_meters'] && 
+          seenState.event['intro_choices_matter'] && 
+          seenState.event['intro_old_guildmaster_final']) {
+        setTutorialCompleted(true)
+        localStorage.setItem(TUTORIAL_COMPLETED_KEY, 'true')
+      }
     }
     
     // Handle character-driven narrative progression (days 5-15)
@@ -428,7 +477,18 @@ export default function YesYourGoat() {
       const characterEvents = events
         .filter(e => {
           const tags = e.tags || []
-          return (tags.includes('character:intro') || tags.includes('character:followup') || tags.includes('character:crisis')) && !usedEventIds.includes(e.id)
+          const isCharacterEvent = tags.includes('character:intro') || tags.includes('character:followup') || tags.includes('character:crisis')
+          if (!isCharacterEvent || usedEventIds.includes(e.id)) return false
+          
+          // Extract storyline name from chain tag (e.g. "chain:leeroy:1" -> "leeroy")
+          const chainTag = tags.find(t => t.startsWith('chain:'))
+          if (chainTag) {
+            const storyline = chainTag.split(':')[1]
+            // Skip if this storyline already triggered in this run
+            if (storylinesThisRun.has(storyline)) return false
+          }
+          
+          return true
         })
         .sort((a, b) => {
           // Prioritize character progression: intro -> followup -> crisis
@@ -439,6 +499,15 @@ export default function YesYourGoat() {
           return aPriority - bPriority
         })
       if (characterEvents.length > 0) {
+        // Mark this storyline as used in this run
+        const event = characterEvents[0]
+        const chainTag = (event.tags || []).find(t => t.startsWith('chain:'))
+        if (chainTag) {
+          const storyline = chainTag.split(':')[1]
+          const newStorylines = new Set(storylinesThisRun)
+          newStorylines.add(storyline)
+          setStorylinesThisRun(newStorylines)
+        }
         return characterEvents[0]
       }
     }
