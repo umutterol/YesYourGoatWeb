@@ -47,6 +47,11 @@ const ReignsCard: React.FC<ReignsCardProps> = ({
 
   return (
     <div className="bg-[var(--reigns-card)] rounded-2xl shadow-2xl border-2 border-[var(--reigns-border)] p-8 max-w-md w-full">
+      {/* Event Body - At Top */}
+      <p className="text-lg text-center mb-8 text-[var(--reigns-text)] leading-relaxed font-medium">
+        {body}
+      </p>
+
       {/* Portrait - Rectangle 300x300 */}
       {speaker && (
         <div className="flex flex-col items-center mb-6">
@@ -67,16 +72,6 @@ const ReignsCard: React.FC<ReignsCardProps> = ({
           </div>
         </div>
       )}
-
-      {/* Event Text (Title + Body) */}
-      <div className="mb-8">
-        <h2 className="text-xl font-bold text-center mb-3 text-[var(--reigns-text)] leading-tight">
-          {title}
-        </h2>
-        <p className="text-base text-center text-[var(--reigns-text-secondary)] leading-relaxed">
-          {body}
-        </p>
-      </div>
 
       {/* Buttons - Both Same Color */}
       <div className="flex gap-4">
