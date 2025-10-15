@@ -144,7 +144,6 @@ export default function YesYourGoat() {
   const CHAIN_KEY = 'yyg_chain_progress'
   const LAST_SEEN_MAP_KEY = 'yyg_event_last_seen_day'
   const TUTORIAL_COMPLETED_KEY = 'yyg_tutorial_completed'
-  const STORYLINES_THIS_RUN_KEY = 'yyg_storylines_this_run'
 
   const [seenState, setSeenState] = useState<SeenState>({ intro: {}, tutorial: {}, event: {} })
   const [choiceState, setChoiceState] = useState<Record<string, 'left' | 'right'>>({})

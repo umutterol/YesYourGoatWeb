@@ -27,7 +27,6 @@ interface ReignsCardProps {
 }
 
 const ReignsCard: React.FC<ReignsCardProps> = ({
-  title,
   body,
   speaker,
   left,
